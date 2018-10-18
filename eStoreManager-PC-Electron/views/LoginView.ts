@@ -18,18 +18,25 @@ export class LoginView extends View {
             this.showLoadingModal();
 
             let userController = new UserController();
-            let result = userController.login(arg.username, arg.password);
-
-            if (result.success === false) {
-                dialog.showMessageBox(this.getWindow(), Object({
-                    type: "error",
-                    title: "Login error ("+result.errorCode+")",
-                    message: result.message,
-                    buttons: ["OK"]
-                }));
-                this.hideLoadingModal();
-            }
             
+            userController.login(arg.username, arg.password, (result:any) => {
+                if (!result.success) {
+                    dialog.showMessageBox(this.getWindow(), Object({
+                        type: "error",
+                        title: "Login error ("+result.errorCode+")",
+                        message: result.message,
+                        buttons: ["OK"]
+                    }));
+                } else {
+                    dialog.showMessageBox(this.getWindow(), Object({
+                        type: "info",
+                        title: "Logged",
+                        message: "Logged in",
+                        buttons: ["OK"]
+                    }));
+                }
+                this.hideLoadingModal();
+            }); 
 
         });
     }
