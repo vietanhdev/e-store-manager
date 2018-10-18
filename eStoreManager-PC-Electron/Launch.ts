@@ -7,7 +7,7 @@ var ui = new UI();
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-  ui.initMainWindow()
+  ui.init()
 });
 
 // Quit when all windows are closed.
@@ -22,8 +22,8 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On OS X it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (ui.mainWindow === null) {
-    ui.initMainWindow();
+  if (ui.getMainView().getWindow() === null) {
+    ui.init();
   }
 });
 

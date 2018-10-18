@@ -85,16 +85,15 @@
 			data.username = username;
 			data.password = password;
 
-			ipcRenderer.send('synchronous-message', data);
+			ipcRenderer.send('login-command', data);
+
 		});
 
 	</script>
 
 
-	<script>
-		require('../dist/views/LoadingModal.js')
-		// require('../dist/views/LoginView.js')
-	</script>
+	<!-- Loading screen -->
+	<script src="../dist/views/LoadingModal.js"></script>
 	
 
 </body>
