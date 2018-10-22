@@ -4,7 +4,8 @@
   "description": "Mockup testing server - eStore Manager",
   "main": "index.js",
   "scripts": {
-    "test": "nodejs index.js"
+    "test": "node index.js",
+    "start": "node index.js"
   },
   "author": "Viet-Anh Nguyen",
   "license": "ISC",

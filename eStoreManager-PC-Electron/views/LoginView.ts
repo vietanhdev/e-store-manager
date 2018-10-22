@@ -34,6 +34,7 @@ export class LoginView extends View {
                         message: "Logged in",
                         buttons: ["OK"]
                     }));
+                    this.requestChangeView("welcome");
                 }
                 this.hideLoadingModal();
             }); 

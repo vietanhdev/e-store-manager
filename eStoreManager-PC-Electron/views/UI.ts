@@ -3,29 +3,53 @@ import * as path from "path";
 import { UserController } from "../controllers/UserController";
 import { View } from "./View";
 const {LoginView} = require('./LoginView');
-
+const {WelcomeView} = require('./WelcomeView');
+const ejse = require('ejs-electron');
 
 export class UI {
 
-  mainView: View;
+  mainWindow: BrowserWindow;
+  loadingView: View;
+  viewList: Array<View>;
 
   public init() {
 
-    let mainView = new View("loading", null, null);
-    mainView.getWindow().maximize();
+    this.viewList = new Array<View>();
+    let loadingView = new View("loading", null, null);
+    this.mainWindow = loadingView.getWindow();
+    loadingView.getWindow().maximize();
+
+    loadingView.show();
 
     // Open the DevTools.
-    // mainView.getWindow().webContents.openDevTools();
+    this.mainWindow.webContents.openDevTools();
+
+    // Init views
+    let loginView = new LoginView(this.mainWindow, null); this.addView(loginView);
+    let welcomeView = new WelcomeView(this.mainWindow, null); this.addView(welcomeView);
+
+    welcomeView.show();
 
     // Check user login and redirect to login page if user have not logged in
-    if (!UserController.isLoggedIn()) {
-      let loginView = new LoginView(mainView.getWindow(), null);
-    }
+    // if (!UserController.isLoggedIn()) {
+    //   loginView.show();
+    // }
 
   }
 
-  getMainView(): View {
-    return this.mainView;
+  private addView(view: View) {
+    this.viewList.push(view);
+    view.eventEmitter.on('request_change_view', (viewName:string) => {
+      this.changeView(viewName);
+    })
+  }
+
+  private changeView(viewName:string) {
+    for (let i = 0; i < this.viewList.length; i++) {
+      if (this.viewList[i].view == viewName) {
+        this.viewList[i].show();
+      }
+    }
   }
 
 }
