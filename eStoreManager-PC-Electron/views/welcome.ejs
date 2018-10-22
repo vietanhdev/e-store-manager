@@ -1,0 +1,69 @@
+<%- include('./header', {title: 'Welcome'}) %>
+<link rel="stylesheet" type="text/css" href="../views/css/welcome.css">
+
+<div id="modal">
+	<h1 class="site-title">Welcome to eStoreManager!</h1>
+	<p class="site-description">These are main functions of this software</p>
+	<div id="welcome-menu" class="est-container">
+		<div class="est-row">
+			<div class="menu-item" id="menu-cashier-ui">
+				<h2 class="item-title">Cashier UI</h2>
+				<p class="item-description">Screen for Cashier to create bills</p>
+			</div>
+			<div class="menu-item" id="menu-bills">
+				<h2 class="item-title">Bills</h2>
+				<p class="item-description">Manage bills created in Cashier UI</p>
+			</div>
+			<div class="menu-item" id="menu-customers">
+				<h2 class="item-title">Customers</h2>
+				<p class="item-description">Manage the list of your customer</p>
+			</div>
+			<div class="menu-item" id="menu-inventory">
+				<h2 class="item-title">Inventory</h2>
+				<p class="item-description">Manage products in your warehouse</p>
+			</div>
+			<div class="menu-item" id="menu-suppliers">
+				<h2 class="item-title">Suppliers</h2>
+				<p class="item-description">Manage good suppliers</p>
+			</div>
+			<div class="menu-item" id="menu-import-products">
+				<h2 class="item-title">Import products</h2>
+				<p class="item-description">Import product to your warehouse</p>
+			</div>
+			<div class="menu-item" id="menu-employees">
+				<h2 class="item-title">Employee</h2>
+				<p class="item-description">Manage your Employees and Users of this software</p>
+			</div>
+			<div class="menu-item" id="menu-reports">
+				<h2 class="item-title">Reports</h2>
+				<p class="item-description">Create and view reports</p>
+			</div>
+			<div class="menu-item" id="menu-finance">
+				<h2 class="item-title">Finance</h2>
+				<p class="item-description">Manage finance of the store</p>
+			</div>
+			<div class="menu-item" id="menu-setting">
+				<h2 class="item-title">Setting</h2>
+				<p class="item-description">Setup and configure your store</p>
+			</div>
+			<div class="menu-item" id="menu-support">
+				<h2 class="item-title">Contact support</h2>
+				<p class="item-description">Contact us for more support</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+	$(document).ready(function() {
+		$(".menu-item").click(function(event) {
+			const {ipcRenderer} = require('electron');
+			ipcRenderer.send('menu-click', this.id);
+			console.log("Clicked: #" + this.id);
+		});
+	});
+
+</script>
+<%- include('./footer') %>

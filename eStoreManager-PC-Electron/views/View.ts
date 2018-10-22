@@ -1,19 +1,28 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
+import { EventEmitter } from "events";
+const ejse = require('ejs-electron');
+var events = require('events').EventEmitter;
 
 export class View {
     
     private viewFile: string;
     private window: BrowserWindow;
+    public eventEmitter: any;
+    public view: string;
+    
 
     constructor (view: string, window: BrowserWindow, parent: BrowserWindow) {
+
+        this.view = view;
+        this.eventEmitter =  new events.EventEmitter();
         
         // If the window was not passed, create another window for this view
         if (window == null) {
 
             // Create the browser window.
             this.window = new BrowserWindow({
-                height: 600,
+                height: 800,
                 width: 800,
                 parent: parent
             });
@@ -44,10 +53,7 @@ export class View {
     logicHandle():void {}
 
     setViewFile(view: string):void {
-        this.viewFile = path.join(__dirname, "../../views/"+view+".html");
-    
-        // Load view file to view window
-        this.show();
+        this.viewFile = path.join(__dirname, "../../views/"+view+".ejs");
     }
 
     public getWindow():BrowserWindow {
@@ -56,7 +62,7 @@ export class View {
 
     // Load view file to view window
     public show() {
-        this.window.loadFile(this.viewFile);
+        this.window.loadFile(this.viewFile); // Load view file to view window
     }
 
     public showLoadingModal() {
@@ -64,6 +70,11 @@ export class View {
     }
     public hideLoadingModal() {
         this.window.webContents.send('loading-modal' , {status:'hide'});
+    }
+
+
+    requestChangeView(view: string) {
+        this.eventEmitter.emit("request_change_view", view);
     }
 
 }
