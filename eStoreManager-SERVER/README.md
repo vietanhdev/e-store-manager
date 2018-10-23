@@ -47,16 +47,19 @@ Visual Studio Code is an ideal lightweight development environment for Spring Bo
 ## Use API of project `eStoreManager`
 
 **Signup**
+
 * Request URL: http://localhost:8080/api/auth/signin
 * Request Method: POST
 * Request Payload: {name: "An Nguyen", email: "syan2244@gmail.com", username: "syan", password: "Pass@12345"}
 
 **Signin**
+
 * Request URL: http://localhost:8080/api/auth/signin
 * Request Method: POST
 * Request Payload: {usernameOrEmail: "an123", password: "12345678"}
 
 **Check username available**
+
 * Request URL: http://localhost:8080/api/user/checkUsernameAvailability?username=syan
 * Request Method: GET
 
@@ -66,11 +69,13 @@ Visual Studio Code is an ideal lightweight development environment for Spring Bo
 * Request Method: GET
 
 **Get current user information**
+
 * Request URL: http://localhost:8080/api/user/me
 * Request Method: GET
 * Request Headers:
     * authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNzc2IiwiaWF0IjoxNTM5OTU2NTc4LCJleHAiOjE1NDA1NjEzNzh9.CvHqlL-plZytqApMOyTQTNewQeSB2FEKr3LZdR7NkCFnirObpwT5OOLCdiUrjlXrPhndM0FFapcqrOZjtGfU5Q
 
 **Get user profile**
+
 * Request URL: http://localhost:8080/api/users/an123
 * Request Method: GET
