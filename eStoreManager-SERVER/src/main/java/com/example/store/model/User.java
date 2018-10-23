@@ -4,9 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import com.example.store.model.audit.DateAudit;
 
@@ -37,15 +35,24 @@ public class User extends DateAudit{
     @Size(max = 15)
     private String username;
 
-    @NaturalId
-    @NotBlank
-    @Size(max = 40)
-    @Email
-    private  String email;
-
     @NotBlank
     @Size(max = 100)
     private String password;
+
+    @NotNull
+    @Min(0)
+    private Long salary;
+
+    @NotBlank
+    @Size(max = 40)
+    @Email
+    private String email;
+
+    @Size(max = 100)
+    private String address;
+
+    @Pattern(regexp="(^$|[0-9]{10})")
+    private String mobileNo;
     
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -57,11 +64,12 @@ public class User extends DateAudit{
 
     }
 
-    public User(String name, String username, String email, String password){
+    public User(String name, String username, String email, String password, Long salary){
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.salary = salary;
     }
 
     public Long getId(){
@@ -72,28 +80,20 @@ public class User extends DateAudit{
         this.id = id;
     }
 
-    public String getUsername(){
-        return username;
-    }
-
-    public void setUsername(String username){
-        this.username = username;
-    }
-
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail(){
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email){
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword(){
@@ -104,11 +104,47 @@ public class User extends DateAudit{
         this.password = password;
     }
 
-    public Set<Role> getRoles(){
+    public Long getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Long salary) {
+        this.salary = salary;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles){
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public void addRole(Role role){
+        this.roles.add(role);
     }
 }

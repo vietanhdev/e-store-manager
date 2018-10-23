@@ -1,37 +1,34 @@
 package com.example.store.payload;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.*;
 
-import com.example.store.model.Role;
+public class ChangeUserInforRequest {
 
-public class UserProfile{
-
-    private Long id;
+    @NotBlank
+    @Size(max = 40)
     private String name;
-    private String username;
-    private Long salary;
-    private String email;
-    private String address;
-    private String mobileNo;
-    private Set<Role> roles = new HashSet<>();
 
-    public UserProfile(Long id, String name, String username, Long salary, String email, String address, String mobileNo){
-        this.id = id;
+    @NotBlank
+    @Size(max = 15)
+    private String username;
+    
+    @NotBlank
+    @Size(max = 40)
+    @Email
+    private String email;
+
+    @Size(max = 100)
+    private String address;
+
+    @Pattern(regexp="(^$|[0-9]{10})")
+    private String mobileNo;
+
+    public ChangeUserInforRequest(String name, String username, String email, String address, String mobileNo) {
         this.name = name;
         this.username = username;
-        this.salary = salary;
         this.email = email;
         this.address = address;
         this.mobileNo = mobileNo;
-    }
-
-    public Long getId(){
-        return id;
-    }
-
-    public void setId(Long id){
-        this.id = id;
     }
 
     public String getName() {
@@ -48,14 +45,6 @@ public class UserProfile{
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Long getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Long salary) {
-        this.salary = salary;
     }
 
     public String getEmail() {
@@ -80,14 +69,6 @@ public class UserProfile{
 
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 
 }

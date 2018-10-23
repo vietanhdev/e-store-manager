@@ -3,35 +3,45 @@ package com.example.store.payload;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.constraints.*;
+
 import com.example.store.model.Role;
 
-public class UserProfile{
+public class ChangeUserProfileRequest {
 
-    private Long id;
+    @NotBlank
+    @Size(max = 40)
     private String name;
-    private String username;
-    private Long salary;
-    private String email;
-    private String address;
-    private String mobileNo;
-    private Set<Role> roles = new HashSet<>();
 
-    public UserProfile(Long id, String name, String username, Long salary, String email, String address, String mobileNo){
-        this.id = id;
+    @NotBlank
+    @Size(max = 15)
+    private String username;
+
+    @NotNull
+    @Min(0)
+    private Long salary;
+    
+    @NotBlank
+    @Size(max = 40)
+    @Email
+    private String email;
+
+    @Size(max = 100)
+    private String address;
+
+    @Pattern(regexp="(^$|[0-9]{10})")
+    private String mobileNo;
+
+    private Set<String> roles = new HashSet<>();
+
+    public ChangeUserProfileRequest(String name, String username, Long salary, String email, String address,
+            String mobileNo) {
         this.name = name;
         this.username = username;
         this.salary = salary;
         this.email = email;
         this.address = address;
         this.mobileNo = mobileNo;
-    }
-
-    public Long getId(){
-        return id;
-    }
-
-    public void setId(Long id){
-        this.id = id;
     }
 
     public String getName() {
@@ -89,5 +99,4 @@ public class UserProfile{
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
 }
