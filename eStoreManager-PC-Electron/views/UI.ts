@@ -4,6 +4,7 @@ import { UserController } from "../controllers/UserController";
 import { View } from "./View";
 const {LoginView} = require('./LoginView');
 const {WelcomeView} = require('./WelcomeView');
+const {CashierUIView} = require('./CashierUIView');
 const ejse = require('ejs-electron');
 
 export class UI {
@@ -22,18 +23,20 @@ export class UI {
     loadingView.show();
 
     // Open the DevTools.
-    this.mainWindow.webContents.openDevTools();
+    // this.mainWindow.webContents.openDevTools();
 
     // Init views
     let loginView = new LoginView(this.mainWindow, null); this.addView(loginView);
     let welcomeView = new WelcomeView(this.mainWindow, null); this.addView(welcomeView);
+    let cashierUIView = new CashierUIView(this.mainWindow, null); this.addView(cashierUIView);
+    
 
-    welcomeView.show();
+    // welcomeView.show();
 
     // Check user login and redirect to login page if user have not logged in
-    // if (!UserController.isLoggedIn()) {
-    //   loginView.show();
-    // }
+    if (!UserController.isLoggedIn()) {
+      loginView.show();
+    }
 
   }
 
