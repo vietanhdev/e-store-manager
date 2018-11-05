@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu} from "electron";
 const {ipcMain} = require('electron');
 import {View} from './View';
 import {UserController} from '../controllers/UserController';

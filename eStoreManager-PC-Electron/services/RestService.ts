@@ -1,20 +1,20 @@
 var http = require('http');
 var https = require('https');
 var querystring = require('querystring');
+const settings = require('electron-settings');
 
 export class RestService {
-
-    hostname: string = 'localhost';
-    protocol: string = 'http:';
-    port: number = 8080;
 
     request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any)) {
 
         let postData = querystring.stringify(data);
+        let hostname:string = settings.get('api_config.hostname');
+        let port:number = settings.get('api_config.port');
+        let protocol: string = settings.get('api_config.protocol');
         
         let options = {
-            hostname: this.hostname,
-            port: this.port,
+            hostname: hostname,
+            port: port,
             path: path,
             method: method,
             headers: {
@@ -24,7 +24,15 @@ export class RestService {
         };
         
         let returnData: string = '';
-        let req = http.request(options, (res:any) => {
+
+        let httpPackage;
+        if (protocol === 'https') {
+            httpPackage = https;
+        } else {
+            httpPackage = http;
+        }
+        
+        let req = httpPackage.request(options, (res:any) => {
             // console.log(`STATUS: ${res.statusCode}`);
             // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
             res.setEncoding('utf8');
