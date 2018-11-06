@@ -91,14 +91,14 @@ export class UI {
 
   private addView(view: View) {
     this.viewList.push(view);
-    view.eventEmitter.on('request_change_view', (viewName:string) => {
+    view.getEventEmitter().on('request_change_view', (viewName:string) => {
       this.changeView(viewName);
     })
   }
 
   private changeView(viewName:string) {
     for (let i = 0; i < this.viewList.length; i++) {
-      if (this.viewList[i].view == viewName) {
+      if (this.viewList[i].getView() == viewName) {
         this.viewList[i].show();
       }
     }
