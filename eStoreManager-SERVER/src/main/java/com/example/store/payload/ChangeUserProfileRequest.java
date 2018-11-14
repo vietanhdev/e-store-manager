@@ -5,8 +5,6 @@ import java.util.Set;
 
 import javax.validation.constraints.*;
 
-import com.example.store.model.Role;
-
 public class ChangeUserProfileRequest {
 
     @NotBlank
@@ -92,11 +90,11 @@ public class ChangeUserProfileRequest {
         this.mobileNo = mobileNo;
     }
 
-    public Set<Role> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 }
