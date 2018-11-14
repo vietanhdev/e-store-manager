@@ -1,13 +1,15 @@
 import {RestService} from '../services/RestService';
+import {Controller} from '../controllers/Controller';
 import { stringify } from 'querystring';
+const settings = require('electron-settings');
 
-export class UserController {
+
+export class UserController extends Controller {
 
     private token: string;
-    rest: RestService;
 
     constructor() {
-        this.rest = new RestService();
+        super();
     }
     
     public static isLoggedIn() {
@@ -22,7 +24,7 @@ export class UserController {
     //     token: string;
     // }
     public login(username: string, password: string, cb: any):any {
-        this.rest.request('POST', '/api/auth/login', {
+        this.getRestService().request('POST', '/api/auth/login', {
             'username': username, 'password': password
         }, (data:any) => {
             cb (data);

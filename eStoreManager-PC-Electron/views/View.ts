@@ -1,18 +1,19 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 import { EventEmitter } from "events";
 const ejse = require('ejs-electron');
 var events = require('events').EventEmitter;
+const { dialog } = require('electron')
 
 export class View {
     
+    private view: string;
     private viewFile: string;
     private window: BrowserWindow;
-    public eventEmitter: any;
-    public view: string;
+    private eventEmitter: EventEmitter;
     
 
-    constructor (view: string, window: BrowserWindow, parent: BrowserWindow) {
+    constructor (view: string, window: BrowserWindow, parent: BrowserWindow, width: number = 800, height: number = 600) {
 
         this.view = view;
         this.eventEmitter =  new events.EventEmitter();
@@ -22,12 +23,10 @@ export class View {
 
             // Create the browser window.
             this.window = new BrowserWindow({
-                height: 800,
-                width: 800,
+                height: height,
+                width: width,
                 parent: parent
             });
-            
-            this.window.setMenu(null);
 
             // Emitted when the window is closed.
             this.window.on("closed", () => {
@@ -49,11 +48,25 @@ export class View {
 
     }
 
+    
+
     // Handle all logic of this view
     logicHandle():void {}
 
+    getView():string {
+        return this.view;
+    }
+
+    getEventEmitter():EventEmitter {
+        return this.eventEmitter;
+    }
+
     setViewFile(view: string):void {
         this.viewFile = path.join(__dirname, "../../views/"+view+".ejs");
+    }
+
+    setMenu(menu: Menu): void {
+        this.window.setMenu(menu);
     }
 
     public getWindow():BrowserWindow {

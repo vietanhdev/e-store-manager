@@ -17,23 +17,13 @@ app.get('/', (req, res) => res.send('Hello World with Express'));
 
 
 // Login
-app.post('/api/auth/login', (req, res) => {
+app.get('/api/product_code', (req, res) => {
 
-    let username = req.body.username;
-    let password = req.body.password;
+    let product_code = req.query.code;
+  
+    console.log(product_code);
 
-    if (username == "admin" && password == "admin") {
-        res.json({
-            'success': true,
-            'token': 'asdj8932ud920d9032ui39'
-        });
-    } else {
-        res.json({
-            'success': false,
-            'errorCode': 101,
-            'message': 'Wrong username or password'
-        });
-    }
+    res.send('ok');
 
 });
 

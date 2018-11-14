@@ -4,10 +4,10 @@ import {View} from './View';
 import {UserController} from '../controllers/UserController';
 const { dialog } = require('electron')
 
-export class CashierUIView extends View {
+export class EmployeeView extends View {
 
     constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("cashier_ui", window, parent);
+        super("employees", window, parent);
     }
 
     // Handle all logic of this view

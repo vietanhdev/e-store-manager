@@ -1,7 +1,16 @@
 import { app } from "electron";
 import { UI } from "./views/UI";
+const settings = require('electron-settings');
 
 var ui = new UI();
+
+// Server settings
+// TODO: Remove this section
+settings.set('api_config', {
+  hostname: 'localhost',
+  port: 8080,
+  protocol: 'http'
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

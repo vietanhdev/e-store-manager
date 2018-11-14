@@ -2,15 +2,23 @@ var http = require('http');
 var https = require('https');
 var querystring = require('querystring');
 
+
 export class RestService {
 
-    hostname: string = 'localhost';
-    protocol: string = 'http:';
-    port: number = 8080;
+    private hostname:string;
+    private protocol:string;
+    private port:number;
 
-    request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any)) {
+    constructor(hostname:string="localhost", protocol:string="http", port:number=80) {
+        this.hostname = hostname;
+        this.protocol = protocol;
+        this.port = port;
+    }
+
+    request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any)):void {
 
         let postData = querystring.stringify(data);
+        
         
         let options = {
             hostname: this.hostname,
@@ -24,7 +32,15 @@ export class RestService {
         };
         
         let returnData: string = '';
-        let req = http.request(options, (res:any) => {
+
+        let httpPackage;
+        if (this.protocol === 'https') {
+            httpPackage = https;
+        } else {
+            httpPackage = http;
+        }
+        
+        let req = httpPackage.request(options, (res:any) => {
             // console.log(`STATUS: ${res.statusCode}`);
             // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
             res.setEncoding('utf8');
