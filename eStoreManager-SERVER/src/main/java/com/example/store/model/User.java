@@ -8,8 +8,6 @@ import javax.validation.constraints.*;
 
 import com.example.store.model.audit.DateAudit;
 
-import org.hibernate.annotations.NaturalId;
-
 @Entity
 @Table(name = "users", uniqueConstraints = {
     @UniqueConstraint(columnNames = {
@@ -147,4 +145,5 @@ public class User extends DateAudit{
     public void addRole(Role role){
         this.roles.add(role);
     }
+    
 }
