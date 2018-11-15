@@ -1,6 +1,5 @@
 package com.example.store.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.example.store.model.User;
@@ -10,13 +9,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    Optional<User> findByUsername(String username);
+    
     Optional<User> findByEmail(String email);
 
     Optional<User> findByUsernameOrEmail(String username, String email);
-
-    List<User> findByIdIn(List<Long> userIds);
-
-    Optional<User> findByUsername(String username);
 
     Boolean existsByUsername(String username);
 

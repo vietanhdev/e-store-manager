@@ -25,7 +25,6 @@ public class User extends DateAudit{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Size(max = 40)
     private String name;
 
@@ -37,7 +36,6 @@ public class User extends DateAudit{
     @Size(max = 100)
     private String password;
 
-    @NotNull
     @Min(0)
     private Long salary;
 
@@ -62,12 +60,10 @@ public class User extends DateAudit{
 
     }
 
-    public User(String name, String username, String email, String password, Long salary){
-        this.name = name;
+    public User(String username, String email, String password){
         this.username = username;
         this.email = email;
         this.password = password;
-        this.salary = salary;
     }
 
     public Long getId(){
