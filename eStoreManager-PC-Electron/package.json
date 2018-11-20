@@ -1,22 +1,13 @@
 {
-  "name": "electron-quick-start-typescript",
+  "name": "eStore-Manager",
   "version": "1.0.0",
-  "description": "A minimal Electron application written with Typescript",
+  "description": "",
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "start": "npm run build && electron ./dist/Launch.js"
+    "start": "cp -r ./src/Views ./dist && npm run build && electron ./dist/Launch.js"
   },
-  "repository": "https://github.com/electron/electron-quick-start-typescript",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo",
-    "typescript"
-  ],
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {

@@ -62,7 +62,7 @@ export class View {
     }
 
     setViewFile(view: string):void {
-        this.viewFile = path.join(__dirname, "../../views/"+view+".ejs");
+        this.viewFile = path.join(__dirname, "../"+view+".ejs");
     }
 
     setMenu(menu: Menu): void {

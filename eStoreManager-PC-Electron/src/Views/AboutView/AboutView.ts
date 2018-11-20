@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu} from "electron";
 const {ipcMain} = require('electron');
-import {View} from './View';
+import {View} from '../View/View';
 const { dialog } = require('electron');
 
 export class AboutView extends View {

@@ -1,5 +1,5 @@
 import { app } from "electron";
-import { UI } from "./views/UI";
+import { UI } from "./UI";
 const settings = require('electron-settings');
 
 var ui = new UI();
