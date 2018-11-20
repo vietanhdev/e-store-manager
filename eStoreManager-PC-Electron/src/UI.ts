@@ -1,18 +1,19 @@
 import { app, BrowserWindow, Menu, MenuItem } from "electron";
 import * as path from "path";
-import { UserController } from "../controllers/UserController";
-import { View } from "./View";
+import {View} from './Views/View/View';
+import {UserController} from './Controllers/Users/UserController';
 
 
 const ejse = require('ejs-electron');
 const settings = require('electron-settings');
 
 // Import views
-const {LoginView} = require('./LoginView');
-const {WelcomeView} = require('./WelcomeView');
-const {CashierUIView} = require('./CashierUIView');
-const {AboutView} = require('./AboutView');
-const {PreferenceView} = require('./PreferenceView');
+// import {LoginView} from './Views/LoginView/LoginView';
+const {LoginView} = require('./Views/LoginView/LoginView');
+const {WelcomeView} = require('./Views/WelcomeView/WelcomeView');
+const {CashierView} = require('./Views/CashierView/CashierView');
+const {AboutView} = require('./Views/AboutView/AboutView');
+const {PreferenceView} = require('./Views/PreferenceView/PreferenceView');
 
 
 // const {Menu} = require('electron');
@@ -30,22 +31,22 @@ export class UI {
   public init() {
 
     // Load the main menu of the application
-    const mainMenuTemplate = require('./MainMenuTemplate').template;
+    const mainMenuTemplate = require('./Views/View/MainMenuTemplate').template;
     this.menu = Menu.buildFromTemplate(mainMenuTemplate);
     Menu.setApplicationMenu(this.menu);
 
     this.viewList = new Array<View>();
-    let loadingView = new View("loading", null, null);
+    let loadingView = new View("LoadingView/loading", null, null);
     this.mainWindow = loadingView.getWindow();
     loadingView.getWindow().maximize();
 
     // Open the DevTools.
-    // this.mainWindow.webContents.openDevTools();
+    this.mainWindow.webContents.openDevTools();
 
     // Init views
     let loginView = new LoginView(this.mainWindow, null); this.addView(loginView);
     let welcomeView = new WelcomeView(this.mainWindow, null); this.addView(welcomeView);
-    let cashierUIView = new CashierUIView(this.mainWindow, null); this.addView(cashierUIView);
+    // let cashierView = new CashierView(this.mainWindow, null); this.addView(CashierView);
     
 
     // Init Menu actions

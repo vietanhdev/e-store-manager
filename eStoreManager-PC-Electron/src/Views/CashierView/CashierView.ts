@@ -1,13 +1,13 @@
 import { app, BrowserWindow, Menu } from "electron";
 const {ipcMain} = require('electron');
-import {View} from './View';
-import {UserController} from '../controllers/UserController';
+import {View} from '../View/View';
+import {UserController} from '../../Controllers/Users/UserController';
 const { dialog } = require('electron')
 
-export class EmployeeView extends View {
+export class CashierUIView extends View {
 
     constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("employees", window, parent);
+        super("cashier_ui", window, parent);
     }
 
     // Handle all logic of this view

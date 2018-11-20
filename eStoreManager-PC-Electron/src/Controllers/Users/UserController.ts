@@ -1,5 +1,4 @@
-import {RestService} from '../services/RestService';
-import {Controller} from '../controllers/Controller';
+import {Controller} from '../Controller/Controller';
 import { stringify } from 'querystring';
 const settings = require('electron-settings');
 

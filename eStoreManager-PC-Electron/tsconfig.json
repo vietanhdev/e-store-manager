@@ -10,9 +10,9 @@
     }
   },
   "include": [
-    "controllers/**/*",
-    "models/**/*",
-    "views/**/*",
-    "."
+    "src/Controllers/**/*",
+    "src/Models/**/*",
+    "src/Views/**/*",
+    "src"
   ]
 }
