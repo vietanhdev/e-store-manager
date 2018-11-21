@@ -4,16 +4,14 @@ import java.util.List;
 
 import javax.validation.constraints.*;
 
-public class CreateUserRequest {
+public class UpdateUserRequest {
 
     @Size(min=4, max=40)
     private String name;
     
-    @NotBlank
     @Size(min = 3, max = 15)
     private String username;
 
-    @NotBlank
     @Size(max = 40)
     @Email
     private String email;

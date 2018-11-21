@@ -5,6 +5,9 @@ import javax.validation.constraints.*;
 
 import com.example.store.model.audit.DateAudit;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 @Table(name = "products")
 public class Product extends DateAudit{
@@ -15,10 +18,15 @@ public class Product extends DateAudit{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "product_type_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductType product_type;
+    
 
-    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "supplier_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Supplier supplier;
     
     @NotNull
