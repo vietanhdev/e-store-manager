@@ -20,7 +20,7 @@ public class Product extends DateAudit{
 
     @NotNull
     private Supplier supplier;
-
+    
     @NotNull
     @Min(0)
     private Integer quantities;

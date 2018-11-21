@@ -7,8 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.example.store.model.Role;
-import com.example.store.model.User;
+import com.example.store.model.user_management.Role;
+import com.example.store.model.user_management.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import org.springframework.security.core.GrantedAuthority;

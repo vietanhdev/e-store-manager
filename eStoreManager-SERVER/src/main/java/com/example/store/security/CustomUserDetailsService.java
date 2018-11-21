@@ -1,7 +1,8 @@
 package com.example.store.security;
 
-import com.example.store.model.User;
-import com.example.store.repository.UserRepository;
+
+import com.example.store.model.user_management.User;
+import com.example.store.repository.user_management.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
