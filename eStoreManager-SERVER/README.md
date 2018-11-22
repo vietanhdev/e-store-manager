@@ -12,13 +12,20 @@ Visual Studio Code is an ideal lightweight development environment for Spring Bo
 
 2. Run project on VSC by starting debug (or press F5). This project use outside mysql-server, so you need internet connection.
 
-3. [Scratch Design for client-server APIs](https://hackmd.io/hTQZJTXPSNaHzta9tsb5Hg?fbclid=IwAR1W9m5mHEY5KzgvCOI3qRO4TDf2EDcEdXyb0alMzJe4PUm76tYwLPdvMOQ)
+3. [Scratch Design for client-server APIs](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/RESTful_API.md)
 
 4. You can use these accounts for logging:
 
-| username | password |
-| --- | --- |
-| admin | admin@123 |
-| manager | manager@123 |
-| cashier | cashier@123 |
+```
+{
+    "name": "admin",
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "user_id": 1,
+    "password": "admin@gmail.com",
+    "roles": [
+        "ROLE_ADMIN"
+    ]
+}
+```
 

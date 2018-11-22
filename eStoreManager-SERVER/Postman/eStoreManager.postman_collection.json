@@ -1,0 +1,416 @@
+{
+	"info": {
+		"_postman_id": "fc8fe689-fd4e-420f-b436-bc8468bd0e5e",
+		"name": "eStoreManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save version 1",
+			"item": [
+				{
+					"name": "User Management",
+					"item": [
+						{
+							"name": "User login his own account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"ceo 1\",\n    \"password\": \"@4hk3wFrE$\"\n}\n"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"login"
+									]
+								},
+								"description": "user login"
+							},
+							"response": []
+						},
+						{
+							"name": "User get his own information",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"me"
+									]
+								},
+								"description": "User get his own profile"
+							},
+							"response": []
+						},
+						{
+							"name": "User get his own summary profile",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUyNTA3LCJleHAiOjE1NDM0NTczMDd9.z5zZyhnnbrZHrUUBE39ToZ3RVwYdogORpsSzPBxJpHZne12vbKe9vRd6oLdj9XAzbulMk49oiAaxntsqPQKM6Q",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/me/profile",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"me",
+										"profile"
+									]
+								},
+								"description": "User get his own information"
+							},
+							"response": []
+						},
+						{
+							"name": "User update his own information",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Admin dep trai\",\r\n    \"username\": \"admin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"address\": \"Hanoi\",\r\n    \"mobileNo\": \"0917915518\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"me"
+									]
+								},
+								"description": "User update his own information"
+							},
+							"response": []
+						},
+						{
+							"name": "User change his own password",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"oldPassword\": \"admin@gmail.com\",\n\t\"newPassword\": \"admin@password\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/me/change_password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"me",
+										"change_password"
+									]
+								},
+								"description": "User change his own password"
+							},
+							"response": []
+						},
+						{
+							"name": "User delete his own account",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMCIsImlhdCI6MTU0Mjg1ODYyMCwiZXhwIjoxNTQzNDYzNDIwfQ.-uGNJXq_kZB0FMzEQgdNWz_VkoAAHIbKAEmzpnfDW3CzP3iEDFLdG15UF46VjQfKxJ-_BnV0wOX4BykUYt9VsQ",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/me",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"me"
+									]
+								},
+								"description": "User delete his own account"
+							},
+							"response": []
+						},
+						{
+							"name": "Admin create new account",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"ceo la\",\r\n    \"username\": \"ceo 1\",\r\n    \"salary\": 1000,\r\n    \"email\": \"ceo1@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167558\",\r\n    \"roles\": [\r\n        \"ROLE_ADMIN\", \"ROLE_MANAGER\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								},
+								"description": "Admin get user information by user_id"
+							},
+							"response": []
+						},
+						{
+							"name": "Admin get user information by user id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/users/91",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"91"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin update user information by user id",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"ceo la la\",\r\n    \"username\": \"ceola\",\r\n    \"salary\": 100,\r\n    \"email\": \"ceola@gmail.com\",\r\n    \"address\": \"hai phong\",\r\n    \"mobileNo\": \"0916157558\",\r\n    \"roles\": [\r\n        \"ROLE_CASHIER\",\r\n        \"ROLE_ADMIN\"\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/users/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"10"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin reset user password by user_id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Berer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/users/9/reset_password",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"9",
+										"reset_password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin delete user by user id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/users/8?",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"8"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			]
+		}
+	]
+}
