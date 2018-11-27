@@ -1,23 +1,32 @@
-```
 
-```
+3. [Scratch Design for client-server APIs](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/RESTful_API.md)
+
 
 ## Build and run via commandline - Ubuntu
 
-### 1. Install maven
+### 1. Install Java
 
-~~~
-sudo apt install maven
-~~~
+### 2. Run commadline
 
-### 2. Open Terminal from project folder then:
+```
+```
 
-~~~
-mvn install
-~~~
+## Note:
 
-### 3. Run it:
+### 1. Account Admin:
+```
+{
+    "name": "admin",
+    "username": "admin",
+    "email": "admin@gmail.com",
+    "user_id": 1,
+    "password": "admin@gmail.com",
+    "roles": [
+        "ROLE_ADMIN"
+    ]
+}
+```
 
-~~~
-mvn spring-boot:run
-~~~
+### 2. [Scratch Design for client-server APIs](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/RESTful_API.md)
+
+### 3. [Postman saved json file](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/Postman)
