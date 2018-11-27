@@ -44,7 +44,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1")
-public class UseController {
+public class UserController {
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -80,7 +80,7 @@ public class UseController {
 
 
     // After login, user get summary information
-    @GetMapping("/me")
+    @GetMapping("/me/profile")
     public ResponseEntity<?> getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         UserSummaryResponse userSummaryResponse = new UserSummaryResponse(true, 
                                                         currentUser.getId(), 
@@ -100,7 +100,7 @@ public class UseController {
     }
 
     // User get his own information
-    @GetMapping("/me/profile")
+    @GetMapping("/me")
     public ResponseEntity<?> getOwnInfor(@CurrentUser UserPrincipal currentUser) {
         UserInforResponse userInforResponse = new UserInforResponse(true, currentUser.getId(), 
                                                                     currentUser.getName(), 
@@ -117,7 +117,7 @@ public class UseController {
     }
 
     // User update his own information
-    @PutMapping("/me/profile")
+    @PutMapping("/me")
     public ResponseEntity<?> updateUserInfor(@CurrentUser UserPrincipal currentUser, 
                                             @Valid @RequestBody UpdateUserRequest updateUserRequest) {
         User user = userRepository.findById(currentUser.getId()).orElse(null);
@@ -126,7 +126,6 @@ public class UseController {
         if(updateUserRequest.getEmail() != null) user.setEmail(updateUserRequest.getEmail());
         if(updateUserRequest.getAddress() != null) user.setAddress(updateUserRequest.getAddress());
         if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
-        if(updateUserRequest.getSalary() != null) user.setSalary(updateUserRequest.getSalary());
 
         userRepository.save(user);
         return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update profile successful"),
@@ -146,7 +145,8 @@ public class UseController {
 
         // Save new password to database
         User user = userRepository.findById(currentUser.getId()).orElse(null);
-        user.setPassword(changePasswordRequest.getNewPassword());
+        String password = changePasswordRequest.getNewPassword();
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
 
         Authentication authentication = authenticationManager.authenticate(
@@ -166,7 +166,7 @@ public class UseController {
 
     // Admin create a new user
     @PostMapping("/users")
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         if( userRepository.existsByUsername( createUserRequest.getUsername() ) ){
             return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
@@ -215,20 +215,20 @@ public class UseController {
     @GetMapping("/users/{user_id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getUserInfor(@PathVariable(value = "user_id") String user_id) {
-        User user;
         try {
+            User user;
             user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            UserInforResponse userInforResponse = new UserInforResponse(true, user.getId(), user.getName(), user.getUsername(), 
+                                                user.getSalary(), user.getEmail(), user.getAddress(), user.getMobileNo());
+            for(Role role: user.getRoles()) {
+                userInforResponse.addRole(role.getName().toString());
+            }
+            return new ResponseEntity<>(userInforResponse,
+                                        HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
                                     HttpStatus.ACCEPTED);
         }
-        UserInforResponse userInforResponse = new UserInforResponse(true, user.getId(), user.getName(), user.getUsername(), 
-                                                user.getSalary(), user.getEmail(), user.getAddress(), user.getMobileNo());
-        for(Role role: user.getRoles()) {
-            userInforResponse.addRole(role.getName().toString());
-        }
-        return new ResponseEntity<>(userInforResponse,
-                                    HttpStatus.ACCEPTED);
     }
 
     // Admin update a user information
@@ -236,75 +236,73 @@ public class UseController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateUserInfor(@PathVariable(value = "user_id") String user_id, 
                                             @Valid @RequestBody UpdateUserRequest updateUserRequest) {
-
-        User user;
         try{
+            User user;
             user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            if(updateUserRequest.getName() != null) user.setName(updateUserRequest.getName());
+            if(updateUserRequest.getUsername() != null) user.setUsername(updateUserRequest.getUsername());
+            if(updateUserRequest.getEmail() != null) user.setEmail(updateUserRequest.getEmail());
+            if(updateUserRequest.getAddress() != null) user.setAddress(updateUserRequest.getAddress());
+            if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
+            if(updateUserRequest.getSalary() != null) user.setSalary(updateUserRequest.getSalary());
+            
+            try {
+                List<String> roles = updateUserRequest.getRoles();
+                if(roles != null){
+                    for(String role: roles) {
+                        Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
+                        user.addRole(userRole);
+                    }
+                }
+            } catch (Exception e) {
+                return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
+                                        HttpStatus.ACCEPTED);
+            }
+
+            userRepository.save(user);
+            return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update successful"),
+                                    HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
                                     HttpStatus.ACCEPTED);
         }
-        if(updateUserRequest.getName() != null) user.setName(updateUserRequest.getName());
-        if(updateUserRequest.getUsername() != null) user.setUsername(updateUserRequest.getUsername());
-        if(updateUserRequest.getEmail() != null) user.setEmail(updateUserRequest.getEmail());
-        if(updateUserRequest.getAddress() != null) user.setAddress(updateUserRequest.getAddress());
-        if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
-        if(updateUserRequest.getSalary() != null) user.setSalary(updateUserRequest.getSalary());
-        
-        try {
-            List<String> roles = updateUserRequest.getRoles();
-            if(roles != null){
-                for(String role: roles) {
-                    Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
-                    user.addRole(userRole);
-                }
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
-                                    HttpStatus.ACCEPTED);
-        }
-
-        userRepository.save(user);
-        return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update successful"),
-                                HttpStatus.ACCEPTED);
     }
 
     // Admin reset user password
-    @PutMapping("/users/{user_id}")
+    @GetMapping("/users/{user_id}/reset_password")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> resetUserPassword(@PathVariable(value = "user_id") String user_id){
-        User user;
         try {
+            User user;
             user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            // Create a new random password and save encoded password
+            RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
+            String password = randomPasswordGenerator.generatePassayPassword();
+            user.setPassword(passwordEncoder.encode(password));
+
+            userRepository.save(user);
+
+            return new ResponseEntity<>(new ResetPasswordResponse(true, password),
+                                        HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
                                     HttpStatus.ACCEPTED);
         }
-        
-        // Create a new random password and save encoded password
-        RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
-        String password = randomPasswordGenerator.generatePassayPassword();
-        user.setPassword(passwordEncoder.encode(password));
-
-        userRepository.save(user);
-
-        return new ResponseEntity<>(new ResetPasswordResponse(false, password),
-                                    HttpStatus.ACCEPTED);
     }
 
     // Admin delete a user
     @DeleteMapping("/users/{user_id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "user_id") String user_id) {
-        User user;
         try {
+            User user;
             user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            userRepository.delete(user);
+            return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
+                                    HttpStatus.ACCEPTED);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
                                     HttpStatus.ACCEPTED);
         }
-        userRepository.delete(user);
-        return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
-                                HttpStatus.ACCEPTED);
     }
 }
