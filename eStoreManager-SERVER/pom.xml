@@ -55,6 +55,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.xml.bind</groupId>
+      <artifactId>jaxb-api</artifactId>
+      <version>2.3.0</version>
+    </dependency> 
 
      <!-- Added for password generation -->
     <dependency>
@@ -75,6 +80,14 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+      <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-surefire-plugin</artifactId>
+			    <version>2.22.1</version>
+			    <configuration>
+			    	<argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+			    </configuration>
+			</plugin>
     </plugins>
   </build>
 </project>

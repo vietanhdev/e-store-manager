@@ -13,6 +13,7 @@ import com.example.store.payload.user_management.request.ChangePasswordRequest;
 import com.example.store.payload.user_management.request.CreateUserRequest;
 import com.example.store.payload.user_management.request.LoginRequest;
 import com.example.store.payload.user_management.request.UpdateUserRequest;
+import com.example.store.payload.user_management.response.AllUserSummaryResponse;
 import com.example.store.payload.user_management.response.CreateUserResponse;
 import com.example.store.payload.user_management.response.ResetPasswordResponse;
 import com.example.store.payload.user_management.response.UserInforResponse;
@@ -75,7 +76,7 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(true, jwt));
     }
 
 
@@ -161,12 +162,12 @@ public class UserController {
 
         String jwt = tokenProvider.generateToken(authentication);
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        return ResponseEntity.ok(new JwtAuthenticationResponse(true, jwt));
     }
 
     // Admin create a new user
     @PostMapping("/users")
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         if( userRepository.existsByUsername( createUserRequest.getUsername() ) ){
             return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
@@ -208,6 +209,21 @@ public class UserController {
         User result = userRepository.save(user);
 
         return new ResponseEntity<>(new CreateUserResponse(true, result.getId(), password),
+                                    HttpStatus.ACCEPTED);
+    }
+
+    // Admin get all user summary informations
+    @GetMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> getAllUserProfile() {
+        AllUserSummaryResponse allUserSummaryResponse = new AllUserSummaryResponse(true);
+        for(User user: userRepository.findAll()){
+            allUserSummaryResponse.addUsers(user.getId(),
+                                            user.getUsername(), 
+                                            user.getName());
+        }
+
+        return new ResponseEntity<>(allUserSummaryResponse,
                                     HttpStatus.ACCEPTED);
     }
 
@@ -279,7 +295,7 @@ public class UserController {
             RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
             String password = randomPasswordGenerator.generatePassayPassword();
             user.setPassword(passwordEncoder.encode(password));
-
+            
             userRepository.save(user);
 
             return new ResponseEntity<>(new ResetPasswordResponse(true, password),

@@ -23,14 +23,12 @@
 
 ### 1.1.2. Response
 
-* On fail (unauthorized):
+* On success:
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": true,
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMjk0MDYxLCJleHAiOjE1NDM4OTg4NjF9.4qDcZMeQPOVWapyovgyvaCo5DlLPIYZtW0QMnrz7XMkQtuA-eSxgDfEwtUBf_9EfGHYUxoONZOr6_bYMCfmEkQ",
+    "tokenType": "Bearer"
 }
 ```
 
@@ -213,7 +211,8 @@
 * On success:
 ```
 {
-    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODU1MjAyLCJleHAiOjE1NDM0NjAwMDJ9.gZxMZeedm0xXBkqBO-BildYHKrBL8G4tabFxOs-zD36TiBZ0JWkvRAV_CFbhPXZelV7ZIi633kOCNGA663gQPg",
+    "success": true,
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMjk0MTQ2LCJleHAiOjE1NDM4OTg5NDZ9.aZo3UktNZYavxIoPVfvmiAEbX5a8MX8BkGMY1YchGfyCdkORonSzjc-KyywIB_Legu0MabWDQiup-UMkyNXfdQ",
     "tokenType": "Bearer"
 }
 ```
@@ -517,7 +516,7 @@
 * On success:
 ```
 {
-    "success": false,
+    "success": true,
     "password": "UL(j#o792O"
 }
 ```
@@ -583,5 +582,45 @@
     "success": false,
     "code": "something_wrong",
     "message": "something wrong with user id"
+}
+```
+
+## 1.12. Get all user summary informations
+
+### 1.12.1. Request
+
+* Path: /api/v1/users/
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 1.12.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "users": [
+        {
+            "user_id": 1,
+            "user_name": "admin",
+            "name": "admin"
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    ...
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Sorry, You're not authorized to access this resource.",
+    ...
 }
 ```

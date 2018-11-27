@@ -1,5 +1,6 @@
 package com.example.store.repository.user_management;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.example.store.model.user_management.User;
@@ -21,5 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+
+    List<User> findAll();
     
 }

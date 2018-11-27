@@ -406,6 +406,37 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Admin get all user summary informations",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMjkxOTkyLCJleHAiOjE1NDM4OTY3OTJ9.WFbeVup04eAU_PSOrkXG71c4E5sJ8F8RUYZ_kF3o2SF4PDKdOnd9mCHxhv6ZOPoR7qiU94zi9cx86TFPkmFKXw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
