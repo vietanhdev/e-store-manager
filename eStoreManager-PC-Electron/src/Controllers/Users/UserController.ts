@@ -26,6 +26,7 @@ export class UserController extends Controller {
         this.getRestService().request('POST', '/api/v1/login', {
             'username': username, 'password': password
         }, (data:any) => {
+            console.log(data);
             cb (data);
         }, (message:any) => {
             cb (message);
