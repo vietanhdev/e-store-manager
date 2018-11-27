@@ -25,7 +25,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\": \"ceo 1\",\n    \"password\": \"@4hk3wFrE$\"\n}\n"
+									"raw": "{\n\t\"username\": \"admin\",\n    \"password\": \"admin@gmail.com\"\n}\n"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/login",
@@ -384,7 +384,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/users/8?",
+									"raw": "http://localhost:8080/api/v1/users/8",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -414,7 +414,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMjkxOTkyLCJleHAiOjE1NDM4OTY3OTJ9.WFbeVup04eAU_PSOrkXG71c4E5sJ8F8RUYZ_kF3o2SF4PDKdOnd9mCHxhv6ZOPoR7qiU94zi9cx86TFPkmFKXw",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
 										"type": "text"
 									}
 								],
@@ -440,6 +440,207 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Customer Management",
+					"item": [
+						{
+							"name": "Admin, Cashier create a new customer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"customer_1\",\r\n    \"email\": \"customer_1@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0916167887\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/customers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier get all user summary informations",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/customers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier get a customer's information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/customers/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"customers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier update a customer's information",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"customer_1\",\r\n    \"email\": \"customer_1@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167997\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/customers/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"customers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier delete a customer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzM5NjExLCJleHAiOjE1NDM5NDQ0MTF9.sM5jliKZbRIvFXDhMIBgPf4vj-6-7Prc33Ms9IE9fmWpdhVc_Q2GMoxdIvOKmz1SA061txj8DBUZPcHG3gHAhA",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/customers/5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"customers",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "JUST FOR TEST: initial admin account with username \"admin\" and password \"admin@gmai.com\"",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/default_initial",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"default_initial"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

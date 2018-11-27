@@ -28,6 +28,8 @@ export class RestService {
             body: postData
         };
 
+        console.log(options)
+
         const request = net.request(options);
         request.write(postData);
         

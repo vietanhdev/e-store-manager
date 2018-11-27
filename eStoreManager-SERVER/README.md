@@ -13,10 +13,8 @@ java -jar store-0.0.1-SNAPSHOT.jar
 ### 1. Account Admin:
 ```
 {
-    "name": "admin",
     "username": "admin",
-    "email": "admin@gmail.com",
-    "user_id": 1,
+    "email": "admin@gmail.com"
     "password": "admin@gmail.com",
     "roles": [
         "ROLE_ADMIN"
@@ -24,6 +22,9 @@ java -jar store-0.0.1-SNAPSHOT.jar
 }
 ```
 
-### 2. [Scratch Design for client-server APIs](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/RESTful_API.md)
+### 2. APIs Design 
+
+* [file RESTful_API.md](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/RESTful_API.md)
+* [hackmd.io online](https://hackmd.io/MmQywEhIQnSbyB25k17FeA?view)
 
 ### 3. [Postman saved json file](https://bitbucket.org/vietanhdev/isd.ict.20181-01/src/master/Project/eStoreManager-SERVER/Postman)

@@ -76,7 +76,11 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(true, jwt));
+
+        // search user and pass user summary information
+        User user = userRepository.findByUsername(loginRequest.getUsername()).orElse(null);
+
+        return ResponseEntity.ok(new JwtAuthenticationResponse(true, user.getId(), user.getName(), jwt));
     }
 
 
@@ -161,8 +165,8 @@ public class UserController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-
-        return ResponseEntity.ok(new JwtAuthenticationResponse(true, jwt));
+        
+        return ResponseEntity.ok(new JwtAuthenticationResponse(true, user.getId(), user.getName(), jwt));
     }
 
     // Admin create a new user
@@ -218,7 +222,7 @@ public class UserController {
     public ResponseEntity<?> getAllUserProfile() {
         AllUserSummaryResponse allUserSummaryResponse = new AllUserSummaryResponse(true);
         for(User user: userRepository.findAll()){
-            allUserSummaryResponse.addUsers(user.getId(),
+            allUserSummaryResponse.addUser(user.getId(),
                                             user.getUsername(), 
                                             user.getName());
         }
@@ -320,5 +324,31 @@ public class UserController {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
                                     HttpStatus.ACCEPTED);
         }
+    }
+
+    // JUST FOR TEST: create default admin account
+    @GetMapping("/default_initial")
+    public ResponseEntity<?> defaultInitial() {
+        if( userRepository.existsByUsername( "admin" ) ){
+            return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
+                                        HttpStatus.ACCEPTED);
+        }
+
+        if( userRepository.existsByEmail( "admin@gmail.com" ) ){
+            return new ResponseEntity<>(new ApiResponse(false, "email_is_taken", "email is already taken!"),
+                                        HttpStatus.ACCEPTED);
+        }
+
+        User user = new User("admin", 
+                            "admin@gmail.com", 
+                            passwordEncoder.encode("admin@gmail.com"));
+
+        Role userRole = roleRepository.findByName(RoleName.valueOf("ROLE_ADMIN")).orElse(null);
+        user.addRole(userRole);
+        
+        User result = userRepository.save(user);
+                            
+        return new ResponseEntity<>(new CreateUserResponse(true, result.getId(), "admin@gmail.com"),
+                                    HttpStatus.ACCEPTED);
     }
 }

@@ -23,7 +23,6 @@ public class Customer extends DateAudit{
     @Size(max = 40)
     private String name;
 
-    @NotBlank
     @Size(max = 40)
     @Email
     private String email;
@@ -38,9 +37,11 @@ public class Customer extends DateAudit{
 
     }
 
-    public Customer(String name, String email){
+    public Customer(String name, String email, String address, String mobileNo){
         this.name = name;
         this.email = email;
+        this.address = address;
+        this.mobileNo = mobileNo;
     }
 
     public Long getId(){

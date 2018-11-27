@@ -27,7 +27,9 @@
 ```
 {
     "success": true,
-    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMjk0MDYxLCJleHAiOjE1NDM4OTg4NjF9.4qDcZMeQPOVWapyovgyvaCo5DlLPIYZtW0QMnrz7XMkQtuA-eSxgDfEwtUBf_9EfGHYUxoONZOr6_bYMCfmEkQ",
+    "id": 1,
+    "name": "admin",
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzM5NjExLCJleHAiOjE1NDM5NDQ0MTF9.sM5jliKZbRIvFXDhMIBgPf4vj-6-7Prc33Ms9IE9fmWpdhVc_Q2GMoxdIvOKmz1SA061txj8DBUZPcHG3gHAhA",
     "tokenType": "Bearer"
 }
 ```
@@ -212,7 +214,9 @@
 ```
 {
     "success": true,
-    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMjk0MTQ2LCJleHAiOjE1NDM4OTg5NDZ9.aZo3UktNZYavxIoPVfvmiAEbX5a8MX8BkGMY1YchGfyCdkORonSzjc-KyywIB_Legu0MabWDQiup-UMkyNXfdQ",
+    "id": 1,
+    "name": "admin",
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzM5NjExLCJleHAiOjE1NDM5NDQ0MTF9.sM5jliKZbRIvFXDhMIBgPf4vj-6-7Prc33Ms9IE9fmWpdhVc_Q2GMoxdIvOKmz1SA061txj8DBUZPcHG3gHAhA",
     "tokenType": "Bearer"
 }
 ```
@@ -367,6 +371,17 @@
 }
 ```
 
+* On fail (you don't have role admin):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
 ## 1.8. Get other user's information
 
 ### 1.8.1. Request
@@ -417,6 +432,17 @@
     "success": false,
     "code": "something_wrong",
     "message": "something wrong with user id"
+}
+```
+
+* On fail (you don't have role admin):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
 }
 ```
 
@@ -497,6 +523,17 @@
 }
 ```
 
+* On fail (you don't have role admin):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
 ## 1.10. Reset other user's password
 
 ### 1.10.1. Request
@@ -538,6 +575,17 @@
     "success": false,
     "code": "something_wrong",
     "message": "something wrong with user id"
+}
+```
+
+* On fail (you don't have role admin):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
 }
 ```
 
@@ -585,6 +633,17 @@
 }
 ```
 
+* On fail (you don't have role admin):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
 ## 1.12. Get all user summary informations
 
 ### 1.12.1. Request
@@ -621,6 +680,315 @@
     "status": 401,
     "error": "Unauthorized",
     "message": "Sorry, You're not authorized to access this resource.",
+    ...
+}
+```
+
+* On fail (you don't have role admin):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
+# 2. Customer management API
+---
+
+## 2.1. Create new customer
+
+### 2.1.1. Request
+
+* Path: /api/v1/customers
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:(name field is compulsory, other fields can be skipped)
+```
+{
+    "name": "customer_1",
+    "username": "customer_1",
+    "email": "customer_1@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0916167887"
+}
+```
+
+### 2.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "user_id": 1
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    ...
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Sorry, You're not authorized to access this resource.",
+    ...
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    ...
+    "status": 400,
+    "error": "Bad Request",
+    ...
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
+## 2.2. Get all customer summary information
+
+### 2.2.1. Request
+
+* Path: /api/v1/customers
+* Method: GET
+* Header:
+    
+    * Content-type: 
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 2.2.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "customer": [
+        {
+            "id": 2,
+            "name": "customer_2"
+        },
+        {
+            "id": 1,
+            "name": "customer_1"
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    ...
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Sorry, You're not authorized to access this resource.",
+    ...
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
+## 2.3. Get a customer's information 
+
+### 2.3.1. Request
+
+* Path: /api/v1/customer/{customer_id}
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 2.3.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1,
+    "name": "customer_1",
+    "email": "customer_1@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0916167887"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    ...
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Sorry, You're not authorized to access this resource.",
+    ...
+}
+```
+
+* On fail (customer_id does not exist):
+```
+{
+    "success": false,
+    "code": "something_wrong",
+    "message": "something wrong with customer id"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
+## 2.4. Update a customer's information 
+
+### 2.4.1. Request
+
+* Path: /api/v1/customers/{customer_id}
+* Method: PUT
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body: (you can choose any fields you want to change, all fields are not compulsory)
+```
+{
+    "name": "customer_5",
+    "email": "customer_5@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0916167997"
+}
+```
+
+### 2.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "update_successful",
+    "message": "update successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    ...
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Sorry, You're not authorized to access this resource.",
+    ...
+}
+```
+
+* On fail (customer_id does not exist):
+```
+{
+    "success": false,
+    "code": "something_wrong",
+    "message": "something wrong with customer id"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
+    ...
+}
+```
+
+## 2.5. Delete a customer
+
+### 2.1.1. Request
+
+* Path: /api/v1/customers/
+* Method: DELETE
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+
+### 2.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "success",
+    "message": "delete customer successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    ...
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "Sorry, You're not authorized to access this resource.",
+    ...
+}
+```
+
+* On fail (customer_id does not exist):
+```
+{
+    "success": false,
+    "code": "something_wrong",
+    "message": "something wrong with customer id"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    ...
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Forbidden",
     ...
 }
 ```
