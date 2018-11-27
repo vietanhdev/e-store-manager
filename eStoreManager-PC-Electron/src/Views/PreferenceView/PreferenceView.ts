@@ -6,7 +6,7 @@ const { dialog } = require('electron');
 export class PreferenceView extends View {
 
     constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("preference", window, parent, 800, 700);
+        super("PreferenceView/preference", window, parent, 800, 700);
         this.getWindow().setMenu(null);
         this.getWindow().webContents.openDevTools();
     }

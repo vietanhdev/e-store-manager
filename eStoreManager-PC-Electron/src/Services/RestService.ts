@@ -9,7 +9,7 @@ export class RestService {
     private protocol:string;
     private port:number;
 
-    constructor(hostname:string="localhost", protocol:string="http", port:number=80) {
+    constructor(hostname:string="localhost", protocol:string="http", port:number=8080) {
         this.hostname = hostname;
         this.protocol = protocol;
         this.port = port;
@@ -17,8 +17,7 @@ export class RestService {
 
     request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any)):void {
 
-        let postData = querystring.stringify(data);
-        
+        let postData = JSON.stringify(data);
         
         let options = {
             hostname: this.hostname,
@@ -30,6 +29,8 @@ export class RestService {
                 'Content-Length': Buffer.byteLength(postData)
             }
         };
+
+        console.log(options);
         
         let returnData: string = '';
 
@@ -63,6 +64,9 @@ export class RestService {
         // write data to request body
         req.write(postData);
         req.end();
+
+
+        console.log(postData);
 
     };
 

@@ -23,7 +23,7 @@ export class UserController extends Controller {
     //     token: string;
     // }
     public login(username: string, password: string, cb: any):any {
-        this.getRestService().request('POST', '/api/auth/login', {
+        this.getRestService().request('POST', '/api/v1/login', {
             'username': username, 'password': password
         }, (data:any) => {
             cb (data);
