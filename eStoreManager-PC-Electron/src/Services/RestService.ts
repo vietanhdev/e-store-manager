@@ -1,6 +1,4 @@
-var http = require('http');
-var https = require('https');
-var querystring = require('querystring');
+const { net } = require('electron')
 
 
 export class RestService {
@@ -9,7 +7,7 @@ export class RestService {
     private protocol:string;
     private port:number;
 
-    constructor(hostname:string="localhost", protocol:string="http", port:number=80) {
+    constructor(hostname:string="localhost", protocol:string="http", port:number=8080) {
         this.hostname = hostname;
         this.protocol = protocol;
         this.port = port;
@@ -17,8 +15,7 @@ export class RestService {
 
     request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any)):void {
 
-        let postData = querystring.stringify(data);
-        
+        let postData = JSON.stringify(data);
         
         let options = {
             hostname: this.hostname,
@@ -26,43 +23,36 @@ export class RestService {
             path: path,
             method: method,
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Content-Length': Buffer.byteLength(postData)
-            }
+                'Content-Type': 'application/json'
+            },
+            body: postData
         };
+
+        const request = net.request(options);
+        request.write(postData);
         
         let returnData: string = '';
-
-        let httpPackage;
-        if (this.protocol === 'https') {
-            httpPackage = https;
-        } else {
-            httpPackage = http;
-        }
         
-        let req = httpPackage.request(options, (res:any) => {
-            // console.log(`STATUS: ${res.statusCode}`);
-            // console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
-            res.setEncoding('utf8');
-            res.on('data', (chunk:any) => {
+        request.on('response', (response) => {
+            console.log(`STATUS: ${response.statusCode}`)
+            console.log(`HEADERS: ${JSON.stringify(response.headers)}`)
+            response.on('data', (chunk) => {
                 returnData += chunk;
-            });
-            res.on('end', () => {
+            })
+            response.on('end', () => {
                 cbSuccess(JSON.parse(returnData));
             })
-        });
-        
-        req.on('error', (e:any) => {
+        })
+        request.on('error', (e:any) => {
             cbFail({
                 success: false,
                 errorCode: 100,
                 message: "Connection error!",
             });
         });
-        
-        // write data to request body
-        req.write(postData);
-        req.end();
+        request.end()
+
+        console.log(postData);
 
     };
 

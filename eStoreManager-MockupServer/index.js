@@ -17,7 +17,9 @@ app.get('/', (req, res) => res.send('Hello World with Express'));
 
 
 // Login
-app.post('/api/auth/login', (req, res) => {
+app.post('/api/v1/login', (req, res) => {
+
+console.log(req);
 
     let username = req.body.username;
     let password = req.body.password;

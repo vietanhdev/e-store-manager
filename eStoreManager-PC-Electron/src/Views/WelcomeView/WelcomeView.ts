@@ -6,7 +6,7 @@ const { dialog } = require('electron');
 export class WelcomeView extends View {
 
     constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("welcome", window, parent);
+        super("WelcomeView/welcome", window, parent);
     }
 
     // Handle all logic of this view
