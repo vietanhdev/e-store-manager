@@ -22,3 +22,22 @@ Visual Studio Code is an ideal lightweight development environment for Spring Bo
 | manager | manager@123 |
 | cashier | cashier@123 |
 
+## Build and run via commandline - Ubuntu
+
+### 1. Install maven
+
+~~~
+sudo apt install maven
+~~~
+
+### 2. Open Terminal from project folder then:
+
+~~~
+mvn install
+~~~
+
+### 3. Run it:
+
+~~~
+mvn spring-boot:run
+~~~
