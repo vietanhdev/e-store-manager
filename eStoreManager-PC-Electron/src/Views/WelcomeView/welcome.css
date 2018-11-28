@@ -1,5 +1,5 @@
 body {
-    background: url(../images/gro.jpg);
+    background: url(images/gro.jpg);
 }
 
 .site-title {
@@ -60,57 +60,57 @@ body {
 }
 
 #menu-cashier-ui {
-    background-image: url("../images/cashier.png");
+    background-image: url("images/cashier.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-bills {
-    background-image: url("../images/bills.png");
+    background-image: url("images/bills.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-customers {
-    background-image: url("../images/god.png");
+    background-image: url("images/god.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-inventory {
-    background-image: url("../images/warehouse.png");
+    background-image: url("images/warehouse.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-suppliers {
-    background-image: url("../images/supplier.png");
+    background-image: url("images/supplier.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-import-products {
-    background-image: url("../images/import.png");
+    background-image: url("images/import.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-employees {
-    background-image: url("../images/employees.png");
+    background-image: url("images/employees.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-reports {
-    background-image: url("../images/report.png");
+    background-image: url("images/report.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-finance {
-    background-image: url("../images/money-bag.png");
+    background-image: url("images/money-bag.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-setting {
-    background-image: url("../images/settings.png");
+    background-image: url("images/settings.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }
 #menu-support {
-    background-image: url("../images/customer-service.png");
+    background-image: url("images/customer-service.png");
     background-position: bottom 5px right 7px; /*Positioning*/
     background-repeat: no-repeat; /*Prevent showing multiple background images*/
 }

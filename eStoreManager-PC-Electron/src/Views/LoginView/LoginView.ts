@@ -3,6 +3,7 @@ const {ipcMain} = require('electron');
 import {View} from '../View/View';
 import {UserController} from '../../Controllers/Users/UserController';
 const { dialog } = require('electron')
+const settings = require('electron-settings');
 
 export class LoginView extends View {
 
@@ -28,13 +29,10 @@ export class LoginView extends View {
                         buttons: ["OK"]
                     }));
                 } else {
-                    dialog.showMessageBox(this.getWindow(), Object({
-                        type: "info",
-                        title: "Logged",
-                        message: "Logged in",
-                        buttons: ["OK"]
-                    }));
-                    this.requestChangeView("welcome");
+                    settings.set("account_info.userid", result.id);
+                    settings.set("account_info.fullname", result.name);
+                    settings.set("account_info.token", result.accessToken);
+                    this.requestChangeView("WelcomeView/welcome");
                 }
                 this.hideLoadingModal();
             }); 

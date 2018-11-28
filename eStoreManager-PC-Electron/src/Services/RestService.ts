@@ -1,5 +1,5 @@
 const { net } = require('electron')
-
+const settings = require('electron-settings');
 
 export class RestService {
 
@@ -13,22 +13,30 @@ export class RestService {
         this.port = port;
     }
 
-    request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any)):void {
+    request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any), auth: boolean):void {
 
         let postData = JSON.stringify(data);
+        // let headers = Object({'Content-Type': 'application/json'});
+        // if (typeof header != "undefined") {
+        //     for (var key in header) {
+        //         if (header.hasOwnProperty(key)) {
+        //             headers[key] = header[key];
+        //         }
+        //     }
+        // }
+        let headers = Object({'Content-Type': 'application/json'});
+        if (auth) {
+            headers['Authorization'] = "Bearer " + settings.get('account_info.token');
+        }
         
         let options = {
             hostname: this.hostname,
             port: this.port,
             path: path,
             method: method,
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: headers,
             body: postData
         };
-
-        console.log(options)
 
         const request = net.request(options);
         request.write(postData);
@@ -53,8 +61,6 @@ export class RestService {
             });
         });
         request.end()
-
-        console.log(postData);
 
     };
 

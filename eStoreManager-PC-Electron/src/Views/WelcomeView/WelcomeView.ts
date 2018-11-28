@@ -16,7 +16,7 @@ export class WelcomeView extends View {
             console.log(data);
             
             if (data == "menu-cashier-ui") {
-                this.requestChangeView('cashier_ui');
+                this.requestChangeView('CashierView/cashier_ui');
             }
 
         });

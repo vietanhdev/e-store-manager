@@ -30,6 +30,8 @@ export class UI {
 
   public init() {
 
+    let userController = new UserController();
+
     // Load the main menu of the application
     const mainMenuTemplate = require('./Views/View/MainMenuTemplate').template;
     this.menu = Menu.buildFromTemplate(mainMenuTemplate);
@@ -46,7 +48,7 @@ export class UI {
     // Init views
     let loginView = new LoginView(this.mainWindow, null); this.addView(loginView);
     let welcomeView = new WelcomeView(this.mainWindow, null); this.addView(welcomeView);
-    // let cashierView = new CashierView(this.mainWindow, null); this.addView(CashierView);
+    let cashierView = new CashierView(this.mainWindow, null); this.addView(cashierView);
     
 
     // Init Menu actions
@@ -55,7 +57,7 @@ export class UI {
       {
           label: 'Welcome Screen',
           click: () => {
-            this.changeView('welcome');
+            this.changeView('WelcomeView/welcome');
           }
       }
       ]
@@ -77,16 +79,26 @@ export class UI {
       }
       ]
     }));
+    this.menu.append(new MenuItem({label: 'Logout',
+      click: () => {
+        userController.logout();
+        this.changeView('LoginView/login');
+      }
+    }));
 
     this.mainWindow.setMenu(this.menu);
 
     // welcomeView.show();
     loadingView.show();
 
+    
+
     // Check user login and redirect to login page if user have not logged in
-    if (!UserController.isLoggedIn()) {
+    userController.isLoggedIn(() => {
+      welcomeView.show();
+    }, () => {
       loginView.show();
-    }
+    });
 
   }
 
