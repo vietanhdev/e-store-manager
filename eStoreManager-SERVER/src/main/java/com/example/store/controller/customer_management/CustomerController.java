@@ -43,7 +43,7 @@ public class CustomerController {
         Customer result = customerRepository.save(customer);
 
         return new ResponseEntity<>(new CreateCustomerResponse(true, result.getId()),
-                                HttpStatus.ACCEPTED);
+                                HttpStatus.OK);
     }
 
     // Admin, Cashier get all customer summary informations
@@ -57,7 +57,7 @@ public class CustomerController {
         }
 
         return new ResponseEntity<>(allCustomerSummaryResponse,
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
     }
 
     // Admin, Cashier get a customer information
@@ -75,10 +75,10 @@ public class CustomerController {
                                                                                     customer.getMobileNo());
 
             return new ResponseEntity<>(customerInforResponse,
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 
@@ -98,10 +98,10 @@ public class CustomerController {
 
             customerRepository.save(customer);
             return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update successful"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 
@@ -114,10 +114,10 @@ public class CustomerController {
             customer = customerRepository.findById(Long.parseLong(customer_id)).orElse(null);
             customerRepository.delete(customer);
             return new ResponseEntity<>(new ApiResponse(true, "success", "delete customer successful"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 

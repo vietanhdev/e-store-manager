@@ -11,8 +11,8 @@ public class AllUserSummaryResponse {
         this.success = success;
     }
 
-    public void addUser(Long user_id, String user_name, String name){
-        this.users.add(new UserSummary(user_id, user_name, name));
+    public void addUser(Long id, String username, String name){
+        this.users.add(new UserSummary(id, username, name));
     }
 
 }

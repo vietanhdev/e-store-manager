@@ -75,8 +75,8 @@
 ```
 {
     "success": true,
-    "user_id": 4,
-    "user_name": "admin",
+    "id": 4,
+    "username": "admin",
     "name": null
 }
 ```
@@ -318,7 +318,7 @@
 ```
 {
     "success": true,
-    "user_id": 9,
+    "id": 9,
     "password": "%^D9e8b)L!"
 }
 ```
@@ -386,7 +386,7 @@
 
 ### 1.8.1. Request
 
-* Path: /api/v1/users/{user_id}
+* Path: /api/v1/users/{id}
 * Method: GET
 * Header:
     
@@ -426,7 +426,7 @@
 }
 ```
 
-* On fail (user_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
@@ -450,7 +450,7 @@
 
 ### 1.9.1. Request
 
-* Path: /api/v1/users/{user_id}
+* Path: /api/v1/users/{id}
 * Method: PUT
 * Header:
     
@@ -514,7 +514,7 @@
 }
 ```
 
-* On fail (user_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
@@ -538,7 +538,7 @@
 
 ### 1.10.1. Request
 
-* Path: /api/v1/users/{user_id}/change_password
+* Path: /api/v1/users/{id}/change_password
 * Method: GET
 * Header:
     
@@ -569,7 +569,7 @@
 }
 ```
 
-* On fail (user_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
@@ -593,7 +593,7 @@
 
 ### 1.11.1. Request
 
-* Path: /api/v1/users/{user_id}
+* Path: /api/v1/users/{id}
 * Method: DELETE
 * Header:
     
@@ -624,7 +624,7 @@
 }
 ```
 
-* On fail (user_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
@@ -665,8 +665,8 @@
     "success": true,
     "users": [
         {
-            "user_id": 1,
-            "user_name": "admin",
+            "id": 1,
+            "username": "admin",
             "name": "admin"
         }
     ]
@@ -713,7 +713,6 @@
 ```
 {
     "name": "customer_1",
-    "username": "customer_1",
     "email": "customer_1@gmail.com",
     "address": "ha noi",
     "mobileNo": "0916167887"
@@ -726,7 +725,7 @@
 ```
 {
     "success": true,
-    "user_id": 1
+    "id": 1
 }
 ```
 

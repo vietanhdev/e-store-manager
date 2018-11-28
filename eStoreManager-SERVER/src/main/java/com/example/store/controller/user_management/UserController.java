@@ -92,7 +92,7 @@ public class UserController {
                                                         currentUser.getUsername(), 
                                                         currentUser.getName());
         return new ResponseEntity<>(userSummaryResponse,
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK );
     }
 
     // User delete his own account
@@ -101,7 +101,7 @@ public class UserController {
         User user = userRepository.findById(currentUser.getId()).orElse(null);
         userRepository.delete(user);
         return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
-                                HttpStatus.ACCEPTED);
+                                HttpStatus.OK);
     }
 
     // User get his own information
@@ -118,7 +118,7 @@ public class UserController {
             userInforResponse.addRole(role.getName().toString());
         }
         return new ResponseEntity<>(userInforResponse,
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
     }
 
     // User update his own information
@@ -134,7 +134,7 @@ public class UserController {
 
         userRepository.save(user);
         return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update profile successful"),
-                                HttpStatus.ACCEPTED);
+                                HttpStatus.OK);
     }
 
     // User change his own password
@@ -145,7 +145,7 @@ public class UserController {
         // Check old passsword and new password if indentity
         if(passwordEncoder.matches(changePasswordRequest.getOldPassword(), currentUser.getPassword()) == false){
             return new ResponseEntity<>(new ApiResponse(false, "change_password_fail", "old password is not correct"),
-                                HttpStatus.ACCEPTED);
+                                HttpStatus.OK);
         };
 
         // Save new password to database
@@ -175,12 +175,12 @@ public class UserController {
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         if( userRepository.existsByUsername( createUserRequest.getUsername() ) ){
             return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         }
 
         if( userRepository.existsByEmail( createUserRequest.getEmail() ) ){
             return new ResponseEntity<>(new ApiResponse(false, "email_is_taken", "email is already taken!"),
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         }
 
         // username, email, password are required
@@ -206,14 +206,14 @@ public class UserController {
             }
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
 
         // save to database
         User result = userRepository.save(user);
 
         return new ResponseEntity<>(new CreateUserResponse(true, result.getId(), password),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
     }
 
     // Admin get all user summary informations
@@ -228,7 +228,7 @@ public class UserController {
         }
 
         return new ResponseEntity<>(allUserSummaryResponse,
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
     }
 
     // Admin get a user information
@@ -244,10 +244,10 @@ public class UserController {
                 userInforResponse.addRole(role.getName().toString());
             }
             return new ResponseEntity<>(userInforResponse,
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 
@@ -276,15 +276,15 @@ public class UserController {
                 }
             } catch (Exception e) {
                 return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
             }
 
             userRepository.save(user);
             return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update successful"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 
@@ -303,10 +303,10 @@ public class UserController {
             userRepository.save(user);
 
             return new ResponseEntity<>(new ResetPasswordResponse(true, password),
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 
@@ -319,10 +319,10 @@ public class UserController {
             user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
             userRepository.delete(user);
             return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
         }
     }
 
@@ -331,12 +331,12 @@ public class UserController {
     public ResponseEntity<?> defaultInitial() {
         if( userRepository.existsByUsername( "admin" ) ){
             return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         }
 
         if( userRepository.existsByEmail( "admin@gmail.com" ) ){
             return new ResponseEntity<>(new ApiResponse(false, "email_is_taken", "email is already taken!"),
-                                        HttpStatus.ACCEPTED);
+                                        HttpStatus.OK);
         }
 
         User user = new User("admin", 
@@ -349,6 +349,6 @@ public class UserController {
         User result = userRepository.save(user);
                             
         return new ResponseEntity<>(new CreateUserResponse(true, result.getId(), "admin@gmail.com"),
-                                    HttpStatus.ACCEPTED);
+                                    HttpStatus.OK);
     }
 }
