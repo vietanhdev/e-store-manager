@@ -297,11 +297,12 @@
     * Content-type: application/json
     * Authorization: Bearer JWT
 
-* Body:
+* Body: (username, email and password are compulsory, other fields can be skipped)
 ```
 {
     "name": "ceo la",
     "username": "ceo",
+    "password": "md5@password",
     "salary": 1000,
     "email": "ceo@gmail.com",
     "address": "hoa binh",
@@ -318,8 +319,7 @@
 ```
 {
     "success": true,
-    "id": 9,
-    "password": "%^D9e8b)L!"
+    "id": 9
 }
 ```
 
@@ -462,6 +462,7 @@
 {
     "name": "ceo la la",
     "username": "ceola",
+    "password": "md5@password"
     "salary": 100,
     "email": "ceola@gmail.com",
     "address": "hai phong",
@@ -534,11 +535,11 @@
 }
 ```
 
-## 1.10. Reset other user's password
+## 1.10. Get all users' information
 
 ### 1.10.1. Request
 
-* Path: /api/v1/users/{id}/change_password
+* Path: /api/v1/users
 * Method: GET
 * Header:
     
@@ -547,14 +548,19 @@
 
 * Body:
 
-
 ### 1.10.2. Response
 
 * On success:
 ```
 {
     "success": true,
-    "password": "UL(j#o792O"
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "name": "admin"
+        }
+    ]
 }
 ```
 
@@ -566,15 +572,6 @@
     "error": "Unauthorized",
     "message": "Sorry, You're not authorized to access this resource.",
     ...
-}
-```
-
-* On fail (id does not exist):
-```
-{
-    "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with user id"
 }
 ```
 
@@ -644,57 +641,6 @@
 }
 ```
 
-## 1.12. Get all user summary informations
-
-### 1.12.1. Request
-
-* Path: /api/v1/users/
-* Method: GET
-* Header:
-    
-    * Content-type:
-    * Authorization: Bearer JWT
-
-* Body:
-
-### 1.12.2. Response
-
-* On success:
-```
-{
-    "success": true,
-    "users": [
-        {
-            "id": 1,
-            "username": "admin",
-            "name": "admin"
-        }
-    ]
-}
-```
-
-* On fail (unauthorized):
-```
-{
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
-}
-```
-
-* On fail (you don't have role admin):
-```
-{
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
-}
-```
-
 # 2. Customer management API
 ---
 
@@ -725,7 +671,42 @@
 ```
 {
     "success": true,
-    "id": 1
+    "users": [
+        {
+            "id": 6,
+            "name": "manager 1",
+            "username": "manager_1",
+            "salary": 1000,
+            "email": "manager_1@gmail.com",
+            "address": "hoa binh",
+            "mobileNo": "0916167558",
+            "roles": [
+                "ROLE_MANAGER"
+            ]
+        },
+        {
+            "id": 4,
+            "name": null,
+            "username": "admin",
+            "salary": null,
+            "email": "admin@gmail.com",
+            "address": null,
+            "mobileNo": null,
+            "roles": [
+                "ROLE_ADMIN"
+            ]
+        },
+        {
+            "id": 7,
+            "name": "noone",
+            "username": "noone",
+            "salary": 0,
+            "email": "noone@gmail.com",
+            "address": "hoa binh",
+            "mobileNo": "0916167558",
+            "roles": []
+        }
+    ]
 }
 ```
 

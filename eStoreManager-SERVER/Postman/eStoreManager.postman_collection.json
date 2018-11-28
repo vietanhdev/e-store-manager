@@ -54,7 +54,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzczMzEyLCJleHAiOjE1NDM5NzgxMTJ9.9tj4nSCYSa2U-hud68U5kBLhadIPCYjNPPGckEHYJKkG65TewfCforUkdb6a1_5e8tV4BXXPPbPurnv_cuMoPg",
 										"type": "text"
 									}
 								],
@@ -89,7 +89,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUyNTA3LCJleHAiOjE1NDM0NTczMDd9.z5zZyhnnbrZHrUUBE39ToZ3RVwYdogORpsSzPBxJpHZne12vbKe9vRd6oLdj9XAzbulMk49oiAaxntsqPQKM6Q",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzczMzEyLCJleHAiOjE1NDM5NzgxMTJ9.9tj4nSCYSa2U-hud68U5kBLhadIPCYjNPPGckEHYJKkG65TewfCforUkdb6a1_5e8tV4BXXPPbPurnv_cuMoPg",
 										"type": "text"
 									}
 								],
@@ -243,7 +243,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"ceo la\",\r\n    \"username\": \"ceo 1\",\r\n    \"salary\": 1000,\r\n    \"email\": \"ceo1@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167558\",\r\n    \"roles\": [\r\n        \"ROLE_ADMIN\", \"ROLE_MANAGER\"\r\n    ]\r\n}"
+									"raw": "{\r\n    \"name\": \"noone\",\r\n    \"username\": \"noone\",\r\n    \"password\": \"md5@password\",\r\n    \"salary\": 0,\r\n    \"email\": \"noone@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167558\",\r\n    \"roles\": [\r\n\t\t\"ROLE_CASHIER\"\r\n    ]\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/users",
@@ -336,13 +336,13 @@
 							"response": []
 						},
 						{
-							"name": "Admin reset user password by user_id",
+							"name": "Admin get all user summary informations",
 							"request": {
 								"method": "GET",
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Berer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQzNDEyNjQzLCJleHAiOjE1NDQwMTc0NDN9.ltS3jZCCP1-QDbiCVT2Q4INSb6phhoFMDs9MTRKwOLIthxHeNgHJD3sCXQ90ahOP9bziBIDo2Onbfi2m7URiYQ",
 										"type": "text"
 									}
 								],
@@ -351,7 +351,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/users/9/reset_password",
+									"raw": "http://localhost:8080/api/v1/users",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -360,9 +360,7 @@
 									"path": [
 										"api",
 										"v1",
-										"users",
-										"9",
-										"reset_password"
+										"users"
 									]
 								}
 							},
@@ -402,37 +400,6 @@
 											"value": "",
 											"disabled": true
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Admin get all user summary informations",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "http://localhost:8080/api/v1/users",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"users"
 									]
 								}
 							},

@@ -13,16 +13,15 @@ import com.example.store.payload.user_management.request.ChangePasswordRequest;
 import com.example.store.payload.user_management.request.CreateUserRequest;
 import com.example.store.payload.user_management.request.LoginRequest;
 import com.example.store.payload.user_management.request.UpdateUserRequest;
-import com.example.store.payload.user_management.response.AllUserSummaryResponse;
+import com.example.store.payload.user_management.response.AllUserInforResponse;
 import com.example.store.payload.user_management.response.CreateUserResponse;
-import com.example.store.payload.user_management.response.ResetPasswordResponse;
+import com.example.store.payload.user_management.response.UserInfor;
 import com.example.store.payload.user_management.response.UserInforResponse;
-import com.example.store.payload.user_management.response.UserSummaryResponse;
 import com.example.store.repository.user_management.RoleRepository;
 import com.example.store.repository.user_management.UserRepository;
 import com.example.store.security.CurrentUser;
 import com.example.store.security.JwtTokenProvider;
-import com.example.store.security.RandomPasswordGenerator;
+// import com.example.store.security.RandomPasswordGenerator;
 import com.example.store.security.UserPrincipal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,18 +82,6 @@ public class UserController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(true, user.getId(), user.getName(), jwt));
     }
 
-
-    // After login, user get summary information
-    @GetMapping("/me/profile")
-    public ResponseEntity<?> getCurrentUser(@CurrentUser UserPrincipal currentUser) {
-        UserSummaryResponse userSummaryResponse = new UserSummaryResponse(true, 
-                                                        currentUser.getId(), 
-                                                        currentUser.getUsername(), 
-                                                        currentUser.getName());
-        return new ResponseEntity<>(userSummaryResponse,
-                                    HttpStatus.OK );
-    }
-
     // User delete his own account
     @DeleteMapping("/me")
     public ResponseEntity<?> deleteOwnAccount(@CurrentUser UserPrincipal currentUser) {
@@ -145,7 +132,7 @@ public class UserController {
         // Check old passsword and new password if indentity
         if(passwordEncoder.matches(changePasswordRequest.getOldPassword(), currentUser.getPassword()) == false){
             return new ResponseEntity<>(new ApiResponse(false, "change_password_fail", "old password is not correct"),
-                                HttpStatus.OK);
+                                        HttpStatus.OK);
         };
 
         // Save new password to database
@@ -184,11 +171,11 @@ public class UserController {
         }
 
         // username, email, password are required
-        RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
-        String password = randomPasswordGenerator.generatePassayPassword();
+        // RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
+        // String password = randomPasswordGenerator.generatePassayPassword();
         User user = new User(createUserRequest.getUsername(), 
                             createUserRequest.getEmail(), 
-                            passwordEncoder.encode(password));
+                            passwordEncoder.encode(createUserRequest.getPassword()));
 
         // name, salary, mobileNo, address, role are optional
         user.setName(createUserRequest.getName());
@@ -197,12 +184,9 @@ public class UserController {
         user.setMobileNo(createUserRequest.getMobileNo());
 
         try {
-            List<String> roles = createUserRequest.getRoles();
-            if(roles != null){
-                for(String role: roles) {
-                    Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
-                    user.addRole(userRole);
-                }
+            for(String role: createUserRequest.getRoles()) {
+                Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
+                user.addRole(userRole);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
@@ -212,7 +196,7 @@ public class UserController {
         // save to database
         User result = userRepository.save(user);
 
-        return new ResponseEntity<>(new CreateUserResponse(true, result.getId(), password),
+        return new ResponseEntity<>(new CreateUserResponse(true, result.getId()),
                                     HttpStatus.OK);
     }
 
@@ -220,14 +204,24 @@ public class UserController {
     @GetMapping("/users")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAllUserProfile() {
-        AllUserSummaryResponse allUserSummaryResponse = new AllUserSummaryResponse(true);
+        AllUserInforResponse allUserInforResponse = new AllUserInforResponse(true);
         for(User user: userRepository.findAll()){
-            allUserSummaryResponse.addUser(user.getId(),
-                                            user.getUsername(), 
-                                            user.getName());
+            UserInfor userInfor = new UserInfor(user.getId(), 
+                                                user.getName(), 
+                                                user.getUsername(), 
+                                                user.getSalary(), 
+                                                user.getEmail(), 
+                                                user.getAddress(), 
+                                                user.getMobileNo());
+
+
+            for(Role role: user.getRoles()) {
+                userInfor.addRole(role.getName().toString());
+            }
+            allUserInforResponse.addUserInfor(userInfor);
         }
 
-        return new ResponseEntity<>(allUserSummaryResponse,
+        return new ResponseEntity<>(allUserInforResponse,
                                     HttpStatus.OK);
     }
 
@@ -236,10 +230,15 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getUserInfor(@PathVariable(value = "user_id") String user_id) {
         try {
-            User user;
-            user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
-            UserInforResponse userInforResponse = new UserInforResponse(true, user.getId(), user.getName(), user.getUsername(), 
-                                                user.getSalary(), user.getEmail(), user.getAddress(), user.getMobileNo());
+            User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            UserInforResponse userInforResponse = new UserInforResponse(true, 
+                                                                        user.getId(), 
+                                                                        user.getName(), 
+                                                                        user.getUsername(), 
+                                                                        user.getSalary(), 
+                                                                        user.getEmail(), 
+                                                                        user.getAddress(), 
+                                                                        user.getMobileNo());
             for(Role role: user.getRoles()) {
                 userInforResponse.addRole(role.getName().toString());
             }
@@ -257,10 +256,10 @@ public class UserController {
     public ResponseEntity<?> updateUserInfor(@PathVariable(value = "user_id") String user_id, 
                                             @Valid @RequestBody UpdateUserRequest updateUserRequest) {
         try{
-            User user;
-            user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
             if(updateUserRequest.getName() != null) user.setName(updateUserRequest.getName());
             if(updateUserRequest.getUsername() != null) user.setUsername(updateUserRequest.getUsername());
+            if(updateUserRequest.getPassword() != null) user.setPassword(updateUserRequest.getPassword());
             if(updateUserRequest.getEmail() != null) user.setEmail(updateUserRequest.getEmail());
             if(updateUserRequest.getAddress() != null) user.setAddress(updateUserRequest.getAddress());
             if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
@@ -288,35 +287,12 @@ public class UserController {
         }
     }
 
-    // Admin reset user password
-    @GetMapping("/users/{user_id}/reset_password")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> resetUserPassword(@PathVariable(value = "user_id") String user_id){
-        try {
-            User user;
-            user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
-            // Create a new random password and save encoded password
-            RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
-            String password = randomPasswordGenerator.generatePassayPassword();
-            user.setPassword(passwordEncoder.encode(password));
-            
-            userRepository.save(user);
-
-            return new ResponseEntity<>(new ResetPasswordResponse(true, password),
-                                        HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
-                                    HttpStatus.OK);
-        }
-    }
-
     // Admin delete a user
     @DeleteMapping("/users/{user_id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteUser(@PathVariable(value = "user_id") String user_id) {
         try {
-            User user;
-            user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
+            User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
             userRepository.delete(user);
             return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
                                     HttpStatus.OK);
@@ -348,7 +324,7 @@ public class UserController {
         
         User result = userRepository.save(user);
                             
-        return new ResponseEntity<>(new CreateUserResponse(true, result.getId(), "admin@gmail.com"),
+        return new ResponseEntity<>(new CreateUserResponse(true, result.getId()),
                                     HttpStatus.OK);
     }
 }
