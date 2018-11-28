@@ -7,7 +7,7 @@ const { dialog } = require('electron')
 export class EmployeeView extends View {
 
     constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("employees", window, parent);
+        super("EmployeeView/employees", window, parent);
     }
 
     // Handle all logic of this view

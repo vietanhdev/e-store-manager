@@ -4,6 +4,7 @@ import { EventEmitter } from "events";
 const ejse = require('ejs-electron');
 var events = require('events').EventEmitter;
 const { dialog } = require('electron')
+const {ipcMain} = require('electron');
 
 export class View {
     
@@ -25,7 +26,10 @@ export class View {
             this.window = new BrowserWindow({
                 height: height,
                 width: width,
-                parent: parent
+                parent: parent,
+                webPreferences: {
+                    nodeIntegrationInWorker: true
+                }
             });
 
             // Emitted when the window is closed.
@@ -42,6 +46,11 @@ export class View {
 
         // Calculate view file path and write to this.viewFile
         this.setViewFile(view);
+
+        // Handle request_change_view event from browser thread
+        ipcMain.on('request_change_view', (event:any, data:any) => {
+            this.requestChangeView(data);
+        });
 
         // Call logic handler
         this.logicHandle();

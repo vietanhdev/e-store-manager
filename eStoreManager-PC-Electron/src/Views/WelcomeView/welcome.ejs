@@ -60,8 +60,21 @@
 	$(document).ready(function() {
 		$(".menu-item").click(function(event) {
 			const {ipcRenderer} = require('electron');
-			ipcRenderer.send('menu-click', this.id);
-			console.log("Clicked: #" + this.id);
+			
+			switch(this.id) {
+				case "menu-cashier-ui": ipcRenderer.send('request_change_view', 'CashierView/cashier_ui'); break;
+				case "menu-bills": ipcRenderer.send('request_change_view', 'BillView/bills'); break;
+				case "menu-customers": ipcRenderer.send('request_change_view', 'CustomerView/customers'); break;
+				case "menu-inventory": ipcRenderer.send('request_change_view', 'InventoryView/inventory'); break;
+				case "menu-suppliers": ipcRenderer.send('request_change_view', 'SuppierView/suppliers'); break;
+				case "menu-import-products": ipcRenderer.send('request_change_view', 'InventoryView/import'); break;
+				case "menu-employees": ipcRenderer.send('request_change_view', 'EmployeeView/employees'); break;
+				case "menu-reports": ipcRenderer.send('request_change_view', 'ReportView/reports'); break;
+				case "menu-finance": ipcRenderer.send('request_change_view', 'FinanceView/finance'); break;
+				case "menu-setting": ipcRenderer.send('request_change_view', 'preferences'); break;
+				case "menu-support": ipcRenderer.send('request_change_view', 'SupportView/support_form'); break;
+			}
+
 		});
 	});
 

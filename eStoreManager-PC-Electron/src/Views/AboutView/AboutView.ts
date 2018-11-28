@@ -6,7 +6,7 @@ const { dialog } = require('electron');
 export class AboutView extends View {
 
     constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("about", window, parent, 500, 400);
+        super("AboutView/about", window, parent, 500, 400);
         this.getWindow().setMenu(null);
     }
 

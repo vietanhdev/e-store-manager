@@ -58,5 +58,18 @@ export class UserController extends Controller {
         settings.delete("account_info.username");
         settings.delete("account_info.fullname");
     }
+
+
+    public getAllUsers(cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('GET', '/api/v1/users', {}, (data:any) => {
+            if (data['success'] == true) {
+                cbSuccess (data.users);
+            } else {
+                cbFail(data);
+            }
+        }, (message:any) => {
+            cbFail (message);
+        }, true);
+    }
  
 }

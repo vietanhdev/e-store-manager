@@ -1,12 +1,182 @@
-<%- include('../View/header', {title: 'Login'}) %>
-<link rel="stylesheet" type="text/css" href="../Views/css/employees.css">
+<%- include('../View/header', {title: 'Employee Management'}) %>
+<link rel="stylesheet" type="text/css" href="employees.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 
+<%- include('../View/secondary-menu.ejs') %>
 
+<div class="container">
+    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+        &gt;&gt; Employee Management
+    </h2>
+</div>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin-bottom: 3rem;padding: 0;">
+                <button class="btn btn-success float-right" id="add">Add employee</button>
+            </div>
+            <table id="realtime" class="display" width="100%"></table>
+        </div>
+        <!-- <div class="col-md-5">
+            <h3 class="text-center">Create New Employee</h3>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <select name="position" id="position" class="form-control">
+                <option value="">--Select Position--</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="UI/UX Engineer">UI/UX Engineer</option>
+                <option value="iOS Engineer">iOS Engineer</option>
+                <option value="Android Developer">Android Developer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="office">Office</label>
+                <select name="office" id="office" class="form-control">
+                <option value="">--Select Office--</option>
+                <option value="Lagos">Lagos</option>
+                <option value="London">London</option>
+                <option value="New York">New York</option>
+                <option value="Berlin">Berlin</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="extn">Extn</label>
+                <input type="number" name="extn" id="extn" placeholder="Extn" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" name="startDate" id="startDate" placeholder="Start Date" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="number" name="salary" id="salary" placeholder="Salary" class="form-control">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-info" id="save">Save</button>
+            </div>
+        </div> -->
+    </div>
+</div>
 
 
 <script>
-	
+    require( 'jszip' );
+    require( 'pdfmake' );
+    require( 'datatables.net-bs4' )();
+    require( 'datatables.net-autofill-bs4' )();
+    require( 'datatables.net-buttons-bs4' )();
+    require( 'datatables.net-buttons/js/buttons.colVis.js' )();
+    require( 'datatables.net-buttons/js/buttons.flash.js' )();
+    require( 'datatables.net-buttons/js/buttons.html5.js' )();
+    require( 'datatables.net-buttons/js/buttons.print.js' )();
+    require( 'datatables.net-colreorder-bs4' )();
+    require( 'datatables.net-fixedcolumns-bs4' )();
+    require( 'datatables.net-fixedheader-bs4' )();
+    require( 'datatables.net-keytable-bs4' )();
+    require( 'datatables.net-responsive-bs4' )();
+    require( 'datatables.net-rowgroup-bs4' )();
+    require( 'datatables.net-rowreorder-bs4' )();
+    require( 'datatables.net-scroller-bs4' )();
+    require( 'datatables.net-select-bs4' )();
+    var dt = require( 'datatables.net' )( window, $ );
 
+
+    dataSet = [
+        [ "Viet Anh", "", "", "", "", "", "",
+        '<button type="button" class="btn btn-sm btn-success"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>&nbsp;<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button>']
+    ];
+
+    let userModule = require('../../Controllers/Users/UserController');
+    var userController = new userModule.UserController();
+
+    console.log(userController);
+
+    userController.getAllUsers((users) => {
+        console.log(users);
+    }, (e) => {
+        console.log(e);
+    });
+
+    const app = {
+        buildForm() {
+            return [
+            $('#name').val(),
+            $('#position').val(),
+            $('#office').val(),
+            $('#extn').val(),
+            $('#startDate')
+                .val()
+                .replace(new RegExp('-', 'g'), '/'),
+            `$${$('#salary').val()}`
+            ];
+        },
+        sendToServer() {
+            const formData = this.buildForm();
+            axios.post('http://localhost:2000/record', formData)
+            .then(response => console.log(response));
+        },
+        addRow(dataTable, data) {
+            const addedRow = dataTable.row.add(data).draw();
+            addedRow.show().draw(false);
+
+            const addedRowNode = addedRow.node();
+            console.log(addedRowNode);
+            $(addedRowNode).addClass('highlight');
+        },
+        selectRow(dataTable) {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+            dataTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        },
+        removeRow(dataTable) {
+            dataTable.row('.selected').remove().draw( false );
+        },
+        start() {
+            const dataTable = $('#realtime').DataTable({
+                data: dataSet,
+                columns: [
+                    { title: 'Name' },
+                    { title: 'Username' },
+                    { title: 'Salary' },
+                    { title: 'Email' },
+                    { title: 'Address' },
+                    { title: 'Mobile' },
+                    { title: 'Position' },
+                    { title: 'Manipulation' }
+                ],
+                "pageLength": 5,
+                "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
+            });
+
+            $('#save').on('click', this.sendToServer.bind(this));
+            const self = this;
+            $('#realtime tbody').on('click', 'tr', function(){
+            self.selectRow.bind(this, dataTable)();
+            });
+            $('#remove').on('click', this.removeRow.bind(this, dataTable));
+
+            // var channel = pusher.subscribe('records');
+            // channel.bind('new-record', (data) => {
+            //     this.addRow(dataTable, data);
+            // });
+        }
+    };
+
+    $(document).ready(() => app.start());
 </script>
+
+<style>
+    input[type="search"] {
+        border-bottom: 1px solid #999;
+    }
+</style>
+
 <%- include('../View/footer') %>

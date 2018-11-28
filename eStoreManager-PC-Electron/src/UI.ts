@@ -14,7 +14,7 @@ const {WelcomeView} = require('./Views/WelcomeView/WelcomeView');
 const {CashierView} = require('./Views/CashierView/CashierView');
 const {AboutView} = require('./Views/AboutView/AboutView');
 const {PreferenceView} = require('./Views/PreferenceView/PreferenceView');
-
+const {EmployeeView} = require('./Views/EmployeeView/EmployeeView');
 
 // const {Menu} = require('electron');
 
@@ -49,18 +49,14 @@ export class UI {
     let loginView = new LoginView(this.mainWindow, null); this.addView(loginView);
     let welcomeView = new WelcomeView(this.mainWindow, null); this.addView(welcomeView);
     let cashierView = new CashierView(this.mainWindow, null); this.addView(cashierView);
-    
+    let employeeView = new EmployeeView(this.mainWindow, null); this.addView(employeeView);
 
     // Init Menu actions
-    this.menu.append(new MenuItem({label: 'Goto',
-    submenu: [
-      {
-          label: 'Welcome Screen',
+    this.menu.append(new MenuItem({
+      label: 'Welcome Screen',
           click: () => {
             this.changeView('WelcomeView/welcome');
           }
-      }
-      ]
     }));
     this.menu.append(new MenuItem({label: 'Preferences',
     click: () => {
@@ -110,10 +106,18 @@ export class UI {
   }
 
   private changeView(viewName:string) {
-    for (let i = 0; i < this.viewList.length; i++) {
-      if (this.viewList[i].getView() == viewName) {
-        this.viewList[i].show();
-      }
+
+    switch(viewName) {
+      case "preferences": 
+        let preferenceView = new PreferenceView(null, this.mainWindow);
+        preferenceView.show();
+        break;
+      default:
+        for (let i = 0; i < this.viewList.length; i++) {
+          if (this.viewList[i].getView() == viewName) {
+            this.viewList[i].show();
+          }
+        }
     }
   }
 
