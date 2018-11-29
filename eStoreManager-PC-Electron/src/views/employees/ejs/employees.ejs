@@ -23,6 +23,7 @@
 
 
 <script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
     const {ipcRenderer} = require('electron');
     require( 'jszip' );
     require( 'pdfmake' );
@@ -138,7 +139,7 @@
 
             // Handle add employee
             $("#add-employee").click(() => {
-                ipcRenderer.send('request_add_employee');
+                ipcRenderer.send(EventGetter.get('request_add_employee'));
             });
 
             const dataTable = $('#realtime').DataTable({
@@ -165,9 +166,9 @@
             $('#remove').on('click', this.removeRow.bind(this, dataTable));
 
             
-            ipcRenderer.send('request_update_employee_list');
+            ipcRenderer.send(EventGetter('request_update_employee_list'));
 
-            ipcRenderer.on("update_employee_list", (event, data) => {
+            ipcRenderer.on(EventGetter("update_employee_list"), (event, data) => {
                 console.log(data);
                 this.updateTable(dataTable, data);
             });

@@ -1,6 +1,6 @@
 var requestElectron = require('request');
 const settings = require('electron-settings');
-
+import { TextGetter } from "./TextGetter";
 
 export class RestService {
 
@@ -39,13 +39,13 @@ export class RestService {
             if (err) {
                 cbFail({
                     status: 100,
-                    message: "Unknown Error"
+                    message: TextGetter.get("unknown_error")
                 });
             } else {
                 cbSuccess(JSON.parse(data.body));
             }
-            console.log("DATA:::::::::::::");
-            console.log(data);
+            // console.log("DATA:::::::::::::");
+            // console.log(data);
         })
 
     };

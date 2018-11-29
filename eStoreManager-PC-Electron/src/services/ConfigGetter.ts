@@ -7,11 +7,11 @@ export class ConfigGetter {
     static getInstance() {
         if (!ConfigGetter.instance) {
             ConfigGetter.instance = new ConfigGetter();
-            ConfigGetter.instance.config = require("./config.json");
+            ConfigGetter.instance.config = require("./data/config.json");
         }
         return ConfigGetter.instance;
     }
-    static getConfig() {
+    static get() {
         return ConfigGetter.getInstance().config;
     }
 }

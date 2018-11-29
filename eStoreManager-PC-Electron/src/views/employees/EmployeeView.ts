@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
+import { EventGetter } from "../../services/EventGetter";
 import {View} from '../shared/View';
 import {AddEmployeeView} from './AddEmployeeView';
 import {UserController} from '../../controllers/UserController';
@@ -20,10 +21,10 @@ export class EmployeeView extends View {
         // ======= Handle requests from renderer process ========
 
         // Request employee list
-        ipcMain.on('request_update_employee_list', (event:any) => {
+        ipcMain.on(EventGetter.get('request_update_employee_list'), (event:any) => {
 
             userController.getAllUsers((data:any) => {
-                this.getWindow().webContents.send("update_employee_list", data);
+                this.getWindow().webContents.send(EventGetter.get("update_employee_list"), data);
             }, () => {
                 dialog.showMessageBox(this.getWindow(), Object({
                     type: "error",

@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
+import { EventGetter } from "../../services/EventGetter";
 import {View} from '../shared/View';
 import {UserController} from '../../controllers/UserController';
 const {ipcMain} = require('electron');
@@ -21,9 +22,9 @@ export class AddEmployeeView extends View {
 
         // ======= Handle requests from renderer process ========
 
-        ipcMain.on('add_employee', (event:any, data:any) => {
+        ipcMain.on(EventGetter.get('add_employee'), (event:any, data:any) => {
             userController.addUser(data, (respond:any) => {
-                this.getWindow().webContents.send("add_employee_success");
+                this.getWindow().webContents.send(EventGetter.get("add_employee_success"));
                 dialog.showMessageBox(this.getWindow(), Object({
                     type: "info",
                     title: "Success",

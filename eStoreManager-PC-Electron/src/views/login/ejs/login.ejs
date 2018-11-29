@@ -47,6 +47,7 @@
 </div>
 
 <script>
+	const EventGetter = require("../../../services/EventGetter").EventGetter;
 	document.querySelector('#login-btn').addEventListener('click', function(e) {
 
 		e.preventDefault();
@@ -60,7 +61,7 @@
 		data.username = username;
 		data.password = password;
 
-		ipcRenderer.send('login-command', data);
+		ipcRenderer.send(EventGetter.get('login_command'), data);
 
 	});
 

@@ -72,6 +72,8 @@
 
 
 <script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+
     const {ipcRenderer} = require('electron');
     $("#save").click(() => {
         let newUser = {}
@@ -93,11 +95,11 @@
                 newUser.roles.push("ROLE_MANAGER");
         }
 
-        ipcRenderer.send('add_employee', newUser);
+        ipcRenderer.send(EventGetter('add_employee'), newUser);
     });
 
 
-    ipcRenderer.on("add_employee_success", () => {
-        ipcRenderer.send("request_update_employee_list");
+    ipcRenderer.on(EventGetter("add_employee_success"), () => {
+        ipcRenderer.send(EventGetter("request_update_employee_list"));
     });
 </script>

@@ -71,7 +71,7 @@ export class View {
     }
 
     setViewFile():void {
-        this.viewFile = path.join(__dirname, "../"+ConfigGetter.getConfig().view[this.viewName].path);
+        this.viewFile = path.join(__dirname, "../"+ConfigGetter.get().view[this.viewName].path);
         console.log(this.viewFile);
     }
 

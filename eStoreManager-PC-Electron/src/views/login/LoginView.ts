@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
+import { EventGetter } from "../../services/EventGetter";
 import {View} from '../shared/View';
 import {UserController} from '../../controllers/UserController';
 const {ipcMain} = require('electron');
@@ -14,7 +15,7 @@ export class LoginView extends View {
 
     // Handle all logic of this view
     logicHandle():void {
-        ipcMain.on('login-command', (event:any, arg:any) => {
+        ipcMain.on(EventGetter.get('login_command'), (event:any, arg:any) => {
             event.preventDefault();
             
             this.showLoadingModal();
@@ -34,6 +35,7 @@ export class LoginView extends View {
                     message: result.message,
                     buttons: ["OK"]
                 }));
+                this.hideLoadingModal();
             }); 
 
         });
