@@ -25,7 +25,6 @@ public class CreateUserRequest {
     @Size(max = 100)
     private String address;
 
-    @Pattern(regexp="(^$|[0-9]{10})")
     private String mobileNo;
 
     @Min(0)

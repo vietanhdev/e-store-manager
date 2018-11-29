@@ -61,20 +61,25 @@
       <version>2.3.0</version>
     </dependency> 
 
-     <!-- Added for password generation -->
+    <!-- for returning a json response from a servelet -->
     <dependency>
-        <groupId>org.passay</groupId>
-        <artifactId>passay</artifactId>
-        <version>1.3.1</version>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
     </dependency>
     <dependency>
-        <groupId>org.apache.commons</groupId>
-        <artifactId>commons-text</artifactId>
-        <version>1.4</version>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
     </dependency>
+
 
   </dependencies>
   <build>
+    <resources>
+	    <resource>
+	        <directory>src/main/resources</directory>
+          <filtering>true</filtering>
+	    </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>

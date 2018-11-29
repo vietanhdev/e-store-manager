@@ -21,7 +21,6 @@ import com.example.store.repository.user_management.RoleRepository;
 import com.example.store.repository.user_management.UserRepository;
 import com.example.store.security.CurrentUser;
 import com.example.store.security.JwtTokenProvider;
-// import com.example.store.security.RandomPasswordGenerator;
 import com.example.store.security.UserPrincipal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +60,7 @@ public class UserController {
     @Autowired
     JwtTokenProvider tokenProvider;
 
-    // Login into Store
+    /** Login into Store **/
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -94,7 +93,8 @@ public class UserController {
     // User get his own information
     @GetMapping("/me")
     public ResponseEntity<?> getOwnInfor(@CurrentUser UserPrincipal currentUser) {
-        UserInforResponse userInforResponse = new UserInforResponse(true, currentUser.getId(), 
+        UserInforResponse userInforResponse = new UserInforResponse(true, 
+                                                                    currentUser.getId(), 
                                                                     currentUser.getName(), 
                                                                     currentUser.getUsername(), 
                                                                     currentUser.getSalary(), 
@@ -171,8 +171,6 @@ public class UserController {
         }
 
         // username, email, password are required
-        // RandomPasswordGenerator randomPasswordGenerator = new RandomPasswordGenerator();
-        // String password = randomPasswordGenerator.generatePassayPassword();
         User user = new User(createUserRequest.getUsername(), 
                             createUserRequest.getEmail(), 
                             passwordEncoder.encode(createUserRequest.getPassword()));
