@@ -1,0 +1,25 @@
+<%- include('../../shared/ejs/header', {title: 'Cashier UI'}) %>
+<link rel="stylesheet" type="text/css" href="../../shareds/css/cashier_ui.css">
+
+
+
+<!-- <script>
+	document.querySelector('#login-btn').addEventListener('click', function(e) {
+
+		e.preventDefault();
+
+		let username = document.getElementById("username").value;
+		let password = document.getElementById("password").value;
+
+		const {ipcRenderer} = require('electron');
+
+		let data = {};
+		data.username = username;
+		data.password = password;
+
+		ipcRenderer.send('login-command', data);
+
+	});
+
+</script> -->
+<%- include('../../shared/ejs/footer') %>

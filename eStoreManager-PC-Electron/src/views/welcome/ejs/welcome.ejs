@@ -1,0 +1,82 @@
+<%- include('../../shared/ejs/header', {title: 'Welcome'}) %>
+<link rel="stylesheet" type="text/css" href="../css/welcome.css">
+
+<div id="modal">
+	<h1 class="site-title">Welcome to eStoreManager!</h1>
+	<p class="site-description">These are main functions of this software</p>
+	<div id="welcome-menu" class="est-container">
+		<div class="est-row">
+			<div class="menu-item" id="menu-cashier-ui">
+				<h2 class="item-title">Cashier UI</h2>
+				<p class="item-description">Screen for Cashier to create bills</p>
+			</div>
+			<div class="menu-item" id="menu-bills">
+				<h2 class="item-title">Bills</h2>
+				<p class="item-description">Manage bills created in Cashier UI</p>
+			</div>
+			<div class="menu-item" id="menu-customers">
+				<h2 class="item-title">Customers</h2>
+				<p class="item-description">Manage the list of your customer</p>
+			</div>
+			<div class="menu-item" id="menu-inventory">
+				<h2 class="item-title">Inventory</h2>
+				<p class="item-description">Manage products in your warehouse</p>
+			</div>
+			<div class="menu-item" id="menu-suppliers">
+				<h2 class="item-title">Suppliers</h2>
+				<p class="item-description">Manage good suppliers</p>
+			</div>
+			<div class="menu-item" id="menu-import-products">
+				<h2 class="item-title">Import products</h2>
+				<p class="item-description">Import product to your warehouse</p>
+			</div>
+			<div class="menu-item" id="menu-employees">
+				<h2 class="item-title">Employee</h2>
+				<p class="item-description">Manage your Employees and Users of this software</p>
+			</div>
+			<div class="menu-item" id="menu-reports">
+				<h2 class="item-title">Reports</h2>
+				<p class="item-description">Create and view reports</p>
+			</div>
+			<div class="menu-item" id="menu-finance">
+				<h2 class="item-title">Finance</h2>
+				<p class="item-description">Manage finance of the store</p>
+			</div>
+			<div class="menu-item" id="menu-setting">
+				<h2 class="item-title">Setting</h2>
+				<p class="item-description">Setup and configure your store</p>
+			</div>
+			<div class="menu-item" id="menu-support">
+				<h2 class="item-title">Contact support</h2>
+				<p class="item-description">Contact us for more support</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+
+	$(document).ready(function() {
+		$(".menu-item").click(function(event) {
+			const {ipcRenderer} = require('electron');
+			
+			switch(this.id) {
+				case "menu-cashier-ui": ipcRenderer.send('request_change_view', 'cashier'); break;
+				case "menu-bills": ipcRenderer.send('request_change_view', 'bills'); break;
+				case "menu-customers": ipcRenderer.send('request_change_view', 'customers'); break;
+				case "menu-inventory": ipcRenderer.send('request_change_view', 'inventory'); break;
+				case "menu-suppliers": ipcRenderer.send('request_change_view', 'suppliers'); break;
+				case "menu-import-products": ipcRenderer.send('request_change_view', 'import'); break;
+				case "menu-employees": ipcRenderer.send('request_change_view', 'employees'); break;
+				case "menu-reports": ipcRenderer.send('request_change_view', 'reports'); break;
+				case "menu-finance": ipcRenderer.send('request_change_view', 'finance'); break;
+				case "menu-setting": ipcRenderer.send('request_change_view', 'preferences'); break;
+				case "menu-support": ipcRenderer.send('request_change_view', 'support_form'); break;
+			}
+
+		});
+	});
+
+</script>
+<%- include('../../shared/ejs/footer') %>

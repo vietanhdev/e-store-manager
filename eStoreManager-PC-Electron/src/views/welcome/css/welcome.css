@@ -1,0 +1,117 @@
+body {
+    background: url(../images/gro.jpg);
+}
+
+.site-title {
+    margin-top: 2rem;
+}
+.site-title, .site-description {
+    padding-left: 4rem;
+    color: #fff;
+}
+
+/* The Modal (background) */
+#modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+
+#modal * {
+    z-index: 10;
+}
+
+#welcome-menu {
+    max-width: 100%;
+    padding: 1rem;
+}
+#welcome-menu .menu-item {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 18rem;
+    height: 10rem;
+    float: left;
+    margin: .2rem;
+}
+#welcome-menu .menu-item:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.menu-item .item-description, .menu-item .item-title {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.2);
+    padding-left: .2rem;
+    cursor: pointer;
+}
+
+.menu-item .item-description {
+    padding-bottom: 2rem;
+}
+
+
+.menu-item .item-title {
+    margin-top: 0.2rem;
+    color: #faff77;
+}
+
+#menu-cashier-ui {
+    background-image: url("../images/cashier.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-bills {
+    background-image: url("../images/bills.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-customers {
+    background-image: url("../images/god.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-inventory {
+    background-image: url("../images/warehouse.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-suppliers {
+    background-image: url("../images/supplier.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-import-products {
+    background-image: url("../images/import.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-employees {
+    background-image: url("../images/employees.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-reports {
+    background-image: url("../images/report.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-finance {
+    background-image: url("../images/money-bag.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-setting {
+    background-image: url("../images/settings.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+#menu-support {
+    background-image: url("../images/customer-service.png");
+    background-position: bottom 5px right 7px; /*Positioning*/
+    background-repeat: no-repeat; /*Prevent showing multiple background images*/
+}
+

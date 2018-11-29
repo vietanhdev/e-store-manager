@@ -1,0 +1,44 @@
+<%- include('../../shared/ejs/header', {title: 'Edit Employee'}) %>
+
+<div class="col-md-5">
+    <h3 class="text-center">Edit Employee</h3>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" placeholder="Name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="position">Position</label>
+        <select name="position" id="position" class="form-control">
+        <option value="">--Select Position--</option>
+        <option value="Frontend Developer">Frontend Developer</option>
+        <option value="UI/UX Engineer">UI/UX Engineer</option>
+        <option value="iOS Engineer">iOS Engineer</option>
+        <option value="Android Developer">Android Developer</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="office">Office</label>
+        <select name="office" id="office" class="form-control">
+        <option value="">--Select Office--</option>
+        <option value="Lagos">Lagos</option>
+        <option value="London">London</option>
+        <option value="New York">New York</option>
+        <option value="Berlin">Berlin</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="extn">Extn</label>
+        <input type="number" name="extn" id="extn" placeholder="Extn" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" name="startDate" id="startDate" placeholder="Start Date" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="number" name="salary" id="salary" placeholder="Salary" class="form-control">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-info" id="save">Save</button>
+    </div>
+</div>

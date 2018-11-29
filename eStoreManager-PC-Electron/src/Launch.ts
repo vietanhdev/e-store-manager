@@ -1,8 +1,8 @@
 import { app } from "electron";
-import { UI } from "./UI";
+import { EStoreManager } from "./EStoreManager";
 const settings = require('electron-settings');
 
-var ui = new UI();
+var eStoreManager = new EStoreManager();
 
 // Server settings
 // TODO: Remove this section
@@ -16,7 +16,7 @@ settings.set('api_config', {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-  ui.init()
+  eStoreManager.init()
 });
 
 // Quit when all windows are closed.
@@ -31,8 +31,8 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On OS X it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (ui.mainWindow === null) {
-    ui.init();
+  if (eStoreManager.mainWindow === null) {
+    eStoreManager.init();
   }
 });
 

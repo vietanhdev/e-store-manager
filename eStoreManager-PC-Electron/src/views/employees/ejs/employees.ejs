@@ -1,0 +1,189 @@
+<%- include('../../shared/ejs/header', {title: 'Employee Management'}) %>
+<link rel="stylesheet" type="text/css" href="../css/employees.css">
+<link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+
+<%- include('../../shared/ejs/secondary_menu.ejs') %>
+
+<div class="container">
+    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+        &gt;&gt; Employee Management
+    </h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin-bottom: 3rem;padding: 0;">
+                <button class="btn btn-success float-right" id="add-employee">Add employee</button>
+            </div>
+            <table id="realtime" class="display" width="100%"></table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const {ipcRenderer} = require('electron');
+    require( 'jszip' );
+    require( 'pdfmake' );
+    require( 'datatables.net-dt' )();
+    require( 'datatables.net-autofill-dt' )();
+    require( 'datatables.net-buttons-dt' )();
+    require( 'datatables.net-buttons/js/buttons.colVis.js' )();
+    require( 'datatables.net-buttons/js/buttons.flash.js' )();
+    require( 'datatables.net-buttons/js/buttons.html5.js' )();
+    require( 'datatables.net-buttons/js/buttons.print.js' )();
+    require( 'datatables.net-colreorder-dt' )();
+    require( 'datatables.net-fixedcolumns-dt' )();
+    require( 'datatables.net-fixedheader-dt' )();
+    require( 'datatables.net-keytable-dt' )();
+    require( 'datatables.net-responsive-dt' )();
+    require( 'datatables.net-rowgroup-dt' )();
+    require( 'datatables.net-rowreorder-dt' )();
+    require( 'datatables.net-scroller-dt' )();
+    require( 'datatables.net-select-dt' )();
+    var dt = require( 'datatables.net' )( window, $ );
+
+
+    dataSet = [
+        [ "", "", "", "", "", "", "",
+        `<button type="button" class="btn btn-sm btn-success">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        </button>&nbsp;
+        <button type="button" class="btn btn-sm btn-danger">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="btn btn-sm btn-warning">
+            Set Password
+        </button>
+        `]
+    ];
+
+
+    const app = {
+        buildForm() {
+            return [
+            $('#name').val(),
+            $('#position').val(),
+            $('#office').val(),
+            $('#extn').val(),
+            $('#startDate')
+                .val()
+                .replace(new RegExp('-', 'g'), '/'),
+            `$${$('#salary').val()}`
+            ];
+        },
+        sendToServer() {
+            const formData = this.buildForm();
+            axios.post('http://localhost:2000/record', formData)
+            .then(response => console.log(response));
+        },
+        addRow(dataTable, data) {
+            const addedRow = dataTable.row.add(data).draw();
+            addedRow.show().draw(false);
+
+            const addedRowNode = addedRow.node();
+            console.log(addedRowNode);
+            $(addedRowNode).addClass('highlight');
+        },
+        updateTable(dataTable, data) {
+            let rows = [];
+            for (let i = 0; i < data.length; ++i) {
+                let row = [];
+                // { title: 'Name' },
+                row.push(String(data[i].name));
+                // { title: 'Username' },
+                row.push(String(data[i].username));
+                // { title: 'Salary' },
+                row.push(String(data[i].salary));
+                // { title: 'Email' },
+                row.push(String(data[i].email));
+                // { title: 'Address' },
+                row.push(String(data[i].address));
+                // { title: 'Mobile' },
+                row.push(String(data[i].mobileNo));
+                // { title: 'Position' },
+                row.push(String(data[i].roles));
+                // { title: 'Manipulation' }
+                row.push(`
+                <button type="button" class="btn btn-sm btn-success">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>&nbsp;
+                <button type="button" class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-warning">
+                    Set Password
+                </button>
+                `);
+                rows.push(row);
+                console.log(row);
+            }
+            dataTable.clear();
+            dataTable.rows.add(rows);
+            dataTable.draw(false);
+        },
+        selectRow(dataTable) {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            } else {
+            dataTable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        },
+        removeRow(dataTable) {
+            dataTable.row('.selected').remove().draw( false );
+        },
+        start() {
+
+            // Handle add employee
+            $("#add-employee").click(() => {
+                ipcRenderer.send('request_add_employee');
+            });
+
+            const dataTable = $('#realtime').DataTable({
+                data: dataSet,
+                columns: [
+                    { title: 'Name' },
+                    { title: 'Username' },
+                    { title: 'Salary' },
+                    { title: 'Email' },
+                    { title: 'Address' },
+                    { title: 'Mobile' },
+                    { title: 'Position' },
+                    { title: 'Manipulation' }
+                ],
+                "pageLength": 5,
+                "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
+            });
+
+            $('#save').on('click', this.sendToServer.bind(this));
+            const self = this;
+            $('#realtime tbody').on('click', 'tr', function(){
+            self.selectRow.bind(this, dataTable)();
+            });
+            $('#remove').on('click', this.removeRow.bind(this, dataTable));
+
+            
+            ipcRenderer.send('request_update_employee_list');
+
+            ipcRenderer.on("update_employee_list", (event, data) => {
+                console.log(data);
+                this.updateTable(dataTable, data);
+            });
+        }
+    };
+
+    $(document).ready(() =>  {
+        app.start();
+
+    });
+</script>
+
+<style>
+    input[type="search"] {
+        border-bottom: 1px solid #999;
+    }
+</style>
+
+<%- include('../../shared/ejs/footer') %>

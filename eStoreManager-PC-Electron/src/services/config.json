@@ -1,0 +1,31 @@
+{
+    "view": {
+        "about_us": {
+            "path": "about/ejs/about.ejs"
+        },
+        "loading": {
+            "path": "loader/ejs/loading.ejs"
+        },
+        "cashier": {
+            "path": "cashier/ejs/cashier.ejs"
+        },
+        "employees": {
+            "path": "employees/ejs/employees.ejs"
+        },
+        "add_employee": {
+            "path": "employees/ejs/add_employee.ejs"
+        },
+        "edit_employee": {
+            "path": "employees/ejs/edit_employee.ejs"
+        },
+        "login": {
+            "path": "login/ejs/login.ejs"
+        },
+        "preferences": {
+            "path": "preferences/ejs/preference.ejs"
+        },
+        "welcome": {
+            "path": "welcome/ejs/welcome.ejs"
+        }
+    }
+}
