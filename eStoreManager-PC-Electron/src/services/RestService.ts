@@ -44,6 +44,8 @@ export class RestService {
             } else {
                 cbSuccess(JSON.parse(data.body));
             }
+            console.log("DATA:::::::::::::");
+            console.log(data);
         })
 
     };

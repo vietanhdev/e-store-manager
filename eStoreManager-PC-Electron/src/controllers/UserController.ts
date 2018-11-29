@@ -76,6 +76,7 @@ export class UserController extends Controller {
 
     public addUser(data: any, cbSuccess: (any), cbFail: (any)) {
         this.getRestService().request('POST', '/api/v1/users', data, (respond:any) => {
+            console.log(respond);
             if (respond['success'] == true) {
                 cbSuccess (respond);
             } else {
