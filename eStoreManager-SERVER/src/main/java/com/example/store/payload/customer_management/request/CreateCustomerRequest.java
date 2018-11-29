@@ -2,7 +2,6 @@ package com.example.store.payload.customer_management.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class CreateCustomerRequest {
@@ -17,7 +16,6 @@ public class CreateCustomerRequest {
     @Size(max=100)
     private String address;
 
-    @Pattern(regexp="(^$|[0-9]{10})")
     private String mobileNo;
 
     public String getName(){

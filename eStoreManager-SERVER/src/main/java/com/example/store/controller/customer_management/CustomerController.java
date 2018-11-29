@@ -6,12 +6,15 @@ import com.example.store.model.customer_management.Customer;
 import com.example.store.payload.common.response.ApiResponse;
 import com.example.store.payload.customer_management.request.CreateCustomerRequest;
 import com.example.store.payload.customer_management.request.UpdateCustomerRequest;
-import com.example.store.payload.customer_management.response.AllCustomerSummaryResponse;
+import com.example.store.payload.customer_management.response.AllCustomerInforResponse;
 import com.example.store.payload.customer_management.response.CreateCustomerResponse;
+import com.example.store.payload.customer_management.response.CustomerInfor;
 import com.example.store.payload.customer_management.response.CustomerInforResponse;
 import com.example.store.repository.customer_management.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,7 +25,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.store.util.AppConstants;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -44,20 +50,6 @@ public class CustomerController {
 
         return new ResponseEntity<>(new CreateCustomerResponse(true, result.getId()),
                                 HttpStatus.OK);
-    }
-
-    // Admin, Cashier get all customer summary informations
-    @GetMapping("/customers")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
-    public ResponseEntity<?> getAllCustomerProfile() {
-        AllCustomerSummaryResponse allCustomerSummaryResponse = new AllCustomerSummaryResponse(true);
-        for(Customer customer: customerRepository.findAll()){
-            allCustomerSummaryResponse.addCustomer(customer.getId(),
-                                                   customer.getName());
-        }
-
-        return new ResponseEntity<>(allCustomerSummaryResponse,
-                                    HttpStatus.OK);
     }
 
     // Admin, Cashier get a customer information
@@ -119,6 +111,40 @@ public class CustomerController {
             return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
                                     HttpStatus.OK);
         }
+    }
+
+    // Admin, Cashier find all user pagable
+    @GetMapping("/customers")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
+    public ResponseEntity<?> getCustomersPagable(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
+                                                @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
+        
+        if(page < 0) {
+            return new ResponseEntity<>( new ApiResponse(false, "page_num_unacceptable", "Page number cannot be less than zero."),
+                                    HttpStatus.OK);
+        }
+
+        if(size > AppConstants.MAX_PAGE_SIZE) {
+            return new ResponseEntity<>( new ApiResponse(false, "page_size_unacceptable", "Page size must not be greater than " + AppConstants.MAX_PAGE_SIZE),
+                                    HttpStatus.OK);
+        }
+
+        AllCustomerInforResponse allCustomerInforResponse = new AllCustomerInforResponse(true);
+
+        // find all customers with page and size parameter
+        Page<Customer> customers = customerRepository.getAllCustomersPagable(PageRequest.of(page, size));
+        
+        for(Customer customer: customers.getContent()) {
+            CustomerInfor customerInfor = new CustomerInfor(customer.getId(), 
+                                                            customer.getName(), 
+                                                            customer.getEmail(), 
+                                                            customer.getAddress(), 
+                                                            customer.getMobileNo());
+            allCustomerInforResponse.addCustomerInfor(customerInfor);
+        }
+
+        return new ResponseEntity<>(allCustomerInforResponse,
+                                    HttpStatus.OK);                                          
     }
 
 }

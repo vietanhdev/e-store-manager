@@ -47,7 +47,6 @@ public class User extends DateAudit{
     @Size(max = 100)
     private String address;
 
-    @Pattern(regexp="(^$|[0-9]{10})")
     private String mobileNo;
     
     @ManyToMany(fetch = FetchType.LAZY)
