@@ -53,12 +53,12 @@ public class CustomerController {
     }
 
     // Admin, Cashier get a customer information
-    @GetMapping("/customers/{customer_id}")
+    @GetMapping("/customers/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
-    public ResponseEntity<?> getCustomerInfor(@PathVariable(value = "customer_id") String customer_id) {
+    public ResponseEntity<?> getCustomerInfor(@PathVariable(value = "id") String id) {
         try {
             Customer customer;
-            customer = customerRepository.findById(Long.parseLong(customer_id)).orElse(null);
+            customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
             CustomerInforResponse customerInforResponse = new CustomerInforResponse(true, 
                                                                                     customer.getId(),
                                                                                     customer.getName(),
@@ -69,19 +69,19 @@ public class CustomerController {
             return new ResponseEntity<>(customerInforResponse,
                                         HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_customer_id", "customer id " + id + " does not exist"),
                                     HttpStatus.OK);
         }
     }
 
     // Admin, Cashier update a customer information
-    @PutMapping("/customers/{customer_id}")
+    @PutMapping("/customers/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
-    public ResponseEntity<?> updateCustomerInfor(@PathVariable(value = "customer_id") String customer_id,
+    public ResponseEntity<?> updateCustomerInfor(@PathVariable(value = "id") String id,
                                                 @Valid @RequestBody UpdateCustomerRequest updateCustomerRequest) {
         try {
             Customer customer;
-            customer = customerRepository.findById(Long.parseLong(customer_id)).orElse(null);
+            customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
             
             if(updateCustomerRequest.getName() != null) customer.setName(updateCustomerRequest.getName());
             if(updateCustomerRequest.getEmail() != null) customer.setEmail(updateCustomerRequest.getEmail());
@@ -89,31 +89,31 @@ public class CustomerController {
             if(updateCustomerRequest.getMobileNo() != null) customer.setMobileNo(updateCustomerRequest.getMobileNo());
 
             customerRepository.save(customer);
-            return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update successful"),
+            return new ResponseEntity<>(new ApiResponse(true, "update_customer_information_successful", "update customer information successful"),
                                     HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_customer_id", "customer id " + id + " does not exist"),
                                     HttpStatus.OK);
         }
     }
 
     // Admin, Cashier delete a customer
-    @DeleteMapping("/customers/{customer_id}")
+    @DeleteMapping("/customers/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
-    public ResponseEntity<?> deleteCustomer(@PathVariable(value = "customer_id") String customer_id) {
+    public ResponseEntity<?> deleteCustomer(@PathVariable(value = "id") String id) {
         try {
             Customer customer;
-            customer = customerRepository.findById(Long.parseLong(customer_id)).orElse(null);
+            customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
             customerRepository.delete(customer);
-            return new ResponseEntity<>(new ApiResponse(true, "success", "delete customer successful"),
+            return new ResponseEntity<>(new ApiResponse(true, "delete_customer_successful", "delete customer successful"),
                                     HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with customer id"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_customer_id", "customer id " + id + " does not exist"),
                                     HttpStatus.OK);
         }
     }
 
-    // Admin, Cashier find all user pagable
+    // Admin, Cashier find all customer pagable
     @GetMapping("/customers")
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
     public ResponseEntity<?> getCustomersPagable(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,

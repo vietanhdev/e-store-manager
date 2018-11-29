@@ -28,20 +28,26 @@
 {
     "success": true,
     "id": 1,
-    "name": "admin",
-    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzM5NjExLCJleHAiOjE1NDM5NDQ0MTF9.sM5jliKZbRIvFXDhMIBgPf4vj-6-7Prc33Ms9IE9fmWpdhVc_Q2GMoxdIvOKmz1SA061txj8DBUZPcHG3gHAhA",
-    "tokenType": "Bearer"
+    "name": "Admin dep trai",
+    "username": "admin",
+    "salary": null,
+    "email": "admin@gmail.com",
+    "address": "Hanoi",
+    "mobileNo": "0917915518",
+    "roles": [
+        "ROLE_ADMIN"
+    ],
+    "tokenType": "Bearer",
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTEyNTYzLCJleHAiOjE1NDQxMTczNjN9.S4zVTJY0ejIjTWbNni1Wo6bQijeRb9fkhs_mi8JAIBx_QbCCPe4Vo_ITbooRWtoDwlihUvfzq9wgFXQxwUJd2w"
 }
 ```
 
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
@@ -49,52 +55,15 @@
 * On fail (one field is not in right format):
 ```
 {
-    ...
-    "status": 400,
-    "error": "Bad Request",
-    ...
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
-## 1.2. Get your own summary profile
+## 1.2. Get your own information
 
 ### 1.2.1. Request
-
-* Path: api/v1/me/profile
-* Method: GET
-* Header: 
-    
-    * Content-type: 
-    * Authorization: Bearer JWT
-
-* Body:
-
-### 1.2.2. Response
-
-* On success:
-```
-{
-    "success": true,
-    "id": 4,
-    "username": "admin",
-    "name": null
-}
-```
-
-* On fail (unauthorized):
-```
-{
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
-}
-```
-
-## 1.3. Get your own information
-
-### 1.3.1. Request
 
 * Path: api/v1/me
 * Method: GET
@@ -105,19 +74,19 @@
 
 * Body:
 
-### 1.3.2. Response
+### 1.2.2. Response
 
 * On success:
 ```
 {
     "success": true,
-    "id": 4,
-    "name": null,
+    "id": 1,
+    "name": "Admin dep trai",
     "username": "admin",
     "salary": null,
     "email": "admin@gmail.com",
-    "address": null,
-    "mobileNo": null,
+    "address": "Hanoi",
+    "mobileNo": "0917915518",
     "roles": [
         "ROLE_ADMIN"
     ]
@@ -127,17 +96,15 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
-## 1.4. Update your own information
+## 1.3. Update your own information
 
-### 1.4.1. Request
+### 1.3.1. Request
 
 * Path: api/v1/me
 * Method: PUT
@@ -157,7 +124,7 @@
 }
 ```
 
-### 1.4.2. Response
+### 1.3.2. Response
 
 * On Success:
 ```
@@ -168,30 +135,27 @@
 }
 ```
 
-* On fail (unauthorized):
+* On fail (unauthorized)
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
 * On fail (one field is not in right format):
 ```
 {
-    ...
-    "status": 400,
-    "error": "Bad Request",
-    ...
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
-## 1.5. Change your own password
+## 1.4. Change your own password
 
-### 1.5.1. Request
+### 1.4.1. Request
 
 * Path: /me/change_password
 * Method: PUT
@@ -208,27 +172,22 @@
 }
 ```
 
-### 1.5.2. Response
+### 1.4.2. Response
 
 * On success:
 ```
 {
-    "success": true,
-    "id": 1,
-    "name": "admin",
-    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzM5NjExLCJleHAiOjE1NDM5NDQ0MTF9.sM5jliKZbRIvFXDhMIBgPf4vj-6-7Prc33Ms9IE9fmWpdhVc_Q2GMoxdIvOKmz1SA061txj8DBUZPcHG3gHAhA",
-    "tokenType": "Bearer"
+    "tokenType": "Bearer",
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTEyNjQxLCJleHAiOjE1NDQxMTc0NDF9.52Mi3nwFVmNtJM-04dknYrCgm8eYe2utlj2k82SEj5lCFvzvypFKuLXxvdAS-OLEYn1DCvMHOQ-L_TlZ5idDww"
 }
 ```
 
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
@@ -236,7 +195,7 @@
 ```
 {
     "success": false,
-    "code": "change_password_fail",
+    "code": "old_password_not_correct",
     "message": "old password is not correct"
 }
 ```
@@ -244,16 +203,15 @@
 * On fail (one field is not in right format):
 ```
 {
-    ...
-    "status": 400,
-    "error": "Bad Request",
-    ...
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
-## 1.6. Delete your own account
+## 1.5. Delete your own account
 
-### 1.6.1. Request
+### 1.5.1. Request
 
 * Path: /api/v1/me
 * Method: DELETE
@@ -264,13 +222,13 @@
 
 * Body:
 
-### 1.6.2. Response
+### 1.5.2. Response
 
 * On success:
 ```
 {
     "success": true,
-    "code": "success",
+    "code": "delete_user_successful",
     "message": "delete user successful"
 }
 ```
@@ -278,17 +236,15 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
-## 1.7. Create new account
+## 1.6. Create new account
 
-### 1.7.1. Request
+### 1.6.1. Request
 
 * Path: /api/v1/users
 * Method: POST
@@ -313,7 +269,7 @@
 }
 ```
 
-### 1.7.2. Response
+### 1.6.2. Response
 
 * On success:
 ```
@@ -326,11 +282,9 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
@@ -338,7 +292,7 @@
 ```
 {
     "success": false,
-    "code": "username_is_taken",
+    "code": "username_taken",
     "message": "Username is already taken!"
 }
 ```
@@ -347,7 +301,7 @@
 ```
 {
     "success": false,
-    "code": "email_is_taken",
+    "code": "email_taken",
     "message": "email is already taken!"
 }
 ```
@@ -355,10 +309,9 @@
 * On fail (one field is not in right format):
 ```
 {
-    ...
-    "status": 400,
-    "error": "Bad Request",
-    ...
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
@@ -366,25 +319,23 @@
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with role field"
+    "code": "wrong_role",
+    "message": "role " + {wrong_role} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
-## 1.8. Get other user's information
+## 1.7. Get other user's information
 
-### 1.8.1. Request
+### 1.7.1. Request
 
 * Path: /api/v1/users/{id}
 * Method: GET
@@ -395,7 +346,7 @@
 
 * Body:
 
-### 1.8.2. Response
+### 1.7.2. Response
 
 * On success:
 ```
@@ -418,11 +369,9 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
@@ -430,25 +379,23 @@
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with user id"
+    "code": "wrong_user_id",
+    "message": "user id " + {id} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
-## 1.9. Update other user's information
+## 1.8. Update other user's information
 
-### 1.9.1. Request
+### 1.8.1. Request
 
 * Path: /api/v1/users/{id}
 * Method: PUT
@@ -474,7 +421,7 @@
 }
 ```
 
-### 1.9.2. Response
+### 1.8.2. Response
 
 * On success:
 ```
@@ -488,21 +435,18 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
 * On fail (one field is not in right format):
 ```
 {
-    ...
-    "status": 400,
-    "error": "Bad Request",
-    ...
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
@@ -510,8 +454,8 @@
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with role field"
+    "code": "wrong_role",
+    "message": "role " + {wrong_role} + " does not exist"
 }
 ```
 
@@ -519,28 +463,123 @@
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with user id"
+    "code": "wrong_user_id",
+    "message": "user id " + {id} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
-## 1.10. Get all users' information
+## 1.9. Get all users' information
+
+### 1.9.1. Request
+
+* Path: /api/v1/users?page=0&size=3
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 1.9.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "users": [
+        {
+            "id": 1,
+            "name": "Admin dep trai",
+            "username": "admin",
+            "salary": null,
+            "email": "admin@gmail.com",
+            "address": "Hanoi",
+            "mobileNo": "0917915518",
+            "roles": [
+                "ROLE_ADMIN"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "cashier",
+            "username": "cashier",
+            "salary": 1000,
+            "email": "cashier@gmail.com",
+            "address": "hoa binh",
+            "mobileNo": "0916167558",
+            "roles": [
+                "ROLE_CASHIER"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "ceo la",
+            "username": "ceo",
+            "salary": 1000,
+            "email": "ceo@gmail.com",
+            "address": "hoa binh",
+            "mobileNo": "0916167558",
+            "roles": [
+                "ROLE_MANAGER",
+                "ROLE_ADMIN"
+            ]
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (page number is less than zero):
+```
+{
+    "success": false,
+    "code": "page_num_unacceptable",
+    "message": "Page number cannot be less than zero."
+}
+```
+
+* On fail (page size is greater than MAX_PAGE_SIZE):
+```
+{
+    "success": false,
+    "code": "page_size_unacceptable",
+    "message": "Page size must not be greater than 50"
+}
+```
+
+## 1.10. Delete other users's account
 
 ### 1.10.1. Request
 
-* Path: /api/v1/users
-* Method: GET
+* Path: /api/v1/users/{id}
+* Method: DELETE
 * Header:
     
     * Content-type:
@@ -554,58 +593,7 @@
 ```
 {
     "success": true,
-    "users": [
-        {
-            "id": 1,
-            "username": "admin",
-            "name": "admin"
-        }
-    ]
-}
-```
-
-* On fail (unauthorized):
-```
-{
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
-}
-```
-
-* On fail (you don't have role admin):
-```
-{
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
-}
-```
-
-## 1.11. Delete other users's account
-
-### 1.11.1. Request
-
-* Path: /api/v1/users/{id}
-* Method: DELETE
-* Header:
-    
-    * Content-type:
-    * Authorization: Bearer JWT
-
-* Body:
-
-### 1.11.2. Response
-
-* On success:
-```
-{
-    "success": true,
-    "code": "success",
+    "code": "delete_user_successful",
     "message": "delete user successful"
 }
 ```
@@ -613,11 +601,9 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
@@ -625,19 +611,17 @@
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with user id"
+    "code": "wrong_user_id",
+    "message": "user id " + {id} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
@@ -671,74 +655,34 @@
 ```
 {
     "success": true,
-    "users": [
-        {
-            "id": 6,
-            "name": "manager 1",
-            "username": "manager_1",
-            "salary": 1000,
-            "email": "manager_1@gmail.com",
-            "address": "hoa binh",
-            "mobileNo": "0916167558",
-            "roles": [
-                "ROLE_MANAGER"
-            ]
-        },
-        {
-            "id": 4,
-            "name": null,
-            "username": "admin",
-            "salary": null,
-            "email": "admin@gmail.com",
-            "address": null,
-            "mobileNo": null,
-            "roles": [
-                "ROLE_ADMIN"
-            ]
-        },
-        {
-            "id": 7,
-            "name": "noone",
-            "username": "noone",
-            "salary": 0,
-            "email": "noone@gmail.com",
-            "address": "hoa binh",
-            "mobileNo": "0916167558",
-            "roles": []
-        }
-    ]
+    "id": 1
 }
 ```
 
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
 * On fail (one field is not in right format):
 ```
 {
-    ...
-    "status": 400,
-    "error": "Bad Request",
-    ...
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
 * On fail (you don't have role admin or cashier):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
@@ -746,7 +690,7 @@
 
 ### 2.2.1. Request
 
-* Path: /api/v1/customers
+* Path: /api/v1/customers?page=0&size=3
 * Method: GET
 * Header:
     
@@ -761,14 +705,30 @@
 ```
 {
     "success": true,
-    "customer": [
+    "customers": [
         {
-            "id": 2,
-            "name": "customer_2"
+            "success": null,
+            "id": 3,
+            "name": "customer_3",
+            "email": "customer_3@gmail.com",
+            "address": "ha noi",
+            "mobileNo": "0916167887"
         },
         {
+            "success": null,
+            "id": 2,
+            "name": "customer_2",
+            "email": "customer_2@gmail.com",
+            "address": "ha noi",
+            "mobileNo": "0916167887"
+        },
+        {
+            "success": null,
             "id": 1,
-            "name": "customer_1"
+            "name": "customer_1",
+            "email": "customer_1@gmail.com",
+            "address": "ha noi",
+            "mobileNo": "0916167887"
         }
     ]
 }
@@ -777,22 +737,18 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
 * On fail (you don't have role admin or cashier):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
@@ -800,7 +756,7 @@
 
 ### 2.3.1. Request
 
-* Path: /api/v1/customer/{customer_id}
+* Path: /api/v1/customer/{id}
 * Method: GET
 * Header:
     
@@ -826,31 +782,27 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
-* On fail (customer_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with customer id"
+    "code": "wrong_customer_id",
+    "message": "customer id " + {id} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin or cashier):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 
@@ -858,7 +810,7 @@
 
 ### 2.4.1. Request
 
-* Path: /api/v1/customers/{customer_id}
+* Path: /api/v1/customers/{id}
 * Method: PUT
 * Header:
     
@@ -889,31 +841,36 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
-* On fail (customer_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with customer id"
+    "code": "wrong_customer_id",
+    "message": "customer id " + {id} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin or cashier):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
 }
 ```
 
@@ -921,7 +878,7 @@
 
 ### 2.1.1. Request
 
-* Path: /api/v1/customers/
+* Path: /api/v1/customers/{id}
 * Method: DELETE
 * Header:
     
@@ -937,7 +894,7 @@
 ```
 {
     "success": true,
-    "code": "success",
+    "code": "delete_customer_successful",
     "message": "delete customer successful"
 }
 ```
@@ -945,30 +902,26 @@
 * On fail (unauthorized):
 ```
 {
-    ...
-    "status": 401,
-    "error": "Unauthorized",
-    "message": "Sorry, You're not authorized to access this resource.",
-    ...
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
 }
 ```
 
-* On fail (customer_id does not exist):
+* On fail (id does not exist):
 ```
 {
     "success": false,
-    "code": "something_wrong",
-    "message": "something wrong with customer id"
+    "code": "wrong_customer_id",
+    "message": "customer id " + {id} + " does not exist"
 }
 ```
 
 * On fail (you don't have role admin or cashier):
 ```
 {
-    ...
-    "status": 403,
-    "error": "Forbidden",
-    "message": "Forbidden",
-    ...
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
