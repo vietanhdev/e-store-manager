@@ -10,8 +10,16 @@ const {ipcMain} = require('electron');
 
 export class EmployeeView extends View {
 
-    constructor(window: BrowserWindow, parent: BrowserWindow) {
+    private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("employees", window, parent);
+    }
+    
+    private static instance: EmployeeView;
+    static getInstance(window: BrowserWindow, parent: BrowserWindow) {
+        if (!EmployeeView.instance) {
+            EmployeeView.instance = new EmployeeView(window, parent);
+        }
+        return EmployeeView.instance;
     }
 
     // Handle all logic of this view
@@ -37,8 +45,8 @@ export class EmployeeView extends View {
         // Request add employee
         ipcMain.on('request_add_employee', (event:any) => {
 
-            let addEmployee = new AddEmployeeView(null, this.getWindow());
-            addEmployee.show();
+            let addEmployeeView = AddEmployeeView.getInstance(null, this.getWindow());
+            addEmployeeView.show();
 
         });
 

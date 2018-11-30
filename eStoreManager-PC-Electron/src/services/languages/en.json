@@ -10,6 +10,6 @@
     "Bad Request": "One of your field is not in right format. Please try again.",
     "something_wrong": "Something wrong with eStoreManager. Please contact support.",
     "Forbidden": "You dont have permission to acccess this function.",
-    "update_successful": "Updated successfully."
-
+    "update_successful": "Updated successfully.",
+    "access_denied": "You dont have permission to acccess this function."
 }

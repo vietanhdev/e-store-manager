@@ -8,10 +8,19 @@ const settings = require('electron-settings');
 
 export class PreferenceView extends View {
 
-    constructor(window: BrowserWindow, parent: BrowserWindow) {
+    private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("preferences", window, parent, 750, 700);
         this.getWindow().setMenu(null);
         // this.getWindow().webContents.openDevTools();
+    }
+
+    
+    private static instance: PreferenceView;
+    static getInstance(window: BrowserWindow, parent: BrowserWindow) {
+        if (!PreferenceView.instance) {
+            PreferenceView.instance = new PreferenceView(window, parent);
+        }
+        return PreferenceView.instance;
     }
 
     // Handle all logic of this view

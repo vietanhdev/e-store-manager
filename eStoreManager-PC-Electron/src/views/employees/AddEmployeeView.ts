@@ -5,16 +5,26 @@ import { TextGetter } from "../../services/TextGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
 import {UserController} from '../../controllers/UserController';
+import { isNull } from "util";
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');
 
 
 export class AddEmployeeView extends View {
 
-    constructor(window: BrowserWindow, parent: BrowserWindow) {
+    
+    private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("add_employee", window, parent, 600, 600);
-        this.getWindow().webContents.openDevTools();
+        // this.getWindow().webContents.opensDevTools();
         this.setMenu(null);
+    }
+
+    private static instance: AddEmployeeView;
+    static getInstance(window: BrowserWindow, parent: BrowserWindow) {
+        if (!AddEmployeeView.instance) {
+            AddEmployeeView.instance = new AddEmployeeView(window, parent);
+        }
+        return AddEmployeeView.instance;
     }
 
     // Handle all logic of this view
@@ -25,9 +35,12 @@ export class AddEmployeeView extends View {
         // ======= Handle requests from renderer process ========
 
         ipcMain.on(EventGetter.get('add_employee'), (event:any, data:any) => {
+            console.log("Request to add user: " + data);
             userController.addUser(data, (respond:any) => {
                 this.getWindow().webContents.send(EventGetter.get("add_employee_success"));
-                Dialog.showDialog("info", TextGetter.get("created_user_successfully") + respond.id, null, this.getWindow());
+                Dialog.showDialog("info", TextGetter.get("created_user_successfully") + respond.id, null, this.getWindow(), () => {
+                    this.hide();
+                });
             }, (respond:any) => {
                 Dialog.showDialogFromRespond("error", respond, this.getWindow());
             })

@@ -6,8 +6,16 @@ const { dialog } = require('electron');
 
 export class CashierView extends View {
 
-    constructor(window: BrowserWindow, parent: BrowserWindow) {
+    private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("cashier",  window, parent);
+    }
+
+    private static instance: CashierView;
+    static getInstance(window: BrowserWindow, parent: BrowserWindow) {
+        if (!CashierView.instance) {
+            CashierView.instance = new CashierView(window, parent);
+        }
+        return CashierView.instance;
     }
 
     // Handle all logic of this view

@@ -16,7 +16,7 @@ export class Dialog {
         }
         return Dialog.instance;
     }
-    static showDialog(type: string, message_code: string, message_content:string, window: BrowserWindow):void {
+    static showDialog(type: string, message_code: string, message_content:string, window: BrowserWindow, cb: any = null):void {
         let title:string = "";
         switch (type) {
             case "error": title = "Error: "; break;
@@ -38,11 +38,11 @@ export class Dialog {
             title: title,
             message: message,
             buttons: ["OK"]
-        }));
+        }), cb);
 
     }
 
-    static showDialogFromRespond(type: string, respond: any, window: BrowserWindow):void {
+    static showDialogFromRespond(type: string, respond: any, window: BrowserWindow, cb: any = null):void {
         let title:string = "";
         switch (type) {
             case "error": title = TextGetter.get("error_2dot"); break;
@@ -63,7 +63,7 @@ export class Dialog {
             title: title,
             message: message,
             buttons: ["OK"]
-        }));
+        }), cb);
 
     }
 }

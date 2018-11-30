@@ -32,8 +32,12 @@ export class RestService {
             url: this.getUrl(path),
             method: method,
             headers: headers,
-            body: postData
+            body: postData,
+            timeout: 10000
         };
+
+        // console.log("REQUESTDATA:::::::::::::");
+        // console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
             if (err) {

@@ -20,7 +20,7 @@ export class EStoreManager {
 
   mainWindow: BrowserWindow;
   loadingView: View;
-  viewList: Array<View>;
+  viewList: Array<any>;
   menu:Menu;
 
   EStoreManager() {}
@@ -40,13 +40,13 @@ export class EStoreManager {
     loadingView.getWindow().maximize();
 
     // Open the DevTools.
-    this.mainWindow.webContents.openDevTools();
+    // this.mainWindow.webContents.openDevTools();
 
     // Init views
-    let loginView = new LoginView(this.mainWindow, null); this.addView(loginView);
-    let welcomeView = new WelcomeView(this.mainWindow, null); this.addView(welcomeView);
-    let cashierView = new CashierView(this.mainWindow, null); this.addView(cashierView);
-    let employeeView = new EmployeeView(this.mainWindow, null); this.addView(employeeView);
+    let loginView = LoginView.getInstance(this.mainWindow, null); this.addView(loginView);
+    let welcomeView = WelcomeView.getInstance(this.mainWindow, null); this.addView(welcomeView);
+    let cashierView = CashierView.getInstance(this.mainWindow, null); this.addView(cashierView);
+    let employeeView = EmployeeView.getInstance(this.mainWindow, null); this.addView(employeeView);
 
     // Init Menu actions
     this.menu.append(new MenuItem({
@@ -84,8 +84,6 @@ export class EStoreManager {
     // welcomeView.show();
     loadingView.show();
 
-    
-
     // Check user login and redirect to login page if user have not logged in
     userController.isLoggedIn(() => {
       welcomeView.show();
@@ -95,7 +93,7 @@ export class EStoreManager {
 
   }
 
-  private addView(view: View) {
+  private addView(view: any) {
     this.viewList.push(view);
     view.getEventEmitter().on('request_change_view', (viewName:string) => {
       this.changeView(viewName);
@@ -106,13 +104,13 @@ export class EStoreManager {
 
     switch(viewName) {
       case "preferences": 
-        let preferenceView = new PreferenceView(null, this.mainWindow);
+        let preferenceView = PreferenceView.getInstance(null, this.mainWindow);
         preferenceView.show();
         break;
       default:
         for (let i = 0; i < this.viewList.length; i++) {
-          if (this.viewList[i].getView() == viewName) {
-            this.viewList[i].show();
+          if (this.viewList[i].getInstance(this.mainWindow, null).getView() == viewName) {
+            this.viewList[i].getInstance(this.mainWindow, null).show();
           }
         }
     }

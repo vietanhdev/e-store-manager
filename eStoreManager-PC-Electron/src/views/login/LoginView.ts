@@ -9,8 +9,17 @@ const settings = require('electron-settings');
 
 export class LoginView extends View {
 
-    constructor(window: BrowserWindow, parent: BrowserWindow) {
+    private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("login", window, parent);
+    }
+
+
+    private static instance: LoginView;
+    static getInstance(window: BrowserWindow, parent: BrowserWindow) {
+        if (!LoginView.instance) {
+            LoginView.instance = new LoginView(window, parent);
+        }
+        return LoginView.instance;
     }
 
     // Handle all logic of this view
