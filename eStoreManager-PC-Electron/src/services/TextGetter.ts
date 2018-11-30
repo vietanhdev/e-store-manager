@@ -18,5 +18,12 @@ export class TextGetter {
             return "";
         }
     }
+    static getWithFailBack(key: string, failback: string):string {
+        if (typeof TextGetter.getInstance().data[key] != "undefined") {
+            return TextGetter.getInstance().data[key];
+        } else {
+            return failback;
+        }
+    }
 }
 

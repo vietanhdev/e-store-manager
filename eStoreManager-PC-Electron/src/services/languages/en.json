@@ -1,3 +1,15 @@
 {
-    "unknown_error": "Unknown Error"
+    "unknown_error": "Unknown Error",
+    "error_retriving_employee_list": "Error on retriving employee list",
+    "created_user_successfully": "Created user successfully. UserId: ",
+    "error_2dot": "Error: ",
+    "info": "Info",
+    "Unauthorized": "Sorry, You're not authorized to access this resource.",
+    "username_is_taken": "Username is already taken!",
+    "email_is_taken": "Email is already taken!",
+    "Bad Request": "One of your field is not in right format. Please try again.",
+    "something_wrong": "Something wrong with eStoreManager. Please contact support.",
+    "Forbidden": "You dont have permission to acccess this function.",
+    "update_successful": "Updated successfully."
+
 }

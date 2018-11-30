@@ -2,7 +2,7 @@
     "request_update_employee_list": "request_update_employee_list",
     "update_employee_list": "update_employee_list",
     "login_command": "login_command",
+    "request_add_employee": "request_add_employee",
     "add_employee": "add_employee",
-    "add_employee_success": "add_employee_success",
-    "request_add_employee": "request_add_employee"
+    "add_employee_success": "add_employee_success"
 }

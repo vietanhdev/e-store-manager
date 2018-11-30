@@ -1,11 +1,12 @@
 import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
 import { EventGetter } from "../../services/EventGetter";
+import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
 import {AddEmployeeView} from './AddEmployeeView';
 import {UserController} from '../../controllers/UserController';
 const {ipcMain} = require('electron');
-const { dialog } = require('electron');
+
 
 export class EmployeeView extends View {
 
@@ -26,12 +27,7 @@ export class EmployeeView extends View {
             userController.getAllUsers((data:any) => {
                 this.getWindow().webContents.send(EventGetter.get("update_employee_list"), data);
             }, () => {
-                dialog.showMessageBox(this.getWindow(), Object({
-                    type: "error",
-                    title: "Error",
-                    message: "Error on retriving employee list",
-                    buttons: ["OK"]
-                }));
+                Dialog.showDialog("error", "error_retriving_employee_list", null, this.getWindow());
             });
 
             
