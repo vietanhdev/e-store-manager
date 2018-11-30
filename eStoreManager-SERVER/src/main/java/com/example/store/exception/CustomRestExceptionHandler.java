@@ -21,7 +21,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 
-    // BindException: This exception is thrown when fatal binding errors occur.
     // MethodArgumentNotValidException: This exception is thrown when argument annotated with @Valid failed validation
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, 
@@ -40,13 +39,12 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
                                     HttpStatus.OK);
     }
     
-    // MissingServletRequestPartException: This exception is thrown when when the part of a multipart request not found
     // MissingServletRequestParameterException: This exception is thrown when request missing parameter
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, 
                                                                         HttpStatus status, WebRequest request) {
 
-        return new ResponseEntity<>(new ApiResponse(false, "parameter_is_missing", "parameter is missing"),
+        return new ResponseEntity<>(new ApiResponse(false, "missing_parameter", "parameter is missing"),
                                 HttpStatus.OK);
     }
 
@@ -58,7 +56,6 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
                                     HttpStatus.OK);
     }
 
-    // TypeMismatchException: This exception is thrown when try to set bean property with wrong type
     // MethodArgumentTypeMismatchException: This exception is thrown when method argument is not the expected type
     @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex, WebRequest request) {
@@ -77,12 +74,5 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new ApiResponse(false, "media_type_not_supported", "media type is not supported"),
                                     HttpStatus.OK);
     }
-
-    //  A fall-back handler – a catch-all type of logic that deals with all other exceptions that don’t have specific handlers
-    // @ExceptionHandler({ Exception.class })
-    // public ResponseEntity<Object> handleAll(Exception ex, WebRequest request) {
-    //     return new ResponseEntity<>(new ApiResponse(false, "error_occured", "error occurred"),
-    //                                 HttpStatus.OK);
-    // }
     
 }

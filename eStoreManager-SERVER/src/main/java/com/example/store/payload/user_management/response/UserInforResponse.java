@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class UserInforResponse {
-    public Boolean success;
+    public Boolean success = true;
     public Long id;
     public String name;
     public String username;
@@ -14,8 +14,7 @@ public class UserInforResponse {
     public String mobileNo;
     public Set<String> roles = new HashSet<>();
 
-    public UserInforResponse(Boolean success, Long id, String name, String username, Long salary, String email, String address, String mobileNo){
-        this.success = success;
+    public UserInforResponse(Long id, String name, String username, Long salary, String email, String address, String mobileNo){
         this.id = id;
         this.name = name;
         this.username = username;

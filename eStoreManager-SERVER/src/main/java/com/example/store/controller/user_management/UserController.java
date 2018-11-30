@@ -8,13 +8,14 @@ import com.example.store.model.user_management.Role;
 import com.example.store.model.user_management.RoleName;
 import com.example.store.model.user_management.User;
 import com.example.store.payload.common.response.ApiResponse;
-import com.example.store.payload.common.response.JwtAuthenticationResponse;
 import com.example.store.payload.user_management.request.ChangePasswordRequest;
 import com.example.store.payload.user_management.request.CreateUserRequest;
 import com.example.store.payload.user_management.request.LoginRequest;
 import com.example.store.payload.user_management.request.UpdateUserRequest;
 import com.example.store.payload.user_management.response.AllUserInforResponse;
+import com.example.store.payload.user_management.response.ChangePasswordResponse;
 import com.example.store.payload.user_management.response.CreateUserResponse;
+import com.example.store.payload.user_management.response.LoginResponse;
 import com.example.store.payload.user_management.response.UserInfor;
 import com.example.store.payload.user_management.response.UserInforResponse;
 import com.example.store.repository.user_management.RoleRepository;
@@ -22,8 +23,11 @@ import com.example.store.repository.user_management.UserRepository;
 import com.example.store.security.CurrentUser;
 import com.example.store.security.JwtTokenProvider;
 import com.example.store.security.UserPrincipal;
+import com.example.store.util.AppConstants;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,6 +43,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -78,7 +83,20 @@ public class UserController {
         // search user and pass user summary information
         User user = userRepository.findByUsername(loginRequest.getUsername()).orElse(null);
 
-        return ResponseEntity.ok(new JwtAuthenticationResponse(true, user.getId(), user.getName(), jwt));
+        LoginResponse loginResponse = new LoginResponse(user.getId(), 
+                                                        user.getName(), 
+                                                        user.getUsername(), 
+                                                        user.getSalary(), 
+                                                        user.getEmail(), 
+                                                        user.getAddress(), 
+                                                        user.getMobileNo(),
+                                                        jwt);
+        
+        for(Role role: user.getRoles()) {
+            loginResponse.addRole(role.getName().toString());
+        }
+        return new ResponseEntity<>(loginResponse,
+                                    HttpStatus.OK);
     }
 
     // User delete his own account
@@ -86,15 +104,14 @@ public class UserController {
     public ResponseEntity<?> deleteOwnAccount(@CurrentUser UserPrincipal currentUser) {
         User user = userRepository.findById(currentUser.getId()).orElse(null);
         userRepository.delete(user);
-        return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
+        return new ResponseEntity<>(new ApiResponse(true, "delete_user_successful", "delete user successful"),
                                 HttpStatus.OK);
     }
 
     // User get his own information
     @GetMapping("/me")
     public ResponseEntity<?> getOwnInfor(@CurrentUser UserPrincipal currentUser) {
-        UserInforResponse userInforResponse = new UserInforResponse(true, 
-                                                                    currentUser.getId(), 
+        UserInforResponse userInforResponse = new UserInforResponse(currentUser.getId(), 
                                                                     currentUser.getName(), 
                                                                     currentUser.getUsername(), 
                                                                     currentUser.getSalary(), 
@@ -120,7 +137,7 @@ public class UserController {
         if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
 
         userRepository.save(user);
-        return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update profile successful"),
+        return new ResponseEntity<>(new ApiResponse(true, "update_user_information_successful", "update your information successful"),
                                 HttpStatus.OK);
     }
 
@@ -131,7 +148,7 @@ public class UserController {
         
         // Check old passsword and new password if indentity
         if(passwordEncoder.matches(changePasswordRequest.getOldPassword(), currentUser.getPassword()) == false){
-            return new ResponseEntity<>(new ApiResponse(false, "change_password_fail", "old password is not correct"),
+            return new ResponseEntity<>(new ApiResponse(false, "old_password_not_correct", "old password is not correct"),
                                         HttpStatus.OK);
         };
 
@@ -153,7 +170,8 @@ public class UserController {
 
         String jwt = tokenProvider.generateToken(authentication);
         
-        return ResponseEntity.ok(new JwtAuthenticationResponse(true, user.getId(), user.getName(), jwt));
+        return new ResponseEntity<>(new ChangePasswordResponse(jwt),
+                                    HttpStatus.OK);
     }
 
     // Admin create a new user
@@ -161,12 +179,12 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequest createUserRequest) {
         if( userRepository.existsByUsername( createUserRequest.getUsername() ) ){
-            return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
+            return new ResponseEntity<>(new ApiResponse(false, "username_taken", "Username is already taken!"),
                                         HttpStatus.OK);
         }
 
         if( userRepository.existsByEmail( createUserRequest.getEmail() ) ){
-            return new ResponseEntity<>(new ApiResponse(false, "email_is_taken", "email is already taken!"),
+            return new ResponseEntity<>(new ApiResponse(false, "email_taken", "email is already taken!"),
                                         HttpStatus.OK);
         }
 
@@ -181,38 +199,54 @@ public class UserController {
         user.setAddress(createUserRequest.getAddress());
         user.setMobileNo(createUserRequest.getMobileNo());
 
+        String r = "";
         try {
             for(String role: createUserRequest.getRoles()) {
+                r = role;
                 Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
                 user.addRole(userRole);
             }
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_role", "role " + r + " does not exist"),
                                     HttpStatus.OK);
         }
 
         // save to database
         User result = userRepository.save(user);
 
-        return new ResponseEntity<>(new CreateUserResponse(true, result.getId()),
+        return new ResponseEntity<>(new CreateUserResponse(result.getId()),
                                     HttpStatus.OK);
     }
 
     // Admin get all user summary informations
     @GetMapping("/users")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<?> getAllUserProfile() {
-        AllUserInforResponse allUserInforResponse = new AllUserInforResponse(true);
-        for(User user: userRepository.findAll()){
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<?> getUsersPagable(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
+                                                @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
+        
+        if(page < 0) {
+            return new ResponseEntity<>( new ApiResponse(false, "page_num_unacceptable", "Page number cannot be less than zero."),
+                                    HttpStatus.OK);
+        }
+
+        if(size > AppConstants.MAX_PAGE_SIZE) {
+            return new ResponseEntity<>( new ApiResponse(false, "page_size_unacceptable", "Page size must not be greater than " + AppConstants.MAX_PAGE_SIZE),
+                                    HttpStatus.OK);
+        }
+
+        AllUserInforResponse allUserInforResponse = new AllUserInforResponse();
+
+        // find all users with page and size parameter
+        Page<User> users = userRepository.getAllUsersPagable(PageRequest.of(page, size));
+        
+        for(User user: users.getContent()) {
             UserInfor userInfor = new UserInfor(user.getId(), 
-                                                user.getName(), 
-                                                user.getUsername(), 
+                                                user.getName(),
+                                                user.getUsername(),
                                                 user.getSalary(), 
                                                 user.getEmail(), 
                                                 user.getAddress(), 
                                                 user.getMobileNo());
-
-
             for(Role role: user.getRoles()) {
                 userInfor.addRole(role.getName().toString());
             }
@@ -220,7 +254,7 @@ public class UserController {
         }
 
         return new ResponseEntity<>(allUserInforResponse,
-                                    HttpStatus.OK);
+                                    HttpStatus.OK);                                          
     }
 
     // Admin get a user information
@@ -229,8 +263,7 @@ public class UserController {
     public ResponseEntity<?> getUserInfor(@PathVariable(value = "user_id") String user_id) {
         try {
             User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
-            UserInforResponse userInforResponse = new UserInforResponse(true, 
-                                                                        user.getId(), 
+            UserInforResponse userInforResponse = new UserInforResponse(user.getId(), 
                                                                         user.getName(), 
                                                                         user.getUsername(), 
                                                                         user.getSalary(), 
@@ -243,7 +276,7 @@ public class UserController {
             return new ResponseEntity<>(userInforResponse,
                                         HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
                                     HttpStatus.OK);
         }
     }
@@ -263,24 +296,24 @@ public class UserController {
             if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
             if(updateUserRequest.getSalary() != null) user.setSalary(updateUserRequest.getSalary());
             
+            String r = "";
             try {
                 List<String> roles = updateUserRequest.getRoles();
-                if(roles != null){
-                    for(String role: roles) {
-                        Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
-                        user.addRole(userRole);
-                    }
+                for(String role: roles) {
+                    r = role;
+                    Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
+                    user.addRole(userRole);
                 }
             } catch (Exception e) {
-                return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with role field"),
+                return new ResponseEntity<>(new ApiResponse(false, "wrong_role", "role " + r + " does not exist"),
                                         HttpStatus.OK);
             }
 
             userRepository.save(user);
-            return new ResponseEntity<>(new ApiResponse(true, "update_successful", "update successful"),
+            return new ResponseEntity<>(new ApiResponse(true, "update_user_information_successful", "update user information successful"),
                                     HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
                                     HttpStatus.OK);
         }
     }
@@ -292,10 +325,10 @@ public class UserController {
         try {
             User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
             userRepository.delete(user);
-            return new ResponseEntity<>(new ApiResponse(true, "success", "delete user successful"),
+            return new ResponseEntity<>(new ApiResponse(true, "delete_user_successful", "delete user successful"),
                                     HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(new ApiResponse(false, "something_wrong", "something wrong with user id"),
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
                                     HttpStatus.OK);
         }
     }
@@ -322,7 +355,7 @@ public class UserController {
         
         User result = userRepository.save(user);
                             
-        return new ResponseEntity<>(new CreateUserResponse(true, result.getId()),
+        return new ResponseEntity<>(new CreateUserResponse(result.getId()),
                                     HttpStatus.OK);
     }
 }

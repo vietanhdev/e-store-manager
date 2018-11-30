@@ -32,7 +32,7 @@ CREATE TABLE `customers` (
   `name` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKrfbvkrffamfql7cjmen8v976v` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,6 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'2018-11-27 17:40:08','2018-11-27 17:40:08','ha noi','customer_1@gmail.com','0916167887','customer_1'),(2,'2018-11-27 17:44:43','2018-11-27 17:44:43','ha noi','customer_2@gmail.com','0916167887','customer_2'),(3,'2018-11-27 17:50:59','2018-11-27 17:50:59','ha noi','customer_3@gmail.com','0916167887','customer_3'),(4,'2018-11-27 18:33:45','2018-11-27 18:33:45','ha noi',NULL,'0916167887','customer_4');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +316,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES (4,1),(6,2),(5,3);
+INSERT INTO `user_roles` VALUES (1,1);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,7 +341,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKr43af9ap4edm43mmtq01oddj6` (`username`),
   UNIQUE KEY `UK6dotkott2kjsp8vw4d0m25fb7` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -351,7 +350,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (4,'2018-11-27 19:10:21','2018-11-27 19:10:21',NULL,'admin@gmail.com',NULL,NULL,'$2a$10$0olCjtjthSq5O5hJXXRaoei73zsZWZGvdnRbEP0ls.GHu0nGQVVXq',NULL,'admin'),(5,'2018-11-27 19:12:06','2018-11-27 19:12:06','hoa binh','cashier_1@gmail.com','0916167887','cashier_1','$2a$10$JLSrHu2Zj0.9IGSDog8M5eMiUYc0GKzUf68o0aX.4/RgiypYcGLse',1000,'cashier 1'),(6,'2018-11-27 19:21:58','2018-11-27 19:21:58','hoa binh','manager_1@gmail.com','0916167558','manager 1','$2a$10$krIA/n7XsEirEaJZEhmhSeVKvrguABmneQ4VXcvRvh8bT7OYFmSwe',1000,'manager_1'),(9,'2018-11-28 13:47:55','2018-11-28 13:47:55','hoa binh','noone@gmail.com','0916167558','noone','$2a$10$mJC00PhyRFUEyPhQOXqZK.7nMwQLPNg8GD8paia9HIklfnBrI5o1.',0,'noone');
+INSERT INTO `users` VALUES (1,'2018-11-29 15:05:12','2018-11-29 15:05:12',NULL,'admin@gmail.com',NULL,NULL,'$2a$10$.PULXfq4cNJd3JxRhm5OI.NX1FZwe/kFPe.Iw03JQEBuElJgRPoOC',NULL,'admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -364,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-28 20:58:11
+-- Dump completed on 2018-11-29 22:08:33

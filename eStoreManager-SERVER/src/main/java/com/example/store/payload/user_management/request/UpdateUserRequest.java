@@ -12,7 +12,6 @@ public class UpdateUserRequest {
     @Size(min = 3, max = 15)
     private String username;
 
-    @NotBlank
     @Size(max = 100)
     private String password;
 

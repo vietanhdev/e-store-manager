@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import com.example.store.model.audit.DateAudit;
 import com.example.store.model.product_management.Product;
