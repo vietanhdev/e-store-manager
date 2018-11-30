@@ -31,4 +31,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT e FROM User e")
     Page<User> getAllUsersPagable(Pageable pageable);
     
+    @Query(query)
+    User filter();
 }

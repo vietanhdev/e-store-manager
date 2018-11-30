@@ -41,8 +41,10 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     
     // MissingServletRequestParameterException: This exception is thrown when request missing parameter
     @Override
-    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, HttpHeaders headers, 
-                                                                        HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex, 
+                                                                        HttpHeaders headers, 
+                                                                        HttpStatus status, 
+                                                                        WebRequest request) {
 
         return new ResponseEntity<>(new ApiResponse(false, "missing_parameter", "parameter is missing"),
                                 HttpStatus.OK);

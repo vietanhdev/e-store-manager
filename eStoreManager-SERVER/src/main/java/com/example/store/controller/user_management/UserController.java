@@ -358,4 +358,10 @@ public class UserController {
         return new ResponseEntity<>(new CreateUserResponse(result.getId()),
                                     HttpStatus.OK);
     }
+
+    @GetMapping("/filter")
+    public ResponseEntity<?> filterUser() {
+        return new ResponseEntity<>(userRepository.filter(),
+                                    HttpStatus.OK);
+    }
 }

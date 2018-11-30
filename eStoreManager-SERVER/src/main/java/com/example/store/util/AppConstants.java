@@ -5,4 +5,5 @@ public interface AppConstants {
     String DEFAULT_PAGE_SIZE = "30";
 
     int MAX_PAGE_SIZE = 50;
+    String query = "SELECT e FROM User e WHERE e.id = 1";
 }
