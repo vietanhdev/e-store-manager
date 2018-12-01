@@ -988,3 +988,12 @@
     "message": "You're not authorized to access this resource"
 }
 ```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
