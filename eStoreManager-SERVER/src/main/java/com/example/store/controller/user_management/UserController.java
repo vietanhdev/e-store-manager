@@ -308,7 +308,7 @@ public class UserController {
             User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
             if(updateUserRequest.getName() != null) user.setName(updateUserRequest.getName());
             if(updateUserRequest.getUsername() != null) user.setUsername(updateUserRequest.getUsername());
-            if(updateUserRequest.getPassword() != null) user.setPassword(updateUserRequest.getPassword());
+            if(updateUserRequest.getPassword() != null) user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
             if(updateUserRequest.getEmail() != null) user.setEmail(updateUserRequest.getEmail());
             if(updateUserRequest.getAddress() != null) user.setAddress(updateUserRequest.getAddress());
             if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());

@@ -1,24 +1,34 @@
 package com.example.store.payload.customer_management.request;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class SearchCustomersRequest {
     
-    private Long draw;
+    @NotNull
+    @Min(0)
+    private Integer draw;
 
-    private Long start;
+    @NotNull
+    @Min(0)
+    private Integer start;
 
-    private Long length;
+    @NotNull
+    @Min(1)
+    private Integer length;
 
+    @NotNull
     private Search search;
 
-    public Long getDraw(){
+    public Integer getDraw(){
         return draw;
     }
 
-    public Long getStart(){
+    public Integer getStart(){
         return start;
     }
 
-    public Long getLength(){
+    public Integer getLength(){
         return length;
     }
 

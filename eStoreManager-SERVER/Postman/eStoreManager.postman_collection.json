@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fc8fe689-fd4e-420f-b436-bc8468bd0e5e",
+		"_postman_id": "ee2ce5f5-25e2-4062-8179-2d2aba040119",
 		"name": "eStoreManager",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -356,7 +356,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/users/3",
+									"raw": "http://localhost:8080/api/v1/users/3?",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -423,7 +423,7 @@
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier get all user summary informations",
+							"name": "Admin, Cashier get all customers' informations",
 							"request": {
 								"method": "GET",
 								"header": [

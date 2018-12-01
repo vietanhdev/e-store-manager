@@ -5,15 +5,15 @@ import java.util.Set;
 
 public class SearchCustomersResponse {
     
-    public Long draw;
+    public int draw;
 
-    public Long recordsTotal;
+    public int recordsTotal;
 
-    public Long recordsFiltered;
+    public int recordsFiltered;
 
     public Set<DataCustomer> data = new HashSet<>();
 
-    public SearchCustomersResponse(Long draw, Long recordsTotal, Long recordsFiltered){
+    public SearchCustomersResponse(int draw, int recordsTotal, int recordsFiltered){
         this.draw = draw;
         this.recordsTotal = recordsTotal;
         this.recordsFiltered = recordsFiltered;
