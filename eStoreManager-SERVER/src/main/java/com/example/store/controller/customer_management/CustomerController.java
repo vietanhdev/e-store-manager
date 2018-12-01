@@ -1,15 +1,20 @@
 package com.example.store.controller.customer_management;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import com.example.store.model.customer_management.Customer;
 import com.example.store.payload.common.response.ApiResponse;
 import com.example.store.payload.customer_management.request.CreateCustomerRequest;
+import com.example.store.payload.customer_management.request.SearchCustomersRequest;
 import com.example.store.payload.customer_management.request.UpdateCustomerRequest;
 import com.example.store.payload.customer_management.response.AllCustomerInforResponse;
 import com.example.store.payload.customer_management.response.CreateCustomerResponse;
 import com.example.store.payload.customer_management.response.CustomerInfor;
 import com.example.store.payload.customer_management.response.CustomerInforResponse;
+import com.example.store.payload.customer_management.response.DataCustomer;
+import com.example.store.payload.customer_management.response.SearchCustomersResponse;
 import com.example.store.repository.customer_management.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,6 +150,37 @@ public class CustomerController {
 
         return new ResponseEntity<>(allCustomerInforResponse,
                                     HttpStatus.OK);                                          
+    }
+
+    // Admin, Cashier search customer
+    @PostMapping("/search/customers")
+    @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
+    public ResponseEntity<?> searchCustomers(@Valid @RequestBody SearchCustomersRequest searchCustomersRequest) {
+
+        List<Customer> customers = customerRepository.searchCustomers(searchCustomersRequest.getSearch().getData(),
+                                                                    searchCustomersRequest.getSearch().getName(),
+                                                                    searchCustomersRequest.getSearch().getEmail(), 
+                                                                    searchCustomersRequest.getSearch().getAddress(), 
+                                                                    searchCustomersRequest.getSearch().getMobileNo());
+
+        Long draw = searchCustomersRequest.getDraw() * 10;
+        Long recordsTotal = 0L;
+        Long recordsFiltered = 0L;
+
+        SearchCustomersResponse searchCustomersResponse = new SearchCustomersResponse(draw, recordsTotal, recordsFiltered);
+
+        for(Customer customer: customers){
+            DataCustomer data = new DataCustomer(customer.getId(), 
+                                                customer.getName(), 
+                                                customer.getEmail(), 
+                                                customer.getAddress(), 
+                                                customer.getMobileNo());
+
+            searchCustomersResponse.addData(data);
+        }
+ 
+        return new ResponseEntity<>(searchCustomersResponse,
+                                    HttpStatus.OK); 
     }
 
 }

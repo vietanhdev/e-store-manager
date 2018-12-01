@@ -1,6 +1,7 @@
 package com.example.store.controller.user_management;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.*;
 
@@ -92,8 +93,11 @@ public class UserController {
                                                         user.getMobileNo(),
                                                         jwt);
         
-        for(Role role: user.getRoles()) {
-            loginResponse.addRole(role.getName().toString());
+        Set<Role> roles = user.getRoles();
+        if(roles != null){
+            for(Role role: roles) {
+                loginResponse.addRole(role.getName().toString());
+            }
         }
         return new ResponseEntity<>(loginResponse,
                                     HttpStatus.OK);
@@ -118,8 +122,12 @@ public class UserController {
                                                                     currentUser.getEmail(), 
                                                                     currentUser.getAddress(), 
                                                                     currentUser.getMobileNo());
-        for(Role role: currentUser.getRoles()) {
-            userInforResponse.addRole(role.getName().toString());
+
+        Set<Role> roles = currentUser.getRoles();
+        if(roles != null){
+            for(Role role: roles) {
+                userInforResponse.addRole(role.getName().toString());
+            }
         }
         return new ResponseEntity<>(userInforResponse,
                                     HttpStatus.OK);
@@ -201,10 +209,13 @@ public class UserController {
 
         String r = "";
         try {
-            for(String role: createUserRequest.getRoles()) {
-                r = role;
-                Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
-                user.addRole(userRole);
+            List<String> roles = createUserRequest.getRoles();
+            if(roles != null){
+                for(String role: roles) {
+                    r = role;
+                    Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
+                    user.addRole(userRole);
+                }
             }
         } catch (Exception e) {
             return new ResponseEntity<>(new ApiResponse(false, "wrong_role", "role " + r + " does not exist"),
@@ -247,8 +258,12 @@ public class UserController {
                                                 user.getEmail(), 
                                                 user.getAddress(), 
                                                 user.getMobileNo());
-            for(Role role: user.getRoles()) {
-                userInfor.addRole(role.getName().toString());
+            
+            Set<Role> roles = user.getRoles();
+            if(roles != null){
+                for(Role role: roles) {
+                    userInfor.addRole(role.getName().toString());
+                }
             }
             allUserInforResponse.addUserInfor(userInfor);
         }
@@ -270,8 +285,11 @@ public class UserController {
                                                                         user.getEmail(), 
                                                                         user.getAddress(), 
                                                                         user.getMobileNo());
-            for(Role role: user.getRoles()) {
-                userInforResponse.addRole(role.getName().toString());
+            Set<Role> roles = user.getRoles();
+            if(roles != null){
+                for(Role role: roles) {
+                    userInforResponse.addRole(role.getName().toString());
+                }
             }
             return new ResponseEntity<>(userInforResponse,
                                         HttpStatus.OK);
@@ -299,10 +317,12 @@ public class UserController {
             String r = "";
             try {
                 List<String> roles = updateUserRequest.getRoles();
-                for(String role: roles) {
-                    r = role;
-                    Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
-                    user.addRole(userRole);
+                if(roles != null){
+                    for(String role: roles) {
+                        r = role;
+                        Role userRole = roleRepository.findByName(RoleName.valueOf(role)).orElse(null);
+                        user.addRole(userRole);
+                    }
                 }
             } catch (Exception e) {
                 return new ResponseEntity<>(new ApiResponse(false, "wrong_role", "role " + r + " does not exist"),
@@ -356,12 +376,6 @@ public class UserController {
         User result = userRepository.save(user);
                             
         return new ResponseEntity<>(new CreateUserResponse(result.getId()),
-                                    HttpStatus.OK);
-    }
-
-    @GetMapping("/filter")
-    public ResponseEntity<?> filterUser() {
-        return new ResponseEntity<>(userRepository.filter(),
                                     HttpStatus.OK);
     }
 }
