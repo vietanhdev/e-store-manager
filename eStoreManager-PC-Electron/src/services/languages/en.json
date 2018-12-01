@@ -11,5 +11,14 @@
     "something_wrong": "Something wrong with eStoreManager. Please contact support.",
     "Forbidden": "You dont have permission to acccess this function.",
     "update_successful": "Updated successfully.",
-    "access_denied": "You dont have permission to acccess this function."
+    "access_denied": "You dont have permission to acccess this function.",
+    "are_you_sure_delete_employee": "Are you sure to delete this employee? User: ",
+    "cancel": "Cancel",
+    "delete_user_successful": "Deleted user successfully!",
+    "unauthorized": "Sorry, You're not authorized to access this resource.",
+    "wrong_user_id": "Sorry, User does not exist",
+    "delete_own_account_denied": "You cannot delete your own account!",
+    "password_dont_match": "Password dont match! Please retype the password correctly.",
+    "please_enter_password": "Please enter the password!",
+    "updated_user_successfully": "Updated employee infomation successfully! "
 }

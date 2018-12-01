@@ -3,6 +3,7 @@ import { EventEmitter } from "events";
 import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
 import {UserController} from '../../controllers/UserController';
+import { isNull } from "util";
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');
 
@@ -12,46 +13,25 @@ export class View {
     private viewName: string;
     private viewFile: string;
     private window: BrowserWindow;
-    private parent: BrowserWindow;
     private eventEmitter: EventEmitter;
-    private default_height: number;
-    private default_width: number;
+    private originHeight: number;
+    private originWidth: number;
+    private originWindow: BrowserWindow;
+    private originParent: BrowserWindow;
+    private menu:Menu = null;
 
     constructor (viewName: string, window: BrowserWindow, parent: BrowserWindow, width: number = 800, height: number = 600) {
 
+        // Save all window settings
         this.viewName = viewName;
         this.eventEmitter =  new EventEmitter();
-        this.default_height = height;
-        this.default_width = width;
-        
-        // If the window was not passed, create another window for this view
-        if (window == null) {
+        this.originHeight = height;
+        this.originWidth = width;
+        this.originWindow = window;
+        this.originParent = parent;
 
-            // Create the browser window.
-            this.window = new BrowserWindow({
-                height: height,
-                width: width,
-                parent: parent,
-                webPreferences: {
-                    nodeIntegrationInWorker: true
-                }
-            });
-
-            // Emitted when the window is closed.
-            this.window.on("closed", (event: any) => {
-                // Dereference the window object, usually you would store windows
-                // in an array if your app supports multi windows, this is the time
-                // when you should delete the corresponding element.
-                // this.window = null;
-                event.preventDefault();
-                this.window.hide();
-            });
-            
-        } else {
-            this.window = window;
-        }
-
-        this.parent = parent;
+        // Create a window
+        this.createWindow();
 
         // Calculate view file path and write to this.viewFile
         this.setViewFile();
@@ -63,6 +43,37 @@ export class View {
 
         // Call logic handler
         this.logicHandle();
+
+    }
+
+    createWindow():void {
+        
+        if (!isNull(this.originWindow)) {
+            this.window = this.originWindow;
+        } else if (this.window == null) {
+
+            // Create the browser window.
+            this.window = new BrowserWindow({
+                height: this.originHeight,
+                width: this.originWidth,
+                parent: this.originParent,
+                webPreferences: {
+                    nodeIntegrationInWorker: true
+                }
+            });
+
+            // Emitted when the window is closed.
+            this.window.on("closed", (event: any) => {
+                // Dereference the window object, usually you would store windows
+                // in an array if your app supports multi windows, this is the time
+                // when you should delete the corresponding element.
+                this.window = null;
+            });
+
+            // Set Menu
+            this.window.setMenu(this.menu);
+            
+        }
 
     }
 
@@ -90,56 +101,41 @@ export class View {
         this.window.setMenu(menu);
     }
 
+    public setOriginWindow(window: BrowserWindow) {
+        this.originWindow = window;
+    }
+
+    public setOriginParent(parent: BrowserWindow) {
+        this.originParent = parent;
+    }
+
     public getWindow():BrowserWindow {
+        this.createWindow();
         return this.window;
     }
 
     public getParent():BrowserWindow {
-        return this.parent;
+        return this.originParent;
     }
 
     // Load view file to view window
     public show() {
-        // If the window was not passed, create another window for this view
-        if (this.window == null) {
-
-            // Create the browser window.
-            this.window = new BrowserWindow({
-                height: this.default_height,
-                width: this.default_width,
-                parent: this.parent,
-                webPreferences: {
-                    nodeIntegrationInWorker: true
-                }
-            });
-
-            // Emitted when the window is closed.
-            this.window.on("closed", (event: any) => {
-                // Dereference the window object, usually you would store windows
-                // in an array if your app supports multi windows, this is the time
-                // when you should delete the corresponding element.
-                // this.window = null;
-                event.preventDefault();
-                this.window.hide();
-            });
-            
-        }
-        this.window.loadFile(this.viewFile); // Load view file to view window
-        this.window.show();
+        this.getWindow().loadFile(this.viewFile); // Load view file to view window
+        this.getWindow().show();
     }
 
     
     public hide() {
-        if (this.window) {
-            this.window.hide();
-        }
+        try {
+            this.window.close();
+        } catch (e) {}
     }
 
     public showLoadingModal() {
-        this.window.webContents.send('loading-modal' , {status:'show'});
+        this.getWindow().webContents.send('loading-modal' , {status:'show'});
     }
     public hideLoadingModal() {
-        this.window.webContents.send('loading-modal' , {status:'hide'});
+        this.getWindow().webContents.send('loading-modal' , {status:'hide'});
     }
 
 

@@ -3,6 +3,21 @@
     "update_employee_list": "update_employee_list",
     "login_command": "login_command",
     "request_add_employee": "request_add_employee",
+    "request_change_user_password": "request_change_user_password",
     "add_employee": "add_employee",
-    "add_employee_success": "add_employee_success"
+    "add_employee_success": "add_employee_success",
+    "request_delete_employee": "request_delete_employee",
+    "delete_row_from_employee_table": "delete_row_from_employee_table",
+
+    "user_enter_password": "user_enter_password",
+    "prompt_password" : "prompt_password",
+    "set_password": "set_password",
+
+    "update_employee": "update_employee",
+    "update_employee_success": "update_employee_success",
+    "request_user_info": "request_user_info",
+    "respond_request_user_info": "respond_request_user_info",
+
+    "request_update_user_info": "request_update_user_info"
+    
 }

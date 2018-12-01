@@ -47,26 +47,20 @@
 
 
     dataSet = [
-        [ "", "", "", "", "", "", "",
-        `<button type="button" class="btn btn-sm btn-success">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-        </button>&nbsp;
-        <button type="button" class="btn btn-sm btn-danger">
-            <i class="fa fa-trash-o" aria-hidden="true"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-warning">
-            Set Password
-        </button>
-        `]
+        [ "", "", "", "", "", "", "", ""]
     ];
 
-
+    
     const app = {
+        rows: [],
+        dataTable: null,
+        selectedUser: null,
         updateTable(dataTable, data) {
-            let rows = [];
+            console.log(data);
+            this.rows = [];
             for (let i = 0; i < data.length; ++i) {
                 let row = [];
-                // row.push(String(data[i].id));
+                row.push(Number(data[i].id));
                 // { title: 'Name' },
                 row.push(String(data[i].name));
                 // { title: 'Username' },
@@ -80,24 +74,23 @@
                 // { title: 'Mobile' },
                 row.push(String(data[i].mobileNo));
                 // { title: 'Position' },
-                row.push(String(data[i].roles));
-                // { title: 'Manipulation' }
-                row.push(`
-                <button type="button" class="edit-employee btn btn-sm btn-success">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>&nbsp;
-                <button type="button" class="delete-employee btn btn-sm btn-danger">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </button>
-                <button type="button" class="set-password btn btn-sm btn-warning">
-                    Set Password
-                </button>
-                `);
-                rows.push(row);
-                console.log(row);
+                row.push(String(JSON.stringify(data[i].roles)));
+                this.rows.push(row);
+                // console.log(row);
             }
             dataTable.clear();
-            dataTable.rows.add(rows);
+            dataTable.rows.add(this.rows);
+            dataTable.draw(false);
+        },
+        deleteFromTable(id) {
+            for (let i = 0; i < this.rows.length; ++i) {
+                if (this.rows[i][0] == id) {
+                    this.rows.splice(i, 1);
+                    break;
+                }
+            }
+            dataTable.clear();
+            dataTable.rows.add(this.rows);
             dataTable.draw(false);
         },
         start() {
@@ -107,10 +100,11 @@
                 ipcRenderer.send(EventGetter.get(EventGetter.get('request_add_employee')));
             });
 
-            const dataTable = $('#realtime').DataTable({
+            // Create table 
+            dataTable = $('#realtime').DataTable({
                 data: dataSet,
                 columns: [
-                    // { title: 'UserID' },
+                    { title: 'UserID' },
                     { title: 'Name' },
                     { title: 'Username' },
                     { title: 'Salary' },
@@ -120,29 +114,101 @@
                     { title: 'Position' },
                     { title: 'Manipulation' }
                 ],
+                "columnDefs": [ {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": `
+                            <button type="button" class="edit-employee btn btn-sm btn-success">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </button>&nbsp;
+                            <button type="button" class="delete-employee btn btn-sm btn-danger">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="set-password btn btn-sm btn-warning">
+                                Set Password
+                            </button>
+                        `
+                } ],
                 "pageLength": 5,
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });
 
-
-            // $('#realtime tbody').on( 'click', 'button.delete-employee', function () {
-            //     var data = dataTable.row( $(this).parents('tr') ).data();
-            //     alert( data[0] );
-            // } );
-
-            
+            // ==== Update data of the table ====
+            // Request data
             ipcRenderer.send(EventGetter.get("request_update_employee_list"));
-
+            // Update list
             ipcRenderer.on(EventGetter.get("update_employee_list"), (event, data) => {
-                console.log(data);
                 this.updateTable(dataTable, data);
             });
+            // Delete a value by id: Id means the value of the first column
+            ipcRenderer.on(EventGetter.get("delete_row_from_employee_table"), (event, id) => {
+                this.deleteFromTable(id);
+            });
+
+            // ==== Handle row buttons ====
+            // Delete
+            $('#realtime tbody').on( 'click', 'button.delete-employee', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                let userData = {};
+                userData.id = data[0];
+                userData.username = data[2];
+                ipcRenderer.send(EventGetter.get("request_delete_employee"), userData);
+            } );
+            // Change password
+            $('#realtime tbody').on( 'click', 'button.set-password', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                
+                // Request password for user
+                let passwordCarrier = {}
+                passwordCarrier.purpose = "set_user_password";
+                passwordCarrier.id = data[0];
+                ipcRenderer.send(EventGetter.get('prompt_password'), passwordCarrier);
+
+            } );
+            // Listening for a change password event
+            ipcRenderer.on(EventGetter.get("set_password"), (event, passwordCarrier) => {
+                // Check purpose of this password
+                if (passwordCarrier.purpose == "set_user_password") {
+                    ipcRenderer.send(EventGetter.get("request_change_user_password"), passwordCarrier);
+                }
+            });
+
+
+            // Edit info
+            $('#realtime tbody').on( 'click', 'button.edit-employee', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                
+                // Request password for user
+                let user = {}
+                user.id = data[0];
+                user.name = data[1];
+                user.username = data[2];
+                user.salary = data[3];
+                user.email = data[4];
+                user.address = data[5];
+                user.mobile = data[6];
+                user.roles = data[7];
+                // { title: 'UserID' },
+                // { title: 'Name' },
+                // { title: 'Username' },
+                // { title: 'Salary' },
+                // { title: 'Email' },
+                // { title: 'Address' },
+                // { title: 'Mobile' },
+                // { title: 'Position' },
+                // { title: 'Manipulation' }
+                ipcRenderer.send(EventGetter.get('request_update_user_info'), user);
+
+            } );
+
+            
+
+            
         }
     };
 
     $(document).ready(() =>  {
         app.start();
-
     });
 </script>
 

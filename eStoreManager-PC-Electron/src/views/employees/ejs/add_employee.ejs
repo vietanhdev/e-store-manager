@@ -28,9 +28,12 @@
             </div>
         </div>
         <div class="col-sm-12">
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="password" class="form-control">
+            <div class="input-group mb-3">
+                <label for="password">Password&nbsp;&nbsp;</label>
+                <input readonly disabled id="password" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button id="btn-setpassword" class="btn btn-success" type="button">Set Password</button>
+                </div>
             </div>
         </div>
         <div class="col-sm-6">
@@ -73,14 +76,24 @@
 
 <script>
     const EventGetter = require("../../../services/EventGetter").EventGetter;
-
     const {ipcRenderer} = require('electron');
+
+    // Handle set password button
+    $("#btn-setpassword").click(() => {
+        ipcRenderer.send(EventGetter.get('prompt_password'));
+    });
+    ipcRenderer.on(EventGetter.get('set_password'), (event, data) => {
+        $("#password").val(data.password);
+    });
+
+    // Handle Save Button
     $("#save").click(() => {
         let newUser = {}
         newUser.name = $("#name").val();
         newUser.username = $("#username").val();
         newUser.email = $("#email").val();
         newUser.address = $("#address").val();
+        newUser.salary = $("#salary").val();
         newUser.mobileNo = $("#phone").val();
         newUser.password = $("#password").val();
         newUser.name = $("#name").val();
@@ -94,8 +107,6 @@
                 newUser.roles.push("ROLE_MANAGER");
                 newUser.roles.push("ROLE_MANAGER");
         }
-
-        console.log("Click Add Employee");
 
         ipcRenderer.send(EventGetter.get('add_employee'), newUser);
     });

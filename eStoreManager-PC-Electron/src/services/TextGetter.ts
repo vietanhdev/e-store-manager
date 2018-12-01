@@ -11,7 +11,7 @@ export class TextGetter {
         }
         return TextGetter.instance;
     }
-    static get(key:string):string {
+    public static get(key:string):string {
         if (typeof TextGetter.getInstance().data[key] != "undefined") {
             return TextGetter.getInstance().data[key];
         } else {

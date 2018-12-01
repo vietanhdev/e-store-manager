@@ -26,6 +26,9 @@
         },
         "welcome": {
             "path": "welcome/ejs/welcome.ejs"
+        },
+        "password_input": {
+            "path": "password_input/ejs/password_input.ejs"
         }
     }
 }

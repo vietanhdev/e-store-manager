@@ -17,7 +17,7 @@ export class UserController extends Controller {
     public isLoggedIn(cbSuccess: (any), cbFail: (any)):void {
         this.getRestService().request('GET', '/api/v1/me', {}, (respond:any) => {
             if (respond.success == true) {
-                settings.set("account_info.userid", respond['user_id']);
+                settings.set("account_info.userid", respond['id']);
                 settings.set("account_info.fullname", respond['name']);
                 settings.set("account_info.username", respond['username']);
                 cbSuccess();
@@ -76,7 +76,6 @@ export class UserController extends Controller {
 
     public addUser(data: any, cbSuccess: (any), cbFail: (any)) {
         this.getRestService().request('POST', '/api/v1/users', data, (respond:any) => {
-            console.log(respond);
             if (respond['success'] == true) {
                 cbSuccess (respond);
             } else {
@@ -86,5 +85,31 @@ export class UserController extends Controller {
             cbFail (respond);
         }, true);
     }
+
+    public deleteUser(userId: any, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('DELETE', '/api/v1/users/' + userId, null, (respond:any) => {
+            if (respond['success'] == true) {
+                cbSuccess (respond);
+            } else {
+                cbFail(respond);
+            }
+        }, (respond:any) => {
+            cbFail (respond);
+        }, true);
+    }
+
+    public updateUserInfo(data: any, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('PUT', '/api/v1/users/' + data.id, data, (respond:any) => {
+            if (respond['success'] == true) {
+                cbSuccess (respond);
+            } else {
+                cbFail(respond);
+            }
+        }, (respond:any) => {
+            cbFail (respond);
+        }, true);
+    }
+    
+
  
 }

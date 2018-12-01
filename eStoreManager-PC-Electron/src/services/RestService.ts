@@ -22,7 +22,12 @@ export class RestService {
 
     request(method:string, path: string, data: any, cbSuccess: (any), cbFail: (any), auth: boolean):void {
 
-        let postData = JSON.stringify(data);
+        let postData:string;
+        try {
+            postData = JSON.stringify(data);
+        } catch(e) {
+            postData = "{}";
+        }
         let headers = Object({'Content-Type': 'application/json'});
         if (auth) {
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
@@ -40,16 +45,18 @@ export class RestService {
         // console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
+            // console.log("DATA:::::::::::::");
+            // console.log(data);
             if (err) {
                 cbFail({
                     status: 100,
                     message: TextGetter.get("unknown_error")
                 });
             } else {
+                
                 cbSuccess(JSON.parse(data.body));
             }
-            // console.log("DATA:::::::::::::");
-            // console.log(data);
+            
         })
 
     };

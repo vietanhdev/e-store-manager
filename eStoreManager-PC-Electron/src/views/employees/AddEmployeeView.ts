@@ -15,7 +15,7 @@ export class AddEmployeeView extends View {
     
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("add_employee", window, parent, 600, 600);
-        // this.getWindow().webContents.opensDevTools();
+        // this.getWindow().webContents.openDevTools();
         this.setMenu(null);
     }
 
@@ -33,9 +33,7 @@ export class AddEmployeeView extends View {
         var userController = new UserController();
 
         // ======= Handle requests from renderer process ========
-
         ipcMain.on(EventGetter.get('add_employee'), (event:any, data:any) => {
-            console.log("Request to add user: " + data);
             userController.addUser(data, (respond:any) => {
                 this.getWindow().webContents.send(EventGetter.get("add_employee_success"));
                 Dialog.showDialog("info", TextGetter.get("created_user_successfully") + respond.id, null, this.getWindow(), () => {

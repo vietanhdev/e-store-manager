@@ -50,11 +50,13 @@ export class Dialog {
         }
 
         let message:string = "";
-        if (isUndefined(respond.code)) {
+        if (!isUndefined(respond.code)) {
             message = TextGetter.getWithFailBack(respond.code, respond.message);
-        } else if (isUndefined(respond.error)) {
+        } else if (!isUndefined(respond.error)) {
             message = TextGetter.getWithFailBack(respond.error, respond.message);
-        } else if (isUndefined(respond.error)) {
+        } else if (!isUndefined(respond.message)) {
+            message = respond.message;
+        } else {
             message = TextGetter.get("unknown_error");
         }
 
