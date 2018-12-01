@@ -20,6 +20,7 @@ import com.example.store.repository.customer_management.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -34,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.store.util.AppConstants;
+import com.example.store.util.OffsetBasedPageRequest;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -157,15 +159,24 @@ public class CustomerController {
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
     public ResponseEntity<?> searchCustomers(@Valid @RequestBody SearchCustomersRequest searchCustomersRequest) {
 
+        Pageable pageable = new OffsetBasedPageRequest(searchCustomersRequest.getStart(), searchCustomersRequest.getLength());
+
+        if(searchCustomersRequest.getSearch().getData() == null) searchCustomersRequest.getSearch().setData("");
+        if(searchCustomersRequest.getSearch().getName() == null) searchCustomersRequest.getSearch().setName("");
+        if(searchCustomersRequest.getSearch().getEmail() == null) searchCustomersRequest.getSearch().setEmail("");
+        if(searchCustomersRequest.getSearch().getAddress() == null) searchCustomersRequest.getSearch().setAddress("");
+        if(searchCustomersRequest.getSearch().getMobileNo() == null) searchCustomersRequest.getSearch().setMobileNo("");
+
         List<Customer> customers = customerRepository.searchCustomers(searchCustomersRequest.getSearch().getData(),
                                                                     searchCustomersRequest.getSearch().getName(),
                                                                     searchCustomersRequest.getSearch().getEmail(), 
                                                                     searchCustomersRequest.getSearch().getAddress(), 
-                                                                    searchCustomersRequest.getSearch().getMobileNo());
+                                                                    searchCustomersRequest.getSearch().getMobileNo(),
+                                                                    pageable);
 
-        Long draw = searchCustomersRequest.getDraw() * 10;
-        Long recordsTotal = 0L;
-        Long recordsFiltered = 0L;
+        int draw = searchCustomersRequest.getDraw() * 10;
+        int recordsTotal = customerRepository.findAll().size();
+        int recordsFiltered = customers.size();
 
         SearchCustomersResponse searchCustomersResponse = new SearchCustomersResponse(draw, recordsTotal, recordsFiltered);
 

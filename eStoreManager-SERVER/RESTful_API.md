@@ -926,15 +926,65 @@
 }
 ```
 
+## 2.6. Search a customer
+### 2.1.1. Request
+
+* Path: /api/v1/search/customers
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+```
 {
     "draw": 1,
     "start": 0,
     "length": 5,
     "search": {
-        "data": "v",
-        "name": "anh",
-        "email": "vie",
-        "address": "4",
-        "mobile": "1616
+        "data": "",
+        "name": "",
+        "email": "",
+        "address": "ha noi",
+        "mobileNo": ""
     }
 }
+```
+
+
+### 2.1.2. Response
+
+* On success:
+```
+{
+    "draw": 10,
+    "recordsTotal": 0,
+    "recordsFiltered": 0,
+    "data": [
+        {
+            "id": 2,
+            "name": "customer_2",
+            "email": "customer_2@gmail.com",
+            "address": "ha noi",
+            "mobileNo": "0916167887"
+        },
+        {
+            "id": 3,
+            "name": "customer_3",
+            "email": "customer_3@gmail.com",
+            "address": "ha noi",
+            "mobileNo": "0916167887"
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
