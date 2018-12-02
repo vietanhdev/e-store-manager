@@ -17,7 +17,7 @@ public interface ProductTypeRepository extends JpaRepository<ProductType, Long>{
 
     List<ProductType> findAll();
 
-    @Query("SELECT e FROM ProductType e WHERE e.name LIKE %:name% AND e.price LIKE %:price% AND e.unit LIKE %:unit% AND e.barcode LIKE %:barcode% AND ( e.name LIKE %:value% OR e.price LIKE %:value% OR e.unit LIKE %:value% OR e.barcode LIKE %:value% )")
-    List<ProductType> searchProductTypes(@Param("value") String value, @Param("name") String name, @Param("price") String price, @Param("unit") String unit, @Param("barcode") String barcode, Pageable pageable);
+    @Query("SELECT e FROM ProductType e WHERE e.name LIKE %:name% AND e.unit LIKE %:unit% AND e.barcode LIKE %:barcode% AND ( e.name LIKE %:value% OR e.unit LIKE %:value% OR e.barcode LIKE %:value% )")
+    List<ProductType> searchProductTypes(@Param("value") String value, @Param("name") String name, @Param("unit") String unit, @Param("barcode") String barcode, Pageable pageable);
 
 }

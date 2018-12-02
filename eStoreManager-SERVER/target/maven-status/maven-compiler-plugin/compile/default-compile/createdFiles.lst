@@ -6,6 +6,7 @@ com/example/store/config/SpringSecurityAuditAwareImpl.class
 com/example/store/payload/user_management/response/UserInfor.class
 com/example/store/model/user_management/Role.class
 com/example/store/payload/customer_management/response/CustomerInfor.class
+com/example/store/payload/product_type_management/response/ProductTypeInforResponse.class
 com/example/store/payload/user_management/request/UpdateUserRequest.class
 com/example/store/exception/CustomRestExceptionHandler.class
 com/example/store/payload/product_type_management/request/SearchProductTypesRequest.class
@@ -16,7 +17,6 @@ com/example/store/payload/supplier_management/request/CreateSupplierRequest.clas
 com/example/store/payload/supplier_management/response/SearchSuppliersResponse.class
 com/example/store/model/bill_management/Invoice.class
 com/example/store/model/product_management/Product.class
-com/example/store/payload/product_type_management/response/SupplierInforResponse.class
 com/example/store/payload/customer_management/response/AllCustomerInforResponse.class
 com/example/store/payload/product_type_management/request/CreateProductTypeRequest.class
 com/example/store/security/JwtAuthenticationEntryPoint.class

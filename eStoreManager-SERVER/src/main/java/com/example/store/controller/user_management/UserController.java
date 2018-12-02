@@ -378,12 +378,12 @@ public class UserController {
     @GetMapping("/default_initial")
     public ResponseEntity<?> defaultInitial() {
         if( userRepository.existsByUsername( "admin" ) ){
-            return new ResponseEntity<>(new ApiResponse(false, "username_is_taken", "Username is already taken!"),
+            return new ResponseEntity<>(new ApiResponse(false, "username_taken", "username is already taken!"),
                                         HttpStatus.OK);
         }
 
         if( userRepository.existsByEmail( "admin@gmail.com" ) ){
-            return new ResponseEntity<>(new ApiResponse(false, "email_is_taken", "email is already taken!"),
+            return new ResponseEntity<>(new ApiResponse(false, "email_taken", "email is already taken!"),
                                         HttpStatus.OK);
         }
 

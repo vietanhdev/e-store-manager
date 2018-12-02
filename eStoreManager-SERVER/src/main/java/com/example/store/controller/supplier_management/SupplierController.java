@@ -57,8 +57,7 @@ public class SupplierController {
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<?> getSupplierInfor(@PathVariable(value = "id") String id) {
         try {
-            Supplier supplier;
-            supplier = supplierRepository.findById(Long.parseLong(id)).orElse(null);
+            Supplier supplier = supplierRepository.findById(Long.parseLong(id)).orElse(null);
             SupplierInforResponse supplierInforResponse = new SupplierInforResponse(supplier.getId(),
                                                                                     supplier.getName(),
                                                                                     supplier.getEmail(),
