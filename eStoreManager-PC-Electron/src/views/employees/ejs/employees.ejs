@@ -1,6 +1,8 @@
 <%- include('../../shared/ejs/header', {title: 'Employee Management'}) %>
 <link rel="stylesheet" type="text/css" href="../css/employees.css">
-<link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+<!-- <link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="../../../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css"> -->
+
 
 <%- include('../../shared/ejs/secondary_menu.ejs') %>
 
@@ -25,25 +27,9 @@
 <script>
     const EventGetter = require("../../../services/EventGetter").EventGetter;
     const {ipcRenderer} = require('electron');
-    require( 'jszip' );
-    require( 'pdfmake' );
-    require( 'datatables.net-dt' )();
-    require( 'datatables.net-autofill-dt' )();
-    require( 'datatables.net-buttons-dt' )();
-    require( 'datatables.net-buttons/js/buttons.colVis.js' )();
-    require( 'datatables.net-buttons/js/buttons.flash.js' )();
-    require( 'datatables.net-buttons/js/buttons.html5.js' )();
-    require( 'datatables.net-buttons/js/buttons.print.js' )();
-    require( 'datatables.net-colreorder-dt' )();
-    require( 'datatables.net-fixedcolumns-dt' )();
-    require( 'datatables.net-fixedheader-dt' )();
-    require( 'datatables.net-keytable-dt' )();
-    require( 'datatables.net-responsive-dt' )();
-    require( 'datatables.net-rowgroup-dt' )();
-    require( 'datatables.net-rowreorder-dt' )();
-    require( 'datatables.net-scroller-dt' )();
-    require( 'datatables.net-select-dt' )();
-    var dt = require( 'datatables.net' )( window, $ );
+    var dt = require( 'datatables.net-dt' )( window, $ );
+    require( 'datatables.net-buttons-dt' )( window, $ );
+    //  = require( 'datatables.net' )( window, $ );
 
 
     dataSet = [
@@ -102,6 +88,7 @@
 
             // Create table 
             dataTable = $('#realtime').DataTable({
+                responsive: true,
                 data: dataSet,
                 columns: [
                     { title: 'UserID' },
@@ -129,6 +116,14 @@
                             </button>
                         `
                 } ],
+                buttons: [
+        {
+            text: 'Reload',
+            action: function ( e, dt, node, config ) {
+                dt.ajax.reload();
+            }
+        }
+    ],
                 "pageLength": 5,
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });

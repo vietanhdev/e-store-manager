@@ -29,6 +29,9 @@
         },
         "password_input": {
             "path": "password_input/ejs/password_input.ejs"
+        },
+        "customers": {
+            "path": "customers/ejs/customers.ejs"
         }
     }
 }

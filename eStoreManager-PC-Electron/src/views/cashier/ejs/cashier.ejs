@@ -1,25 +1,162 @@
-<%- include('../../shared/ejs/header', {title: 'Cashier UI'}) %>
-<link rel="stylesheet" type="text/css" href="../../shareds/css/cashier.css">
+<%- include('../../shared/ejs/header', {title: 'Cashier'}) %>
+<link rel="stylesheet" type="text/css" href="../css/cashier.css">
+<link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+
+<%- include('../../shared/ejs/secondary_menu.ejs') %>
+
+<div class="container">
+    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+        &gt;&gt; Cashier
+    </h2>
+</div>
+
+<div class="container-fluid main-container">
+	<div class="row">
+		<div class="col-sm-1">
+			<img style="width: 85px; border: 1px solid #333" src="../images/barcode-scanner.jpg" alt="barcode">
+		</div>
+		<div class="col-sm-3">
+			<div class="input-group">
+				<label>Product ID&nbsp;&nbsp; </label>
+				<input type="text" class="form-control">
+				<div class="input-group-append">
+					<button class="btn btn-success" type="button">Search</button>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="input-group">
+				<label>Quantity&nbsp;&nbsp; </label>
+				<input type="text" class="form-control">
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="input-group">
+				<button type="submit" class="btn btn-primary">Add Product</button>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="min-height: 500px">
+		<div class="col-sm-8 mt-2">
+			<table id="product-table" class="display" width="100%"></table>
+		</div>
+		<div id="cashier-total-area" class="col-sm-4">
+			<table>
+				<tr>
+					<td>
+						<label class="total-title">SubTotal</label>
+					</td>
+					<td>
+						<input readonly class="total-number" type="text" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="total-title">Tax</label>
+					</td>
+					<td>
+						<input readonly class="total-number" type="text" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="total-title">GrandTotal</label>
+					</td>
+					<td>
+						<input readonly class="total-number" type="text" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div style="padding: 2rem"></div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="total-title title-sm">Customer Pay</label>
+					</td>
+					<td>
+						<input class="total-number" type="text" class="form-control">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="total-title title-sm">Give Back to Customer</label>
+					</td>
+					<td>
+						<input readonly class="total-number" type="text" class="form-control">
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-2">
+			<p>Employee: Viet Anh</p>
+			<p>Time: 10:18 02/12</p>
+		</div>
+		<div class="col-sm-4">
+			<p>Customer: Syan</p>
+			<label>Product ID&nbsp;&nbsp; </label>
+			<input type="text" class="form-control">
+			<div class="input-group-append">
+				<button class="btn btn-success" type="button">Search</button>
+				<button class="btn btn-success" type="button">New</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-
-<!-- <script>
-	document.querySelector('#login-btn').addEventListener('click', function(e) {
-
-		e.preventDefault();
-
-		let username = document.getElementById("username").value;
-		let password = document.getElementById("password").value;
-
-		const {ipcRenderer} = require('electron');
-
-		let data = {};
-		data.username = username;
-		data.password = password;
-
-		ipcRenderer.send('login-command', data);
-
+<script>
+	const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+	var dt = require( 'datatables.net-dt' )( window, $ );
+    require( 'datatables.net-buttons-dt' )( window, $ );
+	// Create table 
+	dataTable = $('#product-table').DataTable({
+		columns: [
+			{ 
+				title: "ID",
+				data: "id"
+			},
+			{ 
+				title: "Product ID",
+				data: "productid"
+			},
+			{ 
+				title: "Product Name",
+				data: "productname"
+			},
+			{ 
+				title: "Price",
+				data: "price"
+			},
+			{ 
+				title: "Quanitity",
+				data: "quantity"
+			},
+			{ 
+				title: "Total",
+				data: "total"
+			},
+			{ 
+				title: "Delete?"
+			}
+		],
+		"columnDefs": [ {
+			"targets": -1,
+			"data": null,
+			"defaultContent": `
+				<button type="button" class="delete-employee btn btn-sm btn-danger">
+					<i class="fa fa-trash-o" aria-hidden="true"></i>
+				</button>
+				`
+		} ],
+		"pageLength": 5,
+		"lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
 	});
 
-</script> -->
+</script>
+
 <%- include('../../shared/ejs/footer') %>

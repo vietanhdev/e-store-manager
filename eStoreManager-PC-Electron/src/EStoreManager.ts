@@ -14,6 +14,7 @@ const {CashierView} = require('./views/cashier/CashierView');
 const {AboutView} = require('./views/about/AboutView');
 const {PreferenceView} = require('./views/preferences/PreferenceView');
 const {EmployeeView} = require('./views/employees/EmployeeView');
+const {CustomerView} = require('./views/customers/CustomerView');
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
 export class EStoreManager {
@@ -49,7 +50,8 @@ export class EStoreManager {
     let welcomeView = WelcomeView.getInstance(this.mainWindow, null); this.addView(welcomeView);
     let cashierView = CashierView.getInstance(this.mainWindow, null); this.addView(cashierView);
     let employeeView = EmployeeView.getInstance(this.mainWindow, null); this.addView(employeeView);
-    
+    let customerView = CustomerView.getInstance(this.mainWindow, null); this.addView(customerView);
+
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot
     let passwordInputView = PasswordInputView.getInstance(null, null); this.addView(passwordInputView);

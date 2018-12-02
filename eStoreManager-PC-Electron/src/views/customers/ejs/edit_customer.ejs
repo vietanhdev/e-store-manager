@@ -1,0 +1,148 @@
+<%- include('../../shared/ejs/header', {title: 'Edit Customer'}) %>
+
+<div class="container">
+    <h3 class="text-center">Edit Customer</h3>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="customer-id">ID</label>
+                <input type="text" disabled readonly name="customer-id" id="customer-id" placeholder="00" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Viet Anh Nguyen" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input  readonly disabled  type="text" name="username" id="username" placeholder="username" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="salary">Email</label>
+                <input type="email" name="email" id="email" placeholder="vietanh@example.com" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="input-group mb-3">
+                <label for="password">Password&nbsp;&nbsp;</label>
+                <input readonly disabled id="password" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button id="btn-setpassword" class="btn btn-success" type="button">Set Password</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" name="address" id="address" placeholder="address" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="phone">Mobile</label>
+                <input type="text" name="phone" id="phone" placeholder="phone" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="salary">Salary</label>
+                <input type="number" name="salary" id="salary" placeholder="salary" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="position">Position</label>
+                <select name="position" id="position" class="form-control">
+                <option value="">No role</option>
+                <option value="ROLE_ADMIN">Admin</option>
+                <option value="ROLE_CASHIER">Cashier</option>
+                <option value="ROLE_MANAGER">Warehouse Manager</option>
+                <option value="ROLE_CASHIER_AND_ROLE_MANAGER">Cashier + Warehouse Manager</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-info" id="save">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+
+
+    // Get all user information and show on the form
+    ipcRenderer.on("respond_request_user_info", (event, userInfo) => {
+        $("#customer-id").val(userInfo.id);
+        $("#username").val(userInfo.username);
+        $("#name").val(userInfo.name);
+        $("#email").val(userInfo.email);
+        $("#phone").val(userInfo.mobile);
+        $("#address").val(userInfo.address);
+        $("#salary").val(userInfo.salary);
+        if (userInfo.roles.includes("ROLE_CASHIER") &&  userInfo.roles.includes("ROLE_MANAGER")) {
+            $("#position").val("ROLE_CASHIER_AND_ROLE_MANAGER");
+        } else if (userInfo.roles.includes("ROLE_CASHIER")) {
+            $("#position").val("ROLE_CASHIER");
+        } else if (userInfo.roles.includes("ROLE_MANAGER")) {
+            $("#position").val("ROLE_MANAGER");
+        } else if (userInfo.roles.includes("ROLE_ADMIN")) {
+            $("#position").val("ROLE_ADMIN");
+        } else {
+            $("#position").val("");
+        }
+    });
+    ipcRenderer.send("request_user_info");
+    
+
+    // Handle set password button
+    $("#btn-setpassword").click(() => {
+        ipcRenderer.send(EventGetter.get('prompt_password'));
+    });
+    ipcRenderer.on(EventGetter.get('set_password'), (event, data) => {
+        $("#password").val(data.password);
+    });
+
+    // Handle Save Button
+    $("#save").click(() => {
+        let user = {}
+        user.id = $("#customer-id").val();
+        user.name = $("#name").val();
+        // user.username = $("#username").val();
+        user.salary = $("#salary").val();
+        user.email = $("#email").val();
+        user.address = $("#address").val();
+        user.mobileNo = $("#phone").val();
+
+        if ($("#password").val() != "") {
+            user.password = $("#password").val();
+        }
+        
+        user.name = $("#name").val();
+        user.roles = [];
+
+        switch ($("#position").val()) {
+            case "ROLE_ADMIN": user.roles.push("ROLE_ADMIN"); break;
+            case "ROLE_CASHIER": user.roles.push("ROLE_CASHIER"); break;
+            case "ROLE_MANAGER": user.roles.push("ROLE_MANAGER"); break;
+            case "ROLE_CASHIER_AND_ROLE_MANAGER":
+                user.roles.push("ROLE_MANAGER");
+                user.roles.push("ROLE_MANAGER");
+        }
+
+        ipcRenderer.send(EventGetter.get('update_customer'), user);
+    });
+
+
+    ipcRenderer.on(EventGetter.get("update_customer_success"), () => {
+        ipcRenderer.send(EventGetter.get("request_update_customer_list"));
+    });
+</script>

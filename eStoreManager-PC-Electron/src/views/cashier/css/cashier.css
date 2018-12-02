@@ -1,0 +1,27 @@
+.main-container {
+    background: rgba(0,0,0,0.05);
+    padding: 1rem;
+    min-height: 500px;
+}
+
+#cashier-total-area .total-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.4rem;
+    margin-right: 0.5rem;
+}
+#cashier-total-area .total-title.title-sm {
+    font-size: 1rem;
+}
+
+#cashier-total-area .total-number {
+    border: none;
+    border-bottom: 2px solid #333;
+    font-size: 1.4rem;
+    text-align: right;
+    width: 15rem;
+}
+
+#cashier-total-area table {
+    max-width: 100%;
+}
