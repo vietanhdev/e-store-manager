@@ -7,14 +7,22 @@ const { dialog } = require('electron');
 
 export class AboutView extends View {
 
-    constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("about_us", window, parent, 500, 400);
-        this.getWindow().setMenu(null);
+    private constructor(window: BrowserWindow, parent: BrowserWindow) {
+        super("about_us",  window, parent, 500, 400);
+    }
+
+    private static instance: AboutView;
+    static getInstance(window: BrowserWindow, parent: BrowserWindow) {
+        if (!AboutView.instance) {
+            AboutView.instance = new AboutView(window, parent);
+        }
+        return AboutView.instance;
     }
 
     // Handle all logic of this view
     logicHandle():void {
         
     }
+
 
 };

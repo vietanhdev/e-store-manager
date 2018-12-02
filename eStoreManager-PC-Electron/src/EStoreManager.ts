@@ -55,6 +55,7 @@ export class EStoreManager {
     let customerView = CustomerView.getInstance(this.mainWindow, null); this.addView(customerView);
     let addCustomerView = AddCustomerView.getInstance(null, null); this.addView(addCustomerView);
     let editCustomerView = EditCustomerView.getInstance(null, null); this.addView(editCustomerView);
+    let aboutView = AboutView.getInstance(null, this.mainWindow); this.addView(aboutView);
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot
@@ -79,7 +80,6 @@ export class EStoreManager {
       {
           label: 'About us',
           click: () => {
-            let aboutView = new AboutView(null, this.mainWindow);
             aboutView.show();
           }
       }

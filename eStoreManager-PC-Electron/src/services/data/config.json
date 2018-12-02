@@ -1,7 +1,7 @@
 {
     "view": {
         "about_us": {
-            "path": "about/ejs/about.ejs"
+            "path": "about/ejs/about_us.ejs"
         },
         "loading": {
             "path": "loader/ejs/loading.ejs"

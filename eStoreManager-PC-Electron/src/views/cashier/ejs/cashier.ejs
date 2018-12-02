@@ -90,7 +90,7 @@
 	<div class="row" style="padding: 1rem; background: ghostwhite">
 		<div class="col-sm-2">
 			<p><b>Employee:</b> Viet Anh</p>
-			<p><b>Time:</b> 10:18 02/12</p>
+			<p><b>Time:</b> <span id="clock"></span></p>
 		</div>
 		<div class="col-sm-4">
 			<p><b>Customer:</b> Syan</p>
@@ -158,6 +158,31 @@
 		} ],
 		"pageLength": 5,
 		"lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
+	});
+
+
+
+	$(document).ready(() => {
+
+		// === Setup Clock ====
+		function startTimer() {
+    		var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			var day = today.getDate();
+			var month = today.getMonth() + 1;
+			m = checkTime(m);
+			s = checkTime(s);
+			$("#clock").html(h + ":" + m + ":" + s + "&nbsp;&nbsp;" + day + "/" + month);
+			var t = setTimeout(startTimer, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			return i;
+		}
+		startTimer();
+
 	});
 
 </script>
