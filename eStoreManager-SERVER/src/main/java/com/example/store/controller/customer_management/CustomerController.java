@@ -64,8 +64,7 @@ public class CustomerController {
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
     public ResponseEntity<?> getCustomerInfor(@PathVariable(value = "id") String id) {
         try {
-            Customer customer;
-            customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
+            Customer customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
             CustomerInforResponse customerInforResponse = new CustomerInforResponse(customer.getId(),
                                                                                     customer.getName(),
                                                                                     customer.getEmail(),
@@ -86,8 +85,7 @@ public class CustomerController {
     public ResponseEntity<?> updateCustomerInfor(@PathVariable(value = "id") String id,
                                                 @Valid @RequestBody UpdateCustomerRequest updateCustomerRequest) {
         try {
-            Customer customer;
-            customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
+            Customer customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
             
             if(updateCustomerRequest.getName() != null) customer.setName(updateCustomerRequest.getName());
             if(updateCustomerRequest.getEmail() != null) customer.setEmail(updateCustomerRequest.getEmail());
@@ -108,8 +106,7 @@ public class CustomerController {
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
     public ResponseEntity<?> deleteCustomer(@PathVariable(value = "id") String id) {
         try {
-            Customer customer;
-            customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
+            Customer customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
             customerRepository.delete(customer);
             return new ResponseEntity<>(new ApiResponse(true, "delete_customer_successful", "delete customer successful"),
                                     HttpStatus.OK);

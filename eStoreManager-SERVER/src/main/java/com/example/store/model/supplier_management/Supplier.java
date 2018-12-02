@@ -33,9 +33,11 @@ public class Supplier extends DateAudit{
 
     }
 
-    public Supplier(String name, String email){
+    public Supplier(String name, String email, String address, String mobileNo){
         this.name = name;
         this.email = email;
+        this.address = address;
+        this.mobileNo = mobileNo;
     }
 
     public Long getId(){

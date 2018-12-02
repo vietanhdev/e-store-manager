@@ -1024,3 +1024,320 @@
     "message": {object_name} + {default_message} + "and" + ...
 }
 ```
+
+# 3. Supplier management API
+---
+
+## 3.1. Create new supllier
+
+### 3.1.1. Request
+
+* Path: /api/v1/suplliers
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:(name field is compulsory, other fields can be skipped)
+```
+{
+    "name": "supplier",
+    "email": "supplier@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0324129032"
+}
+```
+
+### 2.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+
+## 3.2. Search a supllier
+### 3.2.1. Request
+
+* Path: /api/v1/search/suplliers
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+```
+{
+    "draw": 1,
+    "start": 0,
+    "length": 2,
+    "search": {
+        "value": "",
+        "name": "",
+        "email": "",
+        "address": "",
+        "mobileNo": ""
+    }
+}
+```
+
+### 3.2.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "draw": 10,
+    "recordsTotal": 2,
+    "recordsFiltered": 3,
+    "data": [
+        {
+            "id": 1,
+            "name": "customer1",
+            "email": "customer1@gmail.com",
+            "address": "hoa binh",
+            "mobileNo": "0916167997"
+        },
+        {
+            "id": 2,
+            "name": "customer2",
+            "email": "customer2@gmail.com",
+            "address": "ha noi",
+            "mobileNo": "0916167887"
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 3.3. Get a supllier's information 
+
+### 3.3.1. Request
+
+* Path: /api/v1/supllier/{id}
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 3.3.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1,
+    "name": "supllier1",
+    "email": "supllier1@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0916167887"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_supllier_id",
+    "message": "supllier id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 3.4. Update a supllier's information 
+
+### 3.4.1. Request
+
+* Path: /api/v1/suplliers/{id}
+* Method: PUT
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body: (you can choose any fields you want to change, all fields are not compulsory)
+```
+{
+    "name": "supllierX",
+    "email": "supllierX@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0916167997"
+}
+```
+
+### 3.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "update_successful",
+    "message": "update successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_supllier_id",
+    "message": "supllier id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 3.5. Delete a supllier
+
+### 3.1.1. Request
+
+* Path: /api/v1/suplliers/{id}
+* Method: DELETE
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+
+### 3.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "delete_supllier_successful",
+    "message": "delete supllier successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_supllier_id",
+    "message": "supllier id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```

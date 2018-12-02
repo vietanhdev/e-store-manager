@@ -7,15 +7,15 @@ public class SearchSuppliersResponse {
 
     public boolean success = true;
     
-    public int draw;
+    public Long draw;
 
-    public int recordsTotal;
+    public Long recordsTotal;
 
-    public int recordsFiltered;
+    public Long recordsFiltered;
 
     public Set<Data> data = new HashSet<>();
 
-    public SearchSuppliersResponse(int draw, int recordsTotal, int recordsFiltered){
+    public SearchSuppliersResponse(Long draw, Long recordsTotal, Long recordsFiltered){
         this.draw = draw;
         this.recordsTotal = recordsTotal;
         this.recordsFiltered = recordsFiltered;

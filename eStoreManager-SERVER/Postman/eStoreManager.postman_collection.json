@@ -25,7 +25,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\": \"admin\",\n    \"password\": \"admin@gmail.com\"\n}\n"
+									"raw": "{\n\t\"username\": \"manager\",\n    \"password\": \"manager@password\"\n}\n"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/login",
@@ -195,7 +195,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNzE3MTEzLCJleHAiOjE1NDQzMjE5MTN9.mFCP60TluAfIq64tlLgb1_kETjgXak2OcU55YkO7segAMQ-spjF_r2G7SDkBVEF1fEhz80QciiZ4ItZs1MXlVg",
 										"type": "text"
 									},
 									{
@@ -207,7 +207,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"noone\",\r\n    \"username\": \"noone\",\r\n    \"password\": \"md5@password\",\r\n    \"salary\": 0,\r\n    \"email\": \"noone@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167558\",\r\n    \"roles\": [\r\n\t\t\"ROLE_CASHIER\"\r\n    ]\r\n}"
+									"raw": "{\r\n    \"name\": \"manager\",\r\n    \"username\": \"manager\",\r\n    \"password\": \"manager@password\",\r\n    \"salary\": 10,\r\n    \"email\": \"manager@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"09784569\",\r\n    \"roles\": [\r\n\t\t\"ROLE_MANAGER\"\r\n    ]\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/users",
@@ -236,7 +236,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0IiwiaWF0IjoxNTQyODUzNzU4LCJleHAiOjE1NDM0NTg1NTh9._Euv8YhpS7vlBu53XVyjNF5_io4BNcsgxXFbmPEn7hOjKHsPBuo9OmkwRxyakOZPwnuXhMhpdKarjEdXai1rug",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNzE3MTEzLCJleHAiOjE1NDQzMjE5MTN9.mFCP60TluAfIq64tlLgb1_kETjgXak2OcU55YkO7segAMQ-spjF_r2G7SDkBVEF1fEhz80QciiZ4ItZs1MXlVg",
 										"type": "text"
 									}
 								],
@@ -245,7 +245,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/users/91",
+									"raw": "http://localhost:8080/api/v1/users/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -255,7 +255,7 @@
 										"api",
 										"v1",
 										"users",
-										"91"
+										"2"
 									]
 								}
 							},
@@ -540,7 +540,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNzE3MTEzLCJleHAiOjE1NDQzMjE5MTN9.mFCP60TluAfIq64tlLgb1_kETjgXak2OcU55YkO7segAMQ-spjF_r2G7SDkBVEF1fEhz80QciiZ4ItZs1MXlVg",
 										"type": "text"
 									}
 								],
@@ -598,6 +598,189 @@
 										"v1",
 										"search",
 										"customers"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Supplier Management",
+					"item": [
+						{
+							"name": "Admin, Manager create a new customer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNzE3MTEzLCJleHAiOjE1NDQzMjE5MTN9.mFCP60TluAfIq64tlLgb1_kETjgXak2OcU55YkO7segAMQ-spjF_r2G7SDkBVEF1fEhz80QciiZ4ItZs1MXlVg",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"supplier3\",\r\n    \"email\": \"supplier3@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0324129032\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/suppliers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"suppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier get a supplier's information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTQzNzE3OTE5LCJleHAiOjE1NDQzMjI3MTl9.2gXYM77yg2Sgls4QZB6hUE3hnlXWx3LmIPyOywuN_fqNe2hYbbbDufxP5gqQQiAbJ_P9nIfUwnkwr-BWnFIQDw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/suppliers/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"suppliers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier update a supplier's information",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"supplier\",\r\n    \"email\": \"supplier@gmail.com\",\r\n    \"address\": \"hai duong\",\r\n    \"mobileNo\": \"0984651331\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/suppliers/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"suppliers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier delete a customer",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/suppliers/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"suppliers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier search suppliers",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTQzNzE3OTE5LCJleHAiOjE1NDQzMjI3MTl9.2gXYM77yg2Sgls4QZB6hUE3hnlXWx3LmIPyOywuN_fqNe2hYbbbDufxP5gqQQiAbJ_P9nIfUwnkwr-BWnFIQDw"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"\",\r\n        \"regex\": false\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search/suppliers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search",
+										"suppliers"
 									]
 								}
 							},
