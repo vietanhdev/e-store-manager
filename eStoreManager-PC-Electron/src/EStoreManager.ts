@@ -2,10 +2,14 @@ import { app, BrowserWindow, Menu, MenuItem } from "electron";
 import * as path from "path";
 import {View} from './views/shared/View';
 import {UserController} from './controllers/UserController';
-
+import {TextGetter} from './services/TextGetter';
 
 const ejse = require('ejs-electron');
 const settings = require('electron-settings');
+
+// Load the language file
+var textGetter = TextGetter.getInstance();
+ejse.data('gettext', textGetter.data);
 
 // Import views
 const {LoginView} = require('./views/login/LoginView');

@@ -1,4 +1,4 @@
-<%- include('../../shared/ejs/header', {title: 'Customer Management'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.customer_management}) %>
 <link rel="stylesheet" type="text/css" href="../css/customers.css">
 <link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
 
@@ -6,7 +6,7 @@
 
 <div class="container">
     <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
-        &gt;&gt; Customer Management
+        &gt;&gt; <%= gettext.customer_management %>
     </h2>
 </div>
 
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 3rem;padding: 0;">
-                <button class="btn btn-success float-right" id="add-customer">Add customer</button>
+                <button class="btn btn-success float-right" id="add-customer"><%= gettext.add_customer %></button>
             </div>
             <table id="realtime" class="display" width="100%"></table>
         </div>
@@ -24,6 +24,7 @@
 
 <script>
     const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const TextGetter = require("../../../services/TextGetter").TextGetter;
     const {ipcRenderer} = require('electron');
     var dt = require( 'datatables.net-dt' )( window, $ );
     require( 'datatables.net-buttons-dt' )( window, $ );
@@ -59,11 +60,11 @@
                 },
                 columns: [
                     { data: "id", title: "ID" },
-                    { data: "name", title: "Customer Name" },
-                    { data: "email", title: "Email" },
-                    { data: "address", title: "Address" },
-                    { data: "mobileNo", title: "Mobile" },
-                    { title: "Manipulation" }
+                    { data: "name", title: TextGetter.get("customer_name") },
+                    { data: "email", title: TextGetter.get("email") },
+                    { data: "address", title: TextGetter.get("address") },
+                    { data: "mobileNo", title: TextGetter.get("mobile") },
+                    { title: TextGetter.get("manipulation") }
                 ],
                 "columnDefs": [ {
                     "targets": -1,

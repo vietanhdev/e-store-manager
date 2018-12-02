@@ -1,4 +1,4 @@
-<%- include('../../shared/ejs/header', {title: 'Login'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.login}) %>
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 
 <div class="limiter">
@@ -10,11 +10,11 @@
 
 			<form class="login100-form validate-form">
 				<span class="login100-form-title">
-					eStore Manager - Login
+					<%= gettext.program_name %> - <%= gettext.login %>
 				</span>
 
 				<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-					<input id="username" class="input100" type="text" name="username" placeholder="Username">
+					<input id="username" class="input100" type="text" name="username" placeholder="<%= gettext.username %>">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-user" aria-hidden="true"></i>
@@ -22,7 +22,7 @@
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Password is required">
-					<input id="password" class="input100" type="password" name="pass" placeholder="Password">
+					<input id="password" class="input100" type="password" name="pass" placeholder="<%= gettext.password %>">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-lock" aria-hidden="true"></i>
@@ -31,13 +31,13 @@
 
 				<div class="text-center p-t-12">
 					<span class="txt1">
-						Need support? Contact us: ict@estore-manager.hust
+						<%= gettext.need_support_contact_us %>
 					</span>
 				</div>
 				
 				<div class="container-login100-form-btn">
 					<button id="login-btn" class="btn btn-lg btn-success" style="width: 100%;">
-						Login
+						<%= gettext.login %>
 					</button>
 				</div>
 

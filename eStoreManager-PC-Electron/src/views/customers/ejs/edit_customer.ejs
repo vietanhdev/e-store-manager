@@ -1,41 +1,41 @@
-<%- include('../../shared/ejs/header', {title: 'Edit Customer'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.edit_customer}) %>
 
 <div class="container">
-    <h3 class="text-center">Edit Customer</h3>
+    <h3 class="text-center"><%= gettext.edit_customer %></h3>
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="customer-id">ID</label>
+                <label for="customer-id"><%= gettext.id %></label>
                 <input type="text" disabled readonly name="customer-id" id="customer-id" placeholder="00" class="form-control">
             </div>
         </div>
         <div class="col-sm-9">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name"><%= gettext.name %></label>
                 <input type="text" name="name" id="name" placeholder="Viet Anh Nguyen" class="form-control">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="salary">Email</label>
+                <label for="salary"><%= gettext.email %></label>
                 <input type="email" name="email" id="email" placeholder="vietanh@example.com" class="form-control">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="address">Address</label>
+                <label for="address"><%= gettext.address %></label>
                 <input type="text" name="address" id="address" placeholder="address" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="phone">Mobile</label>
+                <label for="phone"><%= gettext.mobile %></label>
                 <input type="text" name="phone" id="phone" placeholder="phone" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <button class="btn btn-info" id="save">Save</button>
+                <button class="btn btn-info" id="save"><%= gettext.save %></button>
             </div>
         </div>
     </div>

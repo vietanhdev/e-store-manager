@@ -1,7 +1,7 @@
-<%- include('../../shared/ejs/header', {title: 'Add Employee'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.add_employee}) %>
 
 <div class="container">
-    <h3 class="text-center">Add Employee</h3>
+    <h3 class="text-center"></h3>
     <div class="row">
         <!-- <div class="col-sm-3">
             <div class="form-group">
@@ -11,25 +11,25 @@
         </div> -->
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name"><%= gettext.name %></label>
                 <input type="text" name="name" id="name" placeholder="Viet Anh Nguyen" class="form-control">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username"><%= gettext.username %></label>
                 <input type="text" name="username" id="username" placeholder="username" class="form-control">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="salary">Email</label>
+                <label for="salary"><%= gettext.email %></label>
                 <input type="email" name="email" id="email" placeholder="vietanh@example.com" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="input-group mb-3">
-                <label for="password">Password&nbsp;&nbsp;</label>
+                <label for="password"><%= gettext.password %>&nbsp;&nbsp;</label>
                 <input readonly disabled id="password" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button id="btn-setpassword" class="btn btn-success" type="button">Set Password</button>
@@ -38,31 +38,31 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="address">Address</label>
+                <label for="address"><%= gettext.address %></label>
                 <input type="text" name="address" id="address" placeholder="address" class="form-control">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="phone">Mobile</label>
+                <label for="phone"><%= gettext.mobile %></label>
                 <input type="text" name="phone" id="phone" placeholder="phone" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="salary">Salary</label>
+                <label for="salary"><%= gettext.salary %></label>
                 <input type="number" name="salary" id="salary" placeholder="salary" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="position">Position</label>
+                <label for="position"><%= gettext.position %></label>
                 <select name="position" id="position" class="form-control">
-                <option value="">--Select Position--</option>
-                <option value="ROLE_ADMIN">Admin</option>
-                <option value="ROLE_CASHIER">Cashier</option>
-                <option value="ROLE_MANAGER">Warehouse Manager</option>
-                <option value="ROLE_CASHIER_AND_ROLE_MANAGER">Cashier + Warehouse Manager</option>
+                <option value="">--<%= gettext.select_position %>--</option>
+                <option value="ROLE_ADMIN"><%= gettext.admin %></option>
+                <option value="ROLE_CASHIER"><%= gettext.cashier %></option>
+                <option value="ROLE_MANAGER"><%= gettext.warehouse_manager %></option>
+                <option value="ROLE_CASHIER_AND_ROLE_MANAGER"><%= gettext.cashier %> + <%= gettext.warehouse_manager %></option>
                 </select>
             </div>
             <div class="form-group">

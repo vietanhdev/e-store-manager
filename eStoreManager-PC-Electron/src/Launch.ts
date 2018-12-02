@@ -16,6 +16,8 @@ settings.set('api_config', {
   protocol: 'http'
 });
 
+settings.set("lang", "en");
+
 // Set max listener
 require('events').EventEmitter.defaultMaxListeners = Infinity;  
 

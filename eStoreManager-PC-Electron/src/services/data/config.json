@@ -39,5 +39,22 @@
         "edit_customer": {
             "path": "customers/ejs/edit_customer.ejs"
         }
-    }
+    },
+    "languages": [
+        {
+            "lang": "en",
+            "title": "English",
+            "file": "en.json"
+        },
+        {
+            "lang": "vi",
+            "title": "Tiếng Việt",
+            "file": "vi.json"
+        },
+        {
+            "lang": "fr",
+            "title": "Le français",
+            "file": "fr.json"
+        }
+    ]
 }

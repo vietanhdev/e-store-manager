@@ -30,5 +30,6 @@ body {
 
 .btn-super-lg {
     padding: 1.5rem 2rem;
+    text-transform: uppercase;
 }
 
