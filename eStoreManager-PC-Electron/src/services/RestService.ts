@@ -15,7 +15,7 @@ export class RestService {
     }
 
 
-    private getUrl(path:string):string {
+    public getUrl(path:string):string {
         return this.protocol + "://" + this.hostname + ":" + this.port + path;
     }
 
@@ -41,12 +41,12 @@ export class RestService {
             timeout: 10000
         };
 
-        // console.log("REQUESTDATA:::::::::::::");
-        // console.log(postData);
+        console.log("REQUESTDATA:::::::::::::");
+        console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
-            // console.log("DATA:::::::::::::");
-            // console.log(data);
+            console.log("DATA:::::::::::::");
+            console.log(data);
             if (err) {
                 cbFail({
                     status: 100,

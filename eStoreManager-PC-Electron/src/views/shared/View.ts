@@ -31,7 +31,7 @@ export class View {
         this.originParent = parent;
 
         // Create a window
-        this.createWindow();
+        // this.createWindow();
 
         // Calculate view file path and write to this.viewFile
         this.setViewFile();
@@ -98,7 +98,7 @@ export class View {
     }
 
     setMenu(menu: Menu): void {
-        this.window.setMenu(menu);
+        this.menu = menu;
     }
 
     public setOriginWindow(window: BrowserWindow) {
@@ -127,7 +127,9 @@ export class View {
     
     public hide() {
         try {
-            this.window.close();
+            if (this.window != null) {
+                this.window.close();
+            }
         } catch (e) {}
     }
 

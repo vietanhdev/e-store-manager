@@ -32,6 +32,12 @@
         },
         "customers": {
             "path": "customers/ejs/customers.ejs"
+        },
+        "add_customer": {
+            "path": "customers/ejs/add_customer.ejs"
+        },
+        "edit_customer": {
+            "path": "customers/ejs/edit_customer.ejs"
         }
     }
 }

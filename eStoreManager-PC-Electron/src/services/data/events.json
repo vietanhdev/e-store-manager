@@ -17,7 +17,16 @@
     "update_employee_success": "update_employee_success",
     "request_user_info": "request_user_info",
     "respond_request_user_info": "respond_request_user_info",
+    "request_update_user_info": "request_update_user_info",
 
-    "request_update_user_info": "request_update_user_info"
+    "request_add_customer": "request_add_customer",
+    "add_customer": "add_customer",
+    "add_customer_success": "add_customer_success",
+    "request_update_customer_list": "request_update_customer_list",
+    "request_delete_customer": "request_delete_customer",
+    "request_update_customer_info": "request_update_customer_info",
+    "update_customer": "update_customer",
+    "respond_request_customer_info": "respond_request_user_info",
+    "request_customer_info": "request_customer_info"
     
 }

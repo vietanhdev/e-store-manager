@@ -80,7 +80,7 @@
 
 
     // Get all user information and show on the form
-    ipcRenderer.on("respond_request_user_info", (event, userInfo) => {
+    ipcRenderer.on(EventGetter.get("respond_request_user_info"), (event, userInfo) => {
         $("#employee-id").val(userInfo.id);
         $("#username").val(userInfo.username);
         $("#name").val(userInfo.name);

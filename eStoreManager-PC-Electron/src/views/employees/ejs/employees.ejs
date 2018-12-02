@@ -83,7 +83,7 @@
 
             // Handle add employee
             $("#add-employee").click(() => {
-                ipcRenderer.send(EventGetter.get(EventGetter.get('request_add_employee')));
+                ipcRenderer.send(EventGetter.get('request_add_employee'));
             });
 
             // Create table 

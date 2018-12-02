@@ -4,7 +4,7 @@ import { EventGetter } from "../../services/EventGetter";
 import { TextGetter } from "../../services/TextGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
-import {UserController} from '../../controllers/UserController';
+import {CustomerController} from '../../controllers/CustomerController';
 import { isNull } from "util";
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');
@@ -12,9 +12,12 @@ const { dialog } = require('electron');
 
 export class AddCustomerView extends View {
 
+
+    // Browser Window that request to add customer
+    private requestedBrowserWindow:BrowserWindow;
     
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("add_customer", window, parent, 600, 600);
+        super("add_customer", window, parent, 600, 400);
         // this.getWindow().webContents.openDevTools();
         this.setMenu(null);
     }
@@ -30,19 +33,31 @@ export class AddCustomerView extends View {
     // Handle all logic of this view
     logicHandle():void {
 
-        var userController = new UserController();
+        var customerController = new CustomerController();
+        var requestedBrowserWindow:BrowserWindow; // Browser window that request to add customer
 
         // ======= Handle requests from renderer process ========
+
+        ipcMain.on(EventGetter.get('request_add_customer'), (event:any, data:any) => {
+            this.setOriginWindow(null);
+            this.setOriginParent(event.sender.getOwnerBrowserWindow());
+            this.requestedBrowserWindow = event.sender.getOwnerBrowserWindow();
+            this.show();
+        });
+
         ipcMain.on(EventGetter.get('add_customer'), (event:any, data:any) => {
-            userController.addUser(data, (respond:any) => {
-                this.getWindow().webContents.send(EventGetter.get("add_customer_success"));
-                Dialog.showDialog("info", TextGetter.get("created_user_successfully") + respond.id, null, this.getWindow(), () => {
+            customerController.addCustomer(data, (respond:any) => {
+                let newCustomer = data;
+                newCustomer.id = respond.id;
+                this.requestedBrowserWindow.webContents.send(EventGetter.get("add_customer_success"), newCustomer);
+                Dialog.showDialog("info", TextGetter.get("created_customer_successfully") + respond.id, null, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {
                 Dialog.showDialogFromRespond("error", respond, this.getWindow());
             })
         });
+
 
 
     }

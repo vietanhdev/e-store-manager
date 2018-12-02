@@ -15,6 +15,8 @@ const {AboutView} = require('./views/about/AboutView');
 const {PreferenceView} = require('./views/preferences/PreferenceView');
 const {EmployeeView} = require('./views/employees/EmployeeView');
 const {CustomerView} = require('./views/customers/CustomerView');
+const {AddCustomerView} = require('./views/customers/AddCustomerView');
+const {EditCustomerView} = require('./views/customers/EditCustomerView');
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
 export class EStoreManager {
@@ -51,6 +53,8 @@ export class EStoreManager {
     let cashierView = CashierView.getInstance(this.mainWindow, null); this.addView(cashierView);
     let employeeView = EmployeeView.getInstance(this.mainWindow, null); this.addView(employeeView);
     let customerView = CustomerView.getInstance(this.mainWindow, null); this.addView(customerView);
+    let addCustomerView = AddCustomerView.getInstance(null, null); this.addView(addCustomerView);
+    let editCustomerView = EditCustomerView.getInstance(null, null); this.addView(editCustomerView);
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot
@@ -110,7 +114,6 @@ export class EStoreManager {
   }
 
   private changeView(viewName:string) {
-
     switch(viewName) {
       case "preferences": 
         let preferenceView = PreferenceView.getInstance(null, this.mainWindow);
@@ -118,8 +121,10 @@ export class EStoreManager {
         break;
       default:
         for (let i = 0; i < this.viewList.length; i++) {
+          // console.log(this.viewList[i].getInstance(this.mainWindow, null).getView());
           if (this.viewList[i].getInstance(this.mainWindow, null).getView() == viewName) {
             this.viewList[i].getInstance(this.mainWindow, null).show();
+            break;
           }
         }
     }

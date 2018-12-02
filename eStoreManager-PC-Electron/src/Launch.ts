@@ -2,6 +2,10 @@ import { app } from "electron";
 import { EStoreManager } from "./EStoreManager";
 const settings = require('electron-settings');
 
+
+app.disableHardwareAcceleration()
+
+
 var eStoreManager = new EStoreManager();
 
 // Server settings
