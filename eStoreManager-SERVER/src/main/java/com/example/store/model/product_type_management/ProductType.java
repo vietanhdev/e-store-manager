@@ -1,4 +1,4 @@
-package com.example.store.model.product_management;
+package com.example.store.model.product_type_management;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;

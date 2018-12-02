@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import com.example.store.model.audit.DateAudit;
+import com.example.store.model.product_type_management.ProductType;
 import com.example.store.model.supplier_management.Supplier;
 
 import org.hibernate.annotations.OnDelete;
