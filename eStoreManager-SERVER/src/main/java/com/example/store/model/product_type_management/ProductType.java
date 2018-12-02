@@ -78,7 +78,7 @@ public class ProductType extends DateAudit{
         return barcode;
     }
 
-    public void barcode(String barcode) {
+    public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
 

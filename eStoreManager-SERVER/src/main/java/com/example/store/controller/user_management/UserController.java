@@ -307,24 +307,30 @@ public class UserController {
         try{
             User user = userRepository.findById(Long.parseLong(user_id)).orElse(null);
 
-            if( !updateUserRequest.getUsername().equals(user.getUsername()) ){
-                if( userRepository.existsByUsername( updateUserRequest.getUsername() ) ){
-                    return new ResponseEntity<>(new ApiResponse(false, "username_taken", "Username is already taken!"),
-                                                HttpStatus.OK);
+            if(updateUserRequest.getUsername() != null){
+                if( !updateUserRequest.getUsername().equals(user.getUsername()) ){
+                    if( userRepository.existsByUsername( updateUserRequest.getUsername() ) ){
+                        return new ResponseEntity<>(new ApiResponse(false, "username_taken", "Username is already taken!"),
+                                                    HttpStatus.OK);
+                    }
                 }
+                
+                user.setUsername(updateUserRequest.getUsername());
             }
 
-            if( !updateUserRequest.getEmail().equals(user.getEmail()) ){
-                if( userRepository.existsByEmail( updateUserRequest.getEmail() ) ){
-                    return new ResponseEntity<>(new ApiResponse(false, "email_taken", "Email is already taken!"),
-                                                HttpStatus.OK);
+            if(updateUserRequest.getEmail() != null) {
+                if( !updateUserRequest.getEmail().equals(user.getEmail()) ){
+                    if( userRepository.existsByEmail( updateUserRequest.getEmail() ) ){
+                        return new ResponseEntity<>(new ApiResponse(false, "email_taken", "Email is already taken!"),
+                                                    HttpStatus.OK);
+                    }
                 }
+                user.setEmail(updateUserRequest.getEmail());
             }
+            
 
             if(updateUserRequest.getName() != null) user.setName(updateUserRequest.getName());
-            if(updateUserRequest.getUsername() != null) user.setUsername(updateUserRequest.getUsername());
             if(updateUserRequest.getPassword() != null) user.setPassword(passwordEncoder.encode(updateUserRequest.getPassword()));
-            if(updateUserRequest.getEmail() != null) user.setEmail(updateUserRequest.getEmail());
             if(updateUserRequest.getAddress() != null) user.setAddress(updateUserRequest.getAddress());
             if(updateUserRequest.getMobileNo() != null) user.setMobileNo(updateUserRequest.getMobileNo());
             if(updateUserRequest.getSalary() != null) user.setSalary(updateUserRequest.getSalary());

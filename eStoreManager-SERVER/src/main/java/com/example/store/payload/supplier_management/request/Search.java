@@ -35,7 +35,6 @@ public class Search {
         this.name = name;
     }
 
-
     public String getEmail(){
         return email;
     }
