@@ -4,19 +4,14 @@ import javax.validation.constraints.NotNull;
 
 public class Search {
     
-    @NotNull
     private String value;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String email;
 
-    @NotNull
     private String address;
 
-    @NotNull
     private String mobileNo;
 
     public String getValue(){

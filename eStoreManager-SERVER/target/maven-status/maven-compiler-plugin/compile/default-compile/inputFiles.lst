@@ -10,7 +10,6 @@
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/customer_management/response/CustomerInfor.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/product_type_management/request/Search.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/customer_management/response/SearchCustomersResponse.java
-/media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/product_type_management/response/SupplierInforResponse.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/model/user_management/User.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/user_management/response/LoginResponse.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/customer_management/request/SearchCustomersRequest.java
@@ -63,6 +62,7 @@
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/customer_management/request/UpdateCustomerRequest.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/controller/supplier_management/SupplierController.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/repository/user_management/UserRepository.java
+/media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/payload/product_type_management/response/ProductTypeInforResponse.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/util/AppConstants.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/repository/customer_management/CustomerRepository.java
 /media/an/163EAD8F3EAD6887/isd.ict.20181-01/Project/eStoreManager-SERVER/src/main/java/com/example/store/repository/bill_management/InvoiceRepository.java
