@@ -13,7 +13,7 @@ import com.example.store.payload.customer_management.response.AllCustomerInforRe
 import com.example.store.payload.customer_management.response.CreateCustomerResponse;
 import com.example.store.payload.customer_management.response.CustomerInfor;
 import com.example.store.payload.customer_management.response.CustomerInforResponse;
-import com.example.store.payload.customer_management.response.DataCustomer;
+import com.example.store.payload.customer_management.response.Data;
 import com.example.store.payload.customer_management.response.SearchCustomersResponse;
 import com.example.store.repository.customer_management.CustomerRepository;
 
@@ -55,7 +55,7 @@ public class CustomerController {
 
         Customer result = customerRepository.save(customer);
 
-        return new ResponseEntity<>(new CreateCustomerResponse(true, result.getId()),
+        return new ResponseEntity<>(new CreateCustomerResponse(result.getId()),
                                 HttpStatus.OK);
     }
 
@@ -66,8 +66,7 @@ public class CustomerController {
         try {
             Customer customer;
             customer = customerRepository.findById(Long.parseLong(id)).orElse(null);
-            CustomerInforResponse customerInforResponse = new CustomerInforResponse(true, 
-                                                                                    customer.getId(),
+            CustomerInforResponse customerInforResponse = new CustomerInforResponse(customer.getId(),
                                                                                     customer.getName(),
                                                                                     customer.getEmail(),
                                                                                     customer.getAddress(),
@@ -120,7 +119,7 @@ public class CustomerController {
         }
     }
 
-    // Admin, Cashier find all customer pagable
+    // Admin, Cashier find all customers pagable
     @GetMapping("/customers")
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
     public ResponseEntity<?> getCustomersPagable(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
@@ -136,7 +135,7 @@ public class CustomerController {
                                     HttpStatus.OK);
         }
 
-        AllCustomerInforResponse allCustomerInforResponse = new AllCustomerInforResponse(true);
+        AllCustomerInforResponse allCustomerInforResponse = new AllCustomerInforResponse();
 
         // find all customers with page and size parameter
         Page<Customer> customers = customerRepository.getAllCustomersPagable(PageRequest.of(page, size));
@@ -161,31 +160,31 @@ public class CustomerController {
 
         Pageable pageable = new OffsetBasedPageRequest(searchCustomersRequest.getStart(), searchCustomersRequest.getLength());
 
-        if(searchCustomersRequest.getSearch().getData() == null) searchCustomersRequest.getSearch().setData("");
+        if(searchCustomersRequest.getSearch().getValue() == null) searchCustomersRequest.getSearch().setValue("");
         if(searchCustomersRequest.getSearch().getName() == null) searchCustomersRequest.getSearch().setName("");
         if(searchCustomersRequest.getSearch().getEmail() == null) searchCustomersRequest.getSearch().setEmail("");
         if(searchCustomersRequest.getSearch().getAddress() == null) searchCustomersRequest.getSearch().setAddress("");
         if(searchCustomersRequest.getSearch().getMobileNo() == null) searchCustomersRequest.getSearch().setMobileNo("");
 
-        List<Customer> customers = customerRepository.searchCustomers(searchCustomersRequest.getSearch().getData(),
+        List<Customer> customers = customerRepository.searchCustomers(searchCustomersRequest.getSearch().getValue(),
                                                                     searchCustomersRequest.getSearch().getName(),
                                                                     searchCustomersRequest.getSearch().getEmail(), 
                                                                     searchCustomersRequest.getSearch().getAddress(), 
                                                                     searchCustomersRequest.getSearch().getMobileNo(),
                                                                     pageable);
 
-        int draw = searchCustomersRequest.getDraw() * 10;
-        int recordsTotal = customerRepository.findAll().size();
-        int recordsFiltered = customers.size();
+        Long draw = searchCustomersRequest.getDraw() * 10;
+        Long recordsTotal = (long) customerRepository.findAll().size();
+        Long recordsFiltered = (long) customers.size();
 
         SearchCustomersResponse searchCustomersResponse = new SearchCustomersResponse(draw, recordsTotal, recordsFiltered);
 
         for(Customer customer: customers){
-            DataCustomer data = new DataCustomer(customer.getId(), 
-                                                customer.getName(), 
-                                                customer.getEmail(), 
-                                                customer.getAddress(), 
-                                                customer.getMobileNo());
+            Data data = new Data(customer.getId(), 
+                                customer.getName(), 
+                                customer.getEmail(), 
+                                customer.getAddress(), 
+                                customer.getMobileNo());
 
             searchCustomersResponse.addData(data);
         }

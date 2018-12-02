@@ -4,22 +4,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class SearchCustomersResponse {
+
+    public boolean success = true;
     
-    public int draw;
+    public Long draw;
 
-    public int recordsTotal;
+    public Long recordsTotal;
 
-    public int recordsFiltered;
+    public Long recordsFiltered;
 
-    public Set<DataCustomer> data = new HashSet<>();
+    public Set<Data> data = new HashSet<>();
 
-    public SearchCustomersResponse(int draw, int recordsTotal, int recordsFiltered){
+    public SearchCustomersResponse(Long draw, Long recordsTotal, Long recordsFiltered){
         this.draw = draw;
         this.recordsTotal = recordsTotal;
         this.recordsFiltered = recordsFiltered;
     }
 
-    public void addData( DataCustomer customer ){
+    public void addData( Data customer ){
         data.add(customer);
     }
 }

@@ -7,28 +7,28 @@ public class SearchCustomersRequest {
     
     @NotNull
     @Min(0)
-    private Integer draw;
+    private Long draw;
 
     @NotNull
     @Min(0)
-    private Integer start;
+    private Long start;
 
     @NotNull
     @Min(1)
-    private Integer length;
+    private Long length;
 
     @NotNull
     private Search search;
 
-    public Integer getDraw(){
+    public Long getDraw(){
         return draw;
     }
 
-    public Integer getStart(){
+    public Long getStart(){
         return start;
     }
 
-    public Integer getLength(){
+    public Long getLength(){
         return length;
     }
 

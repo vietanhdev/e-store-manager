@@ -30,8 +30,7 @@ CREATE TABLE `customers` (
   `email` varchar(40) DEFAULT NULL,
   `mobile_no` varchar(255) DEFAULT NULL,
   `name` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UKrfbvkrffamfql7cjmen8v976v` (`email`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -279,8 +278,7 @@ CREATE TABLE `suppliers` (
   `email` varchar(40) DEFAULT NULL,
   `mobile_no` varchar(255) DEFAULT NULL,
   `name` varchar(40) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UKq5uvp89ra4ksaty5ghyaw4kjr` (`email`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -350,7 +348,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'2018-11-29 15:05:12','2018-11-29 15:05:12',NULL,'admin@gmail.com',NULL,NULL,'$2a$10$.PULXfq4cNJd3JxRhm5OI.NX1FZwe/kFPe.Iw03JQEBuElJgRPoOC',NULL,'admin');
+INSERT INTO `users` VALUES (1,'2018-12-02 01:00:02','2018-12-02 01:00:02',NULL,'admin@gmail.com',NULL,NULL,'$2a$10$dhC4e9LiT9EFeKSvJnQn0OQ7yplQPB7rNnZOR6uoz3aRYBFSLZGgy',NULL,'admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -363,4 +361,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-29 22:08:33
+-- Dump completed on 2018-12-02  8:03:10

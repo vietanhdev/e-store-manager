@@ -5,7 +5,7 @@
 ### 2. Run commadline
 
 ```
-java -jar store-0.0.1-SNAPSHOT.jar
+java -jar target/store-0.0.1-SNAPSHOT.jar
 ```
 
 ## Note:

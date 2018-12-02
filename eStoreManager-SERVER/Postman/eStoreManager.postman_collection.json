@@ -404,7 +404,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"customer_4\",\r\n    \"email\": \"customer_4@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0916167887\"\r\n}"
+									"raw": "{\r\n    \"name\": \"customer3\",\r\n    \"email\": \"customer3@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0324129032\"\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/customers",
@@ -560,6 +560,44 @@
 										"v1",
 										"customers",
 										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier search users",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"2\",\r\n        \"regex\": false\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search/customers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search",
+										"customers"
 									]
 								}
 							},

@@ -6,11 +6,7 @@ import javax.validation.constraints.*;
 import com.example.store.model.audit.DateAudit;
 
 @Entity
-@Table(name = "customers", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {
-        "email"
-    })
-})
+@Table(name = "customers")
 public class Customer extends DateAudit{
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +22,7 @@ public class Customer extends DateAudit{
     @Size(max = 40)
     @Email
     private String email;
-
+    
     @Size(max = 100)
     private String address;
 

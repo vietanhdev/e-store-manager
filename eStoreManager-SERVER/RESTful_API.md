@@ -450,6 +450,24 @@
 }
 ```
 
+* On fail (username is taken):
+```
+{
+    "success": false,
+    "code": "username_taken",
+    "message": "Username is already taken!"
+}
+```
+
+* On fail (email is taken):
+```
+{
+    "success": false,
+    "code": "email_taken",
+    "message": "email is already taken!"
+}
+```
+
 * On fail (role is not in list roleName):
 ```
 {
@@ -927,7 +945,7 @@
 ```
 
 ## 2.6. Search a customer
-### 2.1.1. Request
+### 2.6.1. Request
 
 * Path: /api/v1/search/customers
 * Method: POST
@@ -941,38 +959,38 @@
 {
     "draw": 1,
     "start": 0,
-    "length": 5,
+    "length": 2,
     "search": {
-        "data": "",
+        "value": "",
         "name": "",
         "email": "",
-        "address": "ha noi",
+        "address": "",
         "mobileNo": ""
     }
 }
 ```
 
-
-### 2.1.2. Response
+### 2.6.2. Response
 
 * On success:
 ```
 {
+    "success": true,
     "draw": 10,
-    "recordsTotal": 0,
-    "recordsFiltered": 0,
+    "recordsTotal": 2,
+    "recordsFiltered": 3,
     "data": [
+        {
+            "id": 1,
+            "name": "customer_1",
+            "email": "customer_1@gmail.com",
+            "address": "hoa binh",
+            "mobileNo": "0916167997"
+        },
         {
             "id": 2,
             "name": "customer_2",
             "email": "customer_2@gmail.com",
-            "address": "ha noi",
-            "mobileNo": "0916167887"
-        },
-        {
-            "id": 3,
-            "name": "customer_3",
-            "email": "customer_3@gmail.com",
             "address": "ha noi",
             "mobileNo": "0916167887"
         }
@@ -986,6 +1004,15 @@
     "success": false,
     "code": "unauthorized",
     "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
 }
 ```
 

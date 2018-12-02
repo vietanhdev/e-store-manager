@@ -1,7 +1,6 @@
 package com.example.store.payload.customer_management.response;
 
 public class CustomerInfor {
-    public Boolean success;
     public Long id;
     public String name;
     public String email;

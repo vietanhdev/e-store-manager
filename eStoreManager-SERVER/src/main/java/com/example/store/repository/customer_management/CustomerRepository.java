@@ -22,6 +22,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("SELECT e FROM Customer e")
     Page<Customer> getAllCustomersPagable(Pageable pageable);
 
-    @Query("SELECT e FROM Customer e WHERE e.name LIKE %:name% AND e.email LIKE %:email% AND e.address LIKE %:address% AND e.mobileNo LIKE %:mobileNo% AND ( e.name LIKE %:data% OR e.email LIKE %:data% OR e.address LIKE %:data% OR e.mobileNo LIKE %:data% )")
-    List<Customer> searchCustomers(@Param("data") String data, @Param("name") String name, @Param("email") String email, @Param("address") String address, @Param("mobileNo") String mobileNo, Pageable pageable);
+    @Query("SELECT e FROM Customer e WHERE e.name LIKE %:name% AND e.email LIKE %:email% AND e.address LIKE %:address% AND e.mobileNo LIKE %:mobileNo% AND ( e.name LIKE %:value% OR e.email LIKE %:value% OR e.address LIKE %:value% OR e.mobileNo LIKE %:value% )")
+    List<Customer> searchCustomers(@Param("value") String value, @Param("name") String name, @Param("email") String email, @Param("address") String address, @Param("mobileNo") String mobileNo, Pageable pageable);
 }

@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 public class Search {
     
     @NotNull
-    private String data;
+    private String value;
 
     @NotNull
     private String name;
@@ -19,12 +19,12 @@ public class Search {
     @NotNull
     private String mobileNo;
 
-    public String getData(){
-        return data;
+    public String getValue(){
+        return value;
     }
 
-    public void setData(String data){
-        this.data = data;
+    public void setValue(String value){
+        this.value = value;
     }
 
     public String getName(){
