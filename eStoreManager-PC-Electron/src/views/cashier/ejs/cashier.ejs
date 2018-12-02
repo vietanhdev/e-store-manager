@@ -4,14 +4,8 @@
 
 <%- include('../../shared/ejs/secondary_menu.ejs') %>
 
-<div class="container">
-    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
-        &gt;&gt; Cashier
-    </h2>
-</div>
-
 <div class="container-fluid main-container">
-	<div class="row">
+	<div class="row" style="padding-top: 2rem;">
 		<div class="col-sm-1">
 			<img style="width: 85px; border: 1px solid #333" src="../images/barcode-scanner.jpg" alt="barcode">
 		</div>
@@ -36,7 +30,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row" style="min-height: 500px">
+	<div class="row" style="min-height: 350px">
 		<div class="col-sm-8 mt-2">
 			<table id="product-table" class="display" width="100%"></table>
 		</div>
@@ -90,19 +84,28 @@
 			</table>
 		</div>
 	</div>
-	<div class="row">
+</div>
+
+<div class="container-fluid" style="position:fixed; bottom: 0; left: 0;">
+	<div class="row" style="padding: 1rem; background: ghostwhite">
 		<div class="col-sm-2">
-			<p>Employee: Viet Anh</p>
-			<p>Time: 10:18 02/12</p>
+			<p><b>Employee:</b> Viet Anh</p>
+			<p><b>Time:</b> 10:18 02/12</p>
 		</div>
 		<div class="col-sm-4">
-			<p>Customer: Syan</p>
-			<label>Product ID&nbsp;&nbsp; </label>
-			<input type="text" class="form-control">
-			<div class="input-group-append">
-				<button class="btn btn-success" type="button">Search</button>
-				<button class="btn btn-success" type="button">New</button>
+			<p><b>Customer:</b> Syan</p>
+			<div class="input-group">
+			<input type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="button">Search</button>
+					<button class="btn btn-success" type="button">New</button>
+				</div>
 			</div>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-lg btn-warning btn-super-lg">PRINT RECEIPT</button>
+			<button class="btn btn-lg btn-success btn-super-lg">COMPLETE (F9)</button>
+			<button class="btn btn-lg btn-danger btn-super-lg">DISCARD</button>
 		</div>
 	</div>
 </div>

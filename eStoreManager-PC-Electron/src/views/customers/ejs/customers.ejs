@@ -82,7 +82,7 @@
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });
 
-            // ==== After adding a customer ====
+            // ==== Handle events that cause table to update ====
             ipcRenderer.on(EventGetter.get("add_customer_success"), (event, customer) => {
                 dataTable.ajax.reload();
             });

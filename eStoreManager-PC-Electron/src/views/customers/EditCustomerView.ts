@@ -18,7 +18,7 @@ export class EditCustomerView extends View {
     
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("edit_customer", window, parent, 600, 600);
-        this.getWindow().webContents.openDevTools();
+        // this.getWindow().webContents.openDevTools();
         this.setMenu(null);
     }
 
