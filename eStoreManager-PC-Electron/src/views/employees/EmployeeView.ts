@@ -51,9 +51,6 @@ export class EmployeeView extends View {
         ipcMain.on(EventGetter.get('request_update_employee_list'), (event:any) => {
             this.updateEmployeeList();
         });
-        ipcMain.on(EventGetter.get('add_customer_success'), (event:any) => {
-            this.updateEmployeeList();
-        });
 
         // Request delete employee
         ipcMain.on(EventGetter.get('request_delete_employee'), (event:any, data:any) => {

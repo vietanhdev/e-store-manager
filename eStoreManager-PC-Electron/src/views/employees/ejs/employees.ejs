@@ -136,6 +136,10 @@
             ipcRenderer.on(EventGetter.get("update_employee_list"), (event, data) => {
                 this.updateTable(dataTable, data);
             });
+            ipcRenderer.on(EventGetter.get('add_employee_success'), (event) => {
+                ipcRenderer.send(EventGetter.get("request_update_employee_list"));
+            });
+
             // Delete a value by id: Id means the value of the first column
             ipcRenderer.on(EventGetter.get("delete_row_from_employee_table"), (event, id) => {
                 this.deleteFromTable(id);
