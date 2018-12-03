@@ -36,17 +36,14 @@ export class EStoreManager {
 
     let userController = new UserController();
 
-    // Load the main menu of the application
-    const mainMenuTemplate = require('./views/shared/main_menu_template').template;
-    this.menu = Menu.buildFromTemplate(mainMenuTemplate);
+    // Create the main menu of the application
+    this.menu = new Menu();
     Menu.setApplicationMenu(this.menu);
 
     this.viewList = new Array<View>();
     let loadingView = new View("loading", null, null);
     this.mainWindow = loadingView.getWindow();
     loadingView.getWindow().maximize();
-
-    console.log(settings.get("account_info.token"));
 
     // Open the DevTools.
     this.mainWindow.webContents.openDevTools();
@@ -68,12 +65,12 @@ export class EStoreManager {
 
     // Init Menu actions
     this.menu.append(new MenuItem({
-      label: 'Welcome Screen',
+      label: TextGetter.get("welcome_screen"),
           click: () => {
             this.changeView('welcome');
           }
     }));
-    this.menu.append(new MenuItem({label: 'Preferences',
+    this.menu.append(new MenuItem({label: TextGetter.get("preferences"),
     click: () => {
       let preferenceView = new PreferenceView(null, this.mainWindow);
       preferenceView.show();
@@ -82,14 +79,14 @@ export class EStoreManager {
     this.menu.append(new MenuItem({role: 'help',
     submenu: [
       {
-          label: 'About us',
+          label: TextGetter.get("about_us"),
           click: () => {
             aboutView.show();
           }
       }
       ]
     }));
-    this.menu.append(new MenuItem({label: 'Logout',
+    this.menu.append(new MenuItem({label: TextGetter.get("logout"),
       click: () => {
         userController.logout();
         this.changeView('login');

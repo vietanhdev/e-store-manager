@@ -15,6 +15,7 @@ export class TextGetter {
 
         // If we dont have language setting, pick the first language as default
         if (!settings.has("lang"))  {
+            console.log("DONT HAVE LANG SETTING!");
             this.currentLanguage = this.languages[0];
             // Save new language into app settings
             settings.set("lang", this.currentLanguage.lang);
@@ -22,7 +23,7 @@ export class TextGetter {
 
             // Try to find the language on the avaiable languages
             this.currentLanguage = null;
-            let lang = settings.has("lang");
+            let lang = settings.get("lang");
             for (let i = 0; i < this.languages.length; ++i) {
                 if (this.languages[i].lang == lang) {
                     this.currentLanguage = this.languages[i];

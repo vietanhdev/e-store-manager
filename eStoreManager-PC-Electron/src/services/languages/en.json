@@ -122,6 +122,10 @@
     "about_us": "About Us",
     "username_taken": "Username is already taken!",
     "email_taken": "email is already taken!",
-    "update_user_information_successful": "Update user information successfully"
+    "update_user_information_successful": "Update user information successfully",
+
+
+    "are_you_sure_delete_customer": "Are you sure to delete this customer? ",
+    "logout": "Logout"
 
 }

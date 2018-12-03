@@ -16,7 +16,8 @@ settings.set('api_config', {
   protocol: 'http'
 });
 
-settings.set("lang", "en");
+// settings.set("lang", "en");
+console.log(settings.get("account_info.token"));
 
 // Set max listener
 require('events').EventEmitter.defaultMaxListeners = Infinity;  
