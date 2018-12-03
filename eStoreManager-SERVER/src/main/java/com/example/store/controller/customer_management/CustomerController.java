@@ -1,7 +1,5 @@
 package com.example.store.controller.customer_management;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import com.example.store.model.customer_management.Customer;

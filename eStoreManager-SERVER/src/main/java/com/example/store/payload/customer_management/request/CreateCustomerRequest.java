@@ -5,6 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class CreateCustomerRequest {
+    
     @NotBlank
     @Size(min=4, max=40)
     private String name;

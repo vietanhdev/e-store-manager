@@ -1,7 +1,5 @@
 package com.example.store.controller.product_type_management;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import com.example.store.model.product_type_management.ProductType;
@@ -45,7 +43,8 @@ public class ProductTypeController {
         ProductType productType = new ProductType(createProductTypeRequest.getName(), 
                                         createProductTypeRequest.getPrice(), 
                                         createProductTypeRequest.getUnit(),
-                                        createProductTypeRequest.getBarcode());
+                                        createProductTypeRequest.getBarcode(),
+                                        createProductTypeRequest.getQuantities());
 
         ProductType result = productTypeRepository.save(productType);
 
@@ -63,7 +62,8 @@ public class ProductTypeController {
                                                                                             productType.getName(),
                                                                                             productType.getPrice(),
                                                                                             productType.getUnit(),
-                                                                                            productType.getBarcode());
+                                                                                            productType.getBarcode(),
+                                                                                            productType.getQuantities());
 
             return new ResponseEntity<>(productTypeInforResponse,
                                         HttpStatus.OK);
@@ -85,6 +85,7 @@ public class ProductTypeController {
             if(updateProductTypeRequest.getPrice() != null) productType.setPrice(updateProductTypeRequest.getPrice());
             if(updateProductTypeRequest.getUnit() != null) productType.setUnit(updateProductTypeRequest.getUnit());
             if(updateProductTypeRequest.getBarcode() != null) productType.setBarcode(updateProductTypeRequest.getBarcode());
+            if(updateProductTypeRequest.getQuantities() != null) productType.setQuantities(updateProductTypeRequest.getQuantities());
 
             productTypeRepository.save(productType);
             return new ResponseEntity<>(new ApiResponse(true, "update_product_type_information_successful", "update product type information successful"),
@@ -124,7 +125,7 @@ public class ProductTypeController {
 
         Page<ProductType> productTypes = productTypeRepository.searchProductTypes(searchProductTypesRequest.getSearch().getValue(),
                                                                                 searchProductTypesRequest.getSearch().getName(), 
-                                                                                searchProductTypesRequest.getSearch().getUnit(), 
+                                                                                searchProductTypesRequest.getSearch().getUnit(),
                                                                                 searchProductTypesRequest.getSearch().getBarcode(),
                                                                                 pageable);
 
@@ -139,7 +140,8 @@ public class ProductTypeController {
                                 productType.getName(), 
                                 productType.getPrice(), 
                                 productType.getUnit(), 
-                                productType.getBarcode());
+                                productType.getBarcode(),
+                                productType.getQuantities());
 
             searchProductTypesResponse.addData(data);
         }
