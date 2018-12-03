@@ -22,6 +22,7 @@
     "request_add_customer": "request_add_customer",
     "add_customer": "add_customer",
     "add_customer_success": "add_customer_success",
+    "update_customer_success": "update_customer_success",
     "request_update_customer_list": "request_update_customer_list",
     "request_delete_customer": "request_delete_customer",
     "request_update_customer_info": "request_update_customer_info",
@@ -32,12 +33,24 @@
     "request_add_supplier": "request_add_supplier",
     "add_supplier": "add_supplier",
     "add_supplier_success": "add_supplier_success",
+    "update_supplier_success": "update_supplier_success",
     "request_update_supplier_list": "request_update_supplier_list",
     "request_delete_supplier": "request_delete_supplier",
     "request_update_supplier_info": "request_update_supplier_info",
     "update_supplier": "update_supplier",
     "respond_request_supplier_info": "respond_request_user_info",
-    "request_supplier_info": "request_supplier_info"
+    "request_supplier_info": "request_supplier_info",
+
+    "request_add_product_type": "request_add_product_type",
+    "add_product_type": "add_product_type",
+    "add_product_type_success": "add_product_type_success",
+    "request_update_product_type_list": "request_update_product_type_list",
+    "request_delete_product_type": "request_delete_product_type",
+    "request_update_product_type_info": "request_update_product_type_info",
+    "update_product_type": "update_product_type",
+    "respond_request_product_type_info": "respond_request_user_info",
+    "request_product_type_info": "request_product_type_info",
+    "update_product_type_success": "update_product_type_success"
     
     
 }

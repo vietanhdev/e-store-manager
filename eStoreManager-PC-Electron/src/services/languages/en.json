@@ -137,6 +137,20 @@
     "created_supplier_successfully": "Created supplier successfully! Supplier ID: ",
     "updated_supplier_successfully": "Update supplier successfully.",
     "are_you_sure_delete_supplier": "Are you sure to delete this supplier? ",
-    "delete_supplier_successful": "Deleted supplier successfully!"
+    "delete_supplier_successful": "Deleted supplier successfully!",
+
+
+    "product_type_management": "Inventory",
+    "add_product_type": "Add Product",
+    "edit_product_type": "Edit Product",
+    "product_type_name": "Product Name",
+    "created_product_type_successfully": "Created product successfully! ProductType ID: ",
+    "updated_product_type_successfully": "Update product successfully.",
+    "are_you_sure_delete_product_type": "Are you sure to delete this product? ",
+    "delete_product_type_successful": "Deleted product successfully!",
+
+    "price": "Price",
+    "unit": "Unit",
+    "barcode": "Barcode"
 
 }

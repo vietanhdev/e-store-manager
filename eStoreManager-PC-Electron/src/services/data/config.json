@@ -47,6 +47,15 @@
         },
         "edit_supplier": {
             "path": "suppliers/ejs/edit_supplier.ejs"
+        },
+        "product_types": {
+            "path": "product_types/ejs/product_types.ejs"
+        },
+        "add_product_type": {
+            "path": "product_types/ejs/add_product_type.ejs"
+        },
+        "edit_product_type": {
+            "path": "product_types/ejs/edit_product_type.ejs"
         }
     },
     "languages": [
