@@ -34,8 +34,7 @@ export class AddCustomerView extends View {
     logicHandle():void {
 
         var customerController = new CustomerController();
-        var requestedBrowserWindow:BrowserWindow; // Browser window that request to add customer
-
+        
         // ======= Handle requests from renderer process ========
 
         ipcMain.on(EventGetter.get('request_add_customer'), (event:any, data:any) => {

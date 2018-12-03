@@ -18,6 +18,7 @@ const {CashierView} = require('./views/cashier/CashierView');
 const {AboutView} = require('./views/about/AboutView');
 const {PreferenceView} = require('./views/preferences/PreferenceView');
 const {EmployeeView} = require('./views/employees/EmployeeView');
+const {AddEmployeeView} = require('./views/employees/AddEmployeeView');
 const {CustomerView} = require('./views/customers/CustomerView');
 const {AddCustomerView} = require('./views/customers/AddCustomerView');
 const {EditCustomerView} = require('./views/customers/EditCustomerView');
@@ -53,6 +54,7 @@ export class EStoreManager {
     let welcomeView = WelcomeView.getInstance(this.mainWindow, null); this.addView(welcomeView);
     let cashierView = CashierView.getInstance(this.mainWindow, null); this.addView(cashierView);
     let employeeView = EmployeeView.getInstance(this.mainWindow, null); this.addView(employeeView);
+    let addEmployeeView = AddEmployeeView.getInstance(null, null); this.addView(addEmployeeView);
     let customerView = CustomerView.getInstance(this.mainWindow, null); this.addView(customerView);
     let addCustomerView = AddCustomerView.getInstance(null, null); this.addView(addCustomerView);
     let editCustomerView = EditCustomerView.getInstance(null, null); this.addView(editCustomerView);
