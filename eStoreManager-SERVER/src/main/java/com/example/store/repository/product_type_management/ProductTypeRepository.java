@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.store.model.product_type_management.ProductType;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,6 @@ public interface ProductTypeRepository extends JpaRepository<ProductType, Long>{
     List<ProductType> findAll();
 
     @Query("SELECT e FROM ProductType e WHERE e.name LIKE %:name% AND e.unit LIKE %:unit% AND e.barcode LIKE %:barcode% AND ( e.name LIKE %:value% OR e.unit LIKE %:value% OR e.barcode LIKE %:value% )")
-    List<ProductType> searchProductTypes(@Param("value") String value, @Param("name") String name, @Param("unit") String unit, @Param("barcode") String barcode, Pageable pageable);
+    Page<ProductType> searchProductTypes(@Param("value") String value, @Param("name") String name, @Param("unit") String unit, @Param("barcode") String barcode, Pageable pageable);
 
 }

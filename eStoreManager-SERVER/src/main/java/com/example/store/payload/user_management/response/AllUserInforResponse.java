@@ -18,6 +18,14 @@ public class AllUserInforResponse {
         this.success = success;
     }
 
+    public Set<UserInfor> getUsers(){
+        return users;
+    }
+
+    public void setUsers(Set<UserInfor> users){
+        this.users = users;
+    }
+
     public void addUserInfor(UserInfor userInfor) {
         this.users.add(userInfor);
     }

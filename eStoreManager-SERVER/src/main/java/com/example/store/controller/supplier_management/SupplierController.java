@@ -17,6 +17,7 @@ import com.example.store.repository.supplier_management.SupplierRepository;
 import com.example.store.util.OffsetBasedPageRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -122,7 +123,7 @@ public class SupplierController {
         if(searchSuppliersRequest.getSearch().getAddress() == null) searchSuppliersRequest.getSearch().setAddress("");
         if(searchSuppliersRequest.getSearch().getMobileNo() == null) searchSuppliersRequest.getSearch().setMobileNo("");
 
-        List<Supplier> suppliers = supplierRepository.searchSuppliers(searchSuppliersRequest.getSearch().getValue(),
+        Page<Supplier> suppliers = supplierRepository.searchSuppliers(searchSuppliersRequest.getSearch().getValue(),
                                                                     searchSuppliersRequest.getSearch().getName(),
                                                                     searchSuppliersRequest.getSearch().getEmail(), 
                                                                     searchSuppliersRequest.getSearch().getAddress(), 
@@ -131,11 +132,11 @@ public class SupplierController {
 
         Long draw = searchSuppliersRequest.getDraw() * 10;
         Long recordsTotal = (long) supplierRepository.findAll().size();
-        Long recordsFiltered = (long) suppliers.size();
+        Long recordsFiltered = (long) suppliers.getTotalElements();
 
         SearchSuppliersResponse searchSuppliersResponse = new SearchSuppliersResponse(draw, recordsTotal, recordsFiltered);
 
-        for(Supplier supplier: suppliers){
+        for(Supplier supplier: suppliers.getContent()){
             Data data = new Data(supplier.getId(), 
                                 supplier.getName(), 
                                 supplier.getEmail(), 

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.store.model.supplier_management.Supplier;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,6 +19,6 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long>{
     List<Supplier> findAll();
 
     @Query("SELECT e FROM Supplier e WHERE e.name LIKE %:name% AND e.email LIKE %:email% AND e.address LIKE %:address% AND e.mobileNo LIKE %:mobileNo% AND ( e.name LIKE %:value% OR e.email LIKE %:value% OR e.address LIKE %:value% OR e.mobileNo LIKE %:value% )")
-    List<Supplier> searchSuppliers(@Param("value") String value, @Param("name") String name, @Param("email") String email, @Param("address") String address, @Param("mobileNo") String mobileNo, Pageable pageable);
+    Page<Supplier> searchSuppliers(@Param("value") String value, @Param("name") String name, @Param("email") String email, @Param("address") String address, @Param("mobileNo") String mobileNo, Pageable pageable);
 
 }

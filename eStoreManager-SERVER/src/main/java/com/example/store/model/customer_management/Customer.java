@@ -26,6 +26,7 @@ public class Customer extends DateAudit{
     @Size(max = 100)
     private String address;
 
+    @Size(max = 100)    
     private String mobileNo;
 
     public Customer(){

@@ -163,7 +163,7 @@ public class CustomerController {
         if(searchCustomersRequest.getSearch().getAddress() == null) searchCustomersRequest.getSearch().setAddress("");
         if(searchCustomersRequest.getSearch().getMobileNo() == null) searchCustomersRequest.getSearch().setMobileNo("");
 
-        List<Customer> customers = customerRepository.searchCustomers(searchCustomersRequest.getSearch().getValue(),
+        Page<Customer> customers = customerRepository.searchCustomers(searchCustomersRequest.getSearch().getValue(),
                                                                     searchCustomersRequest.getSearch().getName(),
                                                                     searchCustomersRequest.getSearch().getEmail(), 
                                                                     searchCustomersRequest.getSearch().getAddress(), 
@@ -172,11 +172,11 @@ public class CustomerController {
 
         Long draw = searchCustomersRequest.getDraw() * 10;
         Long recordsTotal = (long) customerRepository.findAll().size();
-        Long recordsFiltered = (long) customers.size();
+        Long recordsFiltered = (long) customers.getTotalElements();
 
         SearchCustomersResponse searchCustomersResponse = new SearchCustomersResponse(draw, recordsTotal, recordsFiltered);
 
-        for(Customer customer: customers){
+        for(Customer customer: customers.getContent()){
             Data data = new Data(customer.getId(), 
                                 customer.getName(), 
                                 customer.getEmail(), 
