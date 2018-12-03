@@ -1,0 +1,62 @@
+<%- include('../../shared/ejs/header', {title: gettext.add_supplier}) %>
+
+<div class="container">
+    <h3 class="text-center"><%= gettext.add_supplier %></h3>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="name"><%= gettext.name %></label>
+                <input type="text" name="name" id="name" placeholder="Viet Anh Nguyen" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="salary"><%= gettext.email %></label>
+                <input type="email" name="email" id="email" placeholder="vietanh@example.com" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="address"><%= gettext.address %></label>
+                <input type="text" name="address" id="address" placeholder="address" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="phone"><%= gettext.mobile %></label>
+                <input type="text" name="phone" id="phone" placeholder="phone" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <button class="btn btn-info" id="save"><%= gettext.save %></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+
+    // Handle set password button
+    $("#btn-setpassword").click(() => {
+        ipcRenderer.send(EventGetter.get('prompt_password'));
+    });
+    ipcRenderer.on(EventGetter.get('set_password'), (event, data) => {
+        $("#password").val(data.password);
+    });
+
+    // Handle Save Button
+    $("#save").click(() => {
+        let newUser = {}
+        newUser.name = $("#name").val();
+        newUser.email = $("#email").val();
+        newUser.address = $("#address").val();
+        newUser.mobileNo = $("#phone").val();
+        ipcRenderer.send(EventGetter.get('add_supplier'), newUser);
+    });
+
+</script>

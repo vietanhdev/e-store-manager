@@ -17,11 +17,18 @@ const {WelcomeView} = require('./views/welcome/WelcomeView');
 const {CashierView} = require('./views/cashier/CashierView');
 const {AboutView} = require('./views/about/AboutView');
 const {PreferenceView} = require('./views/preferences/PreferenceView');
+
 const {EmployeeView} = require('./views/employees/EmployeeView');
 const {AddEmployeeView} = require('./views/employees/AddEmployeeView');
+
 const {CustomerView} = require('./views/customers/CustomerView');
 const {AddCustomerView} = require('./views/customers/AddCustomerView');
 const {EditCustomerView} = require('./views/customers/EditCustomerView');
+
+const {SupplierView} = require('./views/customers/SupplierView');
+const {AddSupplierView} = require('./views/customers/AddSupplierView');
+const {EditSupplierView} = require('./views/customers/EditSupplierView');
+
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
 export class EStoreManager {
@@ -47,7 +54,7 @@ export class EStoreManager {
     loadingView.getWindow().maximize();
 
     // Open the DevTools.
-    this.mainWindow.webContents.openDevTools();
+    // this.mainWindow.webContents.openDevTools();
 
     // Init views
     let loginView = LoginView.getInstance(this.mainWindow, null); this.addView(loginView);
@@ -55,10 +62,16 @@ export class EStoreManager {
     let cashierView = CashierView.getInstance(this.mainWindow, null); this.addView(cashierView);
     let employeeView = EmployeeView.getInstance(this.mainWindow, null); this.addView(employeeView);
     let addEmployeeView = AddEmployeeView.getInstance(null, null); this.addView(addEmployeeView);
+    let aboutView = AboutView.getInstance(null, this.mainWindow); this.addView(aboutView);
+    
     let customerView = CustomerView.getInstance(this.mainWindow, null); this.addView(customerView);
     let addCustomerView = AddCustomerView.getInstance(null, null); this.addView(addCustomerView);
     let editCustomerView = EditCustomerView.getInstance(null, null); this.addView(editCustomerView);
-    let aboutView = AboutView.getInstance(null, this.mainWindow); this.addView(aboutView);
+    
+    let supplierView = SupplierView.getInstance(this.mainWindow, null); this.addView(supplierView);
+    let addSupplierView = AddSupplierView.getInstance(null, null); this.addView(addSupplierView);
+    let editSupplierView = EditSupplierView.getInstance(null, null); this.addView(editSupplierView);
+
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot

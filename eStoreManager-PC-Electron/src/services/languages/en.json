@@ -111,7 +111,6 @@
     "are_you_sure_delete_employee": "Are you sure to delete this employee? User: ",
     "cancel": "Cancel",
     "delete_user_successful": "Deleted user successfully!",
-    "delete_customer_successful": "Deleted customer successfully!",
     "unauthorized": "Sorry, You're not authorized to access this resource.",
     "wrong_user_id": "Sorry, User does not exist",
     "delete_own_account_denied": "You cannot delete your own account!",
@@ -127,6 +126,7 @@
 
 
     "are_you_sure_delete_customer": "Are you sure to delete this customer? ",
-    "logout": "Logout"
+    "logout": "Logout",
+    "delete_customer_successful": "Deleted customer successfully!"
 
 }

@@ -1,0 +1,77 @@
+<%- include('../../shared/ejs/header', {title: gettext.edit_supplier}) %>
+
+<div class="container">
+    <h3 class="text-center"><%= gettext.edit_supplier %></h3>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="supplier-id"><%= gettext.id %></label>
+                <input type="text" disabled readonly name="supplier-id" id="supplier-id" placeholder="00" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="form-group">
+                <label for="name"><%= gettext.name %></label>
+                <input type="text" name="name" id="name" placeholder="Viet Anh Nguyen" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="salary"><%= gettext.email %></label>
+                <input type="email" name="email" id="email" placeholder="vietanh@example.com" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="address"><%= gettext.address %></label>
+                <input type="text" name="address" id="address" placeholder="address" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="phone"><%= gettext.mobile %></label>
+                <input type="text" name="phone" id="phone" placeholder="phone" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <button class="btn btn-info" id="save"><%= gettext.save %></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+
+
+    // Get all supplier information and show on the form
+    ipcRenderer.on(EventGetter.get("respond_request_supplier_info"), (event, supplierInfo) => {
+        $("#supplier-id").val(supplierInfo.id);
+        $("#name").val(supplierInfo.name);
+        $("#email").val(supplierInfo.email);
+        $("#phone").val(supplierInfo.mobileNo);
+        $("#address").val(supplierInfo.address);
+    });
+    ipcRenderer.send(EventGetter.get("request_supplier_info"));
+    
+
+    // Handle Save Button
+    $("#save").click(() => {
+        let supplier = {}
+        supplier.id = $("#supplier-id").val();
+        supplier.name = $("#name").val();
+        supplier.email = $("#email").val();
+        supplier.address = $("#address").val();
+        supplier.mobileNo = $("#phone").val();
+        ipcRenderer.send(EventGetter.get('update_supplier'), supplier);
+    });
+
+
+    ipcRenderer.on(EventGetter.get("update_supplier_success"), () => {
+        ipcRenderer.send(EventGetter.get("request_update_supplier_list"));
+    });
+</script>

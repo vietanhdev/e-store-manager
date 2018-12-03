@@ -1,0 +1,131 @@
+<%- include('../../shared/ejs/header', {title: gettext.supplier_management}) %>
+<link rel="stylesheet" type="text/css" href="../css/suppliers.css">
+<link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+
+<%- include('../../shared/ejs/secondary_menu.ejs') %>
+
+<div class="container">
+    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+        &gt;&gt; <%= gettext.supplier_management %>
+    </h2>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin-bottom: 3rem;padding: 0;">
+                <button class="btn btn-success float-right" id="add-supplier"><%= gettext.add_supplier %></button>
+            </div>
+            <table id="realtime" class="display" width="100%"></table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const TextGetter = require("../../../services/TextGetter").TextGetter;
+    const {ipcRenderer} = require('electron');
+    var dt = require( 'datatables.net-dt' )( window, $ );
+    require( 'datatables.net-buttons-dt' )( window, $ );
+    
+    const app = {
+        rows: [],
+        selectedUser: null,
+        start() {
+
+            // Handle add supplier
+            $("#add-supplier").click(() => {
+                ipcRenderer.send(EventGetter.get('request_add_supplier'));
+            });
+
+            const SupplierController = require("../../../controllers/SupplierController.js").SupplierController;
+            const settings = require('electron-settings');
+            let headers = Object({'Content-Type': 'application/json'});
+            headers['Authorization'] = "Bearer " + settings.get('account_info.token');
+            let supplierController = new SupplierController();
+          
+            // Create table 
+            dataTable = $('#realtime').DataTable({
+                "serverSide": true,
+                "ajax": {
+                    "url": supplierController.getAjaxAPIUrl(),
+                    "type": 'POST',
+                    "headers": headers,
+                    "processData": true,
+                    "contentType": 'application/json',
+                    "data": function ( d ) {
+                        return JSON.stringify(d);
+                    }
+                },
+                columns: [
+                    { data: "id", title: "ID" },
+                    { data: "name", title: TextGetter.get("supplier_name") },
+                    { data: "email", title: TextGetter.get("email") },
+                    { data: "address", title: TextGetter.get("address") },
+                    { data: "mobileNo", title: TextGetter.get("mobile") },
+                    { title: TextGetter.get("manipulation") }
+                ],
+                "columnDefs": [ {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": `
+                        <button type="button" class="edit-supplier btn btn-sm btn-success">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>&nbsp;
+                        <button type="button" class="delete-supplier btn btn-sm btn-danger">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    `
+                } ],
+                // "select": true,
+                "pageLength": 5,
+                "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
+            });
+
+            // ==== Handle events that cause table to update ====
+            ipcRenderer.on(EventGetter.get("add_supplier_success"), (event, supplier) => {
+                dataTable.ajax.reload();
+            });
+            ipcRenderer.on(EventGetter.get("update_supplier_success"), (event, supplier) => {
+                dataTable.ajax.reload();
+            });
+            
+
+            // ==== Update data of the table ====
+            
+            // Delete a value by id: Id means the value of the first column
+            ipcRenderer.on(EventGetter.get("delete_row_from_supplier_table"), (event, id) => {
+                dataTable.ajax.reload();
+            });
+            
+
+            // ==== Handle row buttons ====
+            
+            // Delete
+            $('#realtime tbody').on( 'click', 'button.delete-supplier', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                ipcRenderer.send(EventGetter.get("request_delete_supplier"), data);
+            } );
+          
+            // Edit info
+            $('#realtime tbody').on( 'click', 'button.edit-supplier', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                ipcRenderer.send(EventGetter.get('request_update_supplier_info'), data);
+            } );
+
+        }
+    };
+
+    $(document).ready(() =>  {
+        app.start();
+    });
+</script>
+
+<style>
+    input[type="search"] {
+        border-bottom: 1px solid #999;
+    }
+</style>
+
+<%- include('../../shared/ejs/footer') %>

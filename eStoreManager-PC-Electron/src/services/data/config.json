@@ -38,6 +38,15 @@
         },
         "edit_customer": {
             "path": "customers/ejs/edit_customer.ejs"
+        },
+        "suppliers": {
+            "path": "suppliers/ejs/suppliers.ejs"
+        },
+        "add_supplier": {
+            "path": "suppliers/ejs/add_supplier.ejs"
+        },
+        "edit_supplier": {
+            "path": "suppliers/ejs/edit_supplier.ejs"
         }
     },
     "languages": [
