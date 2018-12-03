@@ -27,7 +27,17 @@
     "request_update_customer_info": "request_update_customer_info",
     "update_customer": "update_customer",
     "respond_request_customer_info": "respond_request_user_info",
-    "request_customer_info": "request_customer_info"
+    "request_customer_info": "request_customer_info",
+
+    "request_add_supplier": "request_add_supplier",
+    "add_supplier": "add_supplier",
+    "add_supplier_success": "add_supplier_success",
+    "request_update_supplier_list": "request_update_supplier_list",
+    "request_delete_supplier": "request_delete_supplier",
+    "request_update_supplier_info": "request_update_supplier_info",
+    "update_supplier": "update_supplier",
+    "respond_request_supplier_info": "respond_request_user_info",
+    "request_supplier_info": "request_supplier_info"
     
     
 }

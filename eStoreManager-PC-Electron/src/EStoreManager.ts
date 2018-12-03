@@ -25,9 +25,9 @@ const {CustomerView} = require('./views/customers/CustomerView');
 const {AddCustomerView} = require('./views/customers/AddCustomerView');
 const {EditCustomerView} = require('./views/customers/EditCustomerView');
 
-const {SupplierView} = require('./views/customers/SupplierView');
-const {AddSupplierView} = require('./views/customers/AddSupplierView');
-const {EditSupplierView} = require('./views/customers/EditSupplierView');
+const {SupplierView} = require('./views/suppliers/SupplierView');
+const {AddSupplierView} = require('./views/suppliers/AddSupplierView');
+const {EditSupplierView} = require('./views/suppliers/EditSupplierView');
 
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 

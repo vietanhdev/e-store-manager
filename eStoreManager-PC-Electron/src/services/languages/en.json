@@ -127,6 +127,16 @@
 
     "are_you_sure_delete_customer": "Are you sure to delete this customer? ",
     "logout": "Logout",
-    "delete_customer_successful": "Deleted customer successfully!"
+    "delete_customer_successful": "Deleted customer successfully!",
+
+
+    "supplier_management": "Supplier Management",
+    "add_supplier": "Add Supplier",
+    "edit_supplier": "Edit Supplier",
+    "supplier_name": "Supplier Name",
+    "created_supplier_successfully": "Created supplier successfully! Supplier ID: ",
+    "updated_supplier_successfully": "Update supplier successfully.",
+    "are_you_sure_delete_supplier": "Are you sure to delete this supplier? ",
+    "delete_supplier_successful": "Deleted supplier successfully!"
 
 }
