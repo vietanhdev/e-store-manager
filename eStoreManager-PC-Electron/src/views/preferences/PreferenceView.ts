@@ -9,9 +9,9 @@ const settings = require('electron-settings');
 export class PreferenceView extends View {
 
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("preferences", window, parent, 750, 700);
+        super("preferences", window, parent, 850, 600);
         this.getWindow().setMenu(null);
-        // this.getWindow().webContents.openDevTools();
+        this.getWindow().webContents.openDevTools();
     }
 
     

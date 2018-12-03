@@ -7,9 +7,6 @@ import com.example.store.model.audit.DateAudit;
 import com.example.store.model.product_type_management.ProductType;
 import com.example.store.model.supplier_management.Supplier;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 @Entity
 @Table(name = "products")
 public class Product extends DateAudit{
@@ -22,13 +19,11 @@ public class Product extends DateAudit{
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_type_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private ProductType product_type;
     
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "supplier_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Supplier supplier;
     
     @NotNull

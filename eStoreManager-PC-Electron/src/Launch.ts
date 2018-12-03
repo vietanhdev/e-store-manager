@@ -2,6 +2,10 @@ import { app } from "electron";
 import { EStoreManager } from "./EStoreManager";
 const settings = require('electron-settings');
 
+
+app.disableHardwareAcceleration()
+
+
 var eStoreManager = new EStoreManager();
 
 // Server settings
@@ -11,6 +15,11 @@ settings.set('api_config', {
   port: 8080,
   protocol: 'http'
 });
+
+settings.set("lang", "en");
+
+// Set max listener
+require('events').EventEmitter.defaultMaxListeners = Infinity;  
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

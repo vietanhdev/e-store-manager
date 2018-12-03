@@ -15,7 +15,7 @@ export class RestService {
     }
 
 
-    private getUrl(path:string):string {
+    public getUrl(path:string):string {
         return this.protocol + "://" + this.hostname + ":" + this.port + path;
     }
 

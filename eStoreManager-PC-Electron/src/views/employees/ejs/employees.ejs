@@ -1,4 +1,4 @@
-<%- include('../../shared/ejs/header', {title: 'Employee Management'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.employee_management}) %>
 <link rel="stylesheet" type="text/css" href="../css/employees.css">
 <!-- <link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="../../../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css"> -->
@@ -8,7 +8,7 @@
 
 <div class="container">
     <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
-        &gt;&gt; Employee Management
+        &gt;&gt; <%= gettext.employee_management %>
     </h2>
 </div>
 
@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 3rem;padding: 0;">
-                <button class="btn btn-success float-right" id="add-employee">Add employee</button>
+                <button class="btn btn-success float-right" id="add-employee"><%= gettext.add_employee %></button>
             </div>
             <table id="realtime" class="display" width="100%"></table>
         </div>
@@ -26,6 +26,7 @@
 
 <script>
     const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const TextGetter = require("../../../services/TextGetter").TextGetter;
     const {ipcRenderer} = require('electron');
     var dt = require( 'datatables.net-dt' )( window, $ );
     require( 'datatables.net-buttons-dt' )( window, $ );
@@ -83,7 +84,7 @@
 
             // Handle add employee
             $("#add-employee").click(() => {
-                ipcRenderer.send(EventGetter.get(EventGetter.get('request_add_employee')));
+                ipcRenderer.send(EventGetter.get('request_add_employee'));
             });
 
             // Create table 
@@ -91,15 +92,15 @@
                 responsive: true,
                 data: dataSet,
                 columns: [
-                    { title: 'UserID' },
-                    { title: 'Name' },
-                    { title: 'Username' },
-                    { title: 'Salary' },
-                    { title: 'Email' },
-                    { title: 'Address' },
-                    { title: 'Mobile' },
-                    { title: 'Position' },
-                    { title: 'Manipulation' }
+                    { title: TextGetter.get("user_id") },
+                    { title: TextGetter.get("name") },
+                    { title: TextGetter.get("username") },
+                    { title: TextGetter.get("salary") },
+                    { title: TextGetter.get("email") },
+                    { title: TextGetter.get("address") },
+                    { title: TextGetter.get("mobile") },
+                    { title: TextGetter.get("position") },
+                    { title: TextGetter.get("manipulation") }
                 ],
                 "columnDefs": [ {
                     "targets": -1,
@@ -112,7 +113,7 @@
                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                             </button>
                             <button type="button" class="set-password btn btn-sm btn-warning">
-                                Set Password
+                                `+TextGetter.get("set_password")+`
                             </button>
                         `
                 } ],

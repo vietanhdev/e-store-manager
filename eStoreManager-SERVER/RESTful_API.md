@@ -130,8 +130,8 @@
 ```
 {
     "success": true,
-    "code": "update_successful",
-    "message": "update profile successful"
+    "code": "update_user_information_successful",
+    "message": "update your information successful"
 }
 ```
 
@@ -427,8 +427,8 @@
 ```
 {
     "success": true,
-    "code": "update_successful",
-    "message": "update successful"
+    "code": "update_user_information_successful",
+    "message": "update user information successful"
 }
 ```
 
@@ -851,8 +851,8 @@
 ```
 {
     "success": true,
-    "code": "update_successful",
-    "message": "update successful"
+    "code": "update_customer_information_successful",
+    "message": "update customer information successful"
 }
 ```
 
@@ -1028,11 +1028,11 @@
 # 3. Supplier management API
 ---
 
-## 3.1. Create new supllier
+## 3.1. Create new supplier
 
 ### 3.1.1. Request
 
-* Path: /api/v1/suplliers
+* Path: /api/v1/suppliers
 * Method: POST
 * Header:
     
@@ -1087,10 +1087,10 @@
 ```
 
 
-## 3.2. Search a supllier
+## 3.2. Search a supplier
 ### 3.2.1. Request
 
-* Path: /api/v1/search/suplliers
+* Path: /api/v1/search/suppliers
 * Method: POST
 * Header:
     
@@ -1168,11 +1168,11 @@
 }
 ```
 
-## 3.3. Get a supllier's information 
+## 3.3. Get a supplier's information 
 
 ### 3.3.1. Request
 
-* Path: /api/v1/supllier/{id}
+* Path: /api/v1/supplier/{id}
 * Method: GET
 * Header:
     
@@ -1188,8 +1188,8 @@
 {
     "success": true,
     "id": 1,
-    "name": "supllier1",
-    "email": "supllier1@gmail.com",
+    "name": "supplier1",
+    "email": "supplier1@gmail.com",
     "address": "ha noi",
     "mobileNo": "0916167887"
 }
@@ -1208,8 +1208,8 @@
 ```
 {
     "success": false,
-    "code": "wrong_supllier_id",
-    "message": "supllier id " + {id} + " does not exist"
+    "code": "wrong_supplier_id",
+    "message": "supplier id " + {id} + " does not exist"
 }
 ```
 
@@ -1222,11 +1222,11 @@
 }
 ```
 
-## 3.4. Update a supllier's information 
+## 3.4. Update a supplier's information 
 
 ### 3.4.1. Request
 
-* Path: /api/v1/suplliers/{id}
+* Path: /api/v1/suppliers/{id}
 * Method: PUT
 * Header:
     
@@ -1236,8 +1236,8 @@
 * Body: (you can choose any fields you want to change, all fields are not compulsory)
 ```
 {
-    "name": "supllierX",
-    "email": "supllierX@gmail.com",
+    "name": "supplierX",
+    "email": "supplierX@gmail.com",
     "address": "ha noi",
     "mobileNo": "0916167997"
 }
@@ -1249,8 +1249,8 @@
 ```
 {
     "success": true,
-    "code": "update_successful",
-    "message": "update successful"
+    "code": "update_supplier_information_successful",
+    "message": "update supplier information successful"
 }
 ```
 
@@ -1267,8 +1267,8 @@
 ```
 {
     "success": false,
-    "code": "wrong_supllier_id",
-    "message": "supllier id " + {id} + " does not exist"
+    "code": "wrong_supplier_id",
+    "message": "supplier id " + {id} + " does not exist"
 }
 ```
 
@@ -1290,11 +1290,11 @@
 }
 ```
 
-## 3.5. Delete a supllier
+## 3.5. Delete a supplier
 
 ### 3.1.1. Request
 
-* Path: /api/v1/suplliers/{id}
+* Path: /api/v1/suppliers/{id}
 * Method: DELETE
 * Header:
     
@@ -1310,8 +1310,8 @@
 ```
 {
     "success": true,
-    "code": "delete_supllier_successful",
-    "message": "delete supllier successful"
+    "code": "delete_supplier_successful",
+    "message": "delete supplier successful"
 }
 ```
 
@@ -1328,8 +1328,324 @@
 ```
 {
     "success": false,
-    "code": "wrong_supllier_id",
-    "message": "supllier id " + {id} + " does not exist"
+    "code": "wrong_supplier_id",
+    "message": "supplier id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+# 4. Product type management API
+---
+
+## 4.1. Create new product_type
+
+### 4.1.1. Request
+
+* Path: /api/v1/product_types
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:(name field is compulsory, other fields can be skipped)
+```
+{
+    "name": "chocolate white vn",
+    "price": 80000,
+    "unit": "lit",
+    "barcode": "df32xv34"
+}
+```
+
+### 2.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+
+## 4.2. Search product types
+### 4.2.1. Request
+
+* Path: /api/v1/search/product_types
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+```
+{
+    "draw": 1,
+    "start": 0,
+    "length": 5,
+    "search": {
+        "value": "",
+        "name": "",
+        "unit": "",
+        "barcode": ""
+    }
+}
+```
+
+### 4.2.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "draw": 10,
+    "recordsTotal": 2,
+    "recordsFiltered": 2,
+    "data": [
+        {
+            "id": 1,
+            "name": "vina milk no sugar",
+            "price": 32300,
+            "unit": "lit",
+            "barcode": "da2cvx34"
+        },
+        {
+            "id": 2,
+            "name": "vina milk with sugar",
+            "price": 35000,
+            "unit": "lit",
+            "barcode": "da2cvx90"
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 4.4. Get a product_type's information 
+
+### 4.4.1. Request
+
+* Path: /api/v1/product_type/{id}
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 4.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 2,
+    "name": "vina milk with sugar",
+    "price": 35000,
+    "unit": "lit",
+    "barcode": "da2cvx90"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_type_id",
+    "message": "product_type id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 4.4. Update a product_type's information 
+
+### 4.4.1. Request
+
+* Path: /api/v1/product_type/{id}
+* Method: PUT
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body: (you can choose any fields you want to change, all fields are not compulsory)
+```
+{
+    "name": "product_typeX",
+    "email": "product_typeX@gmail.com",
+    "address": "ha noi",
+    "mobileNo": "0916167997"
+}
+```
+
+### 4.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "update_product_type_information_successful",
+    "message": "update product type information successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_type_id",
+    "message": "product_type id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 4.5. Delete a product_type
+
+### 4.1.1. Request
+
+* Path: /api/v1/product_type/{id}
+* Method: DELETE
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+
+### 4.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "delete_product_type_successful",
+    "message": "delete product_type successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_type_id",
+    "message": "product_type id " + {id} + " does not exist"
 }
 ```
 

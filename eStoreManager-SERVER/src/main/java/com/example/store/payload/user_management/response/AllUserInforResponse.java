@@ -4,13 +4,21 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AllUserInforResponse {
-    public Boolean success = true;
-    public Set<UserInfor> users = new HashSet<>();
+    private Boolean success = true;
+    private Set<UserInfor> users = new HashSet<>();
 
     public AllUserInforResponse(){
     }
 
-    public void addUserInfor(UserInfor userInfor){
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public void addUserInfor(UserInfor userInfor) {
         this.users.add(userInfor);
     }
 

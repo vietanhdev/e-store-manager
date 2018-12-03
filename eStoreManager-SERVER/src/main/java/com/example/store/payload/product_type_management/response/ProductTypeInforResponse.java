@@ -1,6 +1,8 @@
 package com.example.store.payload.product_type_management.response;
 
-public class Data {
+public class ProductTypeInforResponse {
+    
+    private Boolean success = true;
 
     private Long id;
 
@@ -12,7 +14,7 @@ public class Data {
     
     private String barcode;
 
-    public Data(Long id, String name, Float price , String unit, String barcode){
+    public ProductTypeInforResponse(Long id, String name, Float price, String unit, String barcode){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -28,20 +30,20 @@ public class Data {
         this.barcode = barcode;
     }
 
-    public Float getPrice() {
-        return price;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
     public String getUnit() {
         return unit;
     }
 
     public void setUnit(String unit) {
         this.unit = unit;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public String getName() {
@@ -58,6 +60,14 @@ public class Data {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
     
 }

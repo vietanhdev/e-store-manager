@@ -1,4 +1,4 @@
-<%- include('../../shared/ejs/header', {title: 'Customer Management'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.customer_management}) %>
 <link rel="stylesheet" type="text/css" href="../css/customers.css">
 <link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
 
@@ -6,7 +6,7 @@
 
 <div class="container">
     <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
-        &gt;&gt; Customer Management
+        &gt;&gt; <%= gettext.customer_management %>
     </h2>
 </div>
 
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 3rem;padding: 0;">
-                <button class="btn btn-success float-right" id="add-customer">Add customer</button>
+                <button class="btn btn-success float-right" id="add-customer"><%= gettext.add_customer %></button>
             </div>
             <table id="realtime" class="display" width="100%"></table>
         </div>
@@ -24,74 +24,32 @@
 
 <script>
     const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const TextGetter = require("../../../services/TextGetter").TextGetter;
     const {ipcRenderer} = require('electron');
     var dt = require( 'datatables.net-dt' )( window, $ );
     require( 'datatables.net-buttons-dt' )( window, $ );
-
-
-    dataSet = [
-        [ "", "", "", "", "", "", "", ""]
-    ];
-
     
     const app = {
         rows: [],
-        dataTable: null,
         selectedUser: null,
-        updateTable(dataTable, data) {
-            console.log(data);
-            this.rows = [];
-            for (let i = 0; i < data.length; ++i) {
-                let row = [];
-                row.push(Number(data[i].id));
-                // { title: 'Name' },
-                row.push(String(data[i].name));
-                // { title: 'Username' },
-                row.push(String(data[i].username));
-                // { title: 'Salary' },
-                row.push(String(data[i].salary));
-                // { title: 'Email' },
-                row.push(String(data[i].email));
-                // { title: 'Address' },
-                row.push(String(data[i].address));
-                // { title: 'Mobile' },
-                row.push(String(data[i].mobileNo));
-                // { title: 'Position' },
-                row.push(String(JSON.stringify(data[i].roles)));
-                this.rows.push(row);
-                // console.log(row);
-            }
-            dataTable.clear();
-            dataTable.rows.add(this.rows);
-            dataTable.draw(false);
-        },
-        deleteFromTable(id) {
-            for (let i = 0; i < this.rows.length; ++i) {
-                if (this.rows[i][0] == id) {
-                    this.rows.splice(i, 1);
-                    break;
-                }
-            }
-            dataTable.clear();
-            dataTable.rows.add(this.rows);
-            dataTable.draw(false);
-        },
         start() {
 
-            // // Handle add customer
-            // $("#add-customer").click(() => {
-            //     ipcRenderer.send(EventGetter.get(EventGetter.get('request_add_customer')));
-            // });
+            // Handle add customer
+            $("#add-customer").click(() => {
+                ipcRenderer.send(EventGetter.get('request_add_customer'));
+            });
 
+            const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
             const settings = require('electron-settings');
             let headers = Object({'Content-Type': 'application/json'});
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
+            let customerController = new CustomerController();
           
             // Create table 
             dataTable = $('#realtime').DataTable({
                 "serverSide": true,
                 "ajax": {
-                    "url": "http://localhost:8080/api/v1/search/customers",
+                    "url": customerController.getAjaxAPIUrl(),
                     "type": 'POST',
                     "headers": headers,
                     "processData": true,
@@ -101,83 +59,61 @@
                     }
                 },
                 columns: [
-                    { data: "id" },
-                    { data: "name" },
-                    { data: "email" },
-                    { data: "address" },
-                    { data: "mobileNo" }
+                    { data: "id", title: "ID" },
+                    { data: "name", title: TextGetter.get("customer_name") },
+                    { data: "email", title: TextGetter.get("email") },
+                    { data: "address", title: TextGetter.get("address") },
+                    { data: "mobileNo", title: TextGetter.get("mobile") },
+                    { title: TextGetter.get("manipulation") }
                 ],
+                "columnDefs": [ {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": `
+                        <button type="button" class="edit-customer btn btn-sm btn-success">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>&nbsp;
+                        <button type="button" class="delete-customer btn btn-sm btn-danger">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    `
+                } ],
                 // "select": true,
                 "pageLength": 5,
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });
 
-            // ==== Update data of the table ====
-            /*
-            // Request data
-            ipcRenderer.send(EventGetter.get("request_update_customer_list"));
-            // Update list
-            ipcRenderer.on(EventGetter.get("update_customer_list"), (event, data) => {
-                this.updateTable(dataTable, data);
+            // ==== Handle events that cause table to update ====
+            ipcRenderer.on(EventGetter.get("add_customer_success"), (event, customer) => {
+                dataTable.ajax.reload();
             });
+            ipcRenderer.on(EventGetter.get("update_customer_success"), (event, customer) => {
+                dataTable.ajax.reload();
+            });
+            
+
+            // ==== Update data of the table ====
+            
             // Delete a value by id: Id means the value of the first column
             ipcRenderer.on(EventGetter.get("delete_row_from_customer_table"), (event, id) => {
-                this.deleteFromTable(id);
+                dataTable.ajax.reload();
             });
-            */
+            
 
             // ==== Handle row buttons ====
-            /*
+            
             // Delete
             $('#realtime tbody').on( 'click', 'button.delete-customer', function () {
                 let data = dataTable.row( $(this).parents('tr') ).data();
-                let userData = {};
-                userData.id = data[0];
-                userData.username = data[2];
-                ipcRenderer.send(EventGetter.get("request_delete_customer"), userData);
+                ipcRenderer.send(EventGetter.get("request_delete_customer"), data);
             } );
-            // Change password
-            $('#realtime tbody').on( 'click', 'button.set-password', function () {
-                let data = dataTable.row( $(this).parents('tr') ).data();
-                
-                // Request password for user
-                let passwordCarrier = {}
-                passwordCarrier.purpose = "set_user_password";
-                passwordCarrier.id = data[0];
-                ipcRenderer.send(EventGetter.get('prompt_password'), passwordCarrier);
-
-            } );
-
+          
             // Edit info
             $('#realtime tbody').on( 'click', 'button.edit-customer', function () {
                 let data = dataTable.row( $(this).parents('tr') ).data();
-                
-                // Request password for user
-                let user = {}
-                user.id = data[0];
-                user.name = data[1];
-                user.username = data[2];
-                user.salary = data[3];
-                user.email = data[4];
-                user.address = data[5];
-                user.mobile = data[6];
-                user.roles = data[7];
-                // { title: 'UserID' },
-                // { title: 'Name' },
-                // { title: 'Username' },
-                // { title: 'Salary' },
-                // { title: 'Email' },
-                // { title: 'Address' },
-                // { title: 'Mobile' },
-                // { title: 'Position' },
-                // { title: 'Manipulation' }
-                ipcRenderer.send(EventGetter.get('request_update_user_info'), user);
+                ipcRenderer.send(EventGetter.get('request_update_customer_info'), data);
+            } );
 
-            } );*/
-
-            
-
-            
         }
     };
 

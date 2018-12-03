@@ -1,0 +1,16 @@
+<%- include('../../shared/ejs/header', {title: 'About Us'}) %>
+<!-- <link rel="stylesheet" type="text/css" href="about-us.css"> -->
+
+<div class="container">
+	<img src="../images/store.png" style="height: 4rem; width: 4rem">
+	<h1><%= gettext.about_us %></h1>
+	<p><b>Program:</b> <%= gettext.program_name %></p>
+	<p><%= gettext.about_this_program %></p>
+	<p><b>Members: </b><%= gettext.authors_name %> </p>
+	<br>
+	
+	<p><%= gettext.for_more_support %></p>
+</div>
+
+
+<%- include('../../shared/ejs/footer') %>

@@ -1,7 +1,7 @@
 {
     "view": {
         "about_us": {
-            "path": "about/ejs/about.ejs"
+            "path": "about/ejs/about_us.ejs"
         },
         "loading": {
             "path": "loader/ejs/loading.ejs"
@@ -32,6 +32,29 @@
         },
         "customers": {
             "path": "customers/ejs/customers.ejs"
+        },
+        "add_customer": {
+            "path": "customers/ejs/add_customer.ejs"
+        },
+        "edit_customer": {
+            "path": "customers/ejs/edit_customer.ejs"
         }
-    }
+    },
+    "languages": [
+        {
+            "lang": "en",
+            "title": "English",
+            "file": "en.json"
+        },
+        {
+            "lang": "vi",
+            "title": "Tiếng Việt",
+            "file": "vi.json"
+        },
+        {
+            "lang": "fr",
+            "title": "Le français",
+            "file": "fr.json"
+        }
+    ]
 }

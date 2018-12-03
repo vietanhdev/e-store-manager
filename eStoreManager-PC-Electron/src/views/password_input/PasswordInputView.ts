@@ -30,10 +30,10 @@ export class PasswordInputView extends View {
     // Handle all logic of this view
     logicHandle():void {
         ipcMain.on(EventGetter.get('user_enter_password'), (event:any, password:any) => {
-            PasswordInputView.instance.hide();
+            this.hide();
             if (isUndefined(this.passwordCarrier)) this.passwordCarrier = {password: ""};
-            PasswordInputView.instance.passwordCarrier.password = password;
-            PasswordInputView.instance.windowPromptPassword.webContents.send(EventGetter.get("set_password"), this.passwordCarrier);
+            this.passwordCarrier.password = password;
+            this.windowPromptPassword.webContents.send(EventGetter.get("set_password"), this.passwordCarrier);
         });
         ipcMain.on(EventGetter.get('prompt_password'), (event:any, passwordCarrier:any) => {
             this.hide();

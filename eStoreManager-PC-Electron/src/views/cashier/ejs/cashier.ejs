@@ -4,39 +4,33 @@
 
 <%- include('../../shared/ejs/secondary_menu.ejs') %>
 
-<div class="container">
-    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
-        &gt;&gt; Cashier
-    </h2>
-</div>
-
 <div class="container-fluid main-container">
-	<div class="row">
+	<div class="row" style="padding-top: 2rem;">
 		<div class="col-sm-1">
 			<img style="width: 85px; border: 1px solid #333" src="../images/barcode-scanner.jpg" alt="barcode">
 		</div>
 		<div class="col-sm-3">
 			<div class="input-group">
-				<label>Product ID&nbsp;&nbsp; </label>
+				<label><%= gettext.product_id %>&nbsp;&nbsp; </label>
 				<input type="text" class="form-control">
 				<div class="input-group-append">
-					<button class="btn btn-success" type="button">Search</button>
+					<button class="btn btn-success" type="button"><%= gettext.search %></button>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="input-group">
-				<label>Quantity&nbsp;&nbsp; </label>
+				<label><%= gettext.quantity %>&nbsp;&nbsp; </label>
 				<input type="text" class="form-control">
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="input-group">
-				<button type="submit" class="btn btn-primary">Add Product</button>
+				<button type="submit" class="btn btn-primary"><%= gettext.add_product %></button>
 			</div>
 		</div>
 	</div>
-	<div class="row" style="min-height: 500px">
+	<div class="row" style="min-height: 350px">
 		<div class="col-sm-8 mt-2">
 			<table id="product-table" class="display" width="100%"></table>
 		</div>
@@ -44,7 +38,7 @@
 			<table>
 				<tr>
 					<td>
-						<label class="total-title">SubTotal</label>
+						<label class="total-title"><%= gettext.sub_total %></label>
 					</td>
 					<td>
 						<input readonly class="total-number" type="text" class="form-control">
@@ -52,7 +46,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label class="total-title">Tax</label>
+						<label class="total-title"><%= gettext.tax %></label>
 					</td>
 					<td>
 						<input readonly class="total-number" type="text" class="form-control">
@@ -60,7 +54,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label class="total-title">GrandTotal</label>
+						<label class="total-title"><%= gettext.grand_total %></label>
 					</td>
 					<td>
 						<input readonly class="total-number" type="text" class="form-control">
@@ -73,7 +67,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label class="total-title title-sm">Customer Pay</label>
+						<label class="total-title title-sm"><%= gettext.customer_pay %></label>
 					</td>
 					<td>
 						<input class="total-number" type="text" class="form-control">
@@ -81,7 +75,7 @@
 				</tr>
 				<tr>
 					<td>
-						<label class="total-title title-sm">Give Back to Customer</label>
+						<label class="total-title title-sm"><%= gettext.give_back_to_customer %></label>
 					</td>
 					<td>
 						<input readonly class="total-number" type="text" class="form-control">
@@ -90,19 +84,28 @@
 			</table>
 		</div>
 	</div>
-	<div class="row">
+</div>
+
+<div class="container-fluid" style="position:fixed; bottom: 0; left: 0;">
+	<div class="row" style="padding: 1rem; background: ghostwhite">
 		<div class="col-sm-2">
-			<p>Employee: Viet Anh</p>
-			<p>Time: 10:18 02/12</p>
+			<p><b><%= gettext.employee %>:</b> Viet Anh</p>
+			<p><b><%= gettext.time %>:</b> <span id="clock"></span></p>
 		</div>
 		<div class="col-sm-4">
-			<p>Customer: Syan</p>
-			<label>Product ID&nbsp;&nbsp; </label>
-			<input type="text" class="form-control">
-			<div class="input-group-append">
-				<button class="btn btn-success" type="button">Search</button>
-				<button class="btn btn-success" type="button">New</button>
+			<p><b>Customer:</b> Syan</p>
+			<div class="input-group">
+			<input type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-primary" type="button"><%= gettext.search %></button>
+					<button class="btn btn-success" type="button"><%= gettext.new %></button>
+				</div>
 			</div>
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-lg btn-warning btn-super-lg"><%= gettext.print_receipt %></button>
+			<button class="btn btn-lg btn-success btn-super-lg"><%= gettext.complete_f9 %></button>
+			<button class="btn btn-lg btn-danger btn-super-lg"><%= gettext.discard %></button>
 		</div>
 	</div>
 </div>
@@ -155,6 +158,31 @@
 		} ],
 		"pageLength": 5,
 		"lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
+	});
+
+
+
+	$(document).ready(() => {
+
+		// === Setup Clock ====
+		function startTimer() {
+    		var today = new Date();
+			var h = today.getHours();
+			var m = today.getMinutes();
+			var s = today.getSeconds();
+			var day = today.getDate();
+			var month = today.getMonth() + 1;
+			m = checkTime(m);
+			s = checkTime(s);
+			$("#clock").html(h + ":" + m + ":" + s + "&nbsp;&nbsp;" + day + "/" + month);
+			var t = setTimeout(startTimer, 500);
+		}
+		function checkTime(i) {
+			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+			return i;
+		}
+		startTimer();
+
 	});
 
 </script>

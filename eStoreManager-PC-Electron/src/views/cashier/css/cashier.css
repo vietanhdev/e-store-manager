@@ -1,7 +1,9 @@
-.main-container {
+body {
     background: rgba(0,0,0,0.05);
+}
+
+.main-container {
     padding: 1rem;
-    min-height: 500px;
 }
 
 #cashier-total-area .total-title {
@@ -25,3 +27,9 @@
 #cashier-total-area table {
     max-width: 100%;
 }
+
+.btn-super-lg {
+    padding: 1.5rem 2rem;
+    text-transform: uppercase;
+}
+

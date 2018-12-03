@@ -35,7 +35,7 @@ public class ProductType extends DateAudit{
 
     }
 
-    public ProductType(String name, Float price, Integer quantities, String unit, String barcode){
+    public ProductType(String name, Float price, String unit, String barcode){
         this.name = name;
         this.price = price;
         this.unit = unit;

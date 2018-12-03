@@ -2,53 +2,53 @@
 <link rel="stylesheet" type="text/css" href="../css/welcome.css">
 
 <div id="modal">
-	<h1 class="site-title">Welcome to eStoreManager!</h1>
-	<p class="site-description">These are main functions of this software</p>
+	<h1 class="site-title"><%= gettext.welcome_to %> <%= gettext.program_name %>!</h1>
+	<p class="site-description"><%= gettext.these_are_main_functions_of_this_software %></p>
 	<div id="welcome-menu" class="est-container">
 		<div class="est-row">
 			<div class="menu-item" id="menu-cashier-ui">
-				<h2 class="item-title">Cashier UI</h2>
-				<p class="item-description">Screen for Cashier to create bills</p>
+				<h2 class="item-title"><%= gettext.cashier_ui %></h2>
+				<p class="item-description"><%= gettext.cashier_ui_description %></p>
 			</div>
 			<div class="menu-item" id="menu-bills">
-				<h2 class="item-title">Bills</h2>
-				<p class="item-description">Manage bills created in Cashier UI</p>
+				<h2 class="item-title"><%= gettext.bills %></h2>
+				<p class="item-description"><%= gettext.bills_description %></p>
 			</div>
 			<div class="menu-item" id="menu-customers">
-				<h2 class="item-title">Customers</h2>
-				<p class="item-description">Manage the list of your customer</p>
+				<h2 class="item-title"><%= gettext.customers %></h2>
+				<p class="item-description"><%= gettext.customers_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-inventory">
-				<h2 class="item-title">Inventory</h2>
-				<p class="item-description">Manage products in your warehouse</p>
+				<h2 class="item-title"><%= gettext.inventory %></h2>
+				<p class="item-description"><%= gettext.inventory_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-suppliers">
-				<h2 class="item-title">Suppliers</h2>
-				<p class="item-description">Manage good suppliers</p>
+				<h2 class="item-title"><%= gettext.suppliers %></h2>
+				<p class="item-description"><%= gettext.suppliers_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-import-products">
-				<h2 class="item-title">Import products</h2>
-				<p class="item-description">Import product to your warehouse</p>
+				<h2 class="item-title"><%= gettext.import_products %></h2>
+				<p class="item-description"><%= gettext.import_products_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-employees">
-				<h2 class="item-title">Employee</h2>
-				<p class="item-description">Manage your Employees and Users of this software</p>
+				<h2 class="item-title"><%= gettext.employees %></h2>
+				<p class="item-description"><%= gettext.employees_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-reports">
-				<h2 class="item-title">Reports</h2>
-				<p class="item-description">Create and view reports</p>
+				<h2 class="item-title"><%= gettext.reports %></h2>
+				<p class="item-description"><%= gettext.reports_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-finance">
-				<h2 class="item-title">Finance</h2>
-				<p class="item-description">Manage finance of the store</p>
+				<h2 class="item-title"><%= gettext.finance %></h2>
+				<p class="item-description"><%= gettext.finance_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-setting">
-				<h2 class="item-title">Setting</h2>
-				<p class="item-description">Setup and configure your store</p>
+				<h2 class="item-title"><%= gettext.settings %></h2>
+				<p class="item-description"><%= gettext.settings_menu_description %></p>
 			</div>
 			<div class="menu-item" id="menu-support">
-				<h2 class="item-title">Contact support</h2>
-				<p class="item-description">Contact us for more support</p>
+				<h2 class="item-title"><%= gettext.contact_support %></h2>
+				<p class="item-description"><%= gettext.contact_support_menu_description %></p>
 			</div>
 		</div>
 	</div>
@@ -72,7 +72,7 @@
 				case "menu-reports": ipcRenderer.send('request_change_view', 'reports'); break;
 				case "menu-finance": ipcRenderer.send('request_change_view', 'finance'); break;
 				case "menu-setting": ipcRenderer.send('request_change_view', 'preferences'); break;
-				case "menu-support": ipcRenderer.send('request_change_view', 'support_form'); break;
+				case "menu-support": ipcRenderer.send('request_change_view', 'about_us'); break;
 			}
 
 		});

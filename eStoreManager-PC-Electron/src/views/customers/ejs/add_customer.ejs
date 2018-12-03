@@ -1,72 +1,35 @@
-<%- include('../../shared/ejs/header', {title: 'Add Customer'}) %>
+<%- include('../../shared/ejs/header', {title: gettext.add_customer}) %>
 
 <div class="container">
-    <h3 class="text-center">Add Customer</h3>
+    <h3 class="text-center"><%= gettext.add_customer %></h3>
     <div class="row">
-        <!-- <div class="col-sm-3">
-            <div class="form-group">
-                <label for="customer-id">ID</label>
-                <input type="text" name="customer-id" id="customer-id" placeholder="00" class="form-control">
-            </div>
-        </div> -->
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="name">Name</label>
+                <label for="name"><%= gettext.name %></label>
                 <input type="text" name="name" id="name" placeholder="Viet Anh Nguyen" class="form-control">
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" placeholder="username" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="salary">Email</label>
+                <label for="salary"><%= gettext.email %></label>
                 <input type="email" name="email" id="email" placeholder="vietanh@example.com" class="form-control">
             </div>
         </div>
-        <div class="col-sm-12">
-            <div class="input-group mb-3">
-                <label for="password">Password&nbsp;&nbsp;</label>
-                <input readonly disabled id="password" type="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button id="btn-setpassword" class="btn btn-success" type="button">Set Password</button>
-                </div>
-            </div>
-        </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="address">Address</label>
+                <label for="address"><%= gettext.address %></label>
                 <input type="text" name="address" id="address" placeholder="address" class="form-control">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="phone">Mobile</label>
+                <label for="phone"><%= gettext.mobile %></label>
                 <input type="text" name="phone" id="phone" placeholder="phone" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="salary">Salary</label>
-                <input type="number" name="salary" id="salary" placeholder="salary" class="form-control">
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="form-group">
-                <label for="position">Position</label>
-                <select name="position" id="position" class="form-control">
-                <option value="">--Select Position--</option>
-                <option value="ROLE_ADMIN">Admin</option>
-                <option value="ROLE_CASHIER">Cashier</option>
-                <option value="ROLE_MANAGER">Warehouse Manager</option>
-                <option value="ROLE_CASHIER_AND_ROLE_MANAGER">Cashier + Warehouse Manager</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-info" id="save">Save</button>
+                <button class="btn btn-info" id="save"><%= gettext.save %></button>
             </div>
         </div>
     </div>
@@ -90,29 +53,10 @@
     $("#save").click(() => {
         let newUser = {}
         newUser.name = $("#name").val();
-        newUser.username = $("#username").val();
         newUser.email = $("#email").val();
         newUser.address = $("#address").val();
-        newUser.salary = $("#salary").val();
         newUser.mobileNo = $("#phone").val();
-        newUser.password = $("#password").val();
-        newUser.name = $("#name").val();
-        newUser.roles = [];
-
-        switch ($("#position").val()) {
-            case "ROLE_ADMIN": newUser.roles.push("ROLE_ADMIN"); break;
-            case "ROLE_CASHIER": newUser.roles.push("ROLE_CASHIER"); break;
-            case "ROLE_MANAGER": newUser.roles.push("ROLE_MANAGER"); break;
-            case "ROLE_CASHIER_AND_ROLE_MANAGER":
-                newUser.roles.push("ROLE_MANAGER");
-                newUser.roles.push("ROLE_MANAGER");
-        }
-
         ipcRenderer.send(EventGetter.get('add_customer'), newUser);
     });
 
-
-    ipcRenderer.on(EventGetter.get("add_customer_success"), () => {
-        ipcRenderer.send(EventGetter.get("request_update_customer_list"));
-    });
 </script>

@@ -4,13 +4,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AllCustomerInforResponse {
-    public Boolean success = true;
-    public Set<CustomerInfor> customers = new HashSet<>();
+
+    private Boolean success = true;
+
+    private Set<CustomerInfor> customers = new HashSet<>();
 
     public AllCustomerInforResponse(){
     }
     
-    public void addCustomerInfor(CustomerInfor customerInfor){
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public void addCustomerInfor(CustomerInfor customerInfor) {
         this.customers.add(customerInfor);
     }
 
