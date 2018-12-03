@@ -1359,10 +1359,11 @@
 * Body:(name field is compulsory, other fields can be skipped)
 ```
 {
-    "name": "chocolate white vn",
+    "name": "vina milk",
     "price": 80000,
-    "unit": "lit",
-    "barcode": "df32xv34"
+    "unit": "cartoon",
+    "barcode": "dccf2351",
+    "quantities": 500
 }
 ```
 
@@ -1419,7 +1420,7 @@
 {
     "draw": 1,
     "start": 0,
-    "length": 5,
+    "length": 10,
     "search": {
         "value": "",
         "name": "",
@@ -1440,18 +1441,20 @@
     "recordsFiltered": 2,
     "data": [
         {
-            "id": 1,
-            "name": "vina milk no sugar",
-            "price": 32300,
-            "unit": "lit",
-            "barcode": "da2cvx34"
+            "id": 2,
+            "name": "milk tea",
+            "price": 85000,
+            "unit": "bar",
+            "barcode": "df32xv34",
+            "quantities": 90
         },
         {
-            "id": 2,
-            "name": "vina milk with sugar",
-            "price": 35000,
+            "id": 1,
+            "name": "chocolate white vn",
+            "price": 80000,
             "unit": "lit",
-            "barcode": "da2cvx90"
+            "barcode": "df32xv34",
+            "quantities": 1000
         }
     ]
 }
@@ -1504,10 +1507,11 @@
 {
     "success": true,
     "id": 2,
-    "name": "vina milk with sugar",
-    "price": 35000,
-    "unit": "lit",
-    "barcode": "da2cvx90"
+    "name": "milk",
+    "price": 85000,
+    "unit": "bar",
+    "barcode": "df32xv34",
+    "quantities": 100
 }
 ```
 
@@ -1552,10 +1556,11 @@
 * Body: (you can choose any fields you want to change, all fields are not compulsory)
 ```
 {
-    "name": "product_typeX",
-    "email": "product_typeX@gmail.com",
-    "address": "ha noi",
-    "mobileNo": "0916167997"
+    "name": "milk",
+    "price": 85000,
+    "unit": "bar",
+    "barcode": "df32xv34",
+    "quantities": 100
 }
 ```
 

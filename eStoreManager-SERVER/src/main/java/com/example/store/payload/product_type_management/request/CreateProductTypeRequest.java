@@ -23,6 +23,9 @@ public class CreateProductTypeRequest {
     @Size(max = 40) 
     private String barcode;
 
+    @Min(0)
+    private Long quantities;
+
     public String getName() {
         return name;
     }
@@ -39,4 +42,8 @@ public class CreateProductTypeRequest {
         return barcode;
     }
     
+    public Long getQuantities() {
+        return quantities;
+    }
+
 }

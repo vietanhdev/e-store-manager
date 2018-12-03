@@ -14,12 +14,15 @@ public class ProductTypeInforResponse {
     
     private String barcode;
 
-    public ProductTypeInforResponse(Long id, String name, Float price, String unit, String barcode){
+    private Long quantities;
+
+    public ProductTypeInforResponse(Long id, String name, Float price, String unit, String barcode, Long quantities){
         this.id = id;
         this.name = name;
         this.price = price;
         this.unit = unit;
         this.barcode = barcode;
+        this.quantities = quantities;
     }
 
     public String getBarcode() {
@@ -68,6 +71,14 @@ public class ProductTypeInforResponse {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+    }
+
+    public Long getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(Long quantities) {
+        this.quantities = quantities;
     }
     
 }

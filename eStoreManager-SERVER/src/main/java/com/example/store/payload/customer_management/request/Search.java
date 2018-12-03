@@ -1,7 +1,5 @@
 package com.example.store.payload.customer_management.request;
 
-import javax.validation.constraints.NotNull;
-
 public class Search {
     
     private String value;

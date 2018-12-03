@@ -30,6 +30,10 @@ public class OffsetBasedPageRequest implements Pageable, Serializable {
             throw new IllegalArgumentException("Offset index must not be less than zero!");
         }
 
+        if(limit == -1){
+            limit = 100000000000L;
+        }
+
         if (limit < 1) {
             throw new IllegalArgumentException("Limit must not be less than one!");
         }

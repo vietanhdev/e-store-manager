@@ -19,7 +19,6 @@ public class Supplier extends DateAudit{
     @Size(max = 40)
     private String name;
 
-    @NotBlank
     @Size(max = 40)
     @Email
     private String email;

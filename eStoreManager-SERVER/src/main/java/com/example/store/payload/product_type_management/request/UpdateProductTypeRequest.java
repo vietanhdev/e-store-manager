@@ -17,6 +17,9 @@ public class UpdateProductTypeRequest {
     @Size(max = 40)
     private String barcode;
 
+    @Min(0)
+    private Long quantities;
+
     public String getName() {
         return name;
     }
@@ -31,6 +34,10 @@ public class UpdateProductTypeRequest {
 
     public String getBarcode() {
         return barcode;
+    }
+
+    public Long getQuantities() {
+        return quantities;
     }
 
 }
