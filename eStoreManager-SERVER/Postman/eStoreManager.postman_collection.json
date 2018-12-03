@@ -25,7 +25,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"username\": \"manager\",\n    \"password\": \"manager@password\"\n}\n"
+									"raw": "{\n\t\"username\": \"admin\",\n    \"password\": \"admin@gmail.com\"\n}\n"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/login",
@@ -54,7 +54,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODE2Nzk0LCJleHAiOjE1NDQ0MjE1OTR9.Y6m3t8EHXt-oLJWVfGjVhtnbSU-6P56xtWzjGcTDmVbGNXE34gPNIRygAB-rUhzTDForOmiQD_s7MnKnS7k7KQ",
 										"type": "text"
 									}
 								],
@@ -86,7 +86,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODE2Nzk0LCJleHAiOjE1NDQ0MjE1OTR9.Y6m3t8EHXt-oLJWVfGjVhtnbSU-6P56xtWzjGcTDmVbGNXE34gPNIRygAB-rUhzTDForOmiQD_s7MnKnS7k7KQ",
 										"type": "text"
 									},
 									{
@@ -124,7 +124,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA4MTAyLCJleHAiOjE1NDQxMTI5MDJ9.c8Rj1CV9S2NrlTlfJFEyjfnrfVPnCojr1W2f0YVXh_jhg7nT8cAoJc_xij71DkLE4C6YuX0gBv8U66OfEL320g",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODE2Nzk0LCJleHAiOjE1NDQ0MjE1OTR9.Y6m3t8EHXt-oLJWVfGjVhtnbSU-6P56xtWzjGcTDmVbGNXE34gPNIRygAB-rUhzTDForOmiQD_s7MnKnS7k7KQ",
 										"type": "text"
 									},
 									{
@@ -207,7 +207,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"manager\",\r\n    \"username\": \"manager\",\r\n    \"password\": \"manager@password\",\r\n    \"salary\": 10,\r\n    \"email\": \"manager@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"09784569\",\r\n    \"roles\": [\r\n\t\t\"ROLE_MANAGER\"\r\n    ]\r\n}"
+									"raw": "{\r\n    \"name\": \"cashier\",\r\n    \"username\": \"cashier\",\r\n    \"password\": \"cashier@password\",\r\n    \"salary\": 10,\r\n    \"email\": \"cashier@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"09784569\",\r\n    \"roles\": [\r\n\t\t\"ROLE_MANAGER\"\r\n    ]\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/users",
@@ -236,7 +236,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNzE3MTEzLCJleHAiOjE1NDQzMjE5MTN9.mFCP60TluAfIq64tlLgb1_kETjgXak2OcU55YkO7segAMQ-spjF_r2G7SDkBVEF1fEhz80QciiZ4ItZs1MXlVg",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODE2Nzk0LCJleHAiOjE1NDQ0MjE1OTR9.Y6m3t8EHXt-oLJWVfGjVhtnbSU-6P56xtWzjGcTDmVbGNXE34gPNIRygAB-rUhzTDForOmiQD_s7MnKnS7k7KQ",
 										"type": "text"
 									}
 								],
@@ -268,7 +268,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA5ODYyLCJleHAiOjE1NDQxMTQ2NjJ9.MPFmR6URzfjrLZlSZ0-Wwt46WFRHGoU_JUCagDYqEOuda0g27Q7qrZ4h8wydi8cs2s_rkAqP9nNecBIb5OqtOg",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODE2Nzk0LCJleHAiOjE1NDQ0MjE1OTR9.Y6m3t8EHXt-oLJWVfGjVhtnbSU-6P56xtWzjGcTDmVbGNXE34gPNIRygAB-rUhzTDForOmiQD_s7MnKnS7k7KQ",
 										"type": "text"
 									},
 									{
@@ -280,10 +280,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"ceo la la\",\r\n    \"username\": \"ceola\",\r\n    \"salary\": 100,\r\n    \"email\": \"ceola@gmail.com\",\r\n    \"address\": \"hai phong\",\r\n    \"mobileNo\": \"0916157558\",\r\n    \"roles\": [\r\n        \"ROLE_CASHIER\",\r\n        \"ROLE_ADMIN\"\r\n    ]\r\n}"
+									"raw": "{\n    \"name\": \"manager\",\n    \"username\": \"manager\",\n    \"password\": \"manager@gmail.com\",\n    \"salary\": 10,\n    \"email\": \"manager@gmail.com\",\n    \"address\": \"hoa binh\",\n    \"mobileNo\": \"09784569\"\n}"
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/users/3",
+									"raw": "http://localhost:8080/api/v1/users/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -293,7 +293,7 @@
 										"api",
 										"v1",
 										"users",
-										"3"
+										"2"
 									]
 								}
 							},
@@ -315,7 +315,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/users?page=1&size=1",
+									"raw": "http://localhost:8080/api/v1/users",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -325,16 +325,6 @@
 										"api",
 										"v1",
 										"users"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1"
-										},
-										{
-											"key": "size",
-											"value": "1"
-										}
 									]
 								}
 							},
@@ -404,7 +394,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"customer3\",\r\n    \"email\": \"customer3@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0324129032\"\r\n}"
+									"raw": "{\r\n    \"name\": \"customer4\",\r\n    \"email\": \"customer4@gmail.com\",\r\n    \"address\": \"hai phong\",\r\n    \"mobileNo\": \"0324234423\"\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/customers",
@@ -464,6 +454,44 @@
 							"response": []
 						},
 						{
+							"name": "Admin, Cashier search users",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"9032\",\r\n        \"regex\": false\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search/customers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search",
+										"customers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Admin, Cashier get a customer's information",
 							"request": {
 								"method": "GET",
@@ -479,7 +507,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/customers/10",
+									"raw": "http://localhost:8080/api/v1/customers/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -489,7 +517,7 @@
 										"api",
 										"v1",
 										"customers",
-										"10"
+										"1"
 									]
 								}
 							},
@@ -514,7 +542,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"customer_1\",\r\n    \"email\": \"customer_1@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167997\"\r\n}"
+									"raw": "{\r\n    \"name\": \"customer1\",\r\n    \"email\": \"customer1@gmail.com\",\r\n    \"address\": \"hoa binh\",\r\n    \"mobileNo\": \"0916167997\"\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/customers/1",
@@ -564,44 +592,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Admin, Cashier search users",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg"
-									},
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"type": "text",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"2\",\r\n        \"regex\": false\r\n    }\r\n}"
-								},
-								"url": {
-									"raw": "http://localhost:8080/api/v1/search/customers",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"search",
-										"customers"
-									]
-								}
-							},
-							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -610,7 +600,7 @@
 					"name": "Supplier Management",
 					"item": [
 						{
-							"name": "Admin, Manager create a new customer",
+							"name": "Admin, Manager create a new supplier",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -628,7 +618,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"supplier3\",\r\n    \"email\": \"supplier3@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0324129032\"\r\n}"
+									"raw": "{\r\n    \"name\": \"supplier2\",\r\n    \"email\": \"supplier2@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"0324129032\"\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/suppliers",
@@ -640,6 +630,44 @@
 									"path": [
 										"api",
 										"v1",
+										"suppliers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier search suppliers",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTQzNzE3OTE5LCJleHAiOjE1NDQzMjI3MTl9.2gXYM77yg2Sgls4QZB6hUE3hnlXWx3LmIPyOywuN_fqNe2hYbbbDufxP5gqQQiAbJ_P9nIfUwnkwr-BWnFIQDw"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"r2\",\r\n        \"name\": \"\",\r\n        \"email\": \"\",\r\n        \"address\": \"\",\r\n        \"mobileNo\": \"\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search/suppliers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search",
 										"suppliers"
 									]
 								}
@@ -697,7 +725,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"supplier\",\r\n    \"email\": \"supplier@gmail.com\",\r\n    \"address\": \"hai duong\",\r\n    \"mobileNo\": \"0984651331\"\r\n}"
+									"raw": "{\r\n    \"name\": \"supplier\",\r\n    \"email\": \"supplier@gmail.com\",\r\n    \"address\": \"ha noi\",\r\n    \"mobileNo\": \"095649879865\"\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/suppliers/1",
@@ -732,7 +760,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/suppliers/1",
+									"raw": "http://localhost:8080/api/v1/suppliers/2",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -742,14 +770,57 @@
 										"api",
 										"v1",
 										"suppliers",
-										"1"
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Product Type Management",
+					"item": [
+						{
+							"name": "Admin, Manager create a new product type",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNzE3MTEzLCJleHAiOjE1NDQzMjE5MTN9.mFCP60TluAfIq64tlLgb1_kETjgXak2OcU55YkO7segAMQ-spjF_r2G7SDkBVEF1fEhz80QciiZ4ItZs1MXlVg"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"chocolate white vn\",\r\n    \"price\": 80000,\r\n    \"unit\": \"lit\",\r\n    \"barcode\": \"df32xv34\"\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/product_types",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"product_types"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier search suppliers",
+							"name": "Admin, Cashier search product types",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -767,10 +838,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"\",\r\n        \"regex\": false\r\n    }\r\n}"
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"\",\r\n        \"name\": \"\",\r\n        \"unit\": \"\",\r\n        \"barcode\": \"\"\r\n    }\r\n}"
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/search/suppliers",
+									"raw": "http://localhost:8080/api/v1/search/product_types",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -780,7 +851,109 @@
 										"api",
 										"v1",
 										"search",
-										"suppliers"
+										"product_types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier get a product type's information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTQzNzE3OTE5LCJleHAiOjE1NDQzMjI3MTl9.2gXYM77yg2Sgls4QZB6hUE3hnlXWx3LmIPyOywuN_fqNe2hYbbbDufxP5gqQQiAbJ_P9nIfUwnkwr-BWnFIQDw"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/product_types/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"product_types",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier update a product type's information",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"chocolate white vn\",\n    \"price\": 85000,\n    \"unit\": \"bar\",\n    \"barcode\": \"df32xv34\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/product_types/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"product_types",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier delete a product type",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/product_types/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"product_types",
+										"3"
 									]
 								}
 							},

@@ -2,15 +2,15 @@ package com.example.store.payload.supplier_management.response;
 
 public class Data {
 
-    private Long id;
+    public Long id;
     
-    private String name;
+    public String name;
 
-    private String email;
+    public String email;
 
-    private String address;
+    public String address;
 
-    private String mobileNo;
+    public String mobileNo;
 
     public Data(Long id, String name, String email, String address, String mobileNo) {
         this.id = id;
@@ -18,26 +18,6 @@ public class Data {
         this.email = email;
         this.address = address;
         this.mobileNo = mobileNo;
-    }
-
-    public Long getId(){
-        return id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public String getAddress(){
-        return address;
-    }
-
-    public String getMobileNo(){
-        return mobileNo;
     }
 
 }

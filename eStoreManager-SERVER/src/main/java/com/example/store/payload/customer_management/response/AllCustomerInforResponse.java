@@ -20,6 +20,14 @@ public class AllCustomerInforResponse {
         this.success = success;
     }
 
+    public Set<CustomerInfor> getCustomers(){
+        return customers;
+    }
+
+    public void setCustomers(Set<CustomerInfor> customers){
+        this.customers = customers;
+    }
+
     public void addCustomerInfor(CustomerInfor customerInfor) {
         this.customers.add(customerInfor);
     }

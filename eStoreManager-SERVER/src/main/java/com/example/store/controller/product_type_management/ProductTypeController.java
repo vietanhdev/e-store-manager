@@ -17,6 +17,7 @@ import com.example.store.repository.product_type_management.ProductTypeRepositor
 import com.example.store.util.OffsetBasedPageRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -121,7 +122,7 @@ public class ProductTypeController {
         if(searchProductTypesRequest.getSearch().getUnit() == null) searchProductTypesRequest.getSearch().setUnit("");
         if(searchProductTypesRequest.getSearch().getBarcode() == null) searchProductTypesRequest.getSearch().setBarcode("");
 
-        List<ProductType> productTypes = productTypeRepository.searchProductTypes(searchProductTypesRequest.getSearch().getValue(),
+        Page<ProductType> productTypes = productTypeRepository.searchProductTypes(searchProductTypesRequest.getSearch().getValue(),
                                                                                 searchProductTypesRequest.getSearch().getName(), 
                                                                                 searchProductTypesRequest.getSearch().getUnit(), 
                                                                                 searchProductTypesRequest.getSearch().getBarcode(),
@@ -129,11 +130,11 @@ public class ProductTypeController {
 
         Long draw = searchProductTypesRequest.getDraw() * 10;
         Long recordsTotal = (long) productTypeRepository.findAll().size();
-        Long recordsFiltered = (long) productTypes.size();
+        Long recordsFiltered = (long) productTypes.getTotalElements();
 
         SearchProductTypesResponse searchProductTypesResponse = new SearchProductTypesResponse(draw, recordsTotal, recordsFiltered);
 
-        for(ProductType productType: productTypes){
+        for(ProductType productType: productTypes.getContent()){
             Data data = new Data(productType.getId(), 
                                 productType.getName(), 
                                 productType.getPrice(), 
