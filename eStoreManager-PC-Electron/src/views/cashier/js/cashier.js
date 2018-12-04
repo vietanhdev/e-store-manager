@@ -329,10 +329,9 @@ $(document).ready(() => {
 
 
     // === Handle Customer Area ===
-    $("#btn-add-customer").click(() => {
-        let customerId = $("#inp-customer-id").val();
-
-        customerController.getCustomerDataById(customerId, 
+    // Add customer
+    function addCustomerById(id) {
+        customerController.getCustomerDataById(id, 
             (customer) => { // Success
                 $("#customer-name").html(customer.name);
                 $("#customer-id").html(customer.id);
@@ -341,7 +340,19 @@ $(document).ready(() => {
             (respond) => {
                 alert(TextGetter.get("customer_not_found"));
             });
-
+    }
+    $("#btn-add-customer").click(() => {
+        let customerId = $("#inp-customer-id").val();
+        addCustomerById(customerId);
+    });
+    // New customer
+    ipcRenderer.on(EventGetter.get("add_customer_success"), (event, customer) => {
+        $("#customer-name").html(customer.name);
+        $("#customer-id").html(customer.id);
+        $("#customer-id").attr("customerid", customer.id);
+    });
+    $("#btn-new-customer").click(() => {
+        ipcRenderer.send(EventGetter.get('request_add_customer'));
     });
 
 });
