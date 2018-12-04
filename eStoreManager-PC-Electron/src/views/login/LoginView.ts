@@ -26,8 +26,6 @@ export class LoginView extends View {
     logicHandle():void {
         ipcMain.on(EventGetter.get('login_command'), (event:any, arg:any) => {
             event.preventDefault();
-            
-            this.showLoadingModal();
 
             let userController = new UserController();
             
@@ -36,7 +34,6 @@ export class LoginView extends View {
                 settings.set("account_info.fullname", result.name);
                 settings.set("account_info.token", result.accessToken);
                 this.requestChangeView("welcome");
-                this.hideLoadingModal();
             }, (result:any) => {
                 dialog.showMessageBox(this.getWindow(), Object({
                     type: "error",
@@ -44,7 +41,6 @@ export class LoginView extends View {
                     message: result.message,
                     buttons: ["OK"]
                 }));
-                this.hideLoadingModal();
             }); 
 
         });

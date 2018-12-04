@@ -94,7 +94,7 @@ export class View {
 
     setViewFile():void {
         this.viewFile = path.join(__dirname, "../"+ConfigGetter.get().view[this.viewName].path);
-        console.log(this.viewFile);
+        // console.log(this.viewFile);
     }
 
     setMenu(menu: Menu): void {
@@ -131,13 +131,6 @@ export class View {
                 this.window.close();
             }
         } catch (e) {}
-    }
-
-    public showLoadingModal() {
-        this.getWindow().webContents.send('loading-modal' , {status:'show'});
-    }
-    public hideLoadingModal() {
-        this.getWindow().webContents.send('loading-modal' , {status:'hide'});
     }
 
 

@@ -52,7 +52,10 @@
     "request_product_type_info": "request_product_type_info",
     "update_product_type_success": "update_product_type_success",
 
-    "request_discard_order": "request_discard_order"
+    "request_discard_order": "request_discard_order",
+    "request_print_order": "request_print_order",
+    "request_order_data": "request_order_data",
+    "order_data": "order_data"
     
     
 }

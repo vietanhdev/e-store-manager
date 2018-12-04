@@ -365,5 +365,13 @@ $(document).ready(() => {
         ipcRenderer.send(EventGetter.get('request_discard_order'));
 
     });
+    // Printing Button
+    $("#print-order").click(() => {
+
+        let orderData = {};
+
+        ipcRenderer.send(EventGetter.get('request_print_order'), orderData);
+
+    });
 
 });
