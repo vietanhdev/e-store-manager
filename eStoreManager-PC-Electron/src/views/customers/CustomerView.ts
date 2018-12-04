@@ -1,12 +1,12 @@
 import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
 import { EventGetter } from "../../services/EventGetter";
+import { TextGetter } from "../../services/TextGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
 import {AddCustomerView} from './AddCustomerView';
 import {EditCustomerView} from './EditCustomerView';
 import {CustomerController} from '../../controllers/CustomerController';
-import { TextGetter } from "../../services/TextGetter";
 const settings = require('electron-settings');
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');

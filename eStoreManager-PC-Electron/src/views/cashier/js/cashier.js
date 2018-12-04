@@ -1,7 +1,16 @@
 $(document).ready(() => {
 
+    // Import controllers
+    const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
+    let productTypeControllerController = new ProductTypeController();
+    const UserController = require("../../../controllers/UserController.js").UserController;
+    let userController = new UserController();
+    const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
+    let customerController = new CustomerController();
+
     // Load library
     const prompt = require('electron-prompt');
+    const {dialog} = require('electron');
     const settings = require('electron-settings');
     const EventGetter = require("../../../services/EventGetter").EventGetter;
     const TextGetter = require("../../../services/TextGetter").TextGetter;
@@ -24,14 +33,7 @@ $(document).ready(() => {
         }, 0 );
     } );
 
-    const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
-    let productTypeControllerController = new ProductTypeController();
-
-    const UserController = require("../../../controllers/UserController.js").UserController;
-    let userController = new UserController();
-
-    const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
-    let customerController = new CustomerController();
+    
 
     // TODO: Change this
     var tax = 0.08; // 8 percent
@@ -353,6 +355,15 @@ $(document).ready(() => {
     });
     $("#btn-new-customer").click(() => {
         ipcRenderer.send(EventGetter.get('request_add_customer'));
+    });
+
+
+    // === Handle Main Buttons Area ===
+    // Discard button
+    $("#discard").click(() => {
+
+        ipcRenderer.send(EventGetter.get('request_discard_order'));
+
     });
 
 });

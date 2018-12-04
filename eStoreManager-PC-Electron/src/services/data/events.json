@@ -50,7 +50,9 @@
     "update_product_type": "update_product_type",
     "respond_request_product_type_info": "respond_request_user_info",
     "request_product_type_info": "request_product_type_info",
-    "update_product_type_success": "update_product_type_success"
+    "update_product_type_success": "update_product_type_success",
+
+    "request_discard_order": "request_discard_order"
     
     
 }

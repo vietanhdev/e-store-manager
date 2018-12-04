@@ -169,6 +169,8 @@
     "insufficient_payment": "INSUFFICIENT PAYMENT",
 
     "add": "Add",
-    "customer_not_found": "Could not find this customer. Please try again!"
+    "customer_not_found": "Could not find this customer. Please try again!",
+    "are_you_sure_discard_this_order": "Are you sure to discard this order?",
+    "discard_order": "Discard Order"
 
 }
