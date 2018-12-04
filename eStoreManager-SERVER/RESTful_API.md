@@ -1677,7 +1677,7 @@
     * Content-type: application/json
     * Authorization: Bearer JWT
 
-* Body:(name field is compulsory, other fields can be skipped)
+* Body:
 ```
 {
 	"user_id": 1,
