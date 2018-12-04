@@ -397,6 +397,7 @@ public class UserController {
 
         Role userRole = roleRepository.findByName(RoleName.valueOf("ROLE_ADMIN")).orElse(null);
         user.addRole(userRole);
+        userRepository.save(user);
         
         return new ResponseEntity<>(new ApiResponse(true, "intial_successfull", "intial successfull"),
                                     HttpStatus.OK);
