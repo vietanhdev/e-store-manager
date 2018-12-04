@@ -72,7 +72,7 @@
 						<label class="total-title title-sm"><%= gettext.customer_pay %></label>
 					</td>
 					<td>
-						<input class="total-number" type="text" class="form-control">
+						<input id="customer-give" class="total-number" type="text" class="form-control">
 					</td>
 				</tr>
 				<tr>
@@ -80,7 +80,7 @@
 						<label class="total-title title-sm"><%= gettext.give_back_to_customer %></label>
 					</td>
 					<td>
-						<input value="0" readonly class="total-number" type="text" class="form-control">
+						<input id="customer-take-back" value="0" readonly class="total-number" type="text" class="form-control">
 					</td>
 				</tr>
 			</table>
@@ -329,11 +329,10 @@
 						let product = dataTable.row(index).data();
 						product.quantities = Number(product.quantities) + 1;
 						dataTable
-						.row( $(this).parents('tr') )
+						.row( index )
 						.data( product )
 						.draw();
 					}
-
 
 				},
 				(response) => { //Fail
