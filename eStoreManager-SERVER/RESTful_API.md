@@ -1077,7 +1077,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1150,7 +1150,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1213,7 +1213,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1272,7 +1272,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1333,7 +1333,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1395,7 +1395,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1469,7 +1469,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1533,7 +1533,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1593,7 +1593,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1654,7 +1654,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1663,7 +1663,7 @@
 }
 ```
 
-# 5. Buy management API
+# 5. Sell management API
 ---
 
 ## 5.1. Create new buy
@@ -1753,7 +1753,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1869,7 +1869,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -1943,7 +1943,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -2020,7 +2020,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
@@ -2069,6 +2069,438 @@
     "success": false,
     "code": "wrong_buy_id",
     "message": "buy id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or manager):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+# 6. Sell management API
+---
+
+## 6.1. Create new sell
+
+### 6.1.1. Request
+
+* Path: /api/v1/sells
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+```
+{
+    "user_id": 1,
+    "customer_id": 1,
+    "tax": 10.2,
+    "sell_items": [
+        {
+            "product_id": 1,
+            "supplier_id": 1,
+            "price": 1000,
+            "quantities": 2
+        },
+        {
+            "product_id": 2,
+            "supplier_id": 3,
+            "price": 50,
+            "quantities": 5
+        }
+    ]
+}
+```
+
+### 6.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 10
+}
+```
+
+* On fail (user id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_user_id",
+    "message": "user id " + {id} + " does not exist"
+}
+```
+
+* On fail (customer id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_customer_id",
+    "message": "customer id " + {id} + " does not exist"
+}
+```
+
+* On fail (product id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+
+## 6.2. Search sells
+### 6.2.1. Request
+
+* Path: /api/v1/search/sells
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+
+    * Search by user id and customer id and date:
+
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "user_id": 1,
+            "customer_id": 1,
+            "start": "2018-01-30 06:52:05",
+            "end": "2018-12-05 06:52:08"
+        }
+    }
+    ```
+
+    * Search by date:
+    
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "start": "2018-01-30 06:52:05",
+            "end": "2018-12-05 06:52:08"
+        }
+    }
+    ```
+
+    * Search by user id:
+
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "user_id": 1,
+        }
+    }
+    ```
+
+    * Search by customer id:
+
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "customer_id": 1,
+        }
+    }
+    ```
+
+    * Get all:
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+        }
+    }
+    ```
+
+
+
+### 6.2.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "draw": 10,
+    "recordsTotal": 3,
+    "recordsFiltered": 2,
+    "data": [
+        {
+            "id": 3,
+            "user_id": 1,
+            "customer_id": 1,
+            "tax": 10.2
+        },
+        {
+            "id": 1,
+            "user_id": 1,
+            "customer_id": 1,
+            "tax": 10.2
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 6.3. Get a sell's information 
+
+### 6.3.1. Request
+
+* Path: /api/v1/sells/{id}
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 6.3.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1,
+    "user_id": 1,
+    "customer_id": 1,
+    "tax": 10.2,
+    "sell_items": [
+        {
+            "product_id": 2,
+            "price": 50,
+            "quantities": 5
+        },
+        {
+            "product_id": 1,
+            "price": 1000,
+            "quantities": 2
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 6.4. Update a sell's information 
+
+### 6.4.1. Request
+
+* Path: /api/v1/sells/{id}
+* Method: PUT
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body: (this information will overwrite the original one)
+
+```
+{
+    "user_id": 2,
+    "customer_id": 3,
+    "tax": 20.07,
+    "sell_items": [
+        {
+            "product_id": 1,
+            "supplier_id": 2,
+            "price": 100,
+            "quantities": 18
+        },
+        {
+            "product_id": 3,
+            "supplier_id": 10,
+            "price": 10,
+            "quantities": 150
+        },
+        {
+            "product_id": 4,
+            "supplier_id": 1,
+            "price": 970,
+            "quantities": 100
+        }
+    ]
+}
+```
+
+### 6.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "update_sell_information_successful",
+    "message": "update sell type information successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_sell_id",
+    "message": "sell id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 6.6. Delete a sell
+
+### 6.1.1. Request
+
+* Path: /api/v1/sells/{id}
+* Method: DELETE
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+
+### 6.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "delete_sell_successful",
+    "message": "delete sell successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_sell_id",
+    "message": "sell id " + {id} + " does not exist"
 }
 ```
 

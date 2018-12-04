@@ -18,7 +18,7 @@ public class UpdateProductRequest {
     private String barcode;
 
     @Min(0)
-    private Long quantities;
+    private Float quantities;
 
     public String getName() {
         return name;
@@ -36,7 +36,7 @@ public class UpdateProductRequest {
         return barcode;
     }
 
-    public Long getQuantities() {
+    public Float getQuantities() {
         return quantities;
     }
 
