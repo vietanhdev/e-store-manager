@@ -472,7 +472,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"9032\",\r\n        \"regex\": false\r\n    }\r\n}"
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"customer2\",\r\n        \"regex\": false\r\n    }\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/search/customers",
@@ -498,7 +498,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg",
 										"type": "text"
 									}
 								],
@@ -530,7 +530,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzNTA1MzI3LCJleHAiOjE1NDQxMTAxMjd9.qMjEyDcJlJhTDF8KL6XZ5uuqlTwZ7iIYe1_w5K8IdE7ivYYu_JiQLNL4qTZWO4EyIgVpr094X6OveW7ACtsCCg",
 										"type": "text"
 									},
 									{
@@ -618,7 +618,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"supplier2\"\r\n}"
+									"raw": "{\n    \"name\": \"vina\",\n    \"email\": \"vina@gmail.com\",\n    \"address\": \"ha noi\",\n    \"mobileNo\": \"0324129032\"\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/suppliers",
@@ -655,7 +655,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"\",\r\n        \"name\": \"\",\r\n        \"email\": \"\",\r\n        \"address\": \"\",\r\n        \"mobileNo\": \"\"\r\n    }\r\n}"
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"value\": \"sup\",\r\n        \"name\": \"\",\r\n        \"email\": \"\",\r\n        \"address\": \"\",\r\n        \"mobileNo\": \"\"\r\n    }\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/search/suppliers",
@@ -681,7 +681,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNTQzNzE3OTE5LCJleHAiOjE1NDQzMjI3MTl9.2gXYM77yg2Sgls4QZB6hUE3hnlXWx3LmIPyOywuN_fqNe2hYbbbDufxP5gqQQiAbJ_P9nIfUwnkwr-BWnFIQDw",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A",
 										"type": "text"
 									}
 								],
@@ -713,7 +713,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A",
 										"type": "text"
 									},
 									{
@@ -801,7 +801,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"vina milk\",\r\n    \"price\": 80000,\r\n    \"unit\": \"cartoon\",\r\n    \"barcode\": \"dccf2351\",\r\n    \"quantities\": 500\r\n}"
+									"raw": "{\r\n    \"name\": \"chocolate\",\r\n    \"price\": 80000,\r\n    \"unit\": \"cartoon\",\r\n    \"barcode\": \"dccf2351\",\r\n    \"quantities\": 500\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/products",
@@ -897,7 +897,7 @@
 									{
 										"key": "Authorization",
 										"type": "text",
-										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzMzQ3NDY5LCJleHAiOjE1NDM5NTIyNjl9.RRG69WZ9JHz6h1UjBHciOVB6SlLzadoEwP1E5gd69tQTFB7ls5oZ4zXonNEzSzhhkDsUdCeLkMiU6vv4AoAk-w"
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODQzMDUyLCJleHAiOjE1NDQ0NDc4NTJ9.tSJrcs6Gp7hWYPyMEdhMxC7nkak9JlgnjwjKkbM4uGFOSuxLBwkgBvhnhjWhLN4KuqqBbzuG0Z1-U-QjJCgz9g"
 									},
 									{
 										"key": "Content-Type",
@@ -911,7 +911,7 @@
 									"raw": "{\n    \"name\": \"milk\",\n    \"price\": 85000,\n    \"unit\": \"bar\",\n    \"barcode\": \"df32xv34\",\n    \"quantities\": 100\n}"
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/products/2",
+									"raw": "http://localhost:8080/api/v1/products/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -921,7 +921,7 @@
 										"api",
 										"v1",
 										"products",
-										"2"
+										"1"
 									]
 								}
 							},
@@ -963,7 +963,7 @@
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "Import Bill Management",
+					"name": "Buy Management",
 					"item": [
 						{
 							"name": "Admin, Manager create a new buy",
@@ -984,7 +984,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"user_id\": 1,\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t}\n\t]\n}"
+									"raw": "{\n\t\"user_id\": 1,\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 2,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t}\n\t]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/buys",
@@ -1021,7 +1021,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 10,\r\n    \"search\": {\r\n    \t\"user_id\": 2\r\n    }\r\n}"
+									"raw": "{\n    \"draw\": 1,\n    \"start\": 0,\n    \"length\": 10,\n    \"search\": {\n        \"user_id\": 1,\n        \"start\": \"2016-01-30 06:52:05\",\n        \"end\": \"2019-12-04 06:52:08\"\n    }\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/search/buys",
@@ -1056,7 +1056,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/buys/10",
+									"raw": "http://localhost:8080/api/v1/buys/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1066,7 +1066,7 @@
 										"api",
 										"v1",
 										"buys",
-										"10"
+										"1"
 									]
 								}
 							},
@@ -1094,7 +1094,7 @@
 									"raw": "{\n    \"user_id\": 2,\n    \"buy_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/buys/10",
+									"raw": "http://localhost:8080/api/v1/buys/1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1104,7 +1104,7 @@
 										"api",
 										"v1",
 										"buys",
-										"10"
+										"1"
 									]
 								}
 							},
@@ -1137,6 +1137,189 @@
 										"v1",
 										"buys",
 										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Sell Management Copy",
+					"item": [
+						{
+							"name": "Admin, Manager create a new sell",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\": 1,\r\n    \"customer_id\": 1,\r\n    \"tax\": 10.2,\r\n    \"sell_items\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"supplier_id\": 1,\r\n            \"price\": 700,\r\n            \"quantities\": 2\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"supplier_id\": 3,\r\n            \"price\": 50,\r\n            \"quantities\": 5\r\n        }\r\n    ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/sells",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"sells"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier search sells",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODQzMDUyLCJleHAiOjE1NDQ0NDc4NTJ9.tSJrcs6Gp7hWYPyMEdhMxC7nkak9JlgnjwjKkbM4uGFOSuxLBwkgBvhnhjWhLN4KuqqBbzuG0Z1-U-QjJCgz9g"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"draw\": 1,\r\n        \"start\": 0,\r\n        \"length\": 10,\r\n        \"search\": {\r\n            \"user_id\": 1,\r\n            \"customer_id\": 1,\r\n            \"start\": \"2018-01-30 06:52:05\",\r\n            \"end\": \"2018-12-05 06:52:08\"\r\n        }\r\n    }"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search/sells",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search",
+										"sells"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier get a sell's information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/sells/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"sells",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier update a sell's information",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 2,\n    \"customer_id\": 3,\n    \"tax\": 20.07,\n    \"sell_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/sells/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"sells",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier delete a sell",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/sells/3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"sells",
+										"3"
 									]
 								}
 							},

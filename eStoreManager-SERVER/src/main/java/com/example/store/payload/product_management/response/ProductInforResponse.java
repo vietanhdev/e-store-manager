@@ -14,9 +14,9 @@ public class ProductInforResponse {
     
     private String barcode;
 
-    private Long quantities;
+    private Float quantities;
 
-    public ProductInforResponse(Long id, String name, Float price, String unit, String barcode, Long quantities){
+    public ProductInforResponse(Long id, String name, Float price, String unit, String barcode, Float quantities){
         this.id = id;
         this.name = name;
         this.price = price;
@@ -73,11 +73,11 @@ public class ProductInforResponse {
         this.success = success;
     }
 
-    public Long getQuantities() {
+    public Float getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(Long quantities) {
+    public void setQuantities(Float quantities) {
         this.quantities = quantities;
     }
     

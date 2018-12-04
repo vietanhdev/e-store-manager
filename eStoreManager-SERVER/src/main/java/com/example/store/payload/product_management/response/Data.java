@@ -12,9 +12,9 @@ public class Data {
     
     public String barcode;
 
-    public Long quantities;
+    public Float quantities;
 
-    public Data(Long id, String name, Float price , String unit, String barcode, Long quantities){
+    public Data(Long id, String name, Float price , String unit, String barcode, Float quantities){
         this.id = id;
         this.name = name;
         this.price = price;

@@ -61,26 +61,34 @@ public class BuyController {
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<?> createBuy(@Valid @RequestBody CreateBuyRequest createBuyRequest) {
         // check if user id exist
-        Long user_id = createBuyRequest.getUser_id();
-        if( userRepository.existsById(user_id) == false ) {
-            return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
-                                    HttpStatus.OK);
+        if(createBuyRequest.getUser_id() != null){
+            Long user_id = createBuyRequest.getUser_id();
+            if( userRepository.existsById(user_id) == false ) {
+                return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
+                                        HttpStatus.OK);
+            }
         }
+        
 
         // check if product id and supplier id exist
         for(BuyItemInfor buyItemInfor: createBuyRequest.getBuy_items()) {
-
-            Long product_id = buyItemInfor.getProduct_id();
-            if( productRepository.existsById(product_id) == false ) {
-                return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product type id " + product_id + " does not exist"),
-                                    HttpStatus.OK);
+            
+            if(buyItemInfor.getProduct_id() != null) {
+                Long product_id = buyItemInfor.getProduct_id();
+                if( productRepository.existsById(product_id) == false ) {
+                    return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product type id " + product_id + " does not exist"),
+                                        HttpStatus.OK);
+                }
             }
 
-            Long supplier_id = buyItemInfor.getSupplier_id();
-            if( supplierRepository.existsById(supplier_id) == false ) {
-                return new ResponseEntity<>(new ApiResponse(false, "wrong_supplier_id", "supplier id " + supplier_id + " does not exist"),
-                                    HttpStatus.OK);
+            if(buyItemInfor.getSupplier_id() != null) {
+                Long supplier_id = buyItemInfor.getSupplier_id();
+                if( supplierRepository.existsById(supplier_id) == false ) {
+                    return new ResponseEntity<>(new ApiResponse(false, "wrong_supplier_id", "supplier id " + supplier_id + " does not exist"),
+                                        HttpStatus.OK);
+                }
             }
+            
         }
 
         // create new buy and save
@@ -90,9 +98,9 @@ public class BuyController {
         // create new buyItems and save
         for(BuyItemInfor buyItemInfor: createBuyRequest.getBuy_items()) {
             BuyItem buyItem = new BuyItem(buyItemInfor.getProduct_id(), 
-                        buyItemInfor.getSupplier_id(),
-                        buyItemInfor.getPrice(),
-                        buyItemInfor.getQuantities());
+                                        buyItemInfor.getSupplier_id(),
+                                        buyItemInfor.getPrice(),
+                                        buyItemInfor.getQuantities());
             buyItem.setBuy(buy);
             buyItemRepository.save(buyItem);
         }

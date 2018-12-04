@@ -23,7 +23,7 @@ public class BuyItem extends DateAudit{
 
     private Float price;
 
-    private Long quantities;
+    private Float quantities;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "buy_id", nullable = false)
@@ -34,7 +34,7 @@ public class BuyItem extends DateAudit{
         
     }
 
-    public BuyItem(Long product_id, Long supplier_id, Float price, Long quantities) {
+    public BuyItem(Long product_id, Long supplier_id, Float price, Float quantities) {
         this.product_id = product_id;
         this.supplier_id = supplier_id;
         this.price = price;
@@ -53,11 +53,11 @@ public class BuyItem extends DateAudit{
         this.supplier_id = supplier_id;
     }
 
-    public Long getQuantities() {
+    public Float getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(Long quantities) {
+    public void setQuantities(Float quantities) {
         this.quantities = quantities;
     }
 

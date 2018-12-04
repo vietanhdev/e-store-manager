@@ -36,7 +36,7 @@ public class BuyInforResponse {
         this.buy_items = buy_items;
     }
 
-    public void addBuy_items(Long product_id, Long supplier_id, Float price, Long quantities){
+    public void addBuy_items(Long product_id, Long supplier_id, Float price, Float quantities){
         this.buy_items.add(new BuyItemInfor(product_id, supplier_id, price, quantities));
     }
 

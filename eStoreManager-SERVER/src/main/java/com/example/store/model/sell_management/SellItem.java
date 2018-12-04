@@ -21,7 +21,7 @@ public class SellItem extends DateAudit{
 
     private Float price;
 
-    private Long quantities;
+    private Float quantities;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "sell_id", nullable = false)
@@ -32,17 +32,21 @@ public class SellItem extends DateAudit{
         
     }
 
-    public SellItem(Long product_id, Float price, Long quantities) {
-        this.setProduct_id(product_id);
-        this.setPrice(price);
-        this.setQuantities(quantities);
+    public SellItem(Long product_id, Float price, Float quantities) {
+        this.product_id = product_id;
+        this.price = price;
+        this.quantities = quantities;
     }
 
-    public Long getQuantities() {
+    public Long getId() {
+        return id;
+    }
+
+    public Float getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(Long quantities) {
+    public void setQuantities(Float quantities) {
         this.quantities = quantities;
     }
 
@@ -54,11 +58,11 @@ public class SellItem extends DateAudit{
         this.price = price;
     }
 
-    public Long getProduct_id() {
+    public Long getProductId() {
         return product_id;
     }
 
-    public void setProduct_id(Long product_id) {
+    public void setProductId(Long product_id) {
         this.product_id = product_id;
     }
 

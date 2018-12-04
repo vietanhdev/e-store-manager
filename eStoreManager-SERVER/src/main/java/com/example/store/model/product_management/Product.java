@@ -31,13 +31,13 @@ public class Product extends DateAudit{
     @Size(max = 40)
     private String barcode;
 
-    private Long quantities;
+    private Float quantities;
 
     public Product(){
 
     }
 
-    public Product(String name, Float price, String unit, String barcode, Long quantities) {
+    public Product(String name, Float price, String unit, String barcode, Float quantities) {
         this.name = name;
         this.price = price;
         this.unit = unit;
@@ -85,11 +85,11 @@ public class Product extends DateAudit{
         this.barcode = barcode;
     }
 
-    public Long getQuantities() {
+    public Float getQuantities() {
         return quantities;
     }
 
-    public void setQuantities(Long quantities) {
+    public void setQuantities(Float quantities) {
         this.quantities = quantities;
     }
 

@@ -8,9 +8,9 @@ public class BuyItemInfor {
 
     private Float price;
 
-    private Long quantities;
+    private Float quantities;
 
-    public BuyItemInfor(Long product_id, Long supplier_id, Float price, Long quantities) {
+    public BuyItemInfor(Long product_id, Long supplier_id, Float price, Float quantities) {
         this.product_id = product_id;
         this.supplier_id = supplier_id;
         this.price = price;
@@ -29,7 +29,7 @@ public class BuyItemInfor {
         return this.price;
     }
 
-    public Long getQuantities() {
+    public Float getQuantities() {
         return this.quantities;
     }
 

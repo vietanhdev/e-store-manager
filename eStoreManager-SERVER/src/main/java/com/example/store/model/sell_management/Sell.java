@@ -18,13 +18,32 @@ public class Sell extends DateAudit{
 
     private Long customer_id;
 
+    private Float tax;
+
     public Sell() {
 
     }
 
-    public Sell(Long user_id, Long customer_id) {
+    public Sell(Long user_id, Long customer_id, Float tax) {
         this.user_id = user_id;
         this.customer_id = customer_id;
+        this.tax = tax;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Float getTax() {
+        return tax;
+    }
+
+    public void setTax(Float tax) {
+        this.tax = tax;
     }
 
     public Long getCustomerId() {
