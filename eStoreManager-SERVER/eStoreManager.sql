@@ -44,39 +44,39 @@ LOCK TABLES `customers` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `import_bill_products`
+-- Table structure for table `import_products`
 --
 
-DROP TABLE IF EXISTS `import_bill_products`;
+DROP TABLE IF EXISTS `import_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `import_bill_products` (
-  `import_bill_id` bigint(20) NOT NULL,
+CREATE TABLE `import_products` (
+  `import_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`import_bill_id`,`product_id`),
+  PRIMARY KEY (`import_id`,`product_id`),
   KEY `FKs5rl5ysvypon5n445uus5seo6` (`product_id`),
-  CONSTRAINT `FKr2afgn2oh53531yvi4jfjoshk` FOREIGN KEY (`import_bill_id`) REFERENCES `import_bills` (`id`),
+  CONSTRAINT `FKr2afgn2oh53531yvi4jfjoshk` FOREIGN KEY (`import_id`) REFERENCES `imports` (`id`),
   CONSTRAINT `FKs5rl5ysvypon5n445uus5seo6` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `import_bill_products`
+-- Dumping data for table `import_products`
 --
 
-LOCK TABLES `import_bill_products` WRITE;
-/*!40000 ALTER TABLE `import_bill_products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `import_bill_products` ENABLE KEYS */;
+LOCK TABLES `import_products` WRITE;
+/*!40000 ALTER TABLE `import_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `import_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `import_bills`
+-- Table structure for table `imports`
 --
 
-DROP TABLE IF EXISTS `import_bills`;
+DROP TABLE IF EXISTS `imports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `import_bills` (
+CREATE TABLE `imports` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -88,12 +88,12 @@ CREATE TABLE `import_bills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `import_bills`
+-- Dumping data for table `imports`
 --
 
-LOCK TABLES `import_bills` WRITE;
-/*!40000 ALTER TABLE `import_bills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `import_bills` ENABLE KEYS */;
+LOCK TABLES `imports` WRITE;
+/*!40000 ALTER TABLE `imports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `imports` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -124,39 +124,39 @@ LOCK TABLES `invoices` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `order_bill_products`
+-- Table structure for table `order_products`
 --
 
-DROP TABLE IF EXISTS `order_bill_products`;
+DROP TABLE IF EXISTS `order_products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order_bill_products` (
-  `order_bill_id` bigint(20) NOT NULL,
+CREATE TABLE `order_products` (
+  `order_id` bigint(20) NOT NULL,
   `product_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`order_bill_id`,`product_id`),
+  PRIMARY KEY (`order_id`,`product_id`),
   KEY `FKhbju07gbk85tclhwyousa7xup` (`product_id`),
-  CONSTRAINT `FKbv4ouu9xum56sf3aeaxwxr8fw` FOREIGN KEY (`order_bill_id`) REFERENCES `order_bills` (`id`),
+  CONSTRAINT `FKbv4ouu9xum56sf3aeaxwxr8fw` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `FKhbju07gbk85tclhwyousa7xup` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order_bill_products`
+-- Dumping data for table `order_products`
 --
 
-LOCK TABLES `order_bill_products` WRITE;
-/*!40000 ALTER TABLE `order_bill_products` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order_bill_products` ENABLE KEYS */;
+LOCK TABLES `order_products` WRITE;
+/*!40000 ALTER TABLE `order_products` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_products` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `order_bills`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `order_bills`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order_bills` (
+CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -171,12 +171,12 @@ CREATE TABLE `order_bills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order_bills`
+-- Dumping data for table `orders`
 --
 
-LOCK TABLES `order_bills` WRITE;
-/*!40000 ALTER TABLE `order_bills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order_bills` ENABLE KEYS */;
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -408,13 +408,13 @@ LOCK TABLES `customers` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `import_bills`
+-- Table structure for table `imports`
 --
 
-DROP TABLE IF EXISTS `import_bills`;
+DROP TABLE IF EXISTS `imports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `import_bills` (
+CREATE TABLE `imports` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -424,22 +424,22 @@ CREATE TABLE `import_bills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `import_bills`
+-- Dumping data for table `imports`
 --
 
-LOCK TABLES `import_bills` WRITE;
-/*!40000 ALTER TABLE `import_bills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `import_bills` ENABLE KEYS */;
+LOCK TABLES `imports` WRITE;
+/*!40000 ALTER TABLE `imports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `imports` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `order_bills`
+-- Table structure for table `orders`
 --
 
-DROP TABLE IF EXISTS `order_bills`;
+DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order_bills` (
+CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -450,12 +450,12 @@ CREATE TABLE `order_bills` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order_bills`
+-- Dumping data for table `orders`
 --
 
-LOCK TABLES `order_bills` WRITE;
-/*!40000 ALTER TABLE `order_bills` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order_bills` ENABLE KEYS */;
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

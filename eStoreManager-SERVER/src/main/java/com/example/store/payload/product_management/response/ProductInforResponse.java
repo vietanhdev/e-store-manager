@@ -1,6 +1,6 @@
-package com.example.store.payload.product_type_management.response;
+package com.example.store.payload.product_management.response;
 
-public class ProductTypeInforResponse {
+public class ProductInforResponse {
     
     private Boolean success = true;
 
@@ -16,7 +16,7 @@ public class ProductTypeInforResponse {
 
     private Long quantities;
 
-    public ProductTypeInforResponse(Long id, String name, Float price, String unit, String barcode, Long quantities){
+    public ProductInforResponse(Long id, String name, Float price, String unit, String barcode, Long quantities){
         this.id = id;
         this.name = name;
         this.price = price;

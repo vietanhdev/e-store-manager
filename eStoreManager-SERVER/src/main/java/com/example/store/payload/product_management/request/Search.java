@@ -1,4 +1,4 @@
-package com.example.store.payload.product_type_management.request;
+package com.example.store.payload.product_management.request;
 
 public class Search {
 

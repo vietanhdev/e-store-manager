@@ -1,4 +1,4 @@
-package com.example.store.model.product_type_management;
+package com.example.store.model.product_management;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -6,8 +6,8 @@ import javax.validation.constraints.*;
 import com.example.store.model.audit.DateAudit;
 
 @Entity
-@Table(name = "product_types")
-public class ProductType extends DateAudit{
+@Table(name = "products")
+public class Product extends DateAudit{
 
     private static final long serialVersionUID = 1L;
 
@@ -33,11 +33,11 @@ public class ProductType extends DateAudit{
 
     private Long quantities;
 
-    public ProductType(){
+    public Product(){
 
     }
 
-    public ProductType(String name, Float price, String unit, String barcode, Long quantities) {
+    public Product(String name, Float price, String unit, String barcode, Long quantities) {
         this.name = name;
         this.price = price;
         this.unit = unit;

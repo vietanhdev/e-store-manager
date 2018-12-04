@@ -1,9 +1,9 @@
-package com.example.store.payload.product_type_management.request;
+package com.example.store.payload.product_management.request;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class SearchProductTypesRequest {
+public class SearchProductsRequest {
     
     @NotNull
     @Min(0)

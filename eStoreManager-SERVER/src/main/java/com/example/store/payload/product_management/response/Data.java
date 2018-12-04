@@ -1,4 +1,4 @@
-package com.example.store.payload.product_type_management.response;
+package com.example.store.payload.product_management.response;
 
 public class Data {
 

@@ -377,6 +377,10 @@ public class UserController {
     // JUST FOR TEST: create default admin account
     @GetMapping("/default_initial")
     public ResponseEntity<?> defaultInitial() {
+        if(roleRepository.findByName(RoleName.ROLE_ADMIN).orElse(null) == null) roleRepository.save(new Role(RoleName.ROLE_ADMIN));
+        if(roleRepository.findByName(RoleName.ROLE_MANAGER).orElse(null) == null) roleRepository.save(new Role(RoleName.ROLE_MANAGER));
+        if(roleRepository.findByName(RoleName.ROLE_CASHIER).orElse(null) == null) roleRepository.save(new Role(RoleName.ROLE_CASHIER));
+
         if( userRepository.existsByUsername( "admin" ) ){
             return new ResponseEntity<>(new ApiResponse(false, "username_taken", "username is already taken!"),
                                         HttpStatus.OK);
@@ -396,7 +400,7 @@ public class UserController {
         
         User result = userRepository.save(user);
                             
-        return new ResponseEntity<>(new CreateUserResponse(result.getId()),
+        return new ResponseEntity<>(new ApiResponse(true, "intial_successfull", "intial successfull"),
                                     HttpStatus.OK);
     }
 }

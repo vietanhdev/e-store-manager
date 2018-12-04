@@ -1,12 +1,12 @@
-package com.example.store.model.product_management;
+package com.example.store.model.sell_management;
 
 import javax.persistence.*;
 
 import com.example.store.model.audit.DateAudit;
 
 @Entity
-@Table(name = "order_bills")
-public class OrderBill extends DateAudit{
+@Table(name = "sells")
+public class Sell extends DateAudit{
 
     private static final long serialVersionUID = 1L;
 
@@ -14,32 +14,32 @@ public class OrderBill extends DateAudit{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private String user_id;
+    private Long user_id;
 
-    private String customer_id;
+    private Long customer_id;
 
-    public OrderBill() {
+    public Sell() {
 
     }
 
-    public OrderBill(String user_id, String customer_id) {
+    public Sell(Long user_id, Long customer_id) {
         this.user_id = user_id;
         this.customer_id = customer_id;
     }
 
-    public String getCustomerId() {
+    public Long getCustomerId() {
         return customer_id;
     }
 
-    public void setCustomerId(String customer_id) {
+    public void setCustomerId(Long customer_id) {
         this.customer_id = customer_id;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return user_id;
     }
 
-    public void setUserId(String user_id) {
+    public void setUserId(Long user_id) {
         this.user_id = user_id;
     }
 

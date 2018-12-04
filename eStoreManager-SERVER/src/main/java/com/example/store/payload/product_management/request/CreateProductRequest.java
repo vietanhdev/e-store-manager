@@ -1,11 +1,11 @@
-package com.example.store.payload.product_type_management.request;
+package com.example.store.payload.product_management.request;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class CreateProductTypeRequest {
+public class CreateProductRequest {
 
     @NotBlank
     @Size(min=4, max=40)

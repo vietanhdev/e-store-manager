@@ -1,12 +1,12 @@
-package com.example.store.payload.product_type_management.response;
+package com.example.store.payload.buy_management.response;
 
-public class CreateProductTypeResponse {
+public class CreateBuyResponse {
 
     private Boolean success = true;
 
     private Long id;
 
-    public CreateProductTypeResponse(Long id){
+    public CreateBuyResponse(Long id){
         this.id = id;
     }
 

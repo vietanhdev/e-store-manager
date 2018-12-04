@@ -1049,7 +1049,7 @@
 }
 ```
 
-### 2.1.2. Response
+### 3.1.2. Response
 
 * On success:
 ```
@@ -1342,14 +1342,14 @@
 }
 ```
 
-# 4. Product type management API
+# 4. Product management API
 ---
 
-## 4.1. Create new product_type
+## 4.1. Create new product
 
 ### 4.1.1. Request
 
-* Path: /api/v1/product_types
+* Path: /api/v1/products
 * Method: POST
 * Header:
     
@@ -1367,7 +1367,7 @@
 }
 ```
 
-### 2.1.2. Response
+### 4.1.2. Response
 
 * On success:
 ```
@@ -1405,10 +1405,10 @@
 ```
 
 
-## 4.2. Search product types
+## 4.2. Search products
 ### 4.2.1. Request
 
-* Path: /api/v1/search/product_types
+* Path: /api/v1/search/products
 * Method: POST
 * Header:
     
@@ -1487,11 +1487,11 @@
 }
 ```
 
-## 4.4. Get a product_type's information 
+## 4.3. Get a product's information 
 
-### 4.4.1. Request
+### 4.3.1. Request
 
-* Path: /api/v1/product_type/{id}
+* Path: /api/v1/product/{id}
 * Method: GET
 * Header:
     
@@ -1500,7 +1500,7 @@
 
 * Body:
 
-### 4.4.2. Response
+### 4.3.2. Response
 
 * On success:
 ```
@@ -1528,8 +1528,8 @@
 ```
 {
     "success": false,
-    "code": "wrong_product_type_id",
-    "message": "product_type id " + {id} + " does not exist"
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
 }
 ```
 
@@ -1542,11 +1542,11 @@
 }
 ```
 
-## 4.4. Update a product_type's information 
+## 4.4. Update a product's information 
 
 ### 4.4.1. Request
 
-* Path: /api/v1/product_type/{id}
+* Path: /api/v1/product/{id}
 * Method: PUT
 * Header:
     
@@ -1570,7 +1570,7 @@
 ```
 {
     "success": true,
-    "code": "update_product_type_information_successful",
+    "code": "update_product_information_successful",
     "message": "update product type information successful"
 }
 ```
@@ -1588,8 +1588,8 @@
 ```
 {
     "success": false,
-    "code": "wrong_product_type_id",
-    "message": "product_type id " + {id} + " does not exist"
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
 }
 ```
 
@@ -1611,11 +1611,11 @@
 }
 ```
 
-## 4.5. Delete a product_type
+## 4.5. Delete a product
 
 ### 4.1.1. Request
 
-* Path: /api/v1/product_type/{id}
+* Path: /api/v1/product/{id}
 * Method: DELETE
 * Header:
     
@@ -1631,8 +1631,8 @@
 ```
 {
     "success": true,
-    "code": "delete_product_type_successful",
-    "message": "delete product_type successful"
+    "code": "delete_product_successful",
+    "message": "delete product successful"
 }
 ```
 
@@ -1649,8 +1649,426 @@
 ```
 {
     "success": false,
-    "code": "wrong_product_type_id",
-    "message": "product_type id " + {id} + " does not exist"
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+# 5. Buy management API
+---
+
+## 5.1. Create new buy
+
+### 5.1.1. Request
+
+* Path: /api/v1/buys
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:(name field is compulsory, other fields can be skipped)
+```
+{
+	"user_id": 1,
+	"buy_items": [
+		{
+			"product_id": 1,
+			"supplier_id": 1,
+			"price": 1000,
+			"quantities": 2
+		},
+		{
+			"product_id": 2,
+			"supplier_id": 3,
+			"price": 50,
+			"quantities": 5
+		}
+	]
+}
+```
+
+### 5.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 10
+}
+```
+
+* On fail (user id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_user_id",
+    "message": "user id " + {id} + " does not exist"
+}
+```
+
+* On fail (product id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
+}
+```
+
+* On fail (supplier id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_supplier_id",
+    "message": "supplier id " + {id} + " does not exist"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+
+## 5.2. Search buys
+### 5.2.1. Request
+
+* Path: /api/v1/search/buys
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+
+    * Search by user id and date:
+
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "user_id": 1,
+            "start": "2018-01-30 06:52:05",
+            "end": "2018-12-04 06:52:08"
+        }
+    }
+    ```
+
+    * Search by date:
+    
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "start": "2018-01-30 06:52:05",
+            "end": "2018-12-04 06:52:08"
+        }
+    }
+    ```
+
+    * Search by user id:
+
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+            "user_id": 1,
+        }
+    }
+    ```
+
+    * Get all:
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 10,
+        "search": {
+        }
+    }
+    ```
+
+
+
+### 5.2.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "draw": 10,
+    "recordsTotal": 4,
+    "recordsFiltered": 4,
+    "data": [
+        {
+            "id": 10,
+            "user_id": 1
+        },
+        {
+            "id": 8,
+            "user_id": 1
+        },
+        {
+            "id": 9,
+            "user_id": 1
+        },
+        {
+            "id": 7,
+            "user_id": 1
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 5.3. Get a buy's information 
+
+### 5.3.1. Request
+
+* Path: /api/v1/buys/{id}
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 5.3.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 9,
+    "user_id": 1,
+    "buy_items": [
+        {
+            "product_id": 1,
+            "supplier_id": 1,
+            "price": 590,
+            "quantities": 1
+        },
+        {
+            "product_id": 3,
+            "supplier_id": 2,
+            "price": 100,
+            "quantities": 10
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_product_id",
+    "message": "product id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 5.4. Update a buy's information 
+
+### 5.4.1. Request
+
+* Path: /api/v1/buys/{id}
+* Method: PUT
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body: (this information will overwrite the original one)
+
+```
+{
+    "user_id": 2,
+    "buy_items": [
+        {
+            "product_id": 1,
+            "supplier_id": 2,
+            "price": 100,
+            "quantities": 18
+        },
+        {
+            "product_id": 3,
+            "supplier_id": 10,
+            "price": 10,
+            "quantities": 150
+        },
+        {
+            "product_id": 4,
+            "supplier_id": 1,
+            "price": 970,
+            "quantities": 100
+        }
+    ]
+}
+```
+
+### 5.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "update_buy_information_successful",
+    "message": "update buy type information successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_buy_id",
+    "message": "buy id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or cashier):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 5.5. Delete a buy
+
+### 5.1.1. Request
+
+* Path: /api/v1/buys/{id}
+* Method: DELETE
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+
+### 5.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "delete_buy_successful",
+    "message": "delete buy successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_buy_id",
+    "message": "buy id " + {id} + " does not exist"
 }
 ```
 
