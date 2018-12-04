@@ -29,6 +29,10 @@ const {SupplierView} = require('./views/suppliers/SupplierView');
 const {AddSupplierView} = require('./views/suppliers/AddSupplierView');
 const {EditSupplierView} = require('./views/suppliers/EditSupplierView');
 
+const {ProductTypeView} = require('./views/product_types/ProductTypeView');
+const {AddProductTypeView} = require('./views/product_types/AddProductTypeView');
+const {EditProductTypeView} = require('./views/product_types/EditProductTypeView');
+
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
 export class EStoreManager {
@@ -54,7 +58,7 @@ export class EStoreManager {
     loadingView.getWindow().maximize();
 
     // Open the DevTools.
-    // this.mainWindow.webContents.openDevTools();
+    this.mainWindow.webContents.openDevTools();
 
     // Init views
     let loginView = LoginView.getInstance(this.mainWindow, null); this.addView(loginView);
@@ -71,6 +75,10 @@ export class EStoreManager {
     let supplierView = SupplierView.getInstance(this.mainWindow, null); this.addView(supplierView);
     let addSupplierView = AddSupplierView.getInstance(null, null); this.addView(addSupplierView);
     let editSupplierView = EditSupplierView.getInstance(null, null); this.addView(editSupplierView);
+
+    let productTypeView = ProductTypeView.getInstance(this.mainWindow, null); this.addView(productTypeView);
+    let addProductTypeView = AddProductTypeView.getInstance(null, null); this.addView(addProductTypeView);
+    let editProductTypeView = EditProductTypeView.getInstance(null, null); this.addView(editProductTypeView);
 
 
     // PasswordInputView is shared between views to input password

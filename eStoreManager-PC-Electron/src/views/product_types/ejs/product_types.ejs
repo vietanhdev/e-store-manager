@@ -1,12 +1,12 @@
-<%- include('../../shared/ejs/header', {title: gettext.customer_management}) %>
-<link rel="stylesheet" type="text/css" href="../css/customers.css">
+<%- include('../../shared/ejs/header', {title: gettext.product_type_management}) %>
+<link rel="stylesheet" type="text/css" href="../css/product_types.css">
 <link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
 
 <%- include('../../shared/ejs/secondary_menu.ejs') %>
 
 <div class="container">
     <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
-        &gt;&gt; <%= gettext.customer_management %>
+        &gt;&gt; <%= gettext.product_type_management %>
     </h2>
 </div>
 
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 3rem;padding: 0;">
-                <button class="btn btn-success float-right" id="add-customer"><%= gettext.add_customer %></button>
+                <button class="btn btn-success float-right" id="add-product_type"><%= gettext.add_product_type %></button>
             </div>
             <table id="realtime" class="display" width="100%"></table>
         </div>
@@ -34,22 +34,22 @@
         selectedUser: null,
         start() {
 
-            // Handle add customer
-            $("#add-customer").click(() => {
-                ipcRenderer.send(EventGetter.get('request_add_customer'));
+            // Handle add product_type
+            $("#add-product_type").click(() => {
+                ipcRenderer.send(EventGetter.get('request_add_product_type'));
             });
 
-            const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
+            const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
             const settings = require('electron-settings');
             let headers = Object({'Content-Type': 'application/json'});
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
-            let customerController = new CustomerController();
+            let product_typeController = new ProductTypeController();
           
             // Create table 
             dataTable = $('#realtime').DataTable({
                 "serverSide": true,
                 "ajax": {
-                    "url": customerController.getAjaxAPIUrl(),
+                    "url": product_typeController.getAjaxAPIUrl(),
                     "type": 'POST',
                     "headers": headers,
                     "processData": true,
@@ -60,20 +60,21 @@
                 },
                 columns: [
                     { data: "id", title: "ID" },
-                    { data: "name", title: TextGetter.get("customer_name") },
-                    { data: "email", title: TextGetter.get("email") },
-                    { data: "address", title: TextGetter.get("address") },
-                    { data: "mobileNo", title: TextGetter.get("mobile") },
+                    { data: "name", title: TextGetter.get("product_type_name") },
+                    { data: "price", title: TextGetter.get("price") },
+                    { data: "unit", title: TextGetter.get("unit") },
+                    { data: "barcode", title: TextGetter.get("barcode") },
+                    { data: "quantities", title: TextGetter.get("quantity") },
                     { title: TextGetter.get("manipulation") }
                 ],
                 "columnDefs": [ {
                     "targets": -1,
                     "data": null,
                     "defaultContent": `
-                        <button type="button" class="edit-customer btn btn-sm btn-success">
+                        <button type="button" class="edit-product_type btn btn-sm btn-success">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </button>&nbsp;
-                        <button type="button" class="delete-customer btn btn-sm btn-danger">
+                        <button type="button" class="delete-product_type btn btn-sm btn-danger">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
                     `
@@ -84,10 +85,10 @@
             });
 
             // ==== Handle events that cause table to update ====
-            ipcRenderer.on(EventGetter.get("add_customer_success"), (event, customer) => {
+            ipcRenderer.on(EventGetter.get("add_product_type_success"), (event, product_type) => {
                 dataTable.ajax.reload();
             });
-            ipcRenderer.on(EventGetter.get("update_customer_success"), (event, customer) => {
+            ipcRenderer.on(EventGetter.get("update_product_type_success"), (event, product_type) => {
                 dataTable.ajax.reload();
             });
             
@@ -95,7 +96,7 @@
             // ==== Update data of the table ====
             
             // Delete a value by id: Id means the value of the first column
-            ipcRenderer.on(EventGetter.get("delete_row_from_customer_table"), (event, id) => {
+            ipcRenderer.on(EventGetter.get("delete_row_from_product_type_table"), (event, id) => {
                 dataTable.ajax.reload();
             });
             
@@ -103,15 +104,15 @@
             // ==== Handle row buttons ====
             
             // Delete
-            $('#realtime tbody').on( 'click', 'button.delete-customer', function () {
+            $('#realtime tbody').on( 'click', 'button.delete-product_type', function () {
                 let data = dataTable.row( $(this).parents('tr') ).data();
-                ipcRenderer.send(EventGetter.get("request_delete_customer"), data);
+                ipcRenderer.send(EventGetter.get("request_delete_product_type"), data);
             } );
           
             // Edit info
-            $('#realtime tbody').on( 'click', 'button.edit-customer', function () {
+            $('#realtime tbody').on( 'click', 'button.edit-product_type', function () {
                 let data = dataTable.row( $(this).parents('tr') ).data();
-                ipcRenderer.send(EventGetter.get('request_update_customer_info'), data);
+                ipcRenderer.send(EventGetter.get('request_update_product_type_info'), data);
             } );
 
         }
