@@ -9,6 +9,7 @@
     "search": "Search",
     "quantity": "Quantity",
     "add_product": "Add Product",
+    "total": "Total",
     "sub_total": "SubTotal",
     "grand_total": "GrandTotal",
     "tax": "Tax",
@@ -155,6 +156,11 @@
     "product_name": "Product Name",
     "product_id_or_barcode": "Product ID / Barcode",
 
-    "product_id_or_name_to_search": "Product ID or Name to search"
+    "product_id_or_name_to_search": "Product ID or Name to search",
+    "quantity_manipulation": "Quantity manipulation",
+    "delete_question": "Delete?",
+
+    "cannot_get_product_by_id": "Cannot get product information. Product ID: ",
+    "customer": "Customer"
 
 }

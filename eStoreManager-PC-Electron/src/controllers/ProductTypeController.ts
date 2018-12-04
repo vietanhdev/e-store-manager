@@ -29,6 +29,18 @@ export class ProductTypeController extends Controller {
         }, true);
     }
 
+    
+    public getProductTypeData(product_id: number, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('GET', '/api/v1/product_types/' + product_id, {}, (respond:any) => {
+            if (respond['success'] == true) {
+                cbSuccess (respond);
+            } else {
+                cbFail(respond);
+            }
+        }, (respond:any) => {
+            cbFail (respond);
+        }, true);
+    }
 
     public addProductType(data: any, cbSuccess: (any), cbFail: (any)) {
         this.getRestService().request('POST', '/api/v1/product_types', data, (respond:any) => {

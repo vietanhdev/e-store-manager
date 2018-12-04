@@ -91,11 +91,11 @@
 <div class="container-fluid" style="position:fixed; bottom: 0; left: 0;">
 	<div class="row" style="padding: 1rem; background: ghostwhite">
 		<div class="col-sm-2">
-			<p><b><%= gettext.employee %>:</b> Viet Anh</p>
+			<p><b><%= gettext.employee %>:</b> <span id="logged-in-user"></span></p>
 			<p><b><%= gettext.time %>:</b> <span id="clock"></span></p>
 		</div>
 		<div class="col-sm-4">
-			<p><b>Customer:</b> Syan</p>
+			<p><b><%= gettext.customer %>:</b> <span id="customer-name">SyAn</span></p>
 			<div class="input-group">
 			<input type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
 				<div class="input-group-append">
@@ -118,57 +118,107 @@
 <script>
 	$(document).ready(() => {
 
+		// Load library
+		const settings = require('electron-settings');
 		const EventGetter = require("../../../services/EventGetter").EventGetter;
+		const TextGetter = require("../../../services/TextGetter").TextGetter;
 		const {ipcRenderer} = require('electron');
 		var dt = require( 'datatables.net-dt' )( window, $ );
 		require( 'datatables.net-responsive-dt' )( window, $ );
+
+		const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
+		let productTypeControllerController = new ProductTypeController();
+
+		const UserController = require("../../../controllers/UserController.js").UserController;
+		let userController = new UserController();
 		
-		// Create table 
+		// === Create product table ===
 		dataTable = $('#product-table').DataTable({
+			searching: false,
 			columns: [
 				{ 
-					title: "ID",
+					title: TextGetter.get("product_id"),
 					data: "id"
 				},
 				{ 
-					title: "Product ID",
-					data: "productid"
+					title: TextGetter.get("product_name"),
+					data: "name"
 				},
 				{ 
-					title: "Product Name",
-					data: "productname"
-				},
-				{ 
-					title: "Price",
+					title: TextGetter.get("price"),
 					data: "price"
 				},
 				{ 
-					title: "Quanitity",
-					data: "quantity"
+					title: TextGetter.get("quantity"),
+					data: "quantities"
 				},
 				{ 
-					title: "Total",
+					title: TextGetter.get("quantity_manipulation"),
+					data: null
+				},
+				{ 
+					title: TextGetter.get("unit"),
+					data: "unit"
+				},
+				{ 
+					title: TextGetter.get("total"),
 					data: "total"
 				},
 				{ 
-					title: "Delete?"
+					title: TextGetter.get("delete_question")
 				}
 			],
 			"columnDefs": [ {
 				"targets": -1,
 				"data": null,
 				"defaultContent": `
-					<button type="button" class="delete-employee btn btn-sm btn-danger">
+					<button type="button" class="delete-product btn btn-sm btn-danger">
 						<i class="fa fa-trash-o" aria-hidden="true"></i>
 					</button>
 					`
-			} ],
+			},
+			{
+				"targets": -2,
+				"data": null,
+				render: function(data,type,row) { return (Number(row["price"]) * Number(row["quantities"]))}
+			},
+			{
+				"targets": 4,
+				"data": null,
+				"defaultContent": `
+					<button type="button" class="edit-quantity btn btn-sm btn-default">
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="increase-quantity btn btn-sm btn-success">
+						<i class="fa fa-plus" aria-hidden="true"></i>
+					</button>
+					<button type="button" class="decrease-quantity btn btn-sm btn-warning">
+						<i class="fa fa-minus" aria-hidden="true"></i>
+					</button>
+					`
+			}
+			],
 			"responsive": true,
 			"pageLength": 5,
 			"lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
 		});
 		
-		
+		// === Function to add product to table ===
+		function addProduct(productId) {
+
+			// Get product information
+			let productData = productTypeControllerController.getProductTypeData(productId,
+				(response) => { // Success
+					response.quantities = 1;
+					response.total = 0;
+					dataTable.row.add(response).draw(false);
+				},
+				(response) => { //Fail
+					alert(TextGetter.get("cannot_get_product_by_id") + productId);
+				}
+			);
+
+		}
 
 		// === Setup Clock ====
 		function startTimer() {
@@ -189,42 +239,51 @@
 		}
 		startTimer();
 
+		// === Show Employee ID ===
+		$("#logged-in-user").html(userController.getLoggedInUserDisplayName());
+
 		// === Ajax Search for product ===
-		const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
-		let productTypeController = new ProductTypeController();
+		// Autocomplete searching for products
 		$('#search_form_product').autocomplete({
 			lookup: function (query, done) {
-				// Do Ajax call or lookup locally, when done,
-				// call the callback and pass your results:
-				var result = {
-					suggestions: [
-						{ "value": "United Arab Emirates", "data": "AE" },
-						{ "value": "United Kingdom",       "data": "UK" },
-						{ "value": "United States",        "data": "US" }
-					]
-				};
-
 				
-				productTypeController.getAjaxAPIUrl()
-				const settings = require('electron-settings');
 				let headers = Object({'Content-Type': 'application/json'});
 				headers['Authorization'] = "Bearer " + settings.get('account_info.token');
 
+				let postData = {};
+				postData.draw = 1;
+				postData.length = 8;
+				postData.search = {};
+				postData.search.value = query;
+				postData.start = 0;
+				postData = JSON.stringify(postData);
+
 				$.ajax({
-					method: "POST",
-					url: "some.php",
-					data: { name: "John", location: "Boston" }
+					"url": productTypeControllerController.getAjaxAPIUrl(),
+                    "type": 'POST',
+                    "headers": headers,
+                    "processData": true,
+                    "contentType": 'application/json',
+                    "data": postData
 				})
-				.done(function( msg ) {
-					alert( "Data Saved: " + msg );
+				.done(function( respond ) {
+					let result = {
+						suggestions: []
+					};
+					let data = respond.data;
+					for (let i = 0 ; i < data.length; ++i) {
+						let value = data[i].name + " : " + data[i].barcode;
+						result.suggestions.push({"value": value
+							, "data": data[i]});
+					}
+					done(result);
 				});
-
-
-
-				done(result);
+				
 			},
 			onSelect: function (suggestion) {
-				alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+				// alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+				$("#search_form_product").val(""); // Prevent searching loop
+				addProduct(suggestion.data.id);
 			}
 		});
 
