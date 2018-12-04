@@ -25,15 +25,8 @@
 
 
 <script>
-    const EventGetter = require("../../../services/EventGetter").EventGetter;
-    const TextGetter = require("../../../services/TextGetter").TextGetter;
-    const {ipcRenderer} = require('electron');
-    var dt = require( 'datatables.net-dt' )( window, $ );
-    require( 'datatables.net-buttons-dt' )( window, $ );
-    //  = require( 'datatables.net' )( window, $ );
 
-
-    dataSet = [
+    var dataSet = [
         [ "", "", "", "", "", "", "", ""]
     ];
 
@@ -82,6 +75,13 @@
         },
         start() {
 
+            // Load libraries
+            const EventGetter = require("../../../services/EventGetter").EventGetter;
+            const TextGetter = require("../../../services/TextGetter").TextGetter;
+            const {ipcRenderer} = require('electron');
+            var dt = require( 'datatables.net-dt' )( window, $ );
+            require( 'datatables.net-responsive-dt' )( window, $ );
+
             // Handle add employee
             $("#add-employee").click(() => {
                 ipcRenderer.send(EventGetter.get('request_add_employee'));
@@ -117,14 +117,7 @@
                             </button>
                         `
                 } ],
-                buttons: [
-        {
-            text: 'Reload',
-            action: function ( e, dt, node, config ) {
-                dt.ajax.reload();
-            }
-        }
-    ],
+                "responsive": true,
                 "pageLength": 5,
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });

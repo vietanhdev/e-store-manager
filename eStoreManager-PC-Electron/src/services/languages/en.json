@@ -151,6 +151,10 @@
 
     "price": "Price",
     "unit": "Unit",
-    "barcode": "Barcode"
+    "barcode": "Barcode",
+    "product_name": "Product Name",
+    "product_id_or_barcode": "Product ID / Barcode",
+
+    "product_id_or_name_to_search": "Product ID or Name to search"
 
 }

@@ -23,16 +23,19 @@
 
 
 <script>
-    const EventGetter = require("../../../services/EventGetter").EventGetter;
-    const TextGetter = require("../../../services/TextGetter").TextGetter;
-    const {ipcRenderer} = require('electron');
-    var dt = require( 'datatables.net-dt' )( window, $ );
-    require( 'datatables.net-buttons-dt' )( window, $ );
     
     const app = {
         rows: [],
         selectedUser: null,
         start() {
+
+            // Load libraries
+            const EventGetter = require("../../../services/EventGetter").EventGetter;
+            const TextGetter = require("../../../services/TextGetter").TextGetter;
+            const {ipcRenderer} = require('electron');
+            var dt = require( 'datatables.net-dt' )( window, $ );
+            require( 'datatables.net-responsive-dt' )( window, $ );
+
 
             // Handle add customer
             $("#add-customer").click(() => {
@@ -78,7 +81,7 @@
                         </button>
                     `
                 } ],
-                // "select": true,
+                "responsive": true,
                 "pageLength": 8,
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });
