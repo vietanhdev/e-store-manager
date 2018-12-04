@@ -32,28 +32,30 @@ export class RestService {
         if (auth) {
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
         }
+
+        // console.log(this.getUrl(path));
         
         let options = {
             url: this.getUrl(path),
             method: method,
             headers: headers,
             body: postData,
-            timeout: 10000
+            timeout: 1000
         };
 
         console.log("REQUESTDATA:::::::::::::");
-        console.log(postData);
+        // console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
             console.log("DATA:::::::::::::");
-            console.log(data);
+            // console.log(data);
+            // console.log(err);
             if (err) {
                 cbFail({
                     status: 100,
                     message: TextGetter.get("unknown_error")
                 });
             } else {
-                
                 cbSuccess(JSON.parse(data.body));
             }
             

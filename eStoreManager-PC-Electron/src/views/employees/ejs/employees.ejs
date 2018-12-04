@@ -54,7 +54,7 @@
                 // { title: 'Mobile' },
                 row.push(String(data[i].mobileNo));
                 // { title: 'Position' },
-                row.push(String(JSON.stringify(data[i].roles)));
+                row.push(Array(data[i].roles).join(","));
                 this.rows.push(row);
                 // console.log(row);
             }

@@ -161,6 +161,10 @@
     "delete_question": "Delete?",
 
     "cannot_get_product_by_id": "Cannot get product information. Product ID: ",
-    "customer": "Customer"
+    "customer": "Customer",
+    "product_search": "Product Search",
+    "input_quantity_for": "Input the quantity for ",
+
+    "product_not_found": "Could not found the product: "
 
 }

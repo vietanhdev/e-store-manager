@@ -27,6 +27,7 @@
     "ejs-electron": "^2.0.3",
     "electron-ejs": "^1.2.0",
     "electron-handlebars": "^2.0.0",
+    "electron-prompt": "^1.2.0",
     "electron-reload": "^1.2.5",
     "electron-settings": "^3.2.0",
     "font-awesome": "^4.7.0",

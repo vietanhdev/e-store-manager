@@ -33,6 +33,10 @@ body {
     text-transform: uppercase;
 }
 
+#tax::after {
+    content: " %";
+}
+
 
 /* Style for search form */
 .autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
