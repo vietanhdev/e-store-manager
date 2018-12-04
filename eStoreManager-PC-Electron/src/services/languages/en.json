@@ -165,6 +165,7 @@
     "product_search": "Product Search",
     "input_quantity_for": "Input the quantity for ",
 
-    "product_not_found": "Could not found the product: "
+    "product_not_found": "Could not found the product: ",
+    "insufficient_payment": "INSUFFICIENT PAYMENT"
 
 }
