@@ -9,6 +9,7 @@
     "search": "Search",
     "quantity": "Quantity",
     "add_product": "Add Product",
+    "total": "Total",
     "sub_total": "SubTotal",
     "grand_total": "GrandTotal",
     "tax": "Tax",
@@ -151,6 +152,25 @@
 
     "price": "Price",
     "unit": "Unit",
-    "barcode": "Barcode"
+    "barcode": "Barcode",
+    "product_name": "Product Name",
+    "product_id_or_barcode": "Product ID / Barcode",
+
+    "product_id_or_name_to_search": "Product ID or Name to search",
+    "quantity_manipulation": "Quantity manipulation",
+    "delete_question": "Delete?",
+
+    "cannot_get_product_by_id": "Cannot get product information. Product ID: ",
+    "customer": "Customer",
+    "product_search": "Product Search",
+    "input_quantity_for": "Input the quantity for ",
+
+    "product_not_found": "Could not found the product: ",
+    "insufficient_payment": "INSUFFICIENT PAYMENT",
+
+    "add": "Add",
+    "customer_not_found": "Could not find this customer. Please try again!",
+    "are_you_sure_discard_this_order": "Are you sure to discard this order?",
+    "discard_order": "Discard Order"
 
 }

@@ -35,6 +35,7 @@ const {EditProductTypeView} = require('./views/product_types/EditProductTypeView
 
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
+
 export class EStoreManager {
 
   mainWindow: BrowserWindow;
@@ -79,7 +80,6 @@ export class EStoreManager {
     let productTypeView = ProductTypeView.getInstance(this.mainWindow, null); this.addView(productTypeView);
     let addProductTypeView = AddProductTypeView.getInstance(null, null); this.addView(addProductTypeView);
     let editProductTypeView = EditProductTypeView.getInstance(null, null); this.addView(editProductTypeView);
-
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot

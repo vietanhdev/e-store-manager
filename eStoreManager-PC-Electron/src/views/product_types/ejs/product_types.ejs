@@ -23,16 +23,18 @@
 
 
 <script>
-    const EventGetter = require("../../../services/EventGetter").EventGetter;
-    const TextGetter = require("../../../services/TextGetter").TextGetter;
-    const {ipcRenderer} = require('electron');
-    var dt = require( 'datatables.net-dt' )( window, $ );
-    require( 'datatables.net-buttons-dt' )( window, $ );
     
     const app = {
         rows: [],
         selectedUser: null,
         start() {
+
+            // Load libraries
+            const EventGetter = require("../../../services/EventGetter").EventGetter;
+            const TextGetter = require("../../../services/TextGetter").TextGetter;
+            const {ipcRenderer} = require('electron');
+            var dt = require( 'datatables.net-dt' )( window, $ );
+            require( 'datatables.net-responsive-dt' )( window, $ );
 
             // Handle add product_type
             $("#add-product_type").click(() => {
@@ -40,16 +42,16 @@
             });
 
             const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
+            let productTypeController = new ProductTypeController();
             const settings = require('electron-settings');
             let headers = Object({'Content-Type': 'application/json'});
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
-            let product_typeController = new ProductTypeController();
           
             // Create table 
             dataTable = $('#realtime').DataTable({
                 "serverSide": true,
                 "ajax": {
-                    "url": product_typeController.getAjaxAPIUrl(),
+                    "url": productTypeController.getAjaxAPIUrl(),
                     "type": 'POST',
                     "headers": headers,
                     "processData": true,
@@ -79,7 +81,7 @@
                         </button>
                     `
                 } ],
-                // "select": true,
+                "responsive": true,
                 "pageLength": 8,
                 "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
             });

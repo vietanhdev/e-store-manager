@@ -1,0 +1,133 @@
+<%- include('../../shared/ejs/header', {title: 'Order'}) %>
+
+
+<div class="fluid-container" style="padding: 1rem;">
+    <h3 id="store-name"></h3>
+    <p id="store-address"></p>
+
+        
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    // Load libraries
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const TextGetter = require("../../../services/TextGetter").TextGetter;
+    const settings = require('electron-settings');
+    var dt = require( 'datatables.net-dt' )( window, $ );
+    require( 'datatables.net-responsive-dt' )( window, $ );
+    const {ipcRenderer} = require('electron');
+
+    let storeName = settings.get('store_info.name');
+    let storeAddress = settings.get('store_info.address');
+
+    $("#store-name").html(storeName);
+    $("#store-address").html(storeAddress);
+
+
+
+
+
+    // dataTable = $('#product-table').DataTable({
+    //     searching: false,
+    //     columns: [
+    //         {
+    //             title: TextGetter.get("id"),
+    //             data: "row_id",
+    //             "visible": false,
+    //         },
+    //         { 
+    //             title: "PID",
+    //             data: "id"
+    //         },
+    //         { 
+    //             title: TextGetter.get("product_name"),
+    //             data: "name"
+    //         },
+    //         { 
+    //             title: TextGetter.get("price"),
+    //             data: "price"
+    //         },
+    //         { 
+    //             title: TextGetter.get("quantity"),
+    //             data: "quantities"
+    //         },
+    //         { 
+    //             title: TextGetter.get("quantity_manipulation"),
+    //             data: null
+    //         },
+    //         { 
+    //             title: TextGetter.get("unit"),
+    //             data: "unit"
+    //         },
+    //         { 
+    //             title: TextGetter.get("total"),
+    //             data: "total"
+    //         },
+    //         { 
+    //             title: TextGetter.get("delete_question")
+    //         }
+    //     ],
+    //     "columnDefs": [ {
+    //         "targets": -1,
+    //         "data": null,
+    //         "defaultContent": `
+    //             <button type="button" class="delete-product btn btn-sm btn-danger">
+    //                 <i class="fa fa-trash-o" onclick="$(this).parent().parent().parent().remove();" aria-hidden="true"></i>
+    //             </button>
+    //             `
+    //     },
+    //     {
+    //         "targets": -2,
+    //         "data": null,
+    //         render: function(data,type,row) { 
+    //             this.data = Number(row["price"]) * Number(row["quantities"]);
+    //             return (Number(row["price"]) * Number(row["quantities"]));
+    //         }
+    //     },
+    //     {
+    //         "targets": 5,
+    //         "data": null,
+    //         "defaultContent": `
+    //             <button type="button" class="edit-quantity btn btn-sm btn-default">
+    //                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+    //             </button>
+    //             <button type="button" class="increase-quantity btn btn-sm btn-success">
+    //                 <i class="fa fa-plus" aria-hidden="true"></i>
+    //             </button>
+    //             <button type="button" class="decrease-quantity btn btn-sm btn-warning">
+    //                 <i class="fa fa-minus" aria-hidden="true"></i>
+    //             </button>
+    //             `
+    //     }
+    //     ],
+    //     "order": [[ 0, "desc" ]],
+    //     "responsive": true,
+    //     "pageLength": 5,
+    //     "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]],
+    //     "drawCallback": function () {
+    //         let subtotal = Number(this.api().cells( null, 7 ).render('display').sum()).toFixed(2);
+    //         let grandtotal = Number(subtotal * (1+tax)).toFixed(2);
+    //         $("#subtotal").val(subtotal);
+    //         $("#grandtotal").val(grandtotal);
+    //         updateCustomerCharge();
+    //     }
+    // });
+
+
+
+</script>
+
+
+<%- include('../../shared/ejs/footer') %>

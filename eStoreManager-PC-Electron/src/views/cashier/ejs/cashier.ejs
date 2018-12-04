@@ -5,28 +5,30 @@
 <%- include('../../shared/ejs/secondary_menu.ejs') %>
 
 <div class="container-fluid main-container">
-	<div class="row" style="padding-top: 2rem;">
+	<div class="row" style="padding-top: 1rem;">
 		<div class="col-sm-1">
 			<img style="width: 85px; border: 1px solid #333" src="../images/barcode-scanner.jpg" alt="barcode">
 		</div>
-		<div class="col-sm-3">
-			<div class="input-group">
-				<label><%= gettext.product_id %>&nbsp;&nbsp; </label>
-				<input type="text" class="form-control">
+		<div class="col-sm-5">
+			<div class="input-group pt-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><%= gettext.product_id_or_barcode %></span>
+				</div>
+				<input id="inp-id-or-barcode" type="text" class="form-control" placeholder="Eg. 2234">
 				<div class="input-group-append">
-					<button class="btn btn-success" type="button"><%= gettext.search %></button>
+					<button id="btn-add-product" class="btn btn-warning" type="button"><%= gettext.add_product %></button>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-3">
-			<div class="input-group">
-				<label><%= gettext.quantity %>&nbsp;&nbsp; </label>
-				<input type="text" class="form-control">
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div class="input-group">
-				<button type="submit" class="btn btn-primary"><%= gettext.add_product %></button>
+		<div class="col-sm-5">
+			<div class="input-group pt-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text"><%= gettext.product_search %></span>
+				</div>
+				<input id="search_form_product" type="text" placeholder="E.g: Milk" class="form-control">
+				<div class="input-group-append">
+					<button class="btn btn-success" type="button"><%= gettext.search %></button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -41,7 +43,7 @@
 						<label class="total-title"><%= gettext.sub_total %></label>
 					</td>
 					<td>
-						<input readonly class="total-number" type="text" class="form-control">
+						<input id="subtotal" readonly value="0" class="total-number" type="text" class="form-control">
 					</td>
 				</tr>
 				<tr>
@@ -49,7 +51,7 @@
 						<label class="total-title"><%= gettext.tax %></label>
 					</td>
 					<td>
-						<input readonly class="total-number" type="text" class="form-control">
+						<input id="tax" readonly value="0 %" class="total-number" type="text" class="form-control">
 					</td>
 				</tr>
 				<tr>
@@ -57,7 +59,7 @@
 						<label class="total-title"><%= gettext.grand_total %></label>
 					</td>
 					<td>
-						<input readonly class="total-number" type="text" class="form-control">
+						<input id="grandtotal" readonly value="0" class="total-number" type="text" class="form-control">
 					</td>
 				</tr>
 				<tr>
@@ -70,7 +72,7 @@
 						<label class="total-title title-sm"><%= gettext.customer_pay %></label>
 					</td>
 					<td>
-						<input class="total-number" type="text" class="form-control">
+						<input id="customer-give" class="total-number" type="number" class="form-control">
 					</td>
 				</tr>
 				<tr>
@@ -78,7 +80,7 @@
 						<label class="total-title title-sm"><%= gettext.give_back_to_customer %></label>
 					</td>
 					<td>
-						<input readonly class="total-number" type="text" class="form-control">
+						<input id="customer-take-back" value="0" readonly class="total-number" type="text" class="form-control">
 					</td>
 				</tr>
 			</table>
@@ -89,102 +91,32 @@
 <div class="container-fluid" style="position:fixed; bottom: 0; left: 0;">
 	<div class="row" style="padding: 1rem; background: ghostwhite">
 		<div class="col-sm-2">
-			<p><b><%= gettext.employee %>:</b> Viet Anh</p>
+			<p><b><%= gettext.employee %>:</b> <span id="logged-in-user"></span></p>
 			<p><b><%= gettext.time %>:</b> <span id="clock"></span></p>
 		</div>
 		<div class="col-sm-4">
-			<p><b>Customer:</b> Syan</p>
+			<p><b><%= gettext.customer %>:</b> <span id="customer-name">New Customer</span>
+				- <b><%= gettext.id %>:</b> <span id="customer-id">xxxx</span>
+			</p>
 			<div class="input-group">
-			<input type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
+			<input id="inp-customer-id" type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
 				<div class="input-group-append">
-					<button class="btn btn-primary" type="button"><%= gettext.search %></button>
-					<button class="btn btn-success" type="button"><%= gettext.new %></button>
+					<button id="btn-add-customer" class="btn btn-primary" type="button"><%= gettext.add %></button>
+					<button id="btn-new-customer" class="btn btn-success" type="button"><%= gettext.new %></button>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-6">
-			<button class="btn btn-lg btn-warning btn-super-lg"><%= gettext.print_receipt %></button>
+			<button id="print-order" class="btn btn-lg btn-warning btn-super-lg"><%= gettext.print_receipt %></button>
 			<button class="btn btn-lg btn-success btn-super-lg"><%= gettext.complete_f9 %></button>
-			<button class="btn btn-lg btn-danger btn-super-lg"><%= gettext.discard %></button>
+			<button id="discard" class="btn btn-lg btn-danger btn-super-lg"><%= gettext.discard %></button>
 		</div>
 	</div>
 </div>
 
+<!-- Load autocomplete - https://github.com/devbridge/jQuery-Autocomplete -->
+<script src="../../shared/js/jquery.autocomplete.min.js"></script>
 
-<script>
-	const EventGetter = require("../../../services/EventGetter").EventGetter;
-    const {ipcRenderer} = require('electron');
-	var dt = require( 'datatables.net-dt' )( window, $ );
-    require( 'datatables.net-buttons-dt' )( window, $ );
-	// Create table 
-	dataTable = $('#product-table').DataTable({
-		columns: [
-			{ 
-				title: "ID",
-				data: "id"
-			},
-			{ 
-				title: "Product ID",
-				data: "productid"
-			},
-			{ 
-				title: "Product Name",
-				data: "productname"
-			},
-			{ 
-				title: "Price",
-				data: "price"
-			},
-			{ 
-				title: "Quanitity",
-				data: "quantity"
-			},
-			{ 
-				title: "Total",
-				data: "total"
-			},
-			{ 
-				title: "Delete?"
-			}
-		],
-		"columnDefs": [ {
-			"targets": -1,
-			"data": null,
-			"defaultContent": `
-				<button type="button" class="delete-employee btn btn-sm btn-danger">
-					<i class="fa fa-trash-o" aria-hidden="true"></i>
-				</button>
-				`
-		} ],
-		"pageLength": 5,
-		"lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
-	});
-
-
-
-	$(document).ready(() => {
-
-		// === Setup Clock ====
-		function startTimer() {
-    		var today = new Date();
-			var h = today.getHours();
-			var m = today.getMinutes();
-			var s = today.getSeconds();
-			var day = today.getDate();
-			var month = today.getMonth() + 1;
-			m = checkTime(m);
-			s = checkTime(s);
-			$("#clock").html(h + ":" + m + ":" + s + "&nbsp;&nbsp;" + day + "/" + month);
-			var t = setTimeout(startTimer, 500);
-		}
-		function checkTime(i) {
-			if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-			return i;
-		}
-		startTimer();
-
-	});
-
-</script>
+<script src="../js/cashier.js"> </script>
 
 <%- include('../../shared/ejs/footer') %>

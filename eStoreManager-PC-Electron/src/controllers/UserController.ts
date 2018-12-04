@@ -1,5 +1,6 @@
 import {Controller} from './BasicController';
 import { stringify } from 'querystring';
+import { isUndefined } from 'util';
 const settings = require('electron-settings');
 
 // Settings:
@@ -58,6 +59,20 @@ export class UserController extends Controller {
         settings.delete("account_info.userid");
         settings.delete("account_info.username");
         settings.delete("account_info.fullname");
+    }
+
+
+    public getLoggedInUserDisplayName():string {
+        let fullname = settings.get("account_info.fullname");
+        let username = settings.get("account_info.username");
+        let userid = settings.get("account_info.userid");
+        if (fullname != null && !isUndefined(fullname) && fullname != "" && fullname != "null") {
+            return fullname;
+        } else if (username != null && !isUndefined(username) && username != "" && username != "null") {
+            return username;
+        } else {
+            return userid;
+        }
     }
 
 

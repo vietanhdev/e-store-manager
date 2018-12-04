@@ -56,6 +56,9 @@
         },
         "edit_product_type": {
             "path": "product_types/ejs/edit_product_type.ejs"
+        },
+        "printing": {
+            "path": "printing/ejs/printing.ejs"
         }
     },
     "languages": [
