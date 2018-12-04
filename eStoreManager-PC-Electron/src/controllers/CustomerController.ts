@@ -67,5 +67,17 @@ export class CustomerController extends Controller {
     }
     
 
+    public getCustomerDataById(customerId: string, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('GET', '/api/v1/customers/' + customerId, {}, (respond:any) => {
+            if (respond['success'] == true) {
+                cbSuccess (respond);
+            } else {
+                cbFail(respond);
+            }
+        }, (respond:any) => {
+            cbFail (respond);
+        }, true);
+    }
+
  
 }

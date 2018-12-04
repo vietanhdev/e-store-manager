@@ -30,6 +30,9 @@ $(document).ready(() => {
     const UserController = require("../../../controllers/UserController.js").UserController;
     let userController = new UserController();
 
+    const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
+    let customerController = new CustomerController();
+
     // TODO: Change this
     var tax = 0.08; // 8 percent
     $("#tax").val("" + (tax * 100) + " %");
@@ -322,6 +325,23 @@ $(document).ready(() => {
             $("#search_form_product").val(""); // Prevent searching loop
             addProduct(suggestion.data.id);
         }
+    });
+
+
+    // === Handle Customer Area ===
+    $("#btn-add-customer").click(() => {
+        let customerId = $("#inp-customer-id").val();
+
+        customerController.getCustomerDataById(customerId, 
+            (customer) => { // Success
+                $("#customer-name").html(customer.name);
+                $("#customer-id").html(customer.id);
+                $("#customer-id").attr("customerid", customer.id);
+            },
+            (respond) => {
+                alert(TextGetter.get("customer_not_found"));
+            });
+
     });
 
 });

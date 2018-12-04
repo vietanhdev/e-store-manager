@@ -95,12 +95,14 @@
 			<p><b><%= gettext.time %>:</b> <span id="clock"></span></p>
 		</div>
 		<div class="col-sm-4">
-			<p><b><%= gettext.customer %>:</b> <span id="customer-name">SyAn</span></p>
+			<p><b><%= gettext.customer %>:</b> <span id="customer-name">New Customer</span>
+				- <b><%= gettext.id %>:</b> <span id="customer-id">xxxx</span>
+			</p>
 			<div class="input-group">
-			<input type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
+			<input id="inp-customer-id" type="text" class="form-control" placeholder="CustomerID" aria-label="CustomerID" aria-describedby="basic-addon2">
 				<div class="input-group-append">
-					<button class="btn btn-primary" type="button"><%= gettext.search %></button>
-					<button class="btn btn-success" type="button"><%= gettext.new %></button>
+					<button id="btn-add-customer" class="btn btn-primary" type="button"><%= gettext.add %></button>
+					<button id="btn-new-customer" class="btn btn-success" type="button"><%= gettext.new %></button>
 				</div>
 			</div>
 		</div>
