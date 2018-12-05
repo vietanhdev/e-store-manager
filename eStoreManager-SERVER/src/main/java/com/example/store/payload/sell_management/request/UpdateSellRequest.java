@@ -11,6 +11,8 @@ public class UpdateSellRequest {
 
     private Float tax;
 
+    private Boolean active;
+
     private Set<SellItemInfor> sell_items = new HashSet<>();
 
     public Long getUser_id() {
@@ -23,6 +25,10 @@ public class UpdateSellRequest {
 
     public Long getCustomer_id() {
         return customer_id;
+    }
+
+    public Boolean getActive() {
+        return active;
     }
 
     public Set<SellItemInfor> getSell_items() {

@@ -16,6 +16,8 @@ public class Buy extends DateAudit{
     
     private Long user_id;
 
+    private Boolean active = true;
+
     public Buy() {
 
     }
@@ -39,5 +41,14 @@ public class Buy extends DateAudit{
     public void setUserId(Long user_id) {
         this.user_id = user_id;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
 
 }

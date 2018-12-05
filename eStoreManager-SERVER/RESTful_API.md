@@ -1680,7 +1680,6 @@
 * Body:
 ```
 {
-	"user_id": 1,
 	"buy_items": [
 		{
 			"product_id": 1,
@@ -1837,24 +1836,33 @@
 {
     "success": true,
     "draw": 10,
-    "recordsTotal": 4,
-    "recordsFiltered": 4,
+    "recordsTotal": 1,
+    "recordsFiltered": 1,
     "data": [
         {
-            "id": 10,
-            "user_id": 1
-        },
-        {
-            "id": 8,
-            "user_id": 1
-        },
-        {
-            "id": 9,
-            "user_id": 1
-        },
-        {
-            "id": 7,
-            "user_id": 1
+            "id": 1,
+            "user_id": 3,
+            "active": false,
+            "buy_items": [
+                {
+                    "product_id": 3,
+                    "supplier_id": 10,
+                    "price": 10,
+                    "quantities": 150
+                },
+                {
+                    "product_id": 1,
+                    "supplier_id": 2,
+                    "price": 100,
+                    "quantities": 18
+                },
+                {
+                    "product_id": 4,
+                    "supplier_id": 1,
+                    "price": 970,
+                    "quantities": 100
+                }
+            ]
         }
     ]
 }
@@ -1906,20 +1914,27 @@
 ```
 {
     "success": true,
-    "id": 9,
-    "user_id": 1,
+    "id": 1,
+    "user_id": 3,
+    "active": false,
     "buy_items": [
         {
-            "product_id": 1,
-            "supplier_id": 1,
-            "price": 590,
-            "quantities": 1
+            "product_id": 3,
+            "supplier_id": 10,
+            "price": 10,
+            "quantities": 150
         },
         {
-            "product_id": 3,
+            "product_id": 1,
             "supplier_id": 2,
             "price": 100,
-            "quantities": 10
+            "quantities": 18
+        },
+        {
+            "product_id": 4,
+            "supplier_id": 1,
+            "price": 970,
+            "quantities": 100
         }
     ]
 }
@@ -1967,7 +1982,8 @@
 
 ```
 {
-    "user_id": 2,
+    "user_id": 3,
+    "active": false,
     "buy_items": [
         {
             "product_id": 1,
@@ -2072,7 +2088,7 @@
 }
 ```
 
-* On fail (you don't have role admin or manager):
+* On fail (you don't have role admin):
 ```
 {
     "success": false,
@@ -2098,7 +2114,6 @@
 * Body:
 ```
 {
-    "user_id": 1,
     "customer_id": 1,
     "tax": 10.2,
     "sell_items": [
@@ -2271,20 +2286,49 @@
 {
     "success": true,
     "draw": 10,
-    "recordsTotal": 3,
+    "recordsTotal": 2,
     "recordsFiltered": 2,
     "data": [
         {
-            "id": 3,
+            "id": 2,
             "user_id": 1,
-            "customer_id": 1,
-            "tax": 10.2
+            "customer_id": 2,
+            "tax": 10.2,
+            "sell_items": [
+                {
+                    "product_id": 1,
+                    "price": 700,
+                    "quantities": 2
+                },
+                {
+                    "product_id": 2,
+                    "price": 50,
+                    "quantities": 5
+                }
+            ]
         },
         {
             "id": 1,
-            "user_id": 1,
-            "customer_id": 1,
-            "tax": 10.2
+            "user_id": 2,
+            "customer_id": 3,
+            "tax": 20.07,
+            "sell_items": [
+                {
+                    "product_id": 3,
+                    "price": 10,
+                    "quantities": 150
+                },
+                {
+                    "product_id": 4,
+                    "price": 970,
+                    "quantities": 100
+                },
+                {
+                    "product_id": 1,
+                    "price": 100,
+                    "quantities": 18
+                }
+            ]
         }
     ]
 }
@@ -2463,7 +2507,7 @@
 
 ## 6.6. Delete a sell
 
-### 6.1.1. Request
+### 6.6.1. Request
 
 * Path: /api/v1/sells/{id}
 * Method: DELETE
@@ -2475,7 +2519,7 @@
 * Body:
 
 
-### 6.1.2. Response
+### 6.6.2. Response
 
 * On success:
 ```
@@ -2504,7 +2548,7 @@
 }
 ```
 
-* On fail (you don't have role admin or cashier):
+* On fail (you don't have role admin):
 ```
 {
     "success": false,
