@@ -1,11 +1,11 @@
-<%- include('../../shared/ejs/header', {title: gettext.add_product_type}) %>
+<%- include('../../shared/ejs/header', {title: gettext.add_product}) %>
 
 <div class="container">
-    <h3 class="text-center"><%= gettext.add_product_type %></h3>
+    <h3 class="text-center"><%= gettext.add_product %></h3>
     <div class="row">
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="name"><%= gettext.product_type_name %></label>
+                <label for="name"><%= gettext.product_name %></label>
                 <input type="text" name="name" id="name" placeholder="" class="form-control">
             </div>
         </div>
@@ -64,7 +64,7 @@
         data.unit = $("#unit").val();
         data.barcode = $("#barcode").val();
         data.quantities = $("#quantity").val();
-        ipcRenderer.send(EventGetter.get('add_product_type'), data);
+        ipcRenderer.send(EventGetter.get('add_product'), data);
     });
 
 </script>

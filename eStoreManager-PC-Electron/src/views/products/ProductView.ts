@@ -3,9 +3,9 @@ import { ConfigGetter } from "../../services/ConfigGetter";
 import { EventGetter } from "../../services/EventGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
-import {AddProductTypeView} from './AddProductTypeView';
-import {EditProductTypeView} from './EditProductTypeView';
-import {ProductTypeController} from '../../controllers/ProductTypeController';
+import {AddProductView} from './AddProductView';
+import {EditProductView} from './EditProductView';
+import {ProductController} from '../../controllers/ProductController';
 import { TextGetter } from "../../services/TextGetter";
 const settings = require('electron-settings');
 const {ipcMain} = require('electron');
@@ -13,21 +13,21 @@ const { dialog } = require('electron');
 
 
 
-export class ProductTypeView extends View {
+export class ProductView extends View {
 
-    private product_typeController:ProductTypeController;
+    private productController:ProductController;
 
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("product_types", window, parent);
-        this.product_typeController = new ProductTypeController();
+        super("products", window, parent);
+        this.productController = new ProductController();
     }
     
-    private static instance: ProductTypeView;
+    private static instance: ProductView;
     static getInstance(window: BrowserWindow, parent: BrowserWindow) {
-        if (!ProductTypeView.instance) {
-            ProductTypeView.instance = new ProductTypeView(window, parent);
+        if (!ProductView.instance) {
+            ProductView.instance = new ProductView(window, parent);
         }
-        return ProductTypeView.instance;
+        return ProductView.instance;
     }
 
 
@@ -39,20 +39,20 @@ export class ProductTypeView extends View {
 
         // ======= Handle requests from renderer process ========
 
-        // Request delete product_type
-        ipcMain.on(EventGetter.get('request_delete_product_type'), (event:any, product_type:any) => {
+        // Request delete product
+        ipcMain.on(EventGetter.get('request_delete_product'), (event:any, product:any) => {
 
             dialog.showMessageBox(this.getWindow(), Object({
                 type: "error",
                 title: "Prompt",
-                message: TextGetter.get("are_you_sure_delete_product_type") + product_type.name,
+                message: TextGetter.get("are_you_sure_delete_product") + product.name,
                 buttons: ["OK", TextGetter.get("cancel")]
             }), (result) => {
                 if (result === 0) { // User click OK
-                    this.product_typeController.deleteProductType(product_type.id, (respond:any) => {
+                    this.productController.deleteProduct(product.id, (respond:any) => {
                         Dialog.showDialogFromRespond("info", respond, this.getWindow());
-                        // Update product_type list
-                        this.getWindow().webContents.send(EventGetter.get("delete_row_from_product_type_table"), product_type.id);
+                        // Update product list
+                        this.getWindow().webContents.send(EventGetter.get("delete_row_from_product_table"), product.id);
                     }, (respond:any) => {
                         Dialog.showDialogFromRespond("error", respond, this.getWindow());
                     });

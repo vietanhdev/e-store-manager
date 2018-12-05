@@ -29,9 +29,9 @@ const {SupplierView} = require('./views/suppliers/SupplierView');
 const {AddSupplierView} = require('./views/suppliers/AddSupplierView');
 const {EditSupplierView} = require('./views/suppliers/EditSupplierView');
 
-const {ProductTypeView} = require('./views/product_types/ProductTypeView');
-const {AddProductTypeView} = require('./views/product_types/AddProductTypeView');
-const {EditProductTypeView} = require('./views/product_types/EditProductTypeView');
+const {ProductView} = require('./views/products/ProductView');
+const {AddProductView} = require('./views/products/AddProductView');
+const {EditProductView} = require('./views/products/EditProductView');
 
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
@@ -77,9 +77,9 @@ export class EStoreManager {
     let addSupplierView = AddSupplierView.getInstance(null, null); this.addView(addSupplierView);
     let editSupplierView = EditSupplierView.getInstance(null, null); this.addView(editSupplierView);
 
-    let productTypeView = ProductTypeView.getInstance(this.mainWindow, null); this.addView(productTypeView);
-    let addProductTypeView = AddProductTypeView.getInstance(null, null); this.addView(addProductTypeView);
-    let editProductTypeView = EditProductTypeView.getInstance(null, null); this.addView(editProductTypeView);
+    let productView = ProductView.getInstance(this.mainWindow, null); this.addView(productView);
+    let addProductView = AddProductView.getInstance(null, null); this.addView(addProductView);
+    let editProductView = EditProductView.getInstance(null, null); this.addView(editProductView);
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot

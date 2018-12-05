@@ -3,9 +3,9 @@ import { stringify } from 'querystring';
 const settings = require('electron-settings');
 
 
-export class ProductTypeController extends Controller {
+export class ProductController extends Controller {
 
-    public SEARCH_API_URL: string = "/api/v1/search/product_types";
+    public SEARCH_API_URL: string = "/api/v1/search/products";
 
     constructor() {
         super();
@@ -17,10 +17,10 @@ export class ProductTypeController extends Controller {
     }
     
 
-    public getAllProductTypes(cbSuccess: (any), cbFail: (any)) {
-        this.getRestService().request('GET', '/api/v1/product_types', {}, (respond:any) => {
+    public getAllProducts(cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('GET', '/api/v1/products', {}, (respond:any) => {
             if (respond['success'] == true) {
-                cbSuccess (respond.product_types);
+                cbSuccess (respond.products);
             } else {
                 cbFail(respond);
             }
@@ -30,8 +30,8 @@ export class ProductTypeController extends Controller {
     }
 
     
-    public getProductTypeDataById(product_id: string, cbSuccess: (any), cbFail: (any)) {
-        this.getRestService().request('GET', '/api/v1/product_types/' + product_id, {}, (respond:any) => {
+    public getProductDataById(product_id: string, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('GET', '/api/v1/products/' + product_id, {}, (respond:any) => {
             if (respond['success'] == true) {
                 cbSuccess (respond);
             } else {
@@ -42,7 +42,7 @@ export class ProductTypeController extends Controller {
         }, true);
     }
 
-    public getProductTypeDataByBarcode(barcode: string, cbSuccess: (any), cbFail: (any)) {
+    public getProductDataByBarcode(barcode: string, cbSuccess: (any), cbFail: (any)) {
         let postData: any = {};
         postData.draw = 1;
         postData.length = 1;
@@ -62,16 +62,16 @@ export class ProductTypeController extends Controller {
         }, true);
     }
 
-    public getProductTypeData(productIdOrBarcode: string, cbSuccess: (any), cbFail: (any)) {
+    public getProductData(productIdOrBarcode: string, cbSuccess: (any), cbFail: (any)) {
 
         // Try to get product by id
-        this.getProductTypeDataById(productIdOrBarcode,
+        this.getProductDataById(productIdOrBarcode,
             (respond:any) => { // Success
                 cbSuccess(respond);
             },  
             (respond:any) => { // Fail
                 // If failed, try to find product using barcode
-                this.getProductTypeDataByBarcode(productIdOrBarcode,
+                this.getProductDataByBarcode(productIdOrBarcode,
                     (respond:any) => { // Success
                         cbSuccess(respond);
                     },  
@@ -81,8 +81,8 @@ export class ProductTypeController extends Controller {
             });
     }
 
-    public addProductType(data: any, cbSuccess: (any), cbFail: (any)) {
-        this.getRestService().request('POST', '/api/v1/product_types', data, (respond:any) => {
+    public addProduct(data: any, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('POST', '/api/v1/products', data, (respond:any) => {
             if (respond['success'] == true) {
                 cbSuccess (respond);
             } else {
@@ -93,8 +93,8 @@ export class ProductTypeController extends Controller {
         }, true);
     }
 
-    public deleteProductType(product_typeId: any, cbSuccess: (any), cbFail: (any)) {
-        this.getRestService().request('DELETE', '/api/v1/product_types/' + product_typeId, null, (respond:any) => {
+    public deleteProduct(productId: any, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('DELETE', '/api/v1/products/' + productId, null, (respond:any) => {
             if (respond['success'] == true) {
                 cbSuccess (respond);
             } else {
@@ -105,8 +105,8 @@ export class ProductTypeController extends Controller {
         }, true);
     }
 
-    public updateProductTypeInfo(data: any, cbSuccess: (any), cbFail: (any)) {
-        this.getRestService().request('PUT', '/api/v1/product_types/' + data.id, data, (respond:any) => {
+    public updateProductInfo(data: any, cbSuccess: (any), cbFail: (any)) {
+        this.getRestService().request('PUT', '/api/v1/products/' + data.id, data, (respond:any) => {
             if (respond['success'] == true) {
                 cbSuccess (respond);
             } else {

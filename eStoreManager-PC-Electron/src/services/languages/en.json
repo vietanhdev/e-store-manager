@@ -141,14 +141,14 @@
     "delete_supplier_successful": "Deleted supplier successfully!",
 
 
-    "product_type_management": "Inventory",
-    "add_product_type": "Add Product",
-    "edit_product_type": "Edit Product",
-    "product_type_name": "Product Name",
-    "created_product_type_successfully": "Created product successfully! ProductType ID: ",
-    "updated_product_type_successfully": "Update product successfully.",
-    "are_you_sure_delete_product_type": "Are you sure to delete this product? ",
-    "delete_product_type_successful": "Deleted product successfully!",
+    "product_management": "Inventory",
+    "add_product": "Add Product",
+    "edit_product": "Edit Product",
+    "product_name": "Product Name",
+    "created_product_successfully": "Created product successfully! Product ID: ",
+    "updated_product_successfully": "Update product successfully.",
+    "are_you_sure_delete_product": "Are you sure to delete this product? ",
+    "delete_product_successful": "Deleted product successfully!",
 
     "price": "Price",
     "unit": "Unit",

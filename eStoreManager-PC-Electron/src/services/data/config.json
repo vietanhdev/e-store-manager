@@ -48,14 +48,14 @@
         "edit_supplier": {
             "path": "suppliers/ejs/edit_supplier.ejs"
         },
-        "product_types": {
-            "path": "product_types/ejs/product_types.ejs"
+        "products": {
+            "path": "products/ejs/products.ejs"
         },
-        "add_product_type": {
-            "path": "product_types/ejs/add_product_type.ejs"
+        "add_product": {
+            "path": "products/ejs/add_product.ejs"
         },
-        "edit_product_type": {
-            "path": "product_types/ejs/edit_product_type.ejs"
+        "edit_product": {
+            "path": "products/ejs/edit_product.ejs"
         },
         "printing": {
             "path": "printing/ejs/printing.ejs"

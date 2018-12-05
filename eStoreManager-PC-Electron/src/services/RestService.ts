@@ -44,12 +44,12 @@ export class RestService {
         };
 
         console.log("REQUESTDATA:::::::::::::");
-        // console.log(postData);
+        console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
             console.log("DATA:::::::::::::");
-            // console.log(data);
-            // console.log(err);
+            console.log(data);
+            console.log(err);
             if (err) {
                 cbFail({
                     status: 100,

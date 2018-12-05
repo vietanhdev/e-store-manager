@@ -1,17 +1,17 @@
-<%- include('../../shared/ejs/header', {title: gettext.edit_product_type}) %>
+<%- include('../../shared/ejs/header', {title: gettext.edit_product}) %>
 
 <div class="container">
-    <h3 class="text-center"><%= gettext.edit_product_type %></h3>
+    <h3 class="text-center"><%= gettext.edit_product %></h3>
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
-                <label for="product_type-id"><%= gettext.id %></label>
-                <input type="text" disabled readonly name="product_type-id" id="product_type-id" placeholder="00" class="form-control">
+                <label for="product-id"><%= gettext.id %></label>
+                <input type="text" disabled readonly name="product-id" id="product-id" placeholder="00" class="form-control">
             </div>
         </div>
         <div class="col-sm-12">
             <div class="form-group">
-                <label for="name"><%= gettext.product_type_name %></label>
+                <label for="name"><%= gettext.product_name %></label>
                 <input type="text" name="name" id="name" placeholder="" class="form-control">
             </div>
         </div>
@@ -54,9 +54,9 @@
     const {ipcRenderer} = require('electron');
 
 
-    // Get all product_type information and show on the form
-    ipcRenderer.on(EventGetter.get("respond_request_product_type_info"), (event, productInfo) => {
-        $("#product_type-id").val(productInfo.id);
+    // Get all product information and show on the form
+    ipcRenderer.on(EventGetter.get("respond_request_product_info"), (event, productInfo) => {
+        $("#product-id").val(productInfo.id);
         $("#name").val(productInfo.name);
         $("#price").val(productInfo.price);
         $("#unit").val(productInfo.unit);
@@ -64,24 +64,24 @@
         $("#quantity").val(productInfo.quantities);
 
     });
-    ipcRenderer.send(EventGetter.get("request_product_type_info"));
+    ipcRenderer.send(EventGetter.get("request_product_info"));
     
 
     // Handle Save Button
     $("#save").click(() => {
         let data = {}
-        data.id = $("#product_type-id").val();
+        data.id = $("#product-id").val();
         data.name = $("#name").val();
         data.price = $("#price").val();
         data.unit = $("#unit").val();
         data.barcode = $("#barcode").val();
         data.quantities = $("#quantity").val();
-        ipcRenderer.send(EventGetter.get('update_product_type'), data);
+        ipcRenderer.send(EventGetter.get('update_product'), data);
     });
 
 
-    ipcRenderer.on(EventGetter.get("update_product_type_success"), () => {
-        ipcRenderer.send(EventGetter.get("request_update_product_type_list"));
+    ipcRenderer.on(EventGetter.get("update_product_success"), () => {
+        ipcRenderer.send(EventGetter.get("request_update_product_list"));
     });
 </script>
 

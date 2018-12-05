@@ -1,8 +1,8 @@
 $(document).ready(() => {
 
     // Import controllers
-    const ProductTypeController = require("../../../controllers/ProductTypeController.js").ProductTypeController;
-    let productTypeControllerController = new ProductTypeController();
+    const ProductController = require("../../../controllers/ProductController.js").ProductController;
+    let productControllerController = new ProductController();
     const UserController = require("../../../controllers/UserController.js").UserController;
     let userController = new UserController();
     const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
@@ -215,7 +215,7 @@ $(document).ready(() => {
     function addProduct(productIdOrBarcode) {
 
         // Get product information
-        let productData = productTypeControllerController.getProductTypeData(productIdOrBarcode,
+        let productData = productControllerController.getProductData(productIdOrBarcode,
             (response) => { // Success
 
                 // === Check if product already in the table ===
@@ -301,7 +301,7 @@ $(document).ready(() => {
             postData = JSON.stringify(postData);
 
             $.ajax({
-                "url": productTypeControllerController.getAjaxAPIUrl(),
+                "url": productControllerController.getAjaxAPIUrl(),
                 "type": 'POST',
                 "headers": headers,
                 "processData": true,
