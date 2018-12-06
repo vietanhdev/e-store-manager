@@ -11,20 +11,53 @@ public class Data {
 
     private Long user_id;
 
+    private String user_name;
+
     private Long customer_id;
+
+    private String customer_name;
 
     private Float tax;
 
     private Boolean active;
 
+    private String createdAt;
+
     private Set<SellItemInfor> buy_items = new HashSet<>();
 
-    public Data(Long id, Long user_id, Long customer_id, Float tax, Boolean active) {
+    public Data(Long id, Long user_id, String user_name, Long customer_id, String customer_name, Float tax, Boolean active, String createdAt) {
         this.id = id;
         this.user_id = user_id;
+        this.user_name = user_name;
         this.customer_id = customer_id;
+        this.customer_name = customer_name;
         this.tax = tax;
         this.active = active;
+        this.createdAt = createdAt;
+    }
+
+    public String getCustomer_name() {
+        return customer_name;
+    }
+
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public Boolean getActive() {
@@ -74,9 +107,9 @@ public class Data {
     public void setSell_items(Set<SellItemInfor> buy_items) {
         this.buy_items = buy_items;
     }
-
-    public void addSell_items(Long product_id, Float price, Float quantities){
-        this.buy_items.add(new SellItemInfor(product_id, price, quantities));
+    
+    public void addSell_items(Long product_id, String product_name, Float price, Float quantities, String unit){
+        this.buy_items.add(new SellItemInfor(product_id, product_name, price, quantities, unit));
     }
 
 }

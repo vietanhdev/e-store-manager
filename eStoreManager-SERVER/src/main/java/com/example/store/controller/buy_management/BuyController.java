@@ -1,7 +1,6 @@
 package com.example.store.controller.buy_management;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -131,6 +130,7 @@ public class BuyController {
                 user_name = user.getName();
             }
 
+            // find date created at
             Date myDate = Date.from(buy.getCreatedAt());
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String formattedDate = formatter.format(myDate);
@@ -140,13 +140,15 @@ public class BuyController {
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy_id);
             for(BuyItem buyItem: buyItems) {
                 
-                // find product name by id
+                // find product name, unit by id
                 Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
-                String product_name;
+                String product_name, unit;
                 if(product == null){
                     product_name = "";
+                    unit = "";
                 } else {
                     product_name = product.getName();
+                    unit = product.getUnit();
                 }
 
                 // find supplier name by id
@@ -163,7 +165,8 @@ public class BuyController {
                                             buyItem.getSupplierId(),
                                             supplier_name,
                                             buyItem.getPrice(),
-                                            buyItem.getQuantities());
+                                            buyItem.getQuantities(),
+                                            unit);
             }
 
             return new ResponseEntity<>(buyInforResponse,
@@ -190,12 +193,11 @@ public class BuyController {
             for(BuyItem buyItem: buyItems) {
                 buyItemRepository.deleteById(buyItem.getId());
             }
-            
             for(BuyItemInfor buyItemInfor: updateBuyRequest.getBuy_items()) {
                 BuyItem buyItem = new BuyItem(buyItemInfor.getProduct_id(), 
-                                        buyItemInfor.getSupplier_id(),
-                                        buyItemInfor.getPrice(),
-                                        buyItemInfor.getQuantities());
+                                            buyItemInfor.getSupplier_id(),
+                                            buyItemInfor.getPrice(),
+                                            buyItemInfor.getQuantities());
                 buyItem.setBuy(buy);
                 buyItemRepository.save(buyItem);
             }
@@ -289,11 +291,13 @@ public class BuyController {
 
                 // find product name by id
                 Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
-                String product_name;
+                String product_name, unit;
                 if(product == null){
                     product_name = "";
+                    unit = "";
                 } else {
                     product_name = product.getName();
+                    unit = product.getUnit();
                 }
 
                 // find supplier name by id
@@ -310,7 +314,8 @@ public class BuyController {
                                 buyItem.getSupplierId(),
                                 supplier_name,
                                 buyItem.getPrice(),
-                                buyItem.getQuantities());
+                                buyItem.getQuantities(),
+                                unit);
             }
 
             searchBuysResponse.addData(data);

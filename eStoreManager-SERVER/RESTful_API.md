@@ -1707,15 +1707,6 @@
 }
 ```
 
-* On fail (user id does not exist):
-```
-{
-    "success": false,
-    "code": "wrong_user_id",
-    "message": "user id " + {id} + " does not exist"
-}
-```
-
 * On fail (product id does not exist):
 ```
 {
@@ -1852,7 +1843,8 @@
                     "supplier_id": 1,
                     "supplier_name": "supplier",
                     "price": 970,
-                    "quantities": 100
+                    "quantities": 100,
+                    "unit": ""
                 },
                 {
                     "product_id": 1,
@@ -1860,7 +1852,8 @@
                     "supplier_id": 2,
                     "supplier_name": "vina",
                     "price": 100,
-                    "quantities": 18
+                    "quantities": 18,
+                    "unit": "lit"
                 }
             ]
         },
@@ -1877,7 +1870,8 @@
                     "supplier_id": 1,
                     "supplier_name": "supplier",
                     "price": 1,
-                    "quantities": 1
+                    "quantities": 1,
+                    "unit": "bar"
                 }
             ]
         }
@@ -1943,7 +1937,8 @@
             "supplier_id": 2,
             "supplier_name": "vina",
             "price": 100,
-            "quantities": 18
+            "quantities": 18,
+            "unit": "lit"
         },
         {
             "product_id": 3,
@@ -1951,7 +1946,8 @@
             "supplier_id": 10,
             "supplier_name": "",
             "price": 10,
-            "quantities": 150
+            "quantities": 150,
+            "unit": ""
         },
         {
             "product_id": 4,
@@ -1959,7 +1955,8 @@
             "supplier_id": 1,
             "supplier_name": "supplier",
             "price": 970,
-            "quantities": 100
+            "quantities": 100,
+            "unit": ""
         }
     ]
 }
@@ -2165,6 +2162,15 @@
 {
     "success": true,
     "id": 10
+}
+```
+
+* On fail (total wrong):
+```
+{
+    "success": false,
+    "code": "wrong_total_bill",
+    "message": "wrong total bill"
 }
 ```
 

@@ -1,11 +1,16 @@
 package com.example.store.controller.sell_management;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import com.example.store.model.customer_management.Customer;
+import com.example.store.model.product_management.Product;
 import com.example.store.model.sell_management.Sell;
 import com.example.store.model.sell_management.SellItem;
+import com.example.store.model.user_management.User;
 import com.example.store.payload.sell_management.request.SellItemInfor;
 import com.example.store.payload.sell_management.request.CreateSellRequest;
 import com.example.store.payload.sell_management.request.SearchSellsRequest;
@@ -16,6 +21,7 @@ import com.example.store.payload.sell_management.response.Data;
 import com.example.store.payload.sell_management.response.SearchSellsResponse;
 import com.example.store.payload.common.response.ApiResponse;
 import com.example.store.repository.sell_management.SellRepository;
+import com.example.store.repository.user_management.UserRepository;
 import com.example.store.repository.customer_management.CustomerRepository;
 import com.example.store.repository.product_management.ProductRepository;
 import com.example.store.security.CurrentUser;
@@ -42,6 +48,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class SellController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -87,8 +96,10 @@ public class SellController {
         for(SellItemInfor sellItemInfor: createSellRequest.getSell_items()) {
             total += sellItemInfor.getPrice();
         }
-        total = total * (1 + createSellRequest.getTax());
-        if(Math.abs(total - createSellRequest.getTotal()) < AppConstants.EPS) {
+        total *= (1 + createSellRequest.getTax());
+        Float result = Math.abs(total - createSellRequest.getTotal());
+
+        if( result > AppConstants.EPS ) {
             return new ResponseEntity<>(new ApiResponse(false, "wrong_total_bill", "wrong total bill"),
                                         HttpStatus.OK);
         }
@@ -118,13 +129,51 @@ public class SellController {
         try {
             Long sell_id = Long.parseLong(id);
             Sell sell = sellRepository.findById(sell_id).orElse(null);
-            SellInforResponse sellInforResponse = new SellInforResponse(sell.getId(), sell.getUserId(), sell.getCustomerId(), sell.getTax(), sell.getActive());
+
+            // find user name by id
+            User user = userRepository.findById(sell.getUserId()).orElse(null);
+            String user_name;
+            if(user == null){
+                user_name = "";
+            } else {
+                user_name = user.getName();
+            }
+
+            // find customer name by id
+            Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
+            String customer_name;
+            if(customer == null){
+                customer_name = "";
+            } else {
+                customer_name = customer.getName();
+            }
+
+            // find date created at
+            Date myDate = Date.from(sell.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(myDate);
+
+            SellInforResponse sellInforResponse = new SellInforResponse(sell.getId(), sell.getUserId(), user_name, sell.getCustomerId(), customer_name, sell.getTax(), sell.getActive(), formattedDate);
 
             List<SellItem> sellItems = sellItemRepository.findBySellId(sell_id);
             for(SellItem sellItem: sellItems) {
+
+                // find product name, unit by id
+                Product product = productRepository.findById(sellItem.getProductId()).orElse(null);
+                String product_name, unit;
+                if(product == null){
+                    product_name = "";
+                    unit = "";
+                } else {
+                    product_name = product.getName();
+                    unit = product.getUnit();
+                }
+
                 sellInforResponse.addSell_items(sellItem.getProductId(),
+                                            product_name,
                                             sellItem.getPrice(),
-                                            sellItem.getQuantities());
+                                            sellItem.getQuantities(),
+                                            unit);
             }
             System.out.println(sell.createdAt);
 
@@ -241,17 +290,56 @@ public class SellController {
         SearchSellsResponse searchSellsResponse = new SearchSellsResponse(draw, recordsTotal, recordsFiltered);
 
         for(Sell sell: sells.getContent()) {
+            // find user name by id
+            User user = userRepository.findById(sell.getUserId()).orElse(null);
+            String user_name;
+            if(user == null){
+                user_name = "";
+            } else {
+                user_name = user.getName();
+            }
+
+            // find customer name by id
+            Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
+            String customer_name;
+            if(customer == null){
+                customer_name = "";
+            } else {
+                customer_name = customer.getName();
+            }
+
+            // find date created at
+            Date myDate = Date.from(sell.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(myDate);
+
             Data data = new Data(sell.getId(),
                                 sell.getUserId(),
+                                user_name,
                                 sell.getCustomerId(),
+                                customer_name,
                                 sell.getTax(),
-                                sell.getActive());
+                                sell.getActive(),
+                                formattedDate);
 
             List<SellItem> sellItems = sellItemRepository.findBySellId(sell.getId());
             for(SellItem sellItem: sellItems) {
+                // find product name, unit by id
+                Product product = productRepository.findById(sellItem.getProductId()).orElse(null);
+                String product_name, unit;
+                if(product == null){
+                    product_name = "";
+                    unit = "";
+                } else {
+                    product_name = product.getName();
+                    unit = product.getUnit();
+                }
+
                 data.addSell_items(sellItem.getProductId(),
+                                product_name,
                                 sellItem.getPrice(),
-                                sellItem.getQuantities());
+                                sellItem.getQuantities(),
+                                unit);
             }
             
             searchSellsResponse.addData(data);
