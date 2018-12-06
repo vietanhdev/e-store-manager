@@ -2,6 +2,7 @@ import QRReader from './vendor/qrscan.js';
 import { snackbar } from './snackbar.js';
 import styles from '../css/styles.css';
 import isURL from 'is-url';
+import $ from 'jquery';
 
 //If service worker is installed, show offline usage notification
 if ('serviceWorker' in navigator) {
@@ -80,6 +81,11 @@ window.addEventListener('DOMContentLoaded', () => {
     hideDialog();
   }
 
+  // Send code to server
+  function sendCode(code) {
+    $.get('http://localhost:3843/barcode?code=' + code);
+  }
+
   //Scan
   function scan(forSelectedPhotos = false) {
     if (window.isMediaStreamAPISupported && !window.noCameraPermission) {
@@ -95,6 +101,9 @@ window.addEventListener('DOMContentLoaded', () => {
       textBoxEle.value = result;
       textBoxEle.select();
       scanningEle.style.display = 'none';
+
+      sendCode(result);
+
       if (isURL(result)) {
         dialogOpenBtnElement.style.display = 'inline-block';
       }
@@ -153,12 +162,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
   function Qrfile() {
-    var camera = document.createElement('input'); 
+    var camera = document.createElement('input');
     camera.setAttribute('type', 'file');
     camera.id = 'fichier';
     window.appOverlay.style.borderStyle = '';
     createFrame();
-    
+
     //Add the camera and img element to DOM
     var pageContentElement = document.querySelector('.app__layout-content');
     pageContentElement.appendChild(camera);
@@ -166,8 +175,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     //Click of camera fab icon
     Openfile.addEventListener('click', () => {
-    scanningEle.style.display = 'none';
-    document.querySelector('#fichier').click();
-  });
+      scanningEle.style.display = 'none';
+      document.querySelector('#fichier').click();
+    });
   }
 });
