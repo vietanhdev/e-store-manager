@@ -6,6 +6,9 @@ import javax.validation.Valid;
 
 import com.example.store.model.buy_management.Buy;
 import com.example.store.model.buy_management.BuyItem;
+import com.example.store.model.product_management.Product;
+import com.example.store.model.supplier_management.Supplier;
+import com.example.store.model.user_management.User;
 import com.example.store.payload.buy_management.request.BuyItemInfor;
 import com.example.store.payload.buy_management.request.CreateBuyRequest;
 import com.example.store.payload.buy_management.request.SearchBuysRequest;
@@ -18,6 +21,7 @@ import com.example.store.payload.common.response.ApiResponse;
 import com.example.store.repository.buy_management.BuyRepository;
 import com.example.store.repository.product_management.ProductRepository;
 import com.example.store.repository.supplier_management.SupplierRepository;
+import com.example.store.repository.user_management.UserRepository;
 import com.example.store.security.CurrentUser;
 import com.example.store.security.UserPrincipal;
 import com.example.store.util.OffsetBasedPageRequest;
@@ -41,6 +45,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1")
 public class BuyController {
+    
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private SupplierRepository supplierRepository;
@@ -86,7 +93,12 @@ public class BuyController {
 
         // create new buyItems and save
         for(BuyItemInfor buyItemInfor: createBuyRequest.getBuy_items()) {
-            BuyItem buyItem = new BuyItem(buyItemInfor.getProduct_id(), 
+            // increase product quantities in product database
+            Product product = productRepository.findById(buyItemInfor.getProduct_id()).orElse(null);
+            product.setQuantities(product.getQuantities() + buyItemInfor.getQuantities());
+
+            // write information to buyItem
+            BuyItem buyItem = new BuyItem(buyItemInfor.getProduct_id(),
                                         buyItemInfor.getSupplier_id(),
                                         buyItemInfor.getPrice(),
                                         buyItemInfor.getQuantities());
@@ -106,12 +118,43 @@ public class BuyController {
         try {
             Long buy_id = Long.parseLong(id);
             Buy buy = buyRepository.findById(buy_id).orElse(null);
-            BuyInforResponse buyInforResponse = new BuyInforResponse(buy.getId(), buy.getUserId(), buy.getActive());
+
+            // find user name by id
+            User user = userRepository.findById(buy.getUserId()).orElse(null);
+            String user_name;
+            if(user == null){
+                user_name = "";
+            } else {
+                user_name = user.getName();
+            }
+
+            BuyInforResponse buyInforResponse = new BuyInforResponse(buy.getId(), buy.getUserId(), user_name, buy.getActive());
 
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy_id);
             for(BuyItem buyItem: buyItems) {
+
+                // find product name by id
+                Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
+                String product_name;
+                if(product == null){
+                    product_name = "";
+                } else {
+                    product_name = product.getName();
+                }
+
+                // find supplier name by id
+                Supplier supplier = supplierRepository.findById(buyItem.getSupplierId()).orElse(null);
+                String supplier_name;
+                if(supplier == null){
+                    supplier_name = "";
+                } else {
+                    supplier_name = supplier.getName();
+                }
+
                 buyInforResponse.addBuy_items(buyItem.getProductId(),
+                                            product_name,
                                             buyItem.getSupplierId(),
+                                            supplier_name,
                                             buyItem.getPrice(),
                                             buyItem.getQuantities());
             }
@@ -218,12 +261,43 @@ public class BuyController {
         SearchBuysResponse searchBuysResponse = new SearchBuysResponse(draw, recordsTotal, recordsFiltered);
 
         for(Buy buy: buys.getContent()) {
-            Data data = new Data(buy.getId(), buy.getUserId(), buy.getActive());
+
+            // find user name by id
+            User user = userRepository.findById(buy.getUserId()).orElse(null);
+            String user_name;
+            if(user == null){
+                user_name = "";
+            } else {
+                user_name = user.getName();
+            }
+
+            Data data = new Data(buy.getId(), buy.getUserId(), user_name, buy.getActive());
 
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy.getId());
             for(BuyItem buyItem: buyItems) {
+
+                // find product name by id
+                Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
+                String product_name;
+                if(product == null){
+                    product_name = "";
+                } else {
+                    product_name = product.getName();
+                }
+
+                // find supplier name by id
+                Supplier supplier = supplierRepository.findById(buyItem.getSupplierId()).orElse(null);
+                String supplier_name;
+                if(supplier == null){
+                    supplier_name = "";
+                } else {
+                    supplier_name = supplier.getName();
+                }
+
                 data.addBuy_items(buyItem.getProductId(),
+                                product_name,
                                 buyItem.getSupplierId(),
+                                supplier_name,
                                 buyItem.getPrice(),
                                 buyItem.getQuantities());
             }

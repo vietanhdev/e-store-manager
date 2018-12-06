@@ -13,14 +13,25 @@ public class BuyInforResponse {
 
     private Long user_id;
 
+    private String user_name;
+
     private Boolean active;
 
     private Set<BuyItemInfor> buy_items = new HashSet<>();
 
-    public BuyInforResponse(Long id, Long user_id, Boolean active) {
+    public BuyInforResponse(Long id, Long user_id, String user_name, Boolean active) {
         this.id = id;
         this.user_id = user_id;
+        this.user_name = user_name;
         this.active = active;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
     }
 
     public Boolean getActive() {
@@ -47,8 +58,8 @@ public class BuyInforResponse {
         this.buy_items = buy_items;
     }
 
-    public void addBuy_items(Long product_id, Long supplier_id, Float price, Float quantities){
-        this.buy_items.add(new BuyItemInfor(product_id, supplier_id, price, quantities));
+    public void addBuy_items(Long product_id, String product_name, Long supplier_id, String supplier_name, Float price, Float quantities){
+        this.buy_items.add(new BuyItemInfor(product_id, product_name, supplier_id, supplier_name, price, quantities));
     }
 
     public Long getId() {

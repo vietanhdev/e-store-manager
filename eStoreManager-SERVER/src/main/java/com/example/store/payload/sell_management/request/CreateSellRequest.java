@@ -9,10 +9,16 @@ public class CreateSellRequest {
 
     private Float tax;
 
+    private  Float total;
+
     private Set<SellItemInfor> sell_items = new HashSet<>();
 
     public Float getTax() {
         return tax;
+    }
+
+    public Float getTotal() {
+        return total;
     }
 
     public Long getCustomer_id() {

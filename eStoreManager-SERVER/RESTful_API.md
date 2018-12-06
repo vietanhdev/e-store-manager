@@ -1836,31 +1836,46 @@
 {
     "success": true,
     "draw": 10,
-    "recordsTotal": 1,
-    "recordsFiltered": 1,
+    "recordsTotal": 3,
+    "recordsFiltered": 2,
     "data": [
         {
             "id": 1,
             "user_id": 3,
+            "user_name": "cashier",
             "active": false,
             "buy_items": [
                 {
-                    "product_id": 3,
-                    "supplier_id": 10,
-                    "price": 10,
-                    "quantities": 150
+                    "product_id": 4,
+                    "product_name": "",
+                    "supplier_id": 1,
+                    "supplier_name": "supplier",
+                    "price": 970,
+                    "quantities": 100
                 },
                 {
                     "product_id": 1,
+                    "product_name": "milk",
                     "supplier_id": 2,
+                    "supplier_name": "vina",
                     "price": 100,
                     "quantities": 18
-                },
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "user_id": 1,
+            "user_name": "Admin dep trai",
+            "active": true,
+            "buy_items": [
                 {
-                    "product_id": 4,
+                    "product_id": 2,
+                    "product_name": "chocolate",
                     "supplier_id": 1,
-                    "price": 970,
-                    "quantities": 100
+                    "supplier_name": "supplier",
+                    "price": 1,
+                    "quantities": 1
                 }
             ]
         }
@@ -1916,23 +1931,30 @@
     "success": true,
     "id": 1,
     "user_id": 3,
+    "user_name": "Vanh",
     "active": false,
     "buy_items": [
         {
-            "product_id": 3,
-            "supplier_id": 10,
-            "price": 10,
-            "quantities": 150
-        },
-        {
             "product_id": 1,
+            "product_name": "milk",
             "supplier_id": 2,
+            "supplier_name": "vina",
             "price": 100,
             "quantities": 18
         },
         {
+            "product_id": 3,
+            "product_name": "chocolate",
+            "supplier_id": 10,
+            "supplier_name": "",
+            "price": 10,
+            "quantities": 150
+        },
+        {
             "product_id": 4,
+            "product_name": "",
             "supplier_id": 1,
+            "supplier_name": "supplier",
             "price": 970,
             "quantities": 100
         }
