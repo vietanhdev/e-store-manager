@@ -96,8 +96,10 @@ public class SellController {
         for(SellItemInfor sellItemInfor: createSellRequest.getSell_items()) {
             total += sellItemInfor.getPrice();
         }
-        total = total * (1 + createSellRequest.getTax());
-        if(Math.abs(total - createSellRequest.getTotal()) < AppConstants.EPS) {
+        total *= (1 + createSellRequest.getTax());
+        Float result = Math.abs(total - createSellRequest.getTotal());
+
+        if( result > AppConstants.EPS ) {
             return new ResponseEntity<>(new ApiResponse(false, "wrong_total_bill", "wrong total bill"),
                                         HttpStatus.OK);
         }
