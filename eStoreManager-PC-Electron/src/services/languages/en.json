@@ -190,6 +190,12 @@
     "are_you_sure_discard_import_bill": "Are you sure to discard the import bill?",
     "discard_import_bill_success": "discard_import_bill_success",
     "view": "View",
-    "view_import_bill": "View Import Bill"
+    "view_import_bill": "View Import Bill",
+
+    "wrong_customer_id": "Wrong customer ID!",
+    "argument_not_valid": "Please check all submited fields!",
+    "wrong_supplier_id": "Wrong supplier ID!",
+    "wrong_product_id": "Wrong product ID!",
+    "update_buy_information_successful": "Updated import bill successfully!"
 
 }
