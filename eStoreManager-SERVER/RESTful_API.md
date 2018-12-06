@@ -1931,8 +1931,9 @@
     "success": true,
     "id": 1,
     "user_id": 3,
-    "user_name": "Vanh",
+    "user_name": "",
     "active": false,
+    "createdAt": "2018-12-04T13:13:16Z",
     "buy_items": [
         {
             "product_id": 1,
@@ -1944,7 +1945,7 @@
         },
         {
             "product_id": 3,
-            "product_name": "chocolate",
+            "product_name": "",
             "supplier_id": 10,
             "supplier_name": "",
             "price": 10,

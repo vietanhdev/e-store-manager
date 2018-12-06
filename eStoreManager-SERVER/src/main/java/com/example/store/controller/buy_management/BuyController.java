@@ -1,5 +1,8 @@
 package com.example.store.controller.buy_management;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -128,11 +131,15 @@ public class BuyController {
                 user_name = user.getName();
             }
 
-            BuyInforResponse buyInforResponse = new BuyInforResponse(buy.getId(), buy.getUserId(), user_name, buy.getActive());
+            Date myDate = Date.from(buy.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(myDate);
+
+            BuyInforResponse buyInforResponse = new BuyInforResponse(buy.getId(), buy.getUserId(), user_name, buy.getActive(), formattedDate);
 
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy_id);
             for(BuyItem buyItem: buyItems) {
-
+                
                 // find product name by id
                 Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
                 String product_name;
@@ -271,7 +278,11 @@ public class BuyController {
                 user_name = user.getName();
             }
 
-            Data data = new Data(buy.getId(), buy.getUserId(), user_name, buy.getActive());
+            Date myDate = Date.from(buy.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(myDate);
+
+            Data data = new Data(buy.getId(), buy.getUserId(), user_name, buy.getActive(), formattedDate);
 
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy.getId());
             for(BuyItem buyItem: buyItems) {

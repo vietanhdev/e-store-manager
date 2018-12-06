@@ -15,13 +15,24 @@ public class Data {
 
     private Boolean active;
 
+    private String createdAt;
+
     private Set<BuyItemInfor> buy_items = new HashSet<>();
 
-    public Data(Long id, Long user_id, String user_name, Boolean active) {
+    public Data(Long id, Long user_id, String user_name, Boolean active, String createdAt) {
         this.id = id;
         this.user_id = user_id;
-        this.setUser_name(user_name);
+        this.user_name = user_name;
         this.active = active;
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getUser_name() {
