@@ -18,7 +18,8 @@ import com.example.store.payload.common.response.ApiResponse;
 import com.example.store.repository.sell_management.SellRepository;
 import com.example.store.repository.customer_management.CustomerRepository;
 import com.example.store.repository.product_management.ProductRepository;
-import com.example.store.repository.user_management.UserRepository;
+import com.example.store.security.CurrentUser;
+import com.example.store.security.UserPrincipal;
 import com.example.store.util.OffsetBasedPageRequest;
 import com.example.store.repository.sell_management.SellItemRepository;
 
@@ -42,9 +43,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SellController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private CustomerRepository customerRepository;
 
     @Autowired
@@ -59,15 +57,7 @@ public class SellController {
     // Admin, Manager create sell
     @PostMapping("/sells")
     @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
-    public ResponseEntity<?> createSell(@Valid @RequestBody CreateSellRequest createSellRequest) {
-        // check if user id exist
-        if(createSellRequest.getUser_id() != null){
-            Long user_id = createSellRequest.getUser_id();
-            if( userRepository.existsById(user_id) == false ) {
-                return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
-                                        HttpStatus.OK);
-            }
-        }
+    public ResponseEntity<?> createSell(@Valid @RequestBody CreateSellRequest createSellRequest, @CurrentUser UserPrincipal currentUser) {
 
         // check if customer id exist
         if(createSellRequest.getCustomer_id() != null){
@@ -92,7 +82,7 @@ public class SellController {
         }
 
         // create new sell and save
-        Sell sell = new Sell(createSellRequest.getUser_id(), createSellRequest.getCustomer_id(), createSellRequest.getTax());
+        Sell sell = new Sell(currentUser.getId(), createSellRequest.getCustomer_id(), createSellRequest.getTax());
         sell = sellRepository.save(sell);
 
         // create new sellItems and save
@@ -116,7 +106,7 @@ public class SellController {
         try {
             Long sell_id = Long.parseLong(id);
             Sell sell = sellRepository.findById(sell_id).orElse(null);
-            SellInforResponse sellInforResponse = new SellInforResponse(sell.getId(), sell.getUserId(), sell.getCustomerId(), sell.getTax());
+            SellInforResponse sellInforResponse = new SellInforResponse(sell.getId(), sell.getUserId(), sell.getCustomerId(), sell.getTax(), sell.getActive());
 
             List<SellItem> sellItems = sellItemRepository.findBySellId(sell_id);
             for(SellItem sellItem: sellItems) {
@@ -136,16 +126,17 @@ public class SellController {
 
     // Admin, Manager update sell
     @PutMapping("/sells/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> updateSellInfor(@PathVariable(value = "id") String id,
                                                 @Valid @RequestBody UpdateSellRequest updateSellRequest) {
         try {
             Long sell_id = Long.parseLong(id);
             Sell sell = sellRepository.findById(sell_id).orElse(null);
 
-            sell.setUserId(updateSellRequest.getUser_id());
-            sell.setCustomerId(updateSellRequest.getCustomer_id());
-            sell.setTax(updateSellRequest.getTax());
+            if(updateSellRequest.getUser_id() != null) sell.setUserId(updateSellRequest.getUser_id());
+            if(updateSellRequest.getCustomer_id() != null) sell.setCustomerId(updateSellRequest.getCustomer_id());
+            if(updateSellRequest.getTax() != null) sell.setTax(updateSellRequest.getTax());
+            if(updateSellRequest.getActive() != null) sell.setActive(updateSellRequest.getActive());
 
             List<SellItem> sellItems = sellItemRepository.findBySellId(sell_id);
             for(SellItem sellItem: sellItems) {
@@ -171,7 +162,7 @@ public class SellController {
 
     // Admin, Manager delete sell
     @DeleteMapping("/sells/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'CASHIER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> deleteSell(@PathVariable(value = "id") String id) {
         try {
             Sell sell = sellRepository.findById(Long.parseLong(id)).orElse(null);
@@ -241,8 +232,16 @@ public class SellController {
             Data data = new Data(sell.getId(),
                                 sell.getUserId(),
                                 sell.getCustomerId(),
-                                sell.getTax());
+                                sell.getTax(),
+                                sell.getActive());
 
+            List<SellItem> sellItems = sellItemRepository.findBySellId(sell.getId());
+            for(SellItem sellItem: sellItems) {
+                data.addSell_items(sellItem.getProductId(),
+                                sellItem.getPrice(),
+                                sellItem.getQuantities());
+            }
+            
             searchSellsResponse.addData(data);
         }
 

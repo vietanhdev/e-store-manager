@@ -17,13 +17,24 @@ public class SellInforResponse {
 
     private Float tax;
 
+    private Boolean active;
+
     private Set<SellItemInfor> buy_items = new HashSet<>();
 
-    public SellInforResponse(Long id, Long user_id, Long customer_id, Float tax) {
+    public SellInforResponse(Long id, Long user_id, Long customer_id, Float tax, Boolean active) {
         this.id = id;
         this.user_id = user_id;
         this.customer_id = customer_id;
         this.tax = tax;
+        this.active = active;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Boolean getSuccess() {

@@ -7,10 +7,16 @@ public class UpdateBuyRequest {
     
     private Long user_id;
 
+    private Boolean active;
+
     private Set<BuyItemInfor> buy_items = new HashSet<>();
 
     public Long getUser_id() {
         return user_id;
+    }
+
+    public Boolean getActive() {
+        return active;
     }
 
     public Set<BuyItemInfor> getBuy_items() {
