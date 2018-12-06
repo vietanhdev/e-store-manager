@@ -20,6 +20,7 @@ import com.example.store.repository.customer_management.CustomerRepository;
 import com.example.store.repository.product_management.ProductRepository;
 import com.example.store.security.CurrentUser;
 import com.example.store.security.UserPrincipal;
+import com.example.store.util.AppConstants;
 import com.example.store.util.OffsetBasedPageRequest;
 import com.example.store.repository.sell_management.SellItemRepository;
 
@@ -81,6 +82,17 @@ public class SellController {
             
         }
 
+        // check Total wrong
+        Float total = 0F;
+        for(SellItemInfor sellItemInfor: createSellRequest.getSell_items()) {
+            total += sellItemInfor.getPrice();
+        }
+        total = total * (1 + createSellRequest.getTax());
+        if(Math.abs(total - createSellRequest.getTotal()) < AppConstants.EPS) {
+            return new ResponseEntity<>(new ApiResponse(false, "wrong_total_bill", "wrong total bill"),
+                                        HttpStatus.OK);
+        }
+        
         // create new sell and save
         Sell sell = new Sell(currentUser.getId(), createSellRequest.getCustomer_id(), createSellRequest.getTax());
         sell = sellRepository.save(sell);
