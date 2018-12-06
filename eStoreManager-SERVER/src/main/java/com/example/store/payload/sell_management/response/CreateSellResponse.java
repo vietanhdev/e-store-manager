@@ -6,8 +6,18 @@ public class CreateSellResponse {
 
     private Long id;
 
+    private Boolean active;
+
     public CreateSellResponse(Long id){
         this.id = id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Long getId() {

@@ -4,14 +4,28 @@ public class SellItemInfor {
 
     private Long product_id;
 
+    private String product_name;
+
     private Float price;
 
     private Float quantities;
 
-    public SellItemInfor(Long product_id, Float price, Float quantities) {
+    private String unit;
+
+    public SellItemInfor(Long product_id, String product_name, Float price, Float quantities, String unit) {
         this.product_id = product_id;
+        this.product_name = product_name;
         this.price = price;
         this.quantities = quantities;
+        this.unit = unit;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public String getProduct_name() {
+        return product_name;
     }
 
     public Long getProduct_id() {

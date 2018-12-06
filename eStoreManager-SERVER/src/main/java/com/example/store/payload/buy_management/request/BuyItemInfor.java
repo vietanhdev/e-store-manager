@@ -14,13 +14,20 @@ public class BuyItemInfor {
 
     private Float quantities;
 
-    public BuyItemInfor(Long product_id, String product_name, Long supplier_id, String supplier_name, Float price, Float quantities) {
+    private String unit;
+
+    public BuyItemInfor(Long product_id, String product_name, Long supplier_id, String supplier_name, Float price, Float quantities, String unit) {
         this.product_id = product_id;
         this.product_name = product_name;
         this.supplier_id = supplier_id;
         this.supplier_name = supplier_name;
         this.price = price;
         this.quantities = quantities;
+        this.unit = unit;
+    }
+
+    public String getUnit() {
+        return unit;
     }
 
     public String getSupplier_name() {

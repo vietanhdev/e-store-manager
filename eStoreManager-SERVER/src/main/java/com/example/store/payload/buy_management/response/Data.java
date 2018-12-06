@@ -75,8 +75,8 @@ public class Data {
         this.buy_items = buy_items;
     }
 
-    public void addBuy_items(Long product_id, String product_name, Long supplier_id, String supplier_name, Float price, Float quantities){
-        this.buy_items.add(new BuyItemInfor(product_id, product_name, supplier_id, supplier_name, price, quantities));
+    public void addBuy_items(Long product_id, String product_name, Long supplier_id, String supplier_name, Float price, Float quantities, String unit){
+        this.buy_items.add(new BuyItemInfor(product_id, product_name, supplier_id, supplier_name, price, quantities, unit));
     }
 
 }
