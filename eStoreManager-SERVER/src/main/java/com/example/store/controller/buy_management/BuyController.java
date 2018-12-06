@@ -18,7 +18,8 @@ import com.example.store.payload.common.response.ApiResponse;
 import com.example.store.repository.buy_management.BuyRepository;
 import com.example.store.repository.product_management.ProductRepository;
 import com.example.store.repository.supplier_management.SupplierRepository;
-import com.example.store.repository.user_management.UserRepository;
+import com.example.store.security.CurrentUser;
+import com.example.store.security.UserPrincipal;
 import com.example.store.util.OffsetBasedPageRequest;
 import com.example.store.repository.buy_management.BuyItemRepository;
 
@@ -42,9 +43,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class BuyController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private SupplierRepository supplierRepository;
 
     @Autowired
@@ -59,16 +57,7 @@ public class BuyController {
     // Admin, Manager create buy
     @PostMapping("/buys")
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
-    public ResponseEntity<?> createBuy(@Valid @RequestBody CreateBuyRequest createBuyRequest) {
-        // check if user id exist
-        if(createBuyRequest.getUser_id() != null){
-            Long user_id = createBuyRequest.getUser_id();
-            if( userRepository.existsById(user_id) == false ) {
-                return new ResponseEntity<>(new ApiResponse(false, "wrong_user_id", "user id " + user_id + " does not exist"),
-                                        HttpStatus.OK);
-            }
-        }
-        
+    public ResponseEntity<?> createBuy(@Valid @RequestBody CreateBuyRequest createBuyRequest, @CurrentUser UserPrincipal currentUser) {
 
         // check if product id and supplier id exist
         for(BuyItemInfor buyItemInfor: createBuyRequest.getBuy_items()) {
@@ -92,7 +81,7 @@ public class BuyController {
         }
 
         // create new buy and save
-        Buy buy = new Buy(createBuyRequest.getUser_id());
+        Buy buy = new Buy(currentUser.getId());
         buy = buyRepository.save(buy);
 
         // create new buyItems and save
@@ -117,7 +106,7 @@ public class BuyController {
         try {
             Long buy_id = Long.parseLong(id);
             Buy buy = buyRepository.findById(buy_id).orElse(null);
-            BuyInforResponse buyInforResponse = new BuyInforResponse(buy.getId(), buy.getUserId());
+            BuyInforResponse buyInforResponse = new BuyInforResponse(buy.getId(), buy.getUserId(), buy.getActive());
 
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy_id);
             for(BuyItem buyItem: buyItems) {
@@ -126,7 +115,6 @@ public class BuyController {
                                             buyItem.getPrice(),
                                             buyItem.getQuantities());
             }
-            System.out.println(buy.createdAt);
 
             return new ResponseEntity<>(buyInforResponse,
                                         HttpStatus.OK);
@@ -145,7 +133,8 @@ public class BuyController {
             Long buy_id = Long.parseLong(id);
             Buy buy = buyRepository.findById(buy_id).orElse(null);
 
-            buy.setUserId(updateBuyRequest.getUser_id());
+            if(updateBuyRequest.getUser_id() != null) buy.setUserId(updateBuyRequest.getUser_id());
+            if(updateBuyRequest.getActive() != null) buy.setActive(updateBuyRequest.getActive());
 
             List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy_id);
             for(BuyItem buyItem: buyItems) {
@@ -172,7 +161,7 @@ public class BuyController {
 
     // Admin, Manager delete buy
     @DeleteMapping("/buys/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<?> deleteBuy(@PathVariable(value = "id") String id) {
         try {
             Buy buy = buyRepository.findById(Long.parseLong(id)).orElse(null);
@@ -229,8 +218,15 @@ public class BuyController {
         SearchBuysResponse searchBuysResponse = new SearchBuysResponse(draw, recordsTotal, recordsFiltered);
 
         for(Buy buy: buys.getContent()) {
-            Data data = new Data(buy.getId(),
-                                buy.getUserId());
+            Data data = new Data(buy.getId(), buy.getUserId(), buy.getActive());
+
+            List<BuyItem> buyItems = buyItemRepository.findByBuyId(buy.getId());
+            for(BuyItem buyItem: buyItems) {
+                data.addBuy_items(buyItem.getProductId(),
+                                buyItem.getSupplierId(),
+                                buyItem.getPrice(),
+                                buyItem.getQuantities());
+            }
 
             searchBuysResponse.addData(data);
         }

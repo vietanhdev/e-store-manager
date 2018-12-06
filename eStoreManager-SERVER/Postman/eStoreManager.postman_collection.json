@@ -984,7 +984,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"user_id\": 1,\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 2,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t}\n\t]\n}"
+									"raw": "{\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 2,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t}\n\t]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/buys",
@@ -1003,7 +1003,7 @@
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier search buys",
+							"name": "Admin, Manager search buys",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1021,7 +1021,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"draw\": 1,\n    \"start\": 0,\n    \"length\": 10,\n    \"search\": {\n        \"user_id\": 1,\n        \"start\": \"2016-01-30 06:52:05\",\n        \"end\": \"2019-12-04 06:52:08\"\n    }\n}"
+									"raw": "{\n    \"draw\": 1,\n    \"start\": 0,\n    \"length\": 10,\n    \"search\": {\n    }\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/search/buys",
@@ -1041,7 +1041,7 @@
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier get a buy's information",
+							"name": "Admin, Manager get a buy's information",
 							"request": {
 								"method": "GET",
 								"header": [
@@ -1073,7 +1073,7 @@
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier update a buy's information",
+							"name": "Admin, Manager update a buy's information",
 							"request": {
 								"method": "PUT",
 								"header": [
@@ -1091,7 +1091,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_id\": 2,\n    \"buy_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
+									"raw": "{\n    \"user_id\": 3,\n    \"active\": false,\n    \"buy_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/buys/1",
@@ -1111,7 +1111,7 @@
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier delete a buy",
+							"name": "Admin delete a buy",
 							"request": {
 								"method": "DELETE",
 								"header": [
@@ -1149,7 +1149,7 @@
 					"name": "Sell Management Copy",
 					"item": [
 						{
-							"name": "Admin, Manager create a new sell",
+							"name": "Admin, Cashier create a new sell",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -1167,7 +1167,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"user_id\": 1,\r\n    \"customer_id\": 1,\r\n    \"tax\": 10.2,\r\n    \"sell_items\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"supplier_id\": 1,\r\n            \"price\": 700,\r\n            \"quantities\": 2\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"supplier_id\": 3,\r\n            \"price\": 50,\r\n            \"quantities\": 5\r\n        }\r\n    ]\r\n}"
+									"raw": "{\r\n    \"customer_id\": 1,\r\n    \"tax\": 10.2,\r\n    \"sell_items\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"supplier_id\": 1,\r\n            \"price\": 700,\r\n            \"quantities\": 2\r\n        },\r\n        {\r\n            \"product_id\": 2,\r\n            \"supplier_id\": 3,\r\n            \"price\": 50,\r\n            \"quantities\": 5\r\n        }\r\n    ]\r\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/sells",
@@ -1274,7 +1274,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_id\": 2,\n    \"customer_id\": 3,\n    \"tax\": 20.07,\n    \"sell_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
+									"raw": "{\n    \"user_id\": 2,\n    \"customer_id\": 3,\n    \"tax\": 20.07,\n    \"active\": true,\n    \"sell_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/sells/1",
@@ -1294,7 +1294,7 @@
 							"response": []
 						},
 						{
-							"name": "Admin, Cashier delete a sell",
+							"name": "Admin delete a sell",
 							"request": {
 								"method": "DELETE",
 								"header": [

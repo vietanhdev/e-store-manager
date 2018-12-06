@@ -13,11 +13,22 @@ public class BuyInforResponse {
 
     private Long user_id;
 
+    private Boolean active;
+
     private Set<BuyItemInfor> buy_items = new HashSet<>();
 
-    public BuyInforResponse(Long id, Long user_id) {
+    public BuyInforResponse(Long id, Long user_id, Boolean active) {
         this.id = id;
         this.user_id = user_id;
+        this.active = active;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Long getUser_id() {
