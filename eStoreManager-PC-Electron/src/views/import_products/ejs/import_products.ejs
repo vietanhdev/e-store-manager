@@ -41,8 +41,8 @@
                 ipcRenderer.send(EventGetter.get('request_add_import_bill'));
             });
 
-            const ProductController = require("../../../controllers/ProductController.js").ProductController;
-            let productController = new ProductController();
+            const BuyController = require("../../../controllers/BuyController.js").BuyController;
+            let buyController = new BuyController();
             const settings = require('electron-settings');
             let headers = Object({'Content-Type': 'application/json'});
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
@@ -51,7 +51,7 @@
             dataTable = $('#realtime').DataTable({
                 "serverSide": true,
                 "ajax": {
-                    "url": productController.getAjaxAPIUrl(),
+                    "url": buyController.getAjaxAPIUrl(),
                     "type": 'POST',
                     "headers": headers,
                     "processData": true,
@@ -61,23 +61,36 @@
                     }
                 },
                 columns: [
-                    { data: "id", title: "ID" },
-                    { data: "name", title: TextGetter.get("product_name") },
-                    { data: "price", title: TextGetter.get("price") },
-                    { data: "unit", title: TextGetter.get("unit") },
-                    { data: "barcode", title: TextGetter.get("barcode") },
-                    { data: "quantities", title: TextGetter.get("quantity") },
+                    { data: "createdAt", title: TextGetter.get("date") },
+                    { data: "user_name", title: TextGetter.get("created_by") },
+                    { data: "user_id", title: TextGetter.get("user_id") },
+                    { data: "active", title: TextGetter.get("status"),
+                        render: function ( data, type, row ) {
+                            if (data == true) {
+                                return TextGetter.get("completed");
+                            } else {
+                                return TextGetter.get("discarded");
+                            }
+                        }
+                    },
+                    { data: "buy_items", title: TextGetter.get("number_of_products"),
+                        render: function ( data, type, row ) {
+                            return data.length;
+                        }
+                    },
                     { title: TextGetter.get("manipulation") }
                 ],
+                "order": [[ 0, "desc" ]],
                 "columnDefs": [ {
                     "targets": -1,
                     "data": null,
                     "defaultContent": `
-                        <button type="button" class="edit-product btn btn-sm btn-success">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </button>&nbsp;
-                        <button type="button" class="delete-product btn btn-sm btn-danger">
+                        <button type="button" class="view btn btn-sm btn-primary">
+                            `+TextGetter.get("view")+`
+                        </button>
+                        <button type="button" class="discard btn btn-sm btn-danger">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            `+TextGetter.get("discard")+`
                         </button>
                     `
                 } ],
@@ -87,35 +100,25 @@
             });
 
             // ==== Handle events that cause table to update ====
-            // ipcRenderer.on(EventGetter.get("add_product_success"), (event, product) => {
-            //     dataTable.ajax.reload();
-            // });
-            // ipcRenderer.on(EventGetter.get("update_product_success"), (event, product) => {
-            //     dataTable.ajax.reload();
-            // });
-            
+            ipcRenderer.on(EventGetter.get("add_import_bill_success"), (event, data) => {
+                dataTable.ajax.reload();
+            });
+            ipcRenderer.on(EventGetter.get("discard_import_bill_success"), (event, data) => {
+                dataTable.ajax.reload();
+            });
 
-            // // ==== Update data of the table ====
-            
-            // // Delete a value by id: Id means the value of the first column
-            // ipcRenderer.on(EventGetter.get("delete_row_from_product_table"), (event, id) => {
-            //     dataTable.ajax.reload();
-            // });
-            
-
-            // // ==== Handle row buttons ====
-            
-            // // Delete
-            // $('#realtime tbody').on( 'click', 'button.delete-product', function () {
-            //     let data = dataTable.row( $(this).parents('tr') ).data();
-            //     ipcRenderer.send(EventGetter.get("request_delete_product"), data);
-            // } );
-          
-            // // Edit info
-            // $('#realtime tbody').on( 'click', 'button.edit-product', function () {
-            //     let data = dataTable.row( $(this).parents('tr') ).data();
-            //     ipcRenderer.send(EventGetter.get('request_update_product_info'), data);
-            // } );
+            // ==== Handle row buttons ====
+            // Discard
+            $('#realtime tbody').on( 'click', 'button.discard', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                ipcRenderer.send(EventGetter.get("request_discard_import_bill"), data);
+            } );
+            // View
+            $('#realtime tbody').on( 'click', 'button.view', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                ipcRenderer.send(EventGetter.get("request_view_import_bill"), data);
+            } );
+    
 
         }
     };

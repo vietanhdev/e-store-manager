@@ -71,6 +71,9 @@
         },
         "add_import_bill": {
             "path": "import_products/ejs/add_import_bill.ejs"
+        },
+        "view_import_bill": {
+            "path": "import_products/ejs/view_import_bill.ejs"
         }
     },
     "languages": [

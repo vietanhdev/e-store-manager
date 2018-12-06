@@ -38,8 +38,8 @@
             require( 'datatables.net-responsive-dt' )( window, $ );
 
 
-            const ProductController = require("../../../controllers/ProductController.js").ProductController;
-            let productController = new ProductController();
+            const BuyController = require("../../../controllers/BuyController.js").BuyController;
+            let buyController = new BuyController();
             const settings = require('electron-settings');
             let headers = Object({'Content-Type': 'application/json'});
             headers['Authorization'] = "Bearer " + settings.get('account_info.token');
@@ -87,8 +87,11 @@
 
             // Handle import command
             $("#btn-import").click(() => {
-                
+                let data = dataTable.rows().data().toArray();
+                ipcRenderer.send(EventGetter.get('add_import_bill'), data);
             });
+
+
 
             // ==== Handle row buttons ====
             // Delete

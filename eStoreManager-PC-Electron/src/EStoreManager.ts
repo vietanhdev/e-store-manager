@@ -36,6 +36,8 @@ const {EditProductView} = require('./views/products/EditProductView');
 const {ImportProductView} = require('./views/import_products/ImportProductView');
 const {AddImportItemView} = require('./views/import_products/AddImportItemView');
 const {AddImportBillView} = require('./views/import_products/AddImportBillView');
+const {ViewImportBillView} = require('./views/import_products/ViewImportBillView');
+
 
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
@@ -88,6 +90,7 @@ export class EStoreManager {
     let importProductView = ImportProductView.getInstance(this.mainWindow, null); this.addView(importProductView);
     let addImportItemView = AddImportItemView.getInstance(null, null); this.addView(addImportItemView);
     let addImportBillView = AddImportBillView.getInstance(null, null); this.addView(addImportBillView);
+    let viewImportBillView = ViewImportBillView.getInstance(null, null); this.addView(viewImportBillView);
 
     addImportItemView.show();
 

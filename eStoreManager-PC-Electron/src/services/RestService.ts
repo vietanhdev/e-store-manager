@@ -43,12 +43,12 @@ export class RestService {
             timeout: 1000
         };
 
-        // console.log("REQUESTDATA:::::::::::::");
-        // console.log(postData);
+        console.log("REQUESTDATA:::::::::::::");
+        console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
-            // console.log("DATA:::::::::::::");
-            // console.log(data);
+            console.log("DATA:::::::::::::");
+            console.log(data.body);
             // console.log(err);
             if (err) {
                 cbFail({
@@ -56,7 +56,16 @@ export class RestService {
                     message: TextGetter.get("unknown_error")
                 });
             } else {
-                cbSuccess(JSON.parse(data.body));
+
+                let result = {};
+                try {
+                    result = JSON.parse(data.body);
+                } catch(e) {
+                    result = {"success": false}
+                    console.log(data.body);
+                }
+
+                cbSuccess(result);
             }
             
         })

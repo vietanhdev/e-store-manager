@@ -178,7 +178,18 @@
     "new_product_question": "New Product?",
 
     "new_supplier_question": "New Supplier?",
-    "import": "import"
+    "import": "import",
 
+    "created_by": "Created By",
+    "created_at": "Created At",
+    "status": "Status",
+    "completed": "Completed",
+    "discarded": "Discarded",
+    "number_of_products": "Num Of Products",
+    "date": "Date",
+    "are_you_sure_discard_import_bill": "Are you sure to discard the import bill?",
+    "discard_import_bill_success": "discard_import_bill_success",
+    "view": "View",
+    "view_import_bill": "View Import Bill"
 
 }

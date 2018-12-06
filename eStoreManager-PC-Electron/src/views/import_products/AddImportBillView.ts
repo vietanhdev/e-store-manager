@@ -4,6 +4,7 @@ import { EventGetter } from "../../services/EventGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
 import {ProductController} from '../../controllers/ProductController';
+import {BuyController} from '../../controllers/BuyController';
 import { TextGetter } from "../../services/TextGetter";
 const settings = require('electron-settings');
 const {ipcMain} = require('electron');
@@ -20,8 +21,8 @@ export class AddImportBillView extends View {
 
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("add_import_bill", window, parent);
+        // this.getWindow().webContents.openDevTools();
         this.productController = new ProductController();
-        this.getWindow().webContents.openDevTools();
     }
     
     private static instance: AddImportBillView;
@@ -48,7 +49,19 @@ export class AddImportBillView extends View {
             this.show();
         });
 
-        // ======= Handle requests from renderer process =======
+        let buyController = new BuyController();
+
+        ipcMain.on(EventGetter.get('add_import_bill'), (event:any, data:any) => {
+            let postData = {"buy_items": data}
+            buyController.addBuy(postData, (respond:any) => {
+                let newData = data;
+                newData.id = respond.id;
+                this.requestedBrowserWindow.webContents.send(EventGetter.get("add_import_bill_success"), newData);
+                this.hide();
+            }, (respond:any) => {
+                Dialog.showDialogFromRespond("error", respond, this.getWindow());
+            });
+        });
 
     }
 
