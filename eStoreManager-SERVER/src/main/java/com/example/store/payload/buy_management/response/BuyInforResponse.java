@@ -17,13 +17,16 @@ public class BuyInforResponse {
 
     private Boolean active;
 
+    public String createdAt;
+
     private Set<BuyItemInfor> buy_items = new HashSet<>();
 
-    public BuyInforResponse(Long id, Long user_id, String user_name, Boolean active) {
+    public BuyInforResponse(Long id, Long user_id, String user_name, Boolean active, String createdAt) {
         this.id = id;
         this.user_id = user_id;
         this.user_name = user_name;
         this.active = active;
+        this.createdAt = createdAt;
     }
 
     public String getUser_name() {
