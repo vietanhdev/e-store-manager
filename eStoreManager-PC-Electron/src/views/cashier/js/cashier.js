@@ -2,7 +2,7 @@ $(document).ready(() => {
 
     // Import controllers
     const ProductController = require("../../../controllers/ProductController.js").ProductController;
-    let productControllerController = new ProductController();
+    let productController = new ProductController();
     const UserController = require("../../../controllers/UserController.js").UserController;
     let userController = new UserController();
     const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
@@ -10,7 +10,6 @@ $(document).ready(() => {
 
     // Load library
     const prompt = require('electron-prompt');
-    const {dialog} = require('electron');
     const settings = require('electron-settings');
     const EventGetter = require("../../../services/EventGetter").EventGetter;
     const TextGetter = require("../../../services/TextGetter").TextGetter;
@@ -18,7 +17,7 @@ $(document).ready(() => {
     var dt = require( 'datatables.net-dt' )( window, $ );
     require( 'datatables.net-responsive-dt' )( window, $ );
 
-    // Register sum() api for datatable
+	// Register sum() api for datatable
     jQuery.fn.dataTable.Api.register( 'sum()', function ( ) {
         return this.flatten().reduce( function ( a, b ) {
 
@@ -33,7 +32,6 @@ $(document).ready(() => {
         }, 0 );
     } );
 
-    
 
     // TODO: Change this
     var tax = 0.08; // 8 percent
@@ -215,7 +213,7 @@ $(document).ready(() => {
     function addProduct(productIdOrBarcode) {
 
         // Get product information
-        let productData = productControllerController.getProductData(productIdOrBarcode,
+        let productData = productController.getProductData(productIdOrBarcode,
             (response) => { // Success
 
                 // === Check if product already in the table ===
@@ -261,6 +259,11 @@ $(document).ready(() => {
         }
     });
 
+    // Add barcode via server
+    ipcRenderer.on(EventGetter.get("new_barcode_from_server"), (event, barcode) => {
+        addProduct(barcode);
+    });
+
 
     // === Setup Clock ====
     function startTimer() {
@@ -301,7 +304,7 @@ $(document).ready(() => {
             postData = JSON.stringify(postData);
 
             $.ajax({
-                "url": productControllerController.getAjaxAPIUrl(),
+                "url": productController.getAjaxAPIUrl(),
                 "type": 'POST',
                 "headers": headers,
                 "processData": true,

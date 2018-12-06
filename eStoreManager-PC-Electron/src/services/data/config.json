@@ -59,6 +59,18 @@
         },
         "printing": {
             "path": "printing/ejs/printing.ejs"
+        },
+        "import_products": {
+            "path": "import_products/ejs/import_products.ejs"
+        },
+        "add_import_item": {
+            "path": "import_products/ejs/add_import_item.ejs"
+        },
+        "edit_import_item": {
+            "path": "import_products/ejs/edit_import_item.ejs"
+        },
+        "add_import_bill": {
+            "path": "import_products/ejs/add_import_bill.ejs"
         }
     },
     "languages": [
@@ -77,5 +89,9 @@
             "title": "Le français",
             "file": "fr.json"
         }
-    ]
+    ],
+    "barcode_server": {
+        "path": "/barcode",
+        "port": 3843
+    }
 }

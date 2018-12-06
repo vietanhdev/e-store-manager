@@ -48,14 +48,6 @@
     const EventGetter = require("../../../services/EventGetter").EventGetter;
     const {ipcRenderer} = require('electron');
 
-    // Handle set password button
-    $("#btn-setpassword").click(() => {
-        ipcRenderer.send(EventGetter.get('prompt_password'));
-    });
-    ipcRenderer.on(EventGetter.get('set_password'), (event, data) => {
-        $("#password").val(data.password);
-    });
-
     // Handle Save Button
     $("#save").click(() => {
         let data = {}

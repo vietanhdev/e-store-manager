@@ -1,0 +1,195 @@
+<%- include('../../shared/ejs/header', {title: gettext.add_import_item}) %>
+
+<div class="container">
+    <h3 class="text-center"><%= gettext.add_import_item %></h3>
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="productname"><%= gettext.product_name %></label>
+                <input type="text" name="productname" id="productname" placeholder="<%= gettext.type_here_to_search %>" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="btn-new-product""><%= gettext.new_product_question %></label>
+                <button id="btn-new-product" class="btn btn-success" ><%= gettext.add_product %></button>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="name"><%= gettext.product_id %></label>
+                <input readonly disabled type="text" name="productid" id="productid" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="price"><%= gettext.price %></label>
+                <input type="number" name="price" id="price" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="quantity"><%= gettext.quantity %></label>
+                <input type="number" name="quantity" id="quantity" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="unit"><%= gettext.unit %></label>
+                <input readonly disabled type="text" name="unit" id="unit" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="supplier"><%= gettext.supplier %></label>
+                <input type="text" name="supplier" id="supplier" placeholder="<%= gettext.type_here_to_search %>" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="btn-new-supplier""><%= gettext.new_supplier_question %></label>
+                    <button id="btn-new-supplier" class="btn btn-success" ><%= gettext.add_supplier %></button>
+                </div>
+            </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="supplierid"><%= gettext.supplier_id %></label>
+                <input readonly disabled type="text" name="supplierid" id="supplierid" placeholder="" class="form-control">
+            </div>
+        </div>
+        
+        <div class="col-sm-12">
+            <div class="form-group">
+                <button class="btn btn-info" id="save"><%= gettext.save %></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const prompt = require('electron-prompt');
+    const settings = require('electron-settings');
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const TextGetter = require("../../../services/TextGetter").TextGetter;
+    const {ipcRenderer} = require('electron');
+
+    // Import controllers
+    const SupplierController = require("../../../controllers/SupplierController.js").SupplierController;
+    let supplierController = new SupplierController();
+    const ProductController = require("../../../controllers/ProductController.js").ProductController;
+    let productController = new ProductController();
+
+    // Handle Save Button
+    $("#save").click(() => {
+        let data = {}
+        data.product_id = $("#productid").val();
+        data.supplier_id = $("#supplierid").val();
+        data.price = $("#price").val();
+        data.quantities = $("#quantity").val();
+        data.unit = $("#unit").val();
+        data.product_name = $("#productname").val();
+        data.supplier_name = $("#supplier").val();
+        data.total = data.price * data.quantities;
+        ipcRenderer.send(EventGetter.get('add_import_item'), data);
+    });
+
+
+    // === Ajax Search for product ===
+    $('#productname').autocomplete({
+        lookup: function (query, done) {
+            
+            let headers = Object({'Content-Type': 'application/json'});
+            headers['Authorization'] = "Bearer " + settings.get('account_info.token');
+
+            let postData = {};
+            postData.draw = 1;
+            postData.length = 8;
+            postData.search = {};
+            postData.search.value = query;
+            postData.start = 0;
+            postData = JSON.stringify(postData);
+
+            $.ajax({
+                "url": productController.getAjaxAPIUrl(),
+                "type": 'POST',
+                "headers": headers,
+                "processData": true,
+                "contentType": 'application/json',
+                "data": postData
+            })
+            .done(function( respond ) {
+                let result = {
+                    suggestions: []
+                };
+                let data = respond.data;
+                for (let i = 0 ; i < data.length; ++i) {
+                    let value = data[i].name + " : " + data[i].barcode;
+                    result.suggestions.push({"value": value
+                        , "data": data[i]});
+                }
+                done(result);
+            });
+            
+        },
+        onSelect: function (suggestion) {
+            // alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            $("#productname").val(suggestion.data.name);
+            $("#productid").val(suggestion.data.id);
+            $("#unit").val(suggestion.data.unit);
+
+        }
+    });
+
+
+
+    // === Ajax Search for supplier ===
+    $('#supplier').autocomplete({
+        lookup: function (query, done) {
+            
+            let headers = Object({'Content-Type': 'application/json'});
+            headers['Authorization'] = "Bearer " + settings.get('account_info.token');
+
+            let postData = {};
+            postData.draw = 1;
+            postData.length = 8;
+            postData.search = {};
+            postData.search.value = query;
+            postData.start = 0;
+            postData = JSON.stringify(postData);
+
+            $.ajax({
+                "url": supplierController.getAjaxAPIUrl(),
+                "type": 'POST',
+                "headers": headers,
+                "processData": true,
+                "contentType": 'application/json',
+                "data": postData
+            })
+            .done(function( respond ) {
+                let result = {
+                    suggestions: []
+                };
+                let data = respond.data;
+                for (let i = 0 ; i < data.length; ++i) {
+                    let value = data[i].name + " : " + data[i].id;
+                    result.suggestions.push({"value": value
+                        , "data": data[i]});
+                }
+                done(result);
+            });
+            
+        },
+        onSelect: function (suggestion) {
+            // alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            $("#supplier").val(suggestion.data.name);
+            $("#supplierid").val(suggestion.data.id);
+
+        }
+    });
+
+</script>
+
+
+<%- include('../../shared/ejs/footer') %>

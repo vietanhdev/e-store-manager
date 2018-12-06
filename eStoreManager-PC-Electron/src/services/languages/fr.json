@@ -125,6 +125,59 @@
     "update_user_information_successful": "Mise à jour des informations avec succès",
 
 
-    "are_you_sure_delete_customer": "Are you sure to delete this customer? "
+    "are_you_sure_delete_customer": "Are you sure to delete this customer? ",
+    "logout": "Logout",
+    "delete_customer_successful": "Deleted customer successfully!",
+
+    "supplier_management": "Supplier Management",
+    "add_supplier": "Add Supplier",
+    "edit_supplier": "Edit Supplier",
+    "supplier_name": "Supplier Name",
+    "created_supplier_successfully": "Created supplier successfully! Supplier ID: ",
+    "updated_supplier_successfully": "Update supplier successfully.",
+    "are_you_sure_delete_supplier": "Are you sure to delete this supplier? ",
+    "delete_supplier_successful": "Deleted supplier successfully!",
+
+    "product_management": "Inventory",
+    "edit_product": "Edit Product",
+    "product_name": "Product Name",
+    "created_product_successfully": "Created product successfully! Product ID: ",
+    "updated_product_successfully": "Update product successfully.",
+    "are_you_sure_delete_product": "Are you sure to delete this product? ",
+    "delete_product_successful": "Deleted product successfully!",
+
+    "price": "Price",
+    "unit": "Unit",
+    "barcode": "Barcode",
+    "product_id_or_barcode": "Product ID / Barcode",
+
+    "product_id_or_name_to_search": "Product ID or Name to search",
+    "quantity_manipulation": "Quantity manipulation",
+    "delete_question": "Delete?",
+
+    "cannot_get_product_by_id": "Cannot get product information. Product ID: ",
+    "customer": "Customer",
+    "product_search": "Product Search",
+    "input_quantity_for": "Input the quantity for ",
+
+    "product_not_found": "Could not found the product: ",
+    "insufficient_payment": "INSUFFICIENT PAYMENT",
+
+    "add": "Add",
+    "customer_not_found": "Could not find this customer. Please try again!",
+    "are_you_sure_discard_this_order": "Are you sure to discard this order?",
+    "discard_order": "Discard Order",
+    "add_import_bill": "Add Import Bill",
+
+    "type_here_to_search": "Type here to search",
+    "add_import_item": "Add Import Item",
+
+    "supplier": "Supplier",
+    "supplier_id": "Supplier ID",
+
+    "new_product_question": "New Product?",
+
+    "new_supplier_question": "New Supplier?",
+    "import": "import"
 
 }

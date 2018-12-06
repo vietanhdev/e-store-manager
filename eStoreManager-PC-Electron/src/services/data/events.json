@@ -55,7 +55,16 @@
     "request_discard_order": "request_discard_order",
     "request_print_order": "request_print_order",
     "request_order_data": "request_order_data",
-    "order_data": "order_data"
+    "order_data": "order_data",
+
+    "add_import_item": "add_import_item",
+    "request_add_import_item": "request_add_import_item",
+    "add_import_item_success": "add_import_item_success",
+    "request_add_import_bill": "request_add_import_bill",
+
+    "create_import_bill": "create_import_bill",
+
+    "new_barcode_from_server": "new_barcode_from_server"
     
     
 }

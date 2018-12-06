@@ -33,6 +33,10 @@ const {ProductView} = require('./views/products/ProductView');
 const {AddProductView} = require('./views/products/AddProductView');
 const {EditProductView} = require('./views/products/EditProductView');
 
+const {ImportProductView} = require('./views/import_products/ImportProductView');
+const {AddImportItemView} = require('./views/import_products/AddImportItemView');
+const {AddImportBillView} = require('./views/import_products/AddImportBillView');
+
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
 
@@ -80,6 +84,12 @@ export class EStoreManager {
     let productView = ProductView.getInstance(this.mainWindow, null); this.addView(productView);
     let addProductView = AddProductView.getInstance(null, null); this.addView(addProductView);
     let editProductView = EditProductView.getInstance(null, null); this.addView(editProductView);
+
+    let importProductView = ImportProductView.getInstance(this.mainWindow, null); this.addView(importProductView);
+    let addImportItemView = AddImportItemView.getInstance(null, null); this.addView(addImportItemView);
+    let addImportBillView = AddImportBillView.getInstance(null, null); this.addView(addImportBillView);
+
+    addImportItemView.show();
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot

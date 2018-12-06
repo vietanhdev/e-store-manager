@@ -125,11 +125,9 @@
     "email_taken": "email is already taken!",
     "update_user_information_successful": "Update user information successfully",
 
-
     "are_you_sure_delete_customer": "Are you sure to delete this customer? ",
     "logout": "Logout",
     "delete_customer_successful": "Deleted customer successfully!",
-
 
     "supplier_management": "Supplier Management",
     "add_supplier": "Add Supplier",
@@ -140,9 +138,7 @@
     "are_you_sure_delete_supplier": "Are you sure to delete this supplier? ",
     "delete_supplier_successful": "Deleted supplier successfully!",
 
-
     "product_management": "Inventory",
-    "add_product": "Add Product",
     "edit_product": "Edit Product",
     "product_name": "Product Name",
     "created_product_successfully": "Created product successfully! Product ID: ",
@@ -153,7 +149,6 @@
     "price": "Price",
     "unit": "Unit",
     "barcode": "Barcode",
-    "product_name": "Product Name",
     "product_id_or_barcode": "Product ID / Barcode",
 
     "product_id_or_name_to_search": "Product ID or Name to search",
@@ -171,6 +166,19 @@
     "add": "Add",
     "customer_not_found": "Could not find this customer. Please try again!",
     "are_you_sure_discard_this_order": "Are you sure to discard this order?",
-    "discard_order": "Discard Order"
+    "discard_order": "Discard Order",
+    "add_import_bill": "Add Import Bill",
+
+    "type_here_to_search": "Type here to search",
+    "add_import_item": "Add Import Item",
+
+    "supplier": "Supplier",
+    "supplier_id": "Supplier ID",
+
+    "new_product_question": "New Product?",
+
+    "new_supplier_question": "New Supplier?",
+    "import": "import"
+
 
 }

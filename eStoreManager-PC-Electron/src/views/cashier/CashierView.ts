@@ -7,6 +7,10 @@ import {View} from '../shared/View';
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');
 
+let express = require('express');
+let bodyParser = require('body-parser');
+let expressApp = express();
+
 export class CashierView extends View {
 
     private orderWindow:BrowserWindow;
@@ -20,6 +24,33 @@ export class CashierView extends View {
     static getInstance(window: BrowserWindow, parent: BrowserWindow) {
         if (!CashierView.instance) {
             CashierView.instance = new CashierView(window, parent);
+
+            // === Setup server to receive barcode ===
+
+            expressApp.use(bodyParser.urlencoded({
+                extended: true
+            }));
+            expressApp.use(bodyParser.json());
+
+            // Setup server port
+            var expressAppPort = ConfigGetter.get().barcode_server.port;
+
+            // Barcode service
+            expressApp.get(ConfigGetter.get().barcode_server.path, (req:any, res:any) => {
+                let product_code = req.query.code;
+                console.log(product_code);
+                if (CashierView.instance.isVisible()) {
+                    CashierView.instance.getWindow().webContents.send(EventGetter.get('new_barcode_from_server'), product_code);
+                }
+                res.send('ok');
+            });            
+
+            // Launch app to listen to specified port
+            expressApp.listen(expressAppPort, function () {
+                console.log("Running barocode server on port " + expressAppPort);
+            });
+
+
         }
         return CashierView.instance;
     }

@@ -134,6 +134,12 @@ export class View {
     }
 
 
+    public isVisible():boolean {
+        if (this.window == null) return false;
+        else return true;
+    }
+
+
     requestChangeView(view: string) {
         this.eventEmitter.emit("request_change_view", view);
     }
