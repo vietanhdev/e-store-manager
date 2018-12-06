@@ -1844,6 +1844,7 @@
             "user_id": 3,
             "user_name": "cashier",
             "active": false,
+            "createdAt": "2018-12-04 13:13:16",
             "buy_items": [
                 {
                     "product_id": 4,
@@ -1868,6 +1869,7 @@
             "user_id": 1,
             "user_name": "Admin dep trai",
             "active": true,
+            "createdAt": "2018-12-05 20:32:09",
             "buy_items": [
                 {
                     "product_id": 2,
@@ -1933,7 +1935,7 @@
     "user_id": 3,
     "user_name": "",
     "active": false,
-    "createdAt": "2018-12-04T13:13:16Z",
+    "createdAt": "2018-12-04 13:13:16",
     "buy_items": [
         {
             "product_id": 1,
