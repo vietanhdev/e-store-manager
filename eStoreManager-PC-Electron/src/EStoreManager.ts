@@ -92,8 +92,6 @@ export class EStoreManager {
     let addImportBillView = AddImportBillView.getInstance(null, null); this.addView(addImportBillView);
     let viewImportBillView = ViewImportBillView.getInstance(null, null); this.addView(viewImportBillView);
 
-    addImportItemView.show();
-
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot
     let passwordInputView = PasswordInputView.getInstance(null, null); this.addView(passwordInputView);

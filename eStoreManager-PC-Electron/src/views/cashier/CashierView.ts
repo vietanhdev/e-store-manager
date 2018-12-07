@@ -66,7 +66,7 @@ export class CashierView extends View {
                 this.orderWindow = null;
             });
 
-            this.orderWindow.webContents.openDevTools();
+            //this.orderWindow.webContents.openDevTools();
 
             return this.orderWindow;
         } else {

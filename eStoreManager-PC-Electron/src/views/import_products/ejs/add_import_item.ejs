@@ -83,16 +83,20 @@
 
     // Handle Save Button
     $("#save").click(() => {
-        let data = {}
-        data.product_id = $("#productid").val();
-        data.supplier_id = $("#supplierid").val();
-        data.price = $("#price").val();
-        data.quantities = $("#quantity").val();
-        data.unit = $("#unit").val();
-        data.product_name = $("#productname").val();
-        data.supplier_name = $("#supplier").val();
-        data.total = data.price * data.quantities;
-        ipcRenderer.send(EventGetter.get('add_import_item'), data);
+        if ($("#productid").val().length == 0) {
+            alert(TextGetter.get("you_have_to_input_product"));
+        } else {
+            let data = {}
+            data.product_id = $("#productid").val();
+            data.supplier_id = $("#supplierid").val();
+            data.price = $("#price").val();
+            data.quantities = $("#quantity").val();
+            data.unit = $("#unit").val();
+            data.product_name = $("#productname").val();
+            data.supplier_name = $("#supplier").val();
+            data.total = data.price * data.quantities;
+            ipcRenderer.send(EventGetter.get('add_import_item'), data);
+        }
     });
 
 
@@ -138,7 +142,6 @@
             $("#productname").val(suggestion.data.name);
             $("#productid").val(suggestion.data.id);
             $("#unit").val(suggestion.data.unit);
-
         }
     });
 
@@ -188,6 +191,27 @@
 
         }
     });
+
+
+
+    // Handle add new product
+    $("#btn-new-product").click(() => {
+        ipcRenderer.send(EventGetter.get("request_add_product"));
+    });
+    ipcRenderer.on(EventGetter.get("add_product_success"), (e, data) => {
+        $("#productname").val(data.name);
+        $("#productid").val(data.id);
+        $("#unit").val(data.unit);
+    })
+
+    // Handle add new supplier
+    $("#btn-new-supplier").click(() => {
+        ipcRenderer.send(EventGetter.get("request_add_supplier"));
+    });
+    ipcRenderer.on(EventGetter.get("add_supplier_success"), (e, data) => {
+        $("#supplier").val(data.name);
+        $("#supplierid").val(data.id);
+    })
 
 </script>
 

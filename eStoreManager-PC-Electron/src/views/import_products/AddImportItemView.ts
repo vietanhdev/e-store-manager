@@ -17,7 +17,7 @@ export class AddImportItemView extends View {
     
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("add_import_item", window, parent, 800, 500);
-        // this.getWindow().webContents.openDevTools();
+        this.getWindow().webContents.openDevTools();
         this.setMenu(null);
     }
 
@@ -44,8 +44,6 @@ export class AddImportItemView extends View {
             this.requestedBrowserWindow.webContents.send(EventGetter.get("add_import_item_success"), data);
             this.hide();
         });
-
-
 
     }
 

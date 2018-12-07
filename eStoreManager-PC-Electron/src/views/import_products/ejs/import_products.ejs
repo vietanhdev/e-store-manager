@@ -67,9 +67,9 @@
                     { data: "active", title: TextGetter.get("status"),
                         render: function ( data, type, row ) {
                             if (data == true) {
-                                return TextGetter.get("completed");
+                                return `<span class="badge badge-success">`+TextGetter.get("completed")+`</span>`;
                             } else {
-                                return TextGetter.get("discarded");
+                                return `<span class="badge badge-warning">`+TextGetter.get("discarded")+`</span>`;
                             }
                         }
                     },
