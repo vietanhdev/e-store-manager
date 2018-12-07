@@ -139223,10 +139223,10 @@ function zbarProcessImageData(imgData) {
         typeof MozBlobBuilder != 'undefined'
           ? MozBlobBuilder
           : typeof WebKitBlobBuilder != 'undefined'
-          ? WebKitBlobBuilder
-          : !Browser.hasBlobConstructor
-          ? console.log('warning: no BlobBuilder')
-          : null;
+            ? WebKitBlobBuilder
+            : !Browser.hasBlobConstructor
+              ? console.log('warning: no BlobBuilder')
+              : null;
       Browser.URLObject = typeof window != 'undefined' ? (window.URL ? window.URL : window.webkitURL) : undefined;
       if (!Module.noImageDecoding && typeof Browser.URLObject === 'undefined') {
         console.log('warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available.');
@@ -203274,35 +203274,35 @@ function zbarProcessImageData(imgData) {
     // http://www-cs-students.stanford.edu/~tjw/jsbn/
 
     /*
-     * Copyright (c) 2003-2005  Tom Wu
-     * All Rights Reserved.
-     *
-     * Permission is hereby granted, free of charge, to any person obtaining
-     * a copy of this software and associated documentation files (the
-     * "Software"), to deal in the Software without restriction, including
-     * without limitation the rights to use, copy, modify, merge, publish,
-     * distribute, sublicense, and/or sell copies of the Software, and to
-     * permit persons to whom the Software is furnished to do so, subject to
-     * the following conditions:
-     *
-     * The above copyright notice and this permission notice shall be
-     * included in all copies or substantial portions of the Software.
-     *
-     * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
-     * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
-     * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
-     *
-     * IN NO EVENT SHALL TOM WU BE LIABLE FOR ANY SPECIAL, INCIDENTAL,
-     * INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER
-     * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF
-     * THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT
-     * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-     *
-     * In addition, the following condition applies:
-     *
-     * All redistributions must retain an intact copy of this copyright notice
-     * and disclaimer.
-     */
+   * Copyright (c) 2003-2005  Tom Wu
+   * All Rights Reserved.
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining
+   * a copy of this software and associated documentation files (the
+   * "Software"), to deal in the Software without restriction, including
+   * without limitation the rights to use, copy, modify, merge, publish,
+   * distribute, sublicense, and/or sell copies of the Software, and to
+   * permit persons to whom the Software is furnished to do so, subject to
+   * the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be
+   * included in all copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+   * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+   * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+   *
+   * IN NO EVENT SHALL TOM WU BE LIABLE FOR ANY SPECIAL, INCIDENTAL,
+   * INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER
+   * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF
+   * THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT
+   * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+   *
+   * In addition, the following condition applies:
+   *
+   * All redistributions must retain an intact copy of this copyright notice
+   * and disclaimer.
+   */
 
     // Basic JavaScript BN library - subset useful for RSA encryption.
 
