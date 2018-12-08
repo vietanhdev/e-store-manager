@@ -77,6 +77,10 @@ public class BuyController {
                     return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product type id " + product_id + " does not exist"),
                                         HttpStatus.OK);
                 }
+                if(buyItemInfor.getQuantities() <= 0){
+                    return new ResponseEntity<>(new ApiResponse(false, "product_quantities_unacceptable", "quantities of product must be greater than 0"),
+                                        HttpStatus.OK);
+                }
             } else {
                 return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product id must not be null"),
                                         HttpStatus.OK);

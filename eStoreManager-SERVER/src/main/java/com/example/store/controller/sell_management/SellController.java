@@ -87,6 +87,10 @@ public class SellController {
                     return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product type id " + product_id + " does not exist"),
                                         HttpStatus.OK);
                 }
+                if(sellItemInfor.getQuantities() <= 0){
+                    return new ResponseEntity<>(new ApiResponse(false, "product_quantities_unacceptable", "quantities of product must be greater than 0"),
+                                        HttpStatus.OK);
+                }
             } else {
                 return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product id must not be null"),
                                         HttpStatus.OK);
@@ -113,6 +117,16 @@ public class SellController {
 
         // create new sellItems and save
         for(SellItemInfor sellItemInfor: createSellRequest.getSell_items()) {
+            // increase product quantities in product database
+            Product product = productRepository.findById(sellItemInfor.getProduct_id()).orElse(null);
+            if(product.getQuantities() < sellItemInfor.getQuantities()) {
+                return new ResponseEntity<>(new ApiResponse(false, "not_enough_product", "there are only +" + product.getQuantities() + " items of product id " + sellItemInfor.getProduct_id() + " in warehouse"),
+                                        HttpStatus.OK);
+            } else {
+                product.setQuantities(product.getQuantities() - sellItemInfor.getQuantities());
+            }
+
+            // write information to sellItem
             SellItem sellItem = new SellItem(sellItemInfor.getProduct_id(),
                                         sellItemInfor.getPrice(),
                                         sellItemInfor.getQuantities());

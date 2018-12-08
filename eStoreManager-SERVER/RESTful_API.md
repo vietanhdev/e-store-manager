@@ -1741,6 +1741,13 @@
 }
 ```
 
+* On fail (product is smaller than 0):
+{
+    "success": false,
+    "code": "product_quantities_unacceptable",
+    "message": "quantities of product must be greater than 0"
+}
+
 * On fail (unauthorized):
 ```
 {
@@ -2224,6 +2231,20 @@
 }
 ```
 
+* On fail (product is smaller than 0):
+{
+    "success": false,
+    "code": "product_quantities_unacceptable",
+    "message": "quantities of product must be greater than 0"
+}
+
+* On failt(not enough product):
+{
+    "success": false,
+    "code": "not_enough_product",
+    "message": "there are only +488.0 items of product id 1 in warehouse"
+}
+
 * On fail (unauthorized):
 ```
 {
@@ -2610,6 +2631,333 @@
 ```
 
 * On fail (you don't have role admin):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+# 7. Invoice management API
+---
+
+## 7.1. Create new invoice
+
+### 7.1.1. Request
+
+* Path: /api/v1/invoices
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:(name field is compulsory, other fields can be skipped)
+```
+{
+    "amount": 1000,
+    "purpose": "1",
+    "description": "one"
+}
+```
+
+### 7.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+* On fail (you don't have role admin or manager):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+
+## 7.2. Search a invoice
+### 7.2.1. Request
+
+* Path: /api/v1/search/invoices
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:
+
+    * Search with date:
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 5,
+        "search": {
+            "purpose": "",
+            "description": "",
+            "start": "2018-01-30 06:52:05",
+            "end": "2018-12-30 06:52:05"
+        }
+    }
+    ```
+    * Search without date:
+    ```
+    {
+        "draw": 1,
+        "start": 0,
+        "length": 5,
+        "search": {
+            "purpose": "",
+            "description": "",
+            "start": "2018-01-30 06:52:05",
+            "end": "2018-12-30 06:52:05"
+        }
+    }
+    ```
+
+### 7.2.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "draw": 10,
+    "recordsTotal": 2,
+    "recordsFiltered": 2,
+    "data": [
+        {
+            "id": 2,
+            "amount": 2000,
+            "purpose": "2",
+            "description": "two"
+        },
+        {
+            "id": 1,
+            "amount": 1000,
+            "purpose": "1",
+            "description": "one"
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (you don't have role admin or manager):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 7.7. Get a invoice's information 
+
+### 7.7.1. Request
+
+* Path: /api/v1/invoice/{id}
+* Method: GET
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+### 7.7.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "id": 1,
+    "amount": 1000,
+    "purpose": "1",
+    "description": "one"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_invoice_id",
+    "message": "invoice id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or manager):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+## 7.4. Update a invoice's information 
+
+### 7.4.1. Request
+
+* Path: /api/v1/invoices/{id}
+* Method: PUT
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body: (you can choose any fields you want to change, all fields are not compulsory)
+```
+{
+    "amount": 10000.5,
+    "purpose": "1",
+    "description": "one"
+}
+```
+
+### 7.4.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "update_invoice_information_successful",
+    "message": "update invoice information successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_invoice_id",
+    "message": "invoice id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or manager):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+## 7.5. Delete a invoice
+
+### 7.1.1. Request
+
+* Path: /api/v1/invoices/{id}
+* Method: DELETE
+* Header:
+    
+    * Content-type:
+    * Authorization: Bearer JWT
+
+* Body:
+
+
+### 7.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "code": "delete_invoice_successful",
+    "message": "delete invoice successful"
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (id does not exist):
+```
+{
+    "success": false,
+    "code": "wrong_invoice_id",
+    "message": "invoice id " + {id} + " does not exist"
+}
+```
+
+* On fail (you don't have role admin or manager):
 ```
 {
     "success": false,
