@@ -79,10 +79,6 @@
         ipcRenderer.send(EventGetter.get('update_product'), data);
     });
 
-
-    ipcRenderer.on(EventGetter.get("update_product_success"), () => {
-        ipcRenderer.send(EventGetter.get("request_update_product_list"));
-    });
 </script>
 
 

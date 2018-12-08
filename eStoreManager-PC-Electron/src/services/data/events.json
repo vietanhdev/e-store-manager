@@ -69,6 +69,11 @@
     "request_import_view_data": "request_import_view_data",
     "respond_request_import_view_data": "respond_request_import_view_data",
 
+    "request_view_sell_bill": "request_view_sell_bill",
+    "request_sell_view_data": "request_sell_view_data",
+    "respond_request_sell_view_data": "respond_request_sell_view_data",
+    
+    "request_discard_sell_bill": "request_discard_sell_bill",
 
     "request_add_sell": "request_add_sell",
     "request_open_barcode_scanner": "request_open_barcode_scanner"

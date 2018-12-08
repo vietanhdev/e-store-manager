@@ -74,6 +74,12 @@
         },
         "view_import_bill": {
             "path": "import_products/ejs/view_import_bill.ejs"
+        },
+        "sell_bills": {
+            "path": "sell_bills/ejs/sell_bills.ejs"
+        },
+        "view_sell_bill": {
+            "path": "sell_bills/ejs/view_sell_bill.ejs"
         }
     },
     "languages": [

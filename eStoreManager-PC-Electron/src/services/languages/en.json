@@ -185,7 +185,7 @@
     "status": "Status",
     "completed": "Completed",
     "discarded": "Discarded",
-    "number_of_products": "Num Of Products",
+    "number_of_products": "# Products",
     "date": "Date",
     "are_you_sure_discard_import_bill": "Are you sure to discard the import bill?",
     "discard_import_bill_success": "discard_import_bill_success",
@@ -200,7 +200,15 @@
     "you_have_to_input_product":"You have to input the product!",
     "order_completed": "Order Completed!",
     "completed_order_id": "Completed order ID:",
-    "print_order": "Print Order"
+    "print_order": "Print Order",
 
+
+    "are_you_sure_discard_sell_bill": "Are you sure to discard the sell bill?",
+    "discard_sell_bill_success": "discard_sell_bill_success",
+    "view_sell_bill": "View Import Bill",
+    "update_sell_information_successful": "Updated sell sell successfully!",
+
+    "employee_id": "Employee ID",
+    "new_customer": "New Customer"
 
 }

@@ -51,7 +51,7 @@ export class TextGetter {
         return TextGetter.instance;
     }
     public static get(key:string, failback: string = null):string {
-        if (typeof TextGetter.getInstance().data[key] != "undefined") {
+        if (typeof TextGetter.getInstance().data[key] === "string") {
             return TextGetter.getInstance().data[key];
         } else if (!isNull(failback)) {
             return failback;
