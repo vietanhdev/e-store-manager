@@ -67,7 +67,10 @@
     "add_import_bill_success": "add_import_bill_success",
     "request_discard_import_bill": "request_discard_import_bill",
     "request_import_view_data": "request_import_view_data",
-    "respond_request_import_view_data": "respond_request_import_view_data"
+    "respond_request_import_view_data": "respond_request_import_view_data",
+
+
+    "request_add_sell": "request_add_sell"
     
     
 }
