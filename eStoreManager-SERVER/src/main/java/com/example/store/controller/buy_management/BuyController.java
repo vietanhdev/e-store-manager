@@ -77,6 +77,9 @@ public class BuyController {
                     return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product type id " + product_id + " does not exist"),
                                         HttpStatus.OK);
                 }
+            } else {
+                return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product id must not be null"),
+                                        HttpStatus.OK);
             }
 
             if(buyItemInfor.getSupplier_id() != null) {
@@ -85,6 +88,9 @@ public class BuyController {
                     return new ResponseEntity<>(new ApiResponse(false, "wrong_supplier_id", "supplier id " + supplier_id + " does not exist"),
                                         HttpStatus.OK);
                 }
+            } else {
+                return new ResponseEntity<>(new ApiResponse(false, "wrong_supplier_id", "supplier id must not be null"),
+                                        HttpStatus.OK);
             }
             
         }

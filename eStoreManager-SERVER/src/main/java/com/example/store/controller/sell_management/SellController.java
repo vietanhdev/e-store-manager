@@ -87,6 +87,9 @@ public class SellController {
                     return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product type id " + product_id + " does not exist"),
                                         HttpStatus.OK);
                 }
+            } else {
+                return new ResponseEntity<>(new ApiResponse(false, "wrong_product_id", "product id must not be null"),
+                                        HttpStatus.OK);
             }
             
         }
@@ -140,12 +143,16 @@ public class SellController {
             }
 
             // find customer name by id
-            Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
             String customer_name;
-            if(customer == null){
+            if(sell.getCustomerId() == null) {
                 customer_name = "";
             } else {
-                customer_name = customer.getName();
+                Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
+                if(customer == null){
+                    customer_name = "";
+                } else {
+                    customer_name = customer.getName();
+                }
             }
 
             // find date created at
@@ -256,22 +263,24 @@ public class SellController {
                                                                 searchSellsRequest.getSearch().getEnd(),
                                                                 pageable);
 
-        } else if( (searchSellsRequest.getSearch().getStart() == null 
-            || searchSellsRequest.getSearch().getEnd() == null) 
+        } else if( searchSellsRequest.getSearch().getStart() == null 
+            && searchSellsRequest.getSearch().getEnd() == null 
             && searchSellsRequest.getSearch().getCustomer_id() == null
             && searchSellsRequest.getSearch().getUser_id() != null ){
 
             sells = sellRepository.findByUserId(searchSellsRequest.getSearch().getUser_id(), pageable);
         
-        } else if( (searchSellsRequest.getSearch().getStart() == null 
-            || searchSellsRequest.getSearch().getEnd() == null) 
+        } else if( searchSellsRequest.getSearch().getStart() == null 
+            && searchSellsRequest.getSearch().getEnd() == null
             && searchSellsRequest.getSearch().getUser_id() == null
             && searchSellsRequest.getSearch().getCustomer_id() != null ){
 
             sells = sellRepository.findByCustomerId(searchSellsRequest.getSearch().getCustomer_id(), pageable);
 
         } else if( searchSellsRequest.getSearch().getStart() != null 
-                && searchSellsRequest.getSearch().getEnd() != null ) {
+                && searchSellsRequest.getSearch().getEnd() != null
+                && searchSellsRequest.getSearch().getUser_id() == null
+                && searchSellsRequest.getSearch().getCustomer_id() == null ) {
             
             sells = sellRepository.findByDate(searchSellsRequest.getSearch().getStart(),
                                             searchSellsRequest.getSearch().getEnd(),
@@ -300,12 +309,16 @@ public class SellController {
             }
 
             // find customer name by id
-            Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
             String customer_name;
-            if(customer == null){
+            if(sell.getCustomerId() == null) {
                 customer_name = "";
             } else {
-                customer_name = customer.getName();
+                Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
+                if(customer == null){
+                    customer_name = "";
+                } else {
+                    customer_name = customer.getName();
+                }
             }
 
             // find date created at
