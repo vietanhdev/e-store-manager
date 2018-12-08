@@ -20,7 +20,9 @@ settings.set('api_config', {
 console.log(settings.get("account_info.token"));
 
 // Set max listener
-require('events').EventEmitter.defaultMaxListeners = Infinity;  
+require('events').EventEmitter.defaultMaxListeners = 0;  
+process.setMaxListeners(0);
+// EventEmitter.defaultMaxListeners = 0;
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

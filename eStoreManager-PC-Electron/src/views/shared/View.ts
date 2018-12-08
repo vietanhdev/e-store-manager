@@ -34,7 +34,9 @@ export class View {
         // this.createWindow();
 
         // Calculate view file path and write to this.viewFile
-        this.setViewFile();
+        if (ConfigGetter.get().view[viewName]) {
+            this.viewFile = path.join(__dirname, "../"+ConfigGetter.get().view[viewName].path);
+        }
 
         // Handle request_change_view event from browser thread
         ipcMain.on('request_change_view', (event:any, data:any) => {
@@ -92,9 +94,8 @@ export class View {
         return this.eventEmitter;
     }
 
-    setViewFile():void {
-        this.viewFile = path.join(__dirname, "../"+ConfigGetter.get().view[this.viewName].path);
-        // console.log(this.viewFile);
+    getViewFile(): string {
+        return this.viewFile;
     }
 
     setMenu(menu: Menu): void {

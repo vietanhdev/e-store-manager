@@ -70,7 +70,8 @@
     "respond_request_import_view_data": "respond_request_import_view_data",
 
 
-    "request_add_sell": "request_add_sell"
+    "request_add_sell": "request_add_sell",
+    "request_open_barcode_scanner": "request_open_barcode_scanner"
     
     
 }
