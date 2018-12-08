@@ -49,7 +49,7 @@ export class EditSupplierView extends View {
         ipcMain.on(EventGetter.get('update_supplier'), (event:any, data:any) => {
             supplierController.updateSupplierInfo(data, (respond:any) => {
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("update_supplier_success"));
-                Dialog.showDialog("info", TextGetter.get("updated_supplier_successfully"), null, this.getWindow(), () => {
+                Dialog.showDialog("info", "updated_supplier_successfully", null, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

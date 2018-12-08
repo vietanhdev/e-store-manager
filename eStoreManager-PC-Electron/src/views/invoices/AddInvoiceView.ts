@@ -4,52 +4,52 @@ import { EventGetter } from "../../services/EventGetter";
 import { TextGetter } from "../../services/TextGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
-import {SupplierController} from '../../controllers/SupplierController';
+import {InvoiceController} from '../../controllers/InvoiceController';
 import { isNull } from "util";
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');
 
 
-export class AddSupplierView extends View {
+export class AddInvoiceView extends View {
 
 
-    // Browser Window that request to add supplier
+    // Browser Window that request to add invoice
     private requestedBrowserWindow:BrowserWindow;
     
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
-        super("add_supplier", window, parent, 600, 400);
+        super("add_invoice", window, parent, 600, 400);
         // this.getWindow().webContents.openDevTools();
         this.setMenu(null);
     }
 
-    private static instance: AddSupplierView;
+    private static instance: AddInvoiceView;
     static getInstance(window: BrowserWindow, parent: BrowserWindow) {
-        if (!AddSupplierView.instance) {
-            AddSupplierView.instance = new AddSupplierView(window, parent);
+        if (!AddInvoiceView.instance) {
+            AddInvoiceView.instance = new AddInvoiceView(window, parent);
         }
-        return AddSupplierView.instance;
+        return AddInvoiceView.instance;
     }
 
     // Handle all logic of this view
     logicHandle():void {
 
-        var supplierController = new SupplierController();
+        var invoiceController = new InvoiceController();
         
         // ======= Handle requests from renderer process ========
 
-        ipcMain.on(EventGetter.get('request_add_supplier'), (event:any, data:any) => {
+        ipcMain.on(EventGetter.get('request_add_invoice'), (event:any, data:any) => {
             this.setOriginWindow(null);
             this.setOriginParent(event.sender.getOwnerBrowserWindow());
             this.requestedBrowserWindow = event.sender.getOwnerBrowserWindow();
             this.show();
         });
 
-        ipcMain.on(EventGetter.get('add_supplier'), (event:any, data:any) => {
-            supplierController.addSupplier(data, (respond:any) => {
-                let newSupplier = data;
-                newSupplier.id = respond.id;
-                this.requestedBrowserWindow.webContents.send(EventGetter.get("add_supplier_success"), newSupplier);
-                Dialog.showDialog("info", null, TextGetter.get("created_supplier_successfully") + respond.id, this.getWindow(), () => {
+        ipcMain.on(EventGetter.get('add_invoice'), (event:any, data:any) => {
+            invoiceController.addInvoice(data, (respond:any) => {
+                let newInvoice = data;
+                newInvoice.id = respond.id;
+                this.requestedBrowserWindow.webContents.send(EventGetter.get("add_invoice_success"), newInvoice);
+                Dialog.showDialog("info", null, TextGetter.get("created_invoice_successfully") + respond.id, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {
