@@ -1855,12 +1855,12 @@
             "buy_items": [
                 {
                     "product_id": 4,
-                    "product_name": "",
+                    "product_name": null,
                     "supplier_id": 1,
                     "supplier_name": "supplier",
                     "price": 970,
                     "quantities": 100,
-                    "unit": ""
+                    "unit": null
                 },
                 {
                     "product_id": 1,
@@ -1943,7 +1943,7 @@
     "success": true,
     "id": 1,
     "user_id": 3,
-    "user_name": "",
+    "user_name": null,
     "active": false,
     "createdAt": "2018-12-04 13:13:16",
     "buy_items": [
@@ -1958,21 +1958,21 @@
         },
         {
             "product_id": 3,
-            "product_name": "",
+            "product_name": null,
             "supplier_id": 10,
-            "supplier_name": "",
+            "supplier_name": null,
             "price": 10,
             "quantities": 150,
-            "unit": ""
+            "unit": null
         },
         {
             "product_id": 4,
-            "product_name": "",
+            "product_name": null,
             "supplier_id": 1,
             "supplier_name": "supplier",
             "price": 970,
             "quantities": 100,
-            "unit": ""
+            "unit": null
         }
     ]
 }
@@ -2346,19 +2346,19 @@
         {
             "id": 1,
             "user_id": 3,
-            "user_name": "",
+            "user_name": null,
             "customer_id": 3,
-            "customer_name": "",
+            "customer_name": null,
             "tax": 20.07,
             "active": true,
             "createdAt": "2018-12-04 13:22:38",
             "sell_items": [
                 {
                     "product_id": 3,
-                    "product_name": "",
+                    "product_name": null,
                     "price": 10,
                     "quantities": 150,
-                    "unit": ""
+                    "unit": null
                 },
                 {
                     "product_id": 1,
@@ -2369,10 +2369,10 @@
                 },
                 {
                     "product_id": 4,
-                    "product_name": "",
+                    "product_name": null,
                     "price": 970,
                     "quantities": 100,
-                    "unit": ""
+                    "unit": null
                 }
             ]
         }
@@ -2428,26 +2428,26 @@
     "success": true,
     "id": 1,
     "user_id": 3,
-    "user_name": "",
+    "user_name": null,
     "customer_id": 3,
-    "customer_name": "",
+    "customer_name": null,
     "tax": 20.07,
     "active": true,
     "createdAt": "2018-12-04 13:22:38",
     "sell_items": [
         {
             "product_id": 4,
-            "product_name": "",
+            "product_name": null,
             "price": 970,
             "quantities": 100,
-            "unit": ""
+            "unit": null
         },
         {
             "product_id": 3,
-            "product_name": "",
+            "product_name": null,
             "price": 10,
             "quantities": 150,
-            "unit": ""
+            "unit": null
         },
         {
             "product_id": 1,

@@ -137,7 +137,7 @@ public class SellController {
             User user = userRepository.findById(sell.getUserId()).orElse(null);
             String user_name;
             if(user == null){
-                user_name = "";
+                user_name = null;
             } else {
                 user_name = user.getName();
             }
@@ -145,11 +145,11 @@ public class SellController {
             // find customer name by id
             String customer_name;
             if(sell.getCustomerId() == null) {
-                customer_name = "";
+                customer_name = null;
             } else {
                 Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
                 if(customer == null){
-                    customer_name = "";
+                    customer_name = null;
                 } else {
                     customer_name = customer.getName();
                 }
@@ -169,8 +169,8 @@ public class SellController {
                 Product product = productRepository.findById(sellItem.getProductId()).orElse(null);
                 String product_name, unit;
                 if(product == null){
-                    product_name = "";
-                    unit = "";
+                    product_name = null;
+                    unit = null;
                 } else {
                     product_name = product.getName();
                     unit = product.getUnit();
@@ -303,7 +303,7 @@ public class SellController {
             User user = userRepository.findById(sell.getUserId()).orElse(null);
             String user_name;
             if(user == null){
-                user_name = "";
+                user_name = null;
             } else {
                 user_name = user.getName();
             }
@@ -311,11 +311,11 @@ public class SellController {
             // find customer name by id
             String customer_name;
             if(sell.getCustomerId() == null) {
-                customer_name = "";
+                customer_name = null;
             } else {
                 Customer customer = customerRepository.findById(sell.getCustomerId()).orElse(null);
                 if(customer == null){
-                    customer_name = "";
+                    customer_name = null;
                 } else {
                     customer_name = customer.getName();
                 }
@@ -341,8 +341,8 @@ public class SellController {
                 Product product = productRepository.findById(sellItem.getProductId()).orElse(null);
                 String product_name, unit;
                 if(product == null){
-                    product_name = "";
-                    unit = "";
+                    product_name = null;
+                    unit = null;
                 } else {
                     product_name = product.getName();
                     unit = product.getUnit();

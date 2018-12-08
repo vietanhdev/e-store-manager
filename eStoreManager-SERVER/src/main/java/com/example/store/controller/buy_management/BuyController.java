@@ -131,7 +131,7 @@ public class BuyController {
             User user = userRepository.findById(buy.getUserId()).orElse(null);
             String user_name;
             if(user == null){
-                user_name = "";
+                user_name = null;
             } else {
                 user_name = user.getName();
             }
@@ -150,8 +150,8 @@ public class BuyController {
                 Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
                 String product_name, unit;
                 if(product == null){
-                    product_name = "";
-                    unit = "";
+                    product_name = null;
+                    unit = null;
                 } else {
                     product_name = product.getName();
                     unit = product.getUnit();
@@ -161,7 +161,7 @@ public class BuyController {
                 Supplier supplier = supplierRepository.findById(buyItem.getSupplierId()).orElse(null);
                 String supplier_name;
                 if(supplier == null){
-                    supplier_name = "";
+                    supplier_name = null;
                 } else {
                     supplier_name = supplier.getName();
                 }
@@ -281,7 +281,7 @@ public class BuyController {
             User user = userRepository.findById(buy.getUserId()).orElse(null);
             String user_name;
             if(user == null){
-                user_name = "";
+                user_name = null;
             } else {
                 user_name = user.getName();
             }
@@ -299,8 +299,8 @@ public class BuyController {
                 Product product = productRepository.findById(buyItem.getProductId()).orElse(null);
                 String product_name, unit;
                 if(product == null){
-                    product_name = "";
-                    unit = "";
+                    product_name = null;
+                    unit = null;
                 } else {
                     product_name = product.getName();
                     unit = product.getUnit();
@@ -310,7 +310,7 @@ public class BuyController {
                 Supplier supplier = supplierRepository.findById(buyItem.getSupplierId()).orElse(null);
                 String supplier_name;
                 if(supplier == null){
-                    supplier_name = "";
+                    supplier_name = null;
                 } else {
                     supplier_name = supplier.getName();
                 }
