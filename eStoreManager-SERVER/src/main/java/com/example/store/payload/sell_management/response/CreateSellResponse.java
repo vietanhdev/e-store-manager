@@ -6,7 +6,7 @@ public class CreateSellResponse {
 
     private Long id;
 
-    private Boolean active;
+    private Boolean active = true;
 
     public CreateSellResponse(Long id){
         this.id = id;

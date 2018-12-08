@@ -1716,12 +1716,28 @@
 }
 ```
 
+```
+{
+    "success": false,
+    "code": "wrong_product_id",
+    "message": "product id must not be null"
+}
+```
+
 * On fail (supplier id does not exist):
 ```
 {
     "success": false,
     "code": "wrong_supplier_id",
     "message": "supplier id " + {id} + " does not exist"
+}
+```
+
+```
+{
+    "success": false,
+    "code": "wrong_supplier_id",
+    "message": "supplier id must not be null"
 }
 ```
 
@@ -2141,13 +2157,11 @@
     "sell_items": [
         {
             "product_id": 1,
-            "supplier_id": 1,
             "price": 1000,
             "quantities": 2
         },
         {
             "product_id": 2,
-            "supplier_id": 3,
             "price": 50,
             "quantities": 5
         }
@@ -2161,7 +2175,8 @@
 ```
 {
     "success": true,
-    "id": 10
+    "id": 2,
+    "active": true
 }
 ```
 
@@ -2198,6 +2213,14 @@
     "success": false,
     "code": "wrong_product_id",
     "message": "product id " + {id} + " does not exist"
+}
+```
+
+```
+{
+    "success": false,
+    "code": "wrong_product_id",
+    "message": "product id must not be null"
 }
 ```
 
@@ -2317,47 +2340,39 @@
 {
     "success": true,
     "draw": 10,
-    "recordsTotal": 2,
-    "recordsFiltered": 2,
+    "recordsTotal": 8,
+    "recordsFiltered": 1,
     "data": [
         {
-            "id": 2,
-            "user_id": 1,
-            "customer_id": 2,
-            "tax": 10.2,
-            "sell_items": [
-                {
-                    "product_id": 1,
-                    "price": 700,
-                    "quantities": 2
-                },
-                {
-                    "product_id": 2,
-                    "price": 50,
-                    "quantities": 5
-                }
-            ]
-        },
-        {
             "id": 1,
-            "user_id": 2,
+            "user_id": 3,
+            "user_name": "",
             "customer_id": 3,
+            "customer_name": "",
             "tax": 20.07,
+            "active": true,
+            "createdAt": "2018-12-04 13:22:38",
             "sell_items": [
                 {
                     "product_id": 3,
+                    "product_name": "",
                     "price": 10,
-                    "quantities": 150
-                },
-                {
-                    "product_id": 4,
-                    "price": 970,
-                    "quantities": 100
+                    "quantities": 150,
+                    "unit": ""
                 },
                 {
                     "product_id": 1,
+                    "product_name": "milk",
                     "price": 100,
-                    "quantities": 18
+                    "quantities": 18,
+                    "unit": "bar"
+                },
+                {
+                    "product_id": 4,
+                    "product_name": "",
+                    "price": 970,
+                    "quantities": 100,
+                    "unit": ""
                 }
             ]
         }
@@ -2412,19 +2427,34 @@
 {
     "success": true,
     "id": 1,
-    "user_id": 1,
-    "customer_id": 1,
-    "tax": 10.2,
+    "user_id": 3,
+    "user_name": "",
+    "customer_id": 3,
+    "customer_name": "",
+    "tax": 20.07,
+    "active": true,
+    "createdAt": "2018-12-04 13:22:38",
     "sell_items": [
         {
-            "product_id": 2,
-            "price": 50,
-            "quantities": 5
+            "product_id": 4,
+            "product_name": "",
+            "price": 970,
+            "quantities": 100,
+            "unit": ""
+        },
+        {
+            "product_id": 3,
+            "product_name": "",
+            "price": 10,
+            "quantities": 150,
+            "unit": ""
         },
         {
             "product_id": 1,
-            "price": 1000,
-            "quantities": 2
+            "product_name": "milk",
+            "price": 100,
+            "quantities": 18,
+            "unit": "bar"
         }
     ]
 }
