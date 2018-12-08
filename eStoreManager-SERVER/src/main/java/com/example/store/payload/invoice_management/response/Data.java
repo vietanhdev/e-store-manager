@@ -10,11 +10,14 @@ public class Data {
 
     public String description;
 
-    public Data(Long id, Float amount, String purpose, String description) {
+    public String createdAt;
+
+    public Data(Long id, Float amount, String purpose, String description, String createdAt) {
         this.id = id;
         this.amount = amount;
         this.purpose = purpose;
         this.description = description;
+        this.createdAt = createdAt;
     }
 
 }

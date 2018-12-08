@@ -2744,22 +2744,18 @@
 {
     "success": true,
     "draw": 10,
-    "recordsTotal": 2,
-    "recordsFiltered": 2,
+    "recordsTotal": 1,
+    "recordsFiltered": 1,
     "data": [
         {
-            "id": 2,
-            "amount": 2000,
-            "purpose": "2",
-            "description": "two"
-        },
-        {
             "id": 1,
-            "amount": 1000,
+            "amount": 10000.5,
             "purpose": "1",
-            "description": "one"
+            "description": "one",
+            "createdAt": "2018-12-08 04:02:30"
         }
     ]
+} ]
 }
 ```
 
@@ -2810,9 +2806,10 @@
 {
     "success": true,
     "id": 1,
-    "amount": 1000,
+    "amount": 10000.5,
     "purpose": "1",
-    "description": "one"
+    "description": "one",
+    "createdAt": "2018-12-08 04:02:30"
 }
 ```
 
