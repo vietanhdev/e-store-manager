@@ -4,8 +4,10 @@ import { ConfigGetter } from "../../services/ConfigGetter";
 import { EventGetter } from "../../services/EventGetter";
 import { TextGetter } from "../../services/TextGetter";
 import {View} from '../shared/View';
-const {ipcMain} = require('electron');
+import { SellController } from "../../controllers/SellController";
 const { dialog } = require('electron');
+import { Dialog } from "../../services/Dialog";
+const {ipcMain} = require('electron');
 
 let express = require('express');
 let bodyParser = require('body-parser');
@@ -77,6 +79,9 @@ export class CashierView extends View {
     // Handle all logic of this view
     logicHandle():void {
 
+
+        let sellController = new SellController();
+
         // Handle request discard order
         ipcMain.on(EventGetter.get('request_discard_order'), () => {
             // Ask user the new value of quantity
@@ -95,20 +100,41 @@ export class CashierView extends View {
 
         // Handle order printing
         ipcMain.on(EventGetter.get('request_print_order'), (e:any, data:any) => {
-
             // Save order data
             this.orderData = data;
-
             // Load order template
             this.getOrderWindow().loadFile(path.join(__dirname, "./ejs/order_template.ejs"));
-        
         });
 
         // When the order window request the data, send it
         ipcMain.on(EventGetter.get('request_order_data'), (e:any, data:any) => {
-
             this.getOrderWindow().webContents.send(EventGetter.get('order_data'), this.orderData);
+        });
 
+
+        // Request to complete the bill
+        ipcMain.on(EventGetter.get('request_add_sell'), (event:any, data:any) => {
+            sellController.addSell(data, (respond:any) => {
+                data.id = respond.id;
+
+                // Print the result?
+                dialog.showMessageBox(this.getWindow(), Object({
+                    type: "error",
+                    title: TextGetter.get("order_completed"),
+                    message: TextGetter.get("completed_order_id") + data.id,
+                    buttons: [TextGetter.get("print_order"), TextGetter.get("close")]
+                }), (result) => {
+                    if (result === 0) { // Print the order
+                        // Save order data
+                        this.orderData = data;
+                        // Load order template
+                        this.getOrderWindow().loadFile(path.join(__dirname, "./ejs/order_template.ejs"));
+                    }
+                });
+
+            }, (respond:any) => {
+                Dialog.showDialogFromRespond("error", respond, this.getWindow());
+            });
         });
 
 

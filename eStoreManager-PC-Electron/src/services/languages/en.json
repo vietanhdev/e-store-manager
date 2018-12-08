@@ -197,6 +197,10 @@
     "wrong_supplier_id": "Wrong supplier ID!",
     "wrong_product_id": "Wrong product ID!",
     "update_buy_information_successful": "Updated import bill successfully!",
-    "you_have_to_input_product":"You have to input the product!"
+    "you_have_to_input_product":"You have to input the product!",
+    "order_completed": "Order Completed!",
+    "completed_order_id": "Completed order ID:",
+    "print_order": "Print Order"
+
 
 }
