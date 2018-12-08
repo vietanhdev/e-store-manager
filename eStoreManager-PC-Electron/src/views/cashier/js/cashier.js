@@ -394,4 +394,10 @@ $(document).ready(() => {
 
     });
 
+
+    // Show barcode scanner
+    $("#btn-show-barcode-scanner").click(() => {
+        ipcRenderer.send(EventGetter.get("request_open_barcode_scanner"));
+    });
+
 });

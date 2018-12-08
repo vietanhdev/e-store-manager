@@ -94,7 +94,8 @@
         }
     ],
     "barcode_server": {
-        "path": "/barcode",
-        "port": 3843
+        "scanner_port": 4534,
+        "receiver_path": "/barcode",
+        "receiver_port": 3843
     }
 }

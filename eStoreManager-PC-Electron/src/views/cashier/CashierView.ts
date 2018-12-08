@@ -35,10 +35,10 @@ export class CashierView extends View {
             expressApp.use(bodyParser.json());
 
             // Setup server port
-            var expressAppPort = ConfigGetter.get().barcode_server.port;
+            var expressAppPort = ConfigGetter.get().barcode_server.receiver_port;
 
             // Barcode service
-            expressApp.get(ConfigGetter.get().barcode_server.path, (req:any, res:any) => {
+            expressApp.get(ConfigGetter.get().barcode_server.receiver_path, (req:any, res:any) => {
                 let product_code = req.query.code;
                 console.log(product_code);
                 if (CashierView.instance.isVisible()) {

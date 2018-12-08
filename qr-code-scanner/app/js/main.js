@@ -48,12 +48,12 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', event => {
     QRReader.init(); //To initialize QR Scanner
     // Set camera overlay size
-    setTimeout(() => {
-      setCameraOverlay();
-      if (window.isMediaStreamAPISupported) {
-        scan();
-      }
-    }, 1000);
+    // setTimeout(() => {
+    setCameraOverlay();
+    if (window.isMediaStreamAPISupported) {
+      scan();
+    }
+    // }, 1000);
 
     // To support other browsers who dont have mediaStreamAPI
     selectFromPhoto();
@@ -86,9 +86,23 @@ window.addEventListener('DOMContentLoaded', () => {
     $.get('http://localhost:3843/barcode?code=' + code);
   }
 
+  //Hide dialog
+  function hideDialog() {
+    copiedText = null;
+    textBoxEle.value = '';
+
+    if (!window.isMediaStreamAPISupported) {
+      frame.src = '';
+      frame.className = '';
+    }
+
+    dialogElement.classList.add('app__dialog--hide');
+    dialogOverlayElement.classList.add('app__dialog--hide');
+    // scan();
+  }
+
   //Scan
   function scan(forSelectedPhotos = false) {
-    
     if (window.isMediaStreamAPISupported && !window.noCameraPermission) {
       scanningEle.style.display = 'block';
     }
@@ -102,9 +116,22 @@ window.addEventListener('DOMContentLoaded', () => {
       textBoxEle.value = result;
       textBoxEle.select();
       scanningEle.style.display = 'none';
+
       // play sound beep
       player.play();
       sendCode(result);
+
+      function beep() {
+        var beep = new Audio();
+        beep.src = 'beep-01a.mp3';
+        beep.play();
+      }
+      sendCode(result);
+
+      setTimeout(() => {
+        scan(false);
+        hideDialog();
+      }, 3000);
 
       if (isURL(result)) {
         dialogOpenBtnElement.style.display = 'inline-block';
@@ -114,22 +141,6 @@ window.addEventListener('DOMContentLoaded', () => {
       const frame = document.querySelector('#frame');
       // if (forSelectedPhotos && frame) frame.remove();
     }, forSelectedPhotos);
-  }
-
-  //Hide dialog
-  function hideDialog() {
-    copiedText = null;
-    textBoxEle.value = '';
-
-    if (!window.isMediaStreamAPISupported) {
-      frame.src = '';
-      frame.className = '';
-    }
-   
-    dialogElement.classList.add('app__dialog--hide');
-    dialogOverlayElement.classList.add('app__dialog--hide');
-    
-    scan();
   }
 
   function selectFromPhoto() {
@@ -164,6 +175,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
   function Qrfile() {
     var camera = document.createElement('input');
     camera.setAttribute('type', 'file');
