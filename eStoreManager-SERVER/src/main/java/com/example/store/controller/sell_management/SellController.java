@@ -101,7 +101,7 @@ public class SellController {
         // check Total wrong
         Float total = 0F;
         for(SellItemInfor sellItemInfor: createSellRequest.getSell_items()) {
-            total += sellItemInfor.getPrice();
+            total += sellItemInfor.getPrice() *sellItemInfor.getQuantities();
         }
         total *= (1 + createSellRequest.getTax());
         Float result = Math.abs(total - createSellRequest.getTotal());
