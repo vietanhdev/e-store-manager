@@ -157,9 +157,10 @@ QRReader.scan = function(callback, forSelectedPhotos) {
     try {
       QRReader.ctx.drawImage(QRReader.webcam, 0, 0, QRReader.canvas.width, QRReader.canvas.height);
       var imgData = QRReader.ctx.getImageData(0, 0, QRReader.canvas.width, QRReader.canvas.height);
-
+     
       if (imgData.data) {
         QRReader.decoder.postMessage(imgData);
+      
       }
     } catch (e) {
       // Try-Catch to circumvent Firefox Bug #879717
