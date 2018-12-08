@@ -47,12 +47,12 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', event => {
     QRReader.init(); //To initialize QR Scanner
     // Set camera overlay size
-    setTimeout(() => {
-      setCameraOverlay();
-      if (window.isMediaStreamAPISupported) {
-        scan();
-      }
-    }, 1000);
+    // setTimeout(() => {
+    setCameraOverlay();
+    if (window.isMediaStreamAPISupported) {
+      scan();
+    }
+    // }, 1000);
 
     // To support other browsers who dont have mediaStreamAPI
     selectFromPhoto();
@@ -86,8 +86,22 @@ window.addEventListener('DOMContentLoaded', () => {
     $.get('http://localhost:3843/barcode?code=' + code);
   }
 
+  //Hide dialog
+  var hideDialog = function() {
+    copiedText = null;
+    textBoxEle.value = '';
+
+    if (!window.isMediaStreamAPISupported) {
+      frame.src = '';
+      frame.className = '';
+    }
+
+    dialogElement.classList.add('app__dialog--hide');
+    dialogOverlayElement.classList.add('app__dialog--hide');
+  };
+
   //Scan
-  function scan(forSelectedPhotos = false) {
+  var scan = function(forSelectedPhotos = false) {
     if (window.isMediaStreamAPISupported && !window.noCameraPermission) {
       scanningEle.style.display = 'block';
     }
@@ -101,38 +115,29 @@ window.addEventListener('DOMContentLoaded', () => {
       textBoxEle.value = result;
       textBoxEle.select();
       scanningEle.style.display = 'none';
-      function beep(){
-        var beep =new Audio();
-        beep.src="beep-01a.mp3";
+      function beep() {
+        var beep = new Audio();
+        beep.src = 'beep-01a.mp3';
         beep.play();
       }
-     sendCode(result);
+
+      sendCode(result);
+
+      setTimeout(hideDialog, 3000);
 
       if (isURL(result)) {
         dialogOpenBtnElement.style.display = 'inline-block';
         beep();
       }
+
       dialogElement.classList.remove('app__dialog--hide');
       dialogOverlayElement.classList.remove('app__dialog--hide');
       const frame = document.querySelector('#frame');
       // if (forSelectedPhotos && frame) frame.remove();
+
+      scan();
     }, forSelectedPhotos);
-  }
-
-  //Hide dialog
-  function hideDialog() {
-    copiedText = null;
-    textBoxEle.value = '';
-
-    if (!window.isMediaStreamAPISupported) {
-      frame.src = '';
-      frame.className = '';
-    }
-
-    dialogElement.classList.add('app__dialog--hide');
-    dialogOverlayElement.classList.add('app__dialog--hide');
-    scan();
-  }
+  };
 
   function selectFromPhoto() {
     //Creating the camera element
