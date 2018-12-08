@@ -984,7 +984,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 2,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 1\n\t\t}\n\t]\n}"
+									"raw": "{\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 100\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 100\n\t\t}\n\t]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/buys",
@@ -1146,7 +1146,7 @@
 					"_postman_isSubFolder": true
 				},
 				{
-					"name": "Sell Management Copy",
+					"name": "Sell Management",
 					"item": [
 						{
 							"name": "Admin, Cashier create a new sell",
@@ -1167,7 +1167,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"customer_id\": 1,\r\n    \"tax\": 10.2,\r\n    \"total\": 0,\r\n    \"sell_items\": [\r\n        {\r\n            \"product_id\": 1,\r\n            \"price\": 0,\r\n            \"quantities\": 2\r\n        },\r\n        {\r\n            \"product_id\": 1,\r\n            \"price\": 0,\r\n            \"quantities\": 5\r\n        }\r\n    ]\r\n}"
+									"raw": "{\n    \"customer_id\": 1,\n    \"tax\": 10.2,\n    \"total\": 0,\n    \"sell_items\": [\n        {\n            \"product_id\": 1,\n            \"price\": 0,\n            \"quantities\": 200\n        },\n        {\n            \"product_id\": 1,\n            \"price\": 0,\n            \"quantities\": 5\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/sells",
@@ -1320,6 +1320,189 @@
 										"v1",
 										"sells",
 										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Invoice Management",
+					"item": [
+						{
+							"name": "Admin, Manager create a new invoice",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODMxNjY5LCJleHAiOjE1NDQ0MzY0Njl9.gGNlf0cRUjfggi-BlDZcJLEvyIGlj3J8GEfE-9sfof_pKct3Rxbjp1ALVAuTj8EDFFOW-7s9HOcU9sbJMMsHxQ"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 2000,\n    \"purpose\": \"2\",\n    \"description\": \"two\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/invoices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier search invoice",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"draw\": 1,\r\n    \"start\": 0,\r\n    \"length\": 5,\r\n    \"search\": {\r\n        \"purpose\": \"\",\r\n        \"description\": \"\",\r\n        \"start\": \"2018-01-30 06:52:05\",\r\n        \"end\": \"2018-12-30 06:52:05\"\r\n    }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/search/invoices",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"search",
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier get an invoice's information",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/invoices/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"invoices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier update an invoice's information",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"amount\": 10000.5,\n    \"purpose\": \"1\",\n    \"description\": \"one\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/invoices/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"invoices",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Admin, Cashier delete an invoice",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzOTAwMzgxLCJleHAiOjE1NDQ1MDUxODF9.RwbVOzKpni79k4FlBr9WzFT5hgNUaU_rOY-CQSeozmQ59Xk-gxRV3veeKAu4vGgHrOSfzYW8O-47Mpf6sTp70A",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/invoices/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"invoices",
+										"2"
 									]
 								}
 							},
