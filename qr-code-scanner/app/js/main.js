@@ -41,6 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
   var helpTextEle = document.querySelector('.app__help-text');
   var infoSvg = document.querySelector('.app__header-icon svg');
   var videoElement = document.querySelector('video');
+  var player = document.querySelector('#audioPlayer');
   window.appOverlay = document.querySelector('.app__overlay');
 
   //Initializing qr scanner
@@ -56,7 +57,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // To support other browsers who dont have mediaStreamAPI
     selectFromPhoto();
-    Qrfile();
   });
 
   function setCameraOverlay() {
@@ -88,6 +88,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   //Scan
   function scan(forSelectedPhotos = false) {
+    
     if (window.isMediaStreamAPISupported && !window.noCameraPermission) {
       scanningEle.style.display = 'block';
     }
@@ -101,16 +102,12 @@ window.addEventListener('DOMContentLoaded', () => {
       textBoxEle.value = result;
       textBoxEle.select();
       scanningEle.style.display = 'none';
-      function beep(){
-        var beep =new Audio();
-        beep.src="beep-01a.mp3";
-        beep.play();
-      }
-     sendCode(result);
+      // play sound beep
+      player.play();
+      sendCode(result);
 
       if (isURL(result)) {
         dialogOpenBtnElement.style.display = 'inline-block';
-        beep();
       }
       dialogElement.classList.remove('app__dialog--hide');
       dialogOverlayElement.classList.remove('app__dialog--hide');
@@ -128,9 +125,10 @@ window.addEventListener('DOMContentLoaded', () => {
       frame.src = '';
       frame.className = '';
     }
-
+   
     dialogElement.classList.add('app__dialog--hide');
     dialogOverlayElement.classList.add('app__dialog--hide');
+    
     scan();
   }
 
