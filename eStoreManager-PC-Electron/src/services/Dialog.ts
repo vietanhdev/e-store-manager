@@ -51,9 +51,9 @@ export class Dialog {
 
         let message:string = "";
         if (!isUndefined(respond.code)) {
-            message = TextGetter.getWithFailBack(respond.code, respond.message);
+            message = TextGetter.get(respond.code, respond.message);
         } else if (!isUndefined(respond.error)) {
-            message = TextGetter.getWithFailBack(respond.error, respond.message);
+            message = TextGetter.get(respond.error, respond.message);
         } else if (!isUndefined(respond.message)) {
             message = respond.message;
         } else {

@@ -1,5 +1,7 @@
-const settings = require('electron-settings');
 import { ConfigGetter } from "./ConfigGetter";
+import { isNull, isUndefined } from "util";
+const settings = require('electron-settings'); 
+
 
 export class TextGetter {
     private static instance: TextGetter;
@@ -15,7 +17,7 @@ export class TextGetter {
 
         // If we dont have language setting, pick the first language as default
         if (!settings.has("lang"))  {
-            console.log("DONT HAVE LANG SETTING!");
+            // console.log("DONT HAVE LANG SETTING!");
             this.currentLanguage = this.languages[0];
             // Save new language into app settings
             settings.set("lang", this.currentLanguage.lang);
@@ -48,18 +50,13 @@ export class TextGetter {
         }
         return TextGetter.instance;
     }
-    public static get(key:string):string {
+    public static get(key:string, failback: string = null):string {
         if (typeof TextGetter.getInstance().data[key] != "undefined") {
             return TextGetter.getInstance().data[key];
-        } else {
-            return "";
-        }
-    }
-    static getWithFailBack(key: string, failback: string):string {
-        if (typeof TextGetter.getInstance().data[key] != "undefined") {
-            return TextGetter.getInstance().data[key];
-        } else {
+        } else if (!isNull(failback)) {
             return failback;
+        } else {
+            return "unknown_text";
         }
     }
 }

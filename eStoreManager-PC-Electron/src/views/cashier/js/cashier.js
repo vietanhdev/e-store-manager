@@ -387,9 +387,9 @@ $(document).ready(() => {
         order_data.total = $("#grandtotal").val();
         order_data.sell_items = dataTable.rows().data().toArray();
         for (let i = 0; i < order_data.sell_items.length; ++i) {
-            order_data.sell_items[i].product_id = order_data.sell_items.id;
+            order_data.sell_items[i].product_id = order_data.sell_items[i].id;
         }
-
+        
         ipcRenderer.send(EventGetter.get("request_add_sell"), order_data);
 
     });

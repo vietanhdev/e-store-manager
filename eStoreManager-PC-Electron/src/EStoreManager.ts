@@ -45,7 +45,6 @@ const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 export class EStoreManager {
 
   mainWindow: BrowserWindow;
-  loadingView: View;
   viewList: Array<any>;
   menu:Menu;
 
@@ -60,9 +59,9 @@ export class EStoreManager {
     Menu.setApplicationMenu(this.menu);
 
     this.viewList = new Array<View>();
-    let loadingView = new View("loading", null, null);
-    this.mainWindow = loadingView.getWindow();
-    loadingView.getWindow().maximize();
+  
+    this.mainWindow = new BrowserWindow();
+    this.mainWindow.maximize();
 
     // Open the DevTools.
     this.mainWindow.webContents.openDevTools();
@@ -128,9 +127,6 @@ export class EStoreManager {
     }));
 
     this.mainWindow.setMenu(this.menu);
-
-    // welcomeView.show();
-    loadingView.show();
 
     // Check user login and redirect to login page if user have not logged in
     userController.isLoggedIn(() => {
