@@ -12,11 +12,14 @@ public class InvoiceInforResponse {
 
     private String description;
 
-    public InvoiceInforResponse(Long id, Float amount, String purpose, String description) {
+    public String createdAt;
+
+    public InvoiceInforResponse(Long id, Float amount, String purpose, String description, String createdAt) {
         this.id = id;
         this.amount = amount;
         this.purpose = purpose;
         this.description = description;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {

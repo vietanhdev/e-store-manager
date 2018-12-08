@@ -1,5 +1,8 @@
 package com.example.store.controller.invoice_management;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import com.example.store.model.invoice_management.Invoice;
@@ -56,10 +59,17 @@ public class InvoiceController {
     public ResponseEntity<?> getInvoiceInfor(@PathVariable(value = "id") String id) {
         try {
             Invoice invoice = invoiceRepository.findById(Long.parseLong(id)).orElse(null);
+
+            // find date created at
+            Date myDate = Date.from(invoice.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(myDate);
+
             InvoiceInforResponse invoiceInforResponse = new InvoiceInforResponse(invoice.getId(),
                                                                                 invoice.getAmount(),
                                                                                 invoice.getPurpose(),
-                                                                                invoice.getDescription());
+                                                                                invoice.getDescription(),
+                                                                                formattedDate);
 
             return new ResponseEntity<>(invoiceInforResponse,
                                         HttpStatus.OK);
@@ -140,10 +150,16 @@ public class InvoiceController {
         SearchInvoicesResponse searchInvoicesResponse = new SearchInvoicesResponse(draw, recordsTotal, recordsFiltered);
 
         for(Invoice invoice: invoices.getContent()){
+            // find date created at
+            Date myDate = Date.from(invoice.getCreatedAt());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = formatter.format(myDate);
+            
             Data data = new Data(invoice.getId(), 
                                 invoice.getAmount(), 
                                 invoice.getPurpose(), 
-                                invoice.getDescription());
+                                invoice.getDescription(),
+                                formattedDate);
 
             searchInvoicesResponse.addData(data);
         }
