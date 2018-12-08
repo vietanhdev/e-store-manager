@@ -19,21 +19,32 @@ public class Data {
 
     private Float tax;
 
+    private Float total;
+
     private Boolean active;
 
     private String createdAt;
 
     private Set<SellItemInfor> buy_items = new HashSet<>();
 
-    public Data(Long id, Long user_id, String user_name, Long customer_id, String customer_name, Float tax, Boolean active, String createdAt) {
+    public Data(Long id, Long user_id, String user_name, Long customer_id, String customer_name, Float tax, Float total, Boolean active, String createdAt) {
         this.id = id;
         this.user_id = user_id;
         this.user_name = user_name;
         this.customer_id = customer_id;
         this.customer_name = customer_name;
         this.tax = tax;
+        this.total = total;
         this.active = active;
         this.createdAt = createdAt;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
     }
 
     public String getCustomer_name() {

@@ -2524,8 +2524,10 @@
 ```
 {
     "user_id": 2,
-    "customer_id": 3,
-    "tax": 20.07,
+    "customer_id": 1,
+    "tax": 0,
+    "active": true,
+    "total": 3300,
     "sell_items": [
         {
             "product_id": 1,
@@ -2538,12 +2540,6 @@
             "supplier_id": 10,
             "price": 10,
             "quantities": 150
-        },
-        {
-            "product_id": 4,
-            "supplier_id": 1,
-            "price": 970,
-            "quantities": 100
         }
     ]
 }
