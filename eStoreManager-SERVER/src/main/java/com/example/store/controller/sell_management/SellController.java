@@ -112,7 +112,7 @@ public class SellController {
         }
         
         // create new sell and save
-        Sell sell = new Sell(currentUser.getId(), createSellRequest.getCustomer_id(), createSellRequest.getTax());
+        Sell sell = new Sell(currentUser.getId(), createSellRequest.getCustomer_id(), createSellRequest.getTax(), createSellRequest.getTotal());
         sell = sellRepository.save(sell);
 
         // create new sellItems and save
@@ -174,7 +174,7 @@ public class SellController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String formattedDate = formatter.format(myDate);
 
-            SellInforResponse sellInforResponse = new SellInforResponse(sell.getId(), sell.getUserId(), user_name, sell.getCustomerId(), customer_name, sell.getTax(), sell.getActive(), formattedDate);
+            SellInforResponse sellInforResponse = new SellInforResponse(sell.getId(), sell.getUserId(), user_name, sell.getCustomerId(), customer_name, sell.getTax(), sell.getTotal(), sell.getActive(), formattedDate);
 
             List<SellItem> sellItems = sellItemRepository.findBySellId(sell_id);
             for(SellItem sellItem: sellItems) {
@@ -217,14 +217,38 @@ public class SellController {
 
             if(updateSellRequest.getUser_id() != null) sell.setUserId(updateSellRequest.getUser_id());
             if(updateSellRequest.getCustomer_id() != null) sell.setCustomerId(updateSellRequest.getCustomer_id());
-            if(updateSellRequest.getTax() != null) sell.setTax(updateSellRequest.getTax());
+            sell.setTax(updateSellRequest.getTax());
             if(updateSellRequest.getActive() != null) sell.setActive(updateSellRequest.getActive());
 
+            // check Total wrong and unacceptable quantities
+            Float total = 0F;
+            for(SellItemInfor sellItemInfor: updateSellRequest.getSell_items()) {
+                if(sellItemInfor.getQuantities() <= 0){
+                    return new ResponseEntity<>(new ApiResponse(false, "product_quantities_unacceptable", "quantities of product must be greater than 0"),
+                                        HttpStatus.OK);
+                }
+
+                total += sellItemInfor.getPrice() * sellItemInfor.getQuantities();
+            }
+
+            total *= (1 + updateSellRequest.getTax());
+            Float result = Math.abs(total - updateSellRequest.getTotal());
+
+            if( result > AppConstants.EPS ) {
+                return new ResponseEntity<>(new ApiResponse(false, "wrong_total_bill", "wrong total bill"),
+                                            HttpStatus.OK);
+            }
+
+            // save total
+            sell.setTotal(updateSellRequest.getTotal());
+
+            // delete old sell items
             List<SellItem> sellItems = sellItemRepository.findBySellId(sell_id);
             for(SellItem sellItem: sellItems) {
                 sellItemRepository.deleteById(sellItem.getId());
             }
             
+            // save new update from sell items
             for(SellItemInfor sellItemInfor: updateSellRequest.getSell_items()) {
                 SellItem sellItem = new SellItem(sellItemInfor.getProduct_id(),
                                                 sellItemInfor.getPrice(),
@@ -346,6 +370,7 @@ public class SellController {
                                 sell.getCustomerId(),
                                 customer_name,
                                 sell.getTax(),
+                                sell.getTotal(),
                                 sell.getActive(),
                                 formattedDate);
 

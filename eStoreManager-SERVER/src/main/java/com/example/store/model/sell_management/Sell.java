@@ -20,16 +20,19 @@ public class Sell extends DateAudit{
 
     private Float tax;
 
+    private Float total;
+
     private Boolean active = true;
 
     public Sell() {
 
     }
 
-    public Sell(Long user_id, Long customer_id, Float tax) {
+    public Sell(Long user_id, Long customer_id, Float tax, Float total) {
         this.user_id = user_id;
         this.customer_id = customer_id;
         this.tax = tax;
+        this.total = total;
     }
     
     public Long getId() {
@@ -70,6 +73,14 @@ public class Sell extends DateAudit{
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
     }
 
 }

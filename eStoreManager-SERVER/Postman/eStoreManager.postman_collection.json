@@ -1274,7 +1274,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"user_id\": 2,\n    \"customer_id\": 3,\n    \"tax\": 20.07,\n    \"active\": true,\n    \"sell_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 970,\n            \"quantities\": 100\n        }\n    ]\n}"
+									"raw": "{\n    \"user_id\": 2,\n    \"customer_id\": 1,\n    \"tax\": 0,\n    \"active\": true,\n    \"total\": 3300,\n    \"sell_items\": [\n        {\n            \"product_id\": 1,\n            \"supplier_id\": 2,\n            \"price\": 100,\n            \"quantities\": 18\n        },\n        {\n            \"product_id\": 3,\n            \"supplier_id\": 10,\n            \"price\": 10,\n            \"quantities\": 150\n        },\n        {\n            \"product_id\": 4,\n            \"supplier_id\": 1,\n            \"price\": 0,\n            \"quantities\": 100\n        }\n    ]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/sells/1",
