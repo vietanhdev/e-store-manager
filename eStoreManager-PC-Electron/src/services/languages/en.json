@@ -202,7 +202,6 @@
     "completed_order_id": "Completed order ID:",
     "print_order": "Print Order",
 
-
     "are_you_sure_discard_sell_bill": "Are you sure to discard the sell bill?",
     "discard_sell_bill_success": "discard_sell_bill_success",
     "view_sell_bill": "View Sell Bill",
@@ -210,7 +209,6 @@
 
     "employee_id": "Employee ID",
     "new_customer": "New Customer",
-
 
     "invoice_management": "Invoice Management",
     "add_invoice": "Add Invoice",
@@ -220,7 +218,6 @@
     "updated_invoice_successfully": "Update invoice successfully.",
     "are_you_sure_delete_invoice": "Are you sure to delete this invoice? ",
     "delete_invoice_successful": "Deleted invoice successfully!",
-
 
     "sell_bills": "Sell Bills",
     "amount": "Amount",
