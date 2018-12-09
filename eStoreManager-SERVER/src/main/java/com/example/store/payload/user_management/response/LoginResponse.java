@@ -1,7 +1,7 @@
 package com.example.store.payload.user_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginResponse {
     private Boolean success = true;
@@ -12,7 +12,7 @@ public class LoginResponse {
     private String email;
     private String address;
     private String mobileNo;
-    private Set<String> roles = new HashSet<>();
+    private List<String> roles = new ArrayList<>();
     private String tokenType = "Bearer";
     private String accessToken;
 

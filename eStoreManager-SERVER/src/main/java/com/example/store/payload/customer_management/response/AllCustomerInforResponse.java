@@ -1,13 +1,13 @@
 package com.example.store.payload.customer_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllCustomerInforResponse {
 
     private Boolean success = true;
 
-    private Set<CustomerInfor> customers = new HashSet<>();
+    private List<CustomerInfor> customers = new ArrayList<>();
 
     public AllCustomerInforResponse(){
     }
@@ -20,11 +20,11 @@ public class AllCustomerInforResponse {
         this.success = success;
     }
 
-    public Set<CustomerInfor> getCustomers(){
+    public List<CustomerInfor> getCustomers(){
         return customers;
     }
 
-    public void setCustomers(Set<CustomerInfor> customers){
+    public void setCustomers(List<CustomerInfor> customers){
         this.customers = customers;
     }
 

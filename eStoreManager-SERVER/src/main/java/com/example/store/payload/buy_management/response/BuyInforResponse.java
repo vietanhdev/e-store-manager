@@ -1,7 +1,7 @@
 package com.example.store.payload.buy_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.store.payload.buy_management.request.BuyItemInfor;
 
@@ -19,7 +19,7 @@ public class BuyInforResponse {
 
     public String createdAt;
 
-    private Set<BuyItemInfor> buy_items = new HashSet<>();
+    private List<BuyItemInfor> buy_items = new ArrayList<>();
 
     public BuyInforResponse(Long id, Long user_id, String user_name, Boolean active, String createdAt) {
         this.id = id;
@@ -53,11 +53,11 @@ public class BuyInforResponse {
         this.user_id = user_id;
     }
 
-    public Set<BuyItemInfor> getBuy_items() {
+    public List<BuyItemInfor> getBuy_items() {
         return buy_items;
     }
 
-    public void setBuy_items(Set<BuyItemInfor> buy_items) {
+    public void setBuy_items(List<BuyItemInfor> buy_items) {
         this.buy_items = buy_items;
     }
 

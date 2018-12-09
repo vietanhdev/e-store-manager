@@ -1,7 +1,7 @@
 package com.example.store.payload.user_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserInforResponse {
     private Boolean success = true;
@@ -12,7 +12,7 @@ public class UserInforResponse {
     private String email;
     private String address;
     private String mobileNo;
-    private Set<String> roles = new HashSet<>();
+    private List<String> roles = new ArrayList<>();
 
     public UserInforResponse(Long id, String name, String username, Long salary, String email, String address, String mobileNo){
         this.id = id;
