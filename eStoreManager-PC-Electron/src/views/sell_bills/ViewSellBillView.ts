@@ -22,7 +22,7 @@ export class ViewSellBillView extends View {
 
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("view_sell_bill", window, parent);
-        this.getWindow().webContents.openDevTools();
+        // this.getWindow().webContents.openDevTools();
         this.productController = new ProductController();
     }
     

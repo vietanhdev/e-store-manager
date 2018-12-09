@@ -45,6 +45,8 @@ const {ViewImportBillView} = require('./views/import_products/ViewImportBillView
 const {SellBillView} = require('./views/sell_bills/SellBillView');
 const {ViewSellBillView} = require('./views/sell_bills/ViewSellBillView');
 
+const {ReportView} = require('./views/reports/ReportView');
+
 const {BarcodeScannerView} = require('./views/barcode_scanner/BarcodeScannerView');
 
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
@@ -105,6 +107,8 @@ export class EStoreManager {
 
     let sellBillView = SellBillView.getInstance(this.mainWindow, null); this.addView(sellBillView);
     let viewSellBillView = ViewSellBillView.getInstance(null, null); this.addView(viewSellBillView);
+
+    let reportView = ReportView.getInstance(this.mainWindow, null); this.addView(reportView);
 
     let barcodeScannerView = BarcodeScannerView.getInstance(null, null); this.addView(barcodeScannerView);
     // barcodeScannerView.show();

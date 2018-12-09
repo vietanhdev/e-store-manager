@@ -228,6 +228,20 @@
     "description": "Description",
 
     "subtotal": "Subtotal",
-    "grandtotal": "Grandtotal"
+    "grandtotal": "Grandtotal",
+
+    "start_date": "Start Date",
+    "end_date": "End Date",
+
+    "total_cost": "Total Cost",
+    "total_revenue": "Total Revenue",
+    "profit": "Profit",
+
+    "total_cost_description": "Total cost is made up of buying goods, space cost, employee cost...",
+    "total_revenue_description": "Total Revenue id made up of the grand total of all selling orders.",
+    "profit_description": "Profit is the difference of Total Cost and Total Revenue.",
+
+    "this_month": "This Month",
+    "update": "Update"
 
 }

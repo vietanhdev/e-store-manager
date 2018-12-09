@@ -1,0 +1,69 @@
+<%- include('../../shared/ejs/header', {title: gettext.reports}) %>
+<%- include('../../shared/ejs/secondary_menu.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="../css/reports.css">
+
+<div id="modal">
+
+    <div class="container">
+        <h2 class="text-left site-title" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+            &gt;&gt;
+            <%= gettext.reports %>
+        </h2>
+    </div>
+
+    <div class="container">
+        <div class="row p-3 m-2" style="background: rgba(255,255,255,0.8); border-radius: 2rem;">
+            <div class="col-sm-4 mb-3">
+                <label for="start-date"><%= gettext.start_date %>: </label>
+                <input type="date" class="form-control" id="start-date" placeholder="" required="">
+            </div>
+            <div class="col-sm-4 mb-3">
+                <label for="end-date"><%= gettext.end_date %>: </label>
+                <input type="date" class="form-control" id="end-date" placeholder="" required="">
+            </div>
+            <div class="col-sm-4 mb-3" style="padding-top: 1.8rem;">
+                <label for="btn-this-month"> </label>
+                <button class="btn btn-warning" id="btn-this-month"><%= gettext.this_month %></button>
+                <button class="btn btn-success" id="btn-update"><%= gettext.update %></button>
+            </div>
+        </div>
+        <div class="row" id="concentrate">
+            <div class="col-sm-4">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.total_cost %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-right" id="total_cost">-</h5>
+                        <p class="card-text"><%= gettext.total_cost_description %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.total_revenue %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-right" id="total_revenue">-</h5>
+                        <p class="card-text"><%= gettext.total_revenue_description %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.profit %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-right" id="profit">-</h5>
+                        <p class="card-text"><%= gettext.profit_description %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+</script>
+
+<%- include('../../shared/ejs/footer') %>
