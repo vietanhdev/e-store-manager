@@ -74,7 +74,7 @@ export class EStoreManager {
     this.mainWindow.maximize();
 
     // Open the DevTools.
-    // this.mainWindow.webContents.openDevTools();
+    this.mainWindow.webContents.openDevTools();
 
     // Init views
     let loginView = LoginView.getInstance(this.mainWindow, null); this.addView(loginView);

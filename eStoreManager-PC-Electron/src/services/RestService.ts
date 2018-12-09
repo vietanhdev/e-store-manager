@@ -62,7 +62,7 @@ export class RestService {
                     result = JSON.parse(data.body);
                 } catch(e) {
                     result = {"success": false}
-                    console.log(data.body);
+                    // console.log(data.body);
                 }
 
                 cbSuccess(result);
