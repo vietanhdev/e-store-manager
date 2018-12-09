@@ -225,6 +225,9 @@
     "sell_bills": "Sell Bills",
     "amount": "Amount",
     "purpose": "Purpose",
-    "description": "Description"
+    "description": "Description",
+
+    "subtotal": "Subtotal",
+    "grandtotal": "Grandtotal"
 
 }

@@ -5,8 +5,8 @@ import { EventGetter } from "../../services/EventGetter";
 import { TextGetter } from "../../services/TextGetter";
 import {View} from '../shared/View';
 import { SellController } from "../../controllers/SellController";
-const { dialog } = require('electron');
 import { Dialog } from "../../services/Dialog";
+const { dialog } = require('electron');
 const {ipcMain} = require('electron');
 
 let express = require('express');
@@ -49,7 +49,7 @@ export class CashierView extends View {
 
             // Launch app to listen to specified port
             expressApp.listen(expressAppPort, function () {
-                console.log("Running barocode server on port " + expressAppPort);
+                console.log("Running barocode receiver on port " + expressAppPort);
             });
 
 
@@ -68,10 +68,14 @@ export class CashierView extends View {
                 this.orderWindow = null;
             });
 
-            //this.orderWindow.webContents.openDevTools();
+            // Remove Menu
+            this.orderWindow.setMenu(null);
 
             return this.orderWindow;
         } else {
+
+            // Remove Menu
+            this.orderWindow.setMenu(null);
             return this.orderWindow;
         }
     }
@@ -109,6 +113,12 @@ export class CashierView extends View {
         // When the order window request the data, send it
         ipcMain.on(EventGetter.get('request_order_data'), (e:any, data:any) => {
             this.getOrderWindow().webContents.send(EventGetter.get('order_data'), this.orderData);
+
+            // Wait for 2s to load the bill information then open print dialog
+            setTimeout(() => {
+                this.getOrderWindow().webContents.print();
+            }, 2000);
+
         });
 
 
