@@ -1,0 +1,41 @@
+<div class="row p-3 m-2" style="background: rgba(255,255,255,0.8); border-radius: 2rem;">
+    <div class="col-sm-4 mb-3">
+        <label for="start-date"><%= gettext.start_date %>: </label>
+        <input type="date" class="form-control" id="start-date" placeholder="" required="">
+    </div>
+    <div class="col-sm-4 mb-3">
+        <label for="end-date"><%= gettext.end_date %>: </label>
+        <input type="date" class="form-control" id="end-date" placeholder="" required="">
+    </div>
+    <div class="col-sm-4 mb-3" style="padding-top: 1.8rem;">
+        <label for="btn-this-month"> </label>
+        <button class="btn btn-warning" id="btn-this-month"><%= gettext.this_month %></button>
+        <button class="btn btn-success" id="btn-update"><%= gettext.update %></button>
+    </div>
+</div>
+
+
+<script>
+    function getDateFormated(input) {
+        let date  = new Date(input);
+        let day = ("0" + date.getDate()).slice(-2);
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        return date.getFullYear()+"-"+(month)+"-"+(day) ;
+    }
+    
+    function setDatePickerThisMonth() {
+        // Get this month
+        let today = new Date();
+        let startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        let endMonth = new Date(today.getFullYear(), today.getMonth()+1, 0);
+
+        $("#start-date").val(getDateFormated(startMonth));
+        $("#end-date").val(getDateFormated(endMonth));
+    }
+
+    $("#btn-this-month").click(() => {
+        setDatePickerThisMonth();
+    });
+
+    
+</script>

@@ -1,0 +1,70 @@
+<div class="row p-3 m-2" style="background: rgba(255,255,255,0.8); border-radius: 2rem;">
+    <div class="col-sm-12">
+        <input type="checkbox" class="form-check-input" id="use-date-filter">
+        <label class="form-check-label" style="font-weight: bold" for="use-date-filter"><%= gettext.use_date_filter %></label>
+    </div>
+    <div id="date-filter-form" class="row" style="display: none">
+        <div class="col-sm-4">
+            <label for="start-date"><%= gettext.start_date %>: </label>
+            <input type="date" class="form-control" id="start-date" placeholder="" required="">
+        </div>
+        <div class="col-sm-4">
+            <label for="end-date"><%= gettext.end_date %>: </label>
+            <input type="date" class="form-control" id="end-date" placeholder="" required="">
+        </div>
+        <div class="col-sm-4" style="padding-top: 1.8rem;">
+            <label for="btn-this-month"> </label>
+            <button class="btn btn-warning" id="btn-this-month"><%= gettext.this_month %></button>
+            <button class="btn btn-success" id="btn-date-filter-update"><%= gettext.update %></button>
+        </div>
+    </div>
+    
+</div>
+
+
+<script>
+
+    function getDateFormated(input) {
+        let date  = new Date(input);
+        let day = ("0" + date.getDate()).slice(-2);
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        return date.getFullYear()+"-"+(month)+"-"+(day) ;
+    }
+    
+    function setDatePickerThisMonth() {
+        // Get this month
+        let today = new Date();
+        let startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        let endMonth = new Date(today.getFullYear(), today.getMonth()+1, 0);
+
+        $("#start-date").val(getDateFormated(startMonth));
+        $("#end-date").val(getDateFormated(endMonth));
+    }
+
+    function isUsingDatePicker() {
+        return $('#use-date-filter').is(":checked");
+    }
+
+
+    function getStartDate() {
+        return getDateFormated($("#start-date").val()) + " 00:00:00";
+    }
+
+    function getEndDate() {
+        return getDateFormated($("#end-date").val()) + " 23:59:59";
+    }
+
+    $("#btn-this-month").click(() => {
+        setDatePickerThisMonth();
+    });
+
+    // Handle date picker toggle
+    $("#use-date-filter").change(() => {
+        if ($('#use-date-filter').is(":checked")) {
+            $("#date-filter-form").slideDown();
+            setDatePickerThisMonth();
+        } else {
+            $("#date-filter-form").slideUp();
+        }
+    });
+</script>
