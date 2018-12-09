@@ -41,6 +41,17 @@
     "respond_request_supplier_info": "respond_request_user_info",
     "request_supplier_info": "request_supplier_info",
 
+    "request_add_invoice": "request_add_invoice",
+    "add_invoice": "add_invoice",
+    "add_invoice_success": "add_invoice_success",
+    "update_invoice_success": "update_invoice_success",
+    "request_update_invoice_list": "request_update_invoice_list",
+    "request_delete_invoice": "request_delete_invoice",
+    "request_update_invoice_info": "request_update_invoice_info",
+    "update_invoice": "update_invoice",
+    "respond_request_invoice_info": "respond_request_user_info",
+    "request_invoice_info": "request_invoice_info",
+
     "request_add_product": "request_add_product",
     "add_product": "add_product",
     "add_product_success": "add_product_success",
@@ -67,7 +78,19 @@
     "add_import_bill_success": "add_import_bill_success",
     "request_discard_import_bill": "request_discard_import_bill",
     "request_import_view_data": "request_import_view_data",
-    "respond_request_import_view_data": "respond_request_import_view_data"
+    "respond_request_import_view_data": "respond_request_import_view_data",
+
+    "request_view_sell_bill": "request_view_sell_bill",
+    "request_sell_view_data": "request_sell_view_data",
+    "respond_request_sell_view_data": "respond_request_sell_view_data",
+    
+    "request_discard_sell_bill": "request_discard_sell_bill",
+
+    "request_add_sell": "request_add_sell",
+    "request_open_barcode_scanner": "request_open_barcode_scanner",
+
+    "request_report_data": "request_report_data",
+    "report_data": "report_data"
     
     
 }

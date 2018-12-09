@@ -45,8 +45,6 @@ export class AddImportItemView extends View {
             this.hide();
         });
 
-
-
     }
 
 }

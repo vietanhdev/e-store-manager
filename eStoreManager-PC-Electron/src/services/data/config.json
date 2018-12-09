@@ -48,6 +48,15 @@
         "edit_supplier": {
             "path": "suppliers/ejs/edit_supplier.ejs"
         },
+        "invoices": {
+            "path": "invoices/ejs/invoices.ejs"
+        },
+        "add_invoice": {
+            "path": "invoices/ejs/add_invoice.ejs"
+        },
+        "edit_invoice": {
+            "path": "invoices/ejs/edit_invoice.ejs"
+        },
         "products": {
             "path": "products/ejs/products.ejs"
         },
@@ -74,6 +83,15 @@
         },
         "view_import_bill": {
             "path": "import_products/ejs/view_import_bill.ejs"
+        },
+        "sell_bills": {
+            "path": "sell_bills/ejs/sell_bills.ejs"
+        },
+        "view_sell_bill": {
+            "path": "sell_bills/ejs/view_sell_bill.ejs"
+        },
+        "reports": {
+            "path": "reports/ejs/reports.ejs"
         }
     },
     "languages": [
@@ -83,18 +101,14 @@
             "file": "en.json"
         },
         {
-            "lang": "vi",
-            "title": "Tiếng Việt",
-            "file": "vi.json"
-        },
-        {
             "lang": "fr",
             "title": "Le français",
             "file": "fr.json"
         }
     ],
     "barcode_server": {
-        "path": "/barcode",
-        "port": 3843
+        "scanner_port": 4534,
+        "receiver_path": "/barcode",
+        "receiver_port": 3843
     }
 }

@@ -5,6 +5,8 @@
 <div class="container">
     <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
         &gt;&gt; <%= gettext.view_import_bill %>
+        <span id="status-completed" class="badge badge-success" style="display:none"><%= gettext.completed %></span>
+        <span id="status-discarded" class="badge badge-warning" style="display:none"><%= gettext.discarded %></span>
     </h2>
 </div>
 
@@ -86,6 +88,11 @@
                 // console.log(data);
                 $("#created_at").val(data.createdAt);
                 $("#created_by").val(data.user_name);
+                if (data.active == true) {
+                    $("#status-completed").show();
+                } else {
+                    $("#status-discarded").show();
+                }
                 dataTable.rows.add(data.buy_items).draw();
             });
 

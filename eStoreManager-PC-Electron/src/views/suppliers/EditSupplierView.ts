@@ -1,13 +1,9 @@
-import { app, BrowserWindow, Menu} from "electron";
-import { ConfigGetter } from "../../services/ConfigGetter";
+import { BrowserWindow} from "electron";
 import { EventGetter } from "../../services/EventGetter";
-import { TextGetter } from "../../services/TextGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
 import {SupplierController} from '../../controllers/SupplierController';
-import { isNull } from "util";
 const {ipcMain} = require('electron');
-const { dialog } = require('electron');
 
 
 export class EditSupplierView extends View {
@@ -49,7 +45,7 @@ export class EditSupplierView extends View {
         ipcMain.on(EventGetter.get('update_supplier'), (event:any, data:any) => {
             supplierController.updateSupplierInfo(data, (respond:any) => {
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("update_supplier_success"));
-                Dialog.showDialog("info", TextGetter.get("updated_supplier_successfully"), null, this.getWindow(), () => {
+                Dialog.showDialog("info", "updated_supplier_successfully", null, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

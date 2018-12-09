@@ -7,6 +7,8 @@ $(document).ready(() => {
     let userController = new UserController();
     const CustomerController = require("../../../controllers/CustomerController.js").CustomerController;
     let customerController = new CustomerController();
+    const SellController = require("../../../controllers/SellController.js").SellController;
+    let sellController = new SellController();
 
     // Load library
     const prompt = require('electron-prompt');
@@ -375,6 +377,30 @@ $(document).ready(() => {
 
         ipcRenderer.send(EventGetter.get('request_print_order'), orderData);
 
+    });
+    // Complete Button
+    $("#complete-order").click(() => {
+
+        let order_data = {};
+        order_data.customer_id = $("#customer-id").attr("customerid");
+        order_data.customer_name = $("#customer-name").html();
+        order_data.tax = tax;
+        order_data.total = $("#grandtotal").val();
+        order_data.subtotal = $("#subtotal").val();
+        order_data.employee_name = $("#logged-in-user").html();
+        order_data.sell_items = dataTable.rows().data().toArray();
+        for (let i = 0; i < order_data.sell_items.length; ++i) {
+            order_data.sell_items[i].product_id = order_data.sell_items[i].id;
+        }
+        
+        ipcRenderer.send(EventGetter.get("request_add_sell"), order_data);
+
+    });
+
+
+    // Show barcode scanner
+    $("#btn-show-barcode-scanner").click(() => {
+        ipcRenderer.send(EventGetter.get("request_open_barcode_scanner"));
     });
 
 });

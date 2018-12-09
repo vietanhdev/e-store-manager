@@ -11,6 +11,7 @@
 </div>
 
 <div class="container">
+    <%- include('../../shared/ejs/datepicker_optional.ejs') %>
     <div class="row">
         <div class="col-md-12">
             <div style="margin-bottom: 3rem;padding: 0;">
@@ -57,6 +58,13 @@
                     "processData": true,
                     "contentType": 'application/json',
                     "data": function ( d ) {
+
+                        // Add the Date Filter info
+                        if (isUsingDatePicker()) {
+                            d.search.start = getStartDate();
+                            d.search.end = getEndDate();
+                        }
+
                         return JSON.stringify(d);
                     }
                 },
@@ -67,9 +75,9 @@
                     { data: "active", title: TextGetter.get("status"),
                         render: function ( data, type, row ) {
                             if (data == true) {
-                                return TextGetter.get("completed");
+                                return `<span class="badge badge-success">`+TextGetter.get("completed")+`</span>`;
                             } else {
-                                return TextGetter.get("discarded");
+                                return `<span class="badge badge-warning">`+TextGetter.get("discarded")+`</span>`;
                             }
                         }
                     },
@@ -104,6 +112,14 @@
                 dataTable.ajax.reload();
             });
             ipcRenderer.on(EventGetter.get("discard_import_bill_success"), (event, data) => {
+                dataTable.ajax.reload();
+            });
+            // Reload when clicking Update in Date Filter
+            $("#btn-date-filter-update").click(() => {
+                dataTable.ajax.reload();
+            });
+            // Reload when changing the usage of date filter
+            $("#use-date-filter").change(() => {
                 dataTable.ajax.reload();
             });
 

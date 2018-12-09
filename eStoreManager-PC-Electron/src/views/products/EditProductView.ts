@@ -49,7 +49,7 @@ export class EditProductView extends View {
         ipcMain.on(EventGetter.get('update_product'), (event:any, data:any) => {
             productController.updateProductInfo(data, (respond:any) => {
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("update_product_success"));
-                Dialog.showDialog("info", TextGetter.get("updated_product_successfully"), null, this.getWindow(), () => {
+                Dialog.showDialog("info", "updated_product_successfully", null, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

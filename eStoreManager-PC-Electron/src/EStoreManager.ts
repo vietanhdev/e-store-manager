@@ -29,6 +29,10 @@ const {SupplierView} = require('./views/suppliers/SupplierView');
 const {AddSupplierView} = require('./views/suppliers/AddSupplierView');
 const {EditSupplierView} = require('./views/suppliers/EditSupplierView');
 
+const {InvoiceView} = require('./views/invoices/InvoiceView');
+const {AddInvoiceView} = require('./views/invoices/AddInvoiceView');
+const {EditInvoiceView} = require('./views/invoices/EditInvoiceView');
+
 const {ProductView} = require('./views/products/ProductView');
 const {AddProductView} = require('./views/products/AddProductView');
 const {EditProductView} = require('./views/products/EditProductView');
@@ -38,6 +42,12 @@ const {AddImportItemView} = require('./views/import_products/AddImportItemView')
 const {AddImportBillView} = require('./views/import_products/AddImportBillView');
 const {ViewImportBillView} = require('./views/import_products/ViewImportBillView');
 
+const {SellBillView} = require('./views/sell_bills/SellBillView');
+const {ViewSellBillView} = require('./views/sell_bills/ViewSellBillView');
+
+const {ReportView} = require('./views/reports/ReportView');
+
+const {BarcodeScannerView} = require('./views/barcode_scanner/BarcodeScannerView');
 
 const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 
@@ -45,7 +55,6 @@ const {PasswordInputView} = require('./views/password_input/PasswordInputView');
 export class EStoreManager {
 
   mainWindow: BrowserWindow;
-  loadingView: View;
   viewList: Array<any>;
   menu:Menu;
 
@@ -60,9 +69,9 @@ export class EStoreManager {
     Menu.setApplicationMenu(this.menu);
 
     this.viewList = new Array<View>();
-    let loadingView = new View("loading", null, null);
-    this.mainWindow = loadingView.getWindow();
-    loadingView.getWindow().maximize();
+  
+    this.mainWindow = new BrowserWindow();
+    this.mainWindow.maximize();
 
     // Open the DevTools.
     this.mainWindow.webContents.openDevTools();
@@ -83,6 +92,10 @@ export class EStoreManager {
     let addSupplierView = AddSupplierView.getInstance(null, null); this.addView(addSupplierView);
     let editSupplierView = EditSupplierView.getInstance(null, null); this.addView(editSupplierView);
 
+    let invoiceView = InvoiceView.getInstance(this.mainWindow, null); this.addView(invoiceView);
+    let addInvoiceView = AddInvoiceView.getInstance(null, null); this.addView(addInvoiceView);
+    let editInvoiceView = EditInvoiceView.getInstance(null, null); this.addView(editInvoiceView);
+
     let productView = ProductView.getInstance(this.mainWindow, null); this.addView(productView);
     let addProductView = AddProductView.getInstance(null, null); this.addView(addProductView);
     let editProductView = EditProductView.getInstance(null, null); this.addView(editProductView);
@@ -92,7 +105,14 @@ export class EStoreManager {
     let addImportBillView = AddImportBillView.getInstance(null, null); this.addView(addImportBillView);
     let viewImportBillView = ViewImportBillView.getInstance(null, null); this.addView(viewImportBillView);
 
-    addImportItemView.show();
+    let sellBillView = SellBillView.getInstance(this.mainWindow, null); this.addView(sellBillView);
+    let viewSellBillView = ViewSellBillView.getInstance(null, null); this.addView(viewSellBillView);
+
+    let reportView = ReportView.getInstance(this.mainWindow, null); this.addView(reportView);
+
+    let barcodeScannerView = BarcodeScannerView.getInstance(null, null); this.addView(barcodeScannerView);
+    // barcodeScannerView.show();
+    
 
     // PasswordInputView is shared between views to input password
     // This view MUST BE initialize on boot
@@ -130,9 +150,6 @@ export class EStoreManager {
     }));
 
     this.mainWindow.setMenu(this.menu);
-
-    // welcomeView.show();
-    loadingView.show();
 
     // Check user login and redirect to login page if user have not logged in
     userController.isLoggedIn(() => {

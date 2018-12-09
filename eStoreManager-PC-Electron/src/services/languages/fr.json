@@ -178,6 +178,70 @@
     "new_product_question": "Nouveau produit?",
 
     "new_supplier_question": "Nouveau fournisseur?",
-    "import": "importer"
+    "import": "importer",
+
+    "created_by": "Created By",
+    "created_at": "Created At",
+    "status": "Status",
+    "completed": "Completed",
+    "discarded": "Discarded",
+    "number_of_products": "# Products",
+    "date": "Date",
+    "are_you_sure_discard_import_bill": "Are you sure to discard the import bill?",
+    "discard_import_bill_success": "discard_import_bill_success",
+    "view": "View",
+    "view_import_bill": "View Import Bill",
+
+    "wrong_customer_id": "Wrong customer ID!",
+    "argument_not_valid": "Please check all submited fields!",
+    "wrong_supplier_id": "Wrong supplier ID!",
+    "wrong_product_id": "Wrong product ID!",
+    "update_buy_information_successful": "Updated import bill successfully!",
+    "you_have_to_input_product":"You have to input the product!",
+    "order_completed": "Order Completed!",
+    "completed_order_id": "Completed order ID:",
+    "print_order": "Print Order",
+
+    "are_you_sure_discard_sell_bill": "Are you sure to discard the sell bill?",
+    "discard_sell_bill_success": "discard_sell_bill_success",
+    "view_sell_bill": "View Sell Bill",
+    "update_sell_information_successful": "Updated sell sell successfully!",
+
+    "employee_id": "Employee ID",
+    "new_customer": "New Customer",
+
+    "invoice_management": "Invoice Management",
+    "add_invoice": "Add Invoice",
+    "edit_invoice": "Edit Invoice",
+    "invoice_name": "Invoice Name",
+    "created_invoice_successfully": "Created invoice successfully! Invoice ID: ",
+    "updated_invoice_successfully": "Update invoice successfully.",
+    "are_you_sure_delete_invoice": "Are you sure to delete this invoice? ",
+    "delete_invoice_successful": "Deleted invoice successfully!",
+
+    "sell_bills": "Sell Bills",
+    "amount": "Amount",
+    "purpose": "Purpose",
+    "description": "Description",
+
+    "subtotal": "Subtotal",
+    "grandtotal": "Grandtotal",
+
+    "start_date": "Start Date",
+    "end_date": "End Date",
+
+    "total_cost": "Total Cost",
+    "total_revenue": "Total Revenue",
+    "profit": "Profit",
+
+    "total_cost_description": "Total cost is made up of buying goods, space cost, employee cost...",
+    "total_revenue_description": "Total Revenue id made up of the grand total of all selling orders.",
+    "profit_description": "Profit is the difference of Total Cost and Total Revenue.",
+
+    "this_month": "This Month",
+    "update": "Update",
+    "best_selling": "Best Selling",
+    "best_selling_description": "Best selling is the list of best seller product by the selling quantity."
+
 
 }

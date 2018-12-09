@@ -5,17 +5,42 @@
     <h3 id="store-name"></h3>
     <p id="store-address"></p>
 
-        
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="customer_name"><%= gettext.customer_name %></label>
+                <input type="text" name="customer_name" id="customer_name" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="cashier_name"><%= gettext.cashier %></label>
+                <input type="text" name="cashier_name" id="cashier_name" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="subtotal"><%= gettext.subtotal %></label>
+                <input type="text" name="subtotal" id="subtotal" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="tax"><%= gettext.tax %></label>
+                <input type="text" name="tax" id="tax" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="grandtotal"><%= gettext.grandtotal %></label>
+                <input type="text" name="grandtotal" id="grandtotal" placeholder="" class="form-control">
+            </div>
+        </div>
+    </div>
+    
+    <table id="product-table" class="display" width="100%"></table>
 
 </div>
-
-
-
-
-
-
-
-
 
 
 
@@ -36,95 +61,63 @@
     $("#store-address").html(storeAddress);
 
 
+    // Display the order data then print it
+    ipcRenderer.on(EventGetter.get("order_data"), (event, data) => {
+
+        // Meta info
+        $("#customer_name").val(data.customer_name);
+        $("#cashier_name").val(data.employee_name);
+        $("#subtotal").val(data.subtotal);
+        $("#tax").val(data.tax);
+        $("#grandtotal").val(data.total);
 
 
+        // Draw product table
+        dataTable = $('#product-table').DataTable({
+            searching: false,
+            data: data.sell_items,
+            columns: [
+                {
+                    title: TextGetter.get("id"),
+                    data: "row_id",
+                    "visible": false,
+                },
+                { 
+                    title: "PID",
+                    data: "id"
+                },
+                { 
+                    title: TextGetter.get("product_name"),
+                    data: "name"
+                },
+                { 
+                    title: TextGetter.get("price"),
+                    data: "price"
+                },
+                { 
+                    title: TextGetter.get("quantity"),
+                    data: "quantities"
+                },
+                { 
+                    title: TextGetter.get("unit"),
+                    data: "unit"
+                },
+                { 
+                    title: TextGetter.get("total"),
+                    data: null,
+                    render: function(data,type,row) { 
+                        this.data = Number(row["price"]) * Number(row["quantities"]);
+                        return (Number(row["price"]) * Number(row["quantities"]));
+                    }
+                }
+            ],
+            "order": [[ 0, "desc" ]],
+            "responsive": false,
+            "paging": false
+        });
 
-    // dataTable = $('#product-table').DataTable({
-    //     searching: false,
-    //     columns: [
-    //         {
-    //             title: TextGetter.get("id"),
-    //             data: "row_id",
-    //             "visible": false,
-    //         },
-    //         { 
-    //             title: "PID",
-    //             data: "id"
-    //         },
-    //         { 
-    //             title: TextGetter.get("product_name"),
-    //             data: "name"
-    //         },
-    //         { 
-    //             title: TextGetter.get("price"),
-    //             data: "price"
-    //         },
-    //         { 
-    //             title: TextGetter.get("quantity"),
-    //             data: "quantities"
-    //         },
-    //         { 
-    //             title: TextGetter.get("quantity_manipulation"),
-    //             data: null
-    //         },
-    //         { 
-    //             title: TextGetter.get("unit"),
-    //             data: "unit"
-    //         },
-    //         { 
-    //             title: TextGetter.get("total"),
-    //             data: "total"
-    //         },
-    //         { 
-    //             title: TextGetter.get("delete_question")
-    //         }
-    //     ],
-    //     "columnDefs": [ {
-    //         "targets": -1,
-    //         "data": null,
-    //         "defaultContent": `
-    //             <button type="button" class="delete-product btn btn-sm btn-danger">
-    //                 <i class="fa fa-trash-o" onclick="$(this).parent().parent().parent().remove();" aria-hidden="true"></i>
-    //             </button>
-    //             `
-    //     },
-    //     {
-    //         "targets": -2,
-    //         "data": null,
-    //         render: function(data,type,row) { 
-    //             this.data = Number(row["price"]) * Number(row["quantities"]);
-    //             return (Number(row["price"]) * Number(row["quantities"]));
-    //         }
-    //     },
-    //     {
-    //         "targets": 5,
-    //         "data": null,
-    //         "defaultContent": `
-    //             <button type="button" class="edit-quantity btn btn-sm btn-default">
-    //                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-    //             </button>
-    //             <button type="button" class="increase-quantity btn btn-sm btn-success">
-    //                 <i class="fa fa-plus" aria-hidden="true"></i>
-    //             </button>
-    //             <button type="button" class="decrease-quantity btn btn-sm btn-warning">
-    //                 <i class="fa fa-minus" aria-hidden="true"></i>
-    //             </button>
-    //             `
-    //     }
-    //     ],
-    //     "order": [[ 0, "desc" ]],
-    //     "responsive": true,
-    //     "pageLength": 5,
-    //     "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]],
-    //     "drawCallback": function () {
-    //         let subtotal = Number(this.api().cells( null, 7 ).render('display').sum()).toFixed(2);
-    //         let grandtotal = Number(subtotal * (1+tax)).toFixed(2);
-    //         $("#subtotal").val(subtotal);
-    //         $("#grandtotal").val(grandtotal);
-    //         updateCustomerCharge();
-    //     }
-    // });
-
+    });
+    ipcRenderer.send(EventGetter.get("request_order_data"));
 
 
 </script>

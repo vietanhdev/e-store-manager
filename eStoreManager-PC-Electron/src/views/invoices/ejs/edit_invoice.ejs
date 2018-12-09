@@ -1,0 +1,73 @@
+<%- include('../../shared/ejs/header', {title: gettext.edit_invoice}) %>
+
+<div class="container">
+    <h3 class="text-center"><%= gettext.edit_invoice %></h3>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="invoice-id"><%= gettext.id %></label>
+                <input type="text" disabled readonly name="invoice-id" id="invoice-id" placeholder="00" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="amount"><%= gettext.amount %></label>
+                <input type="number" name="amount" id="amount" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="purpose"><%= gettext.purpose %></label>
+                <input type="text" name="purpose" id="purpose" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label for="description"><%= gettext.description %></label>
+                <input type="text" name="description" id="description" placeholder="" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <button class="btn btn-info" id="save"><%= gettext.save %></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+
+
+    // Get all invoice information and show on the form
+    ipcRenderer.on(EventGetter.get("respond_request_invoice_info"), (event, invoiceInfo) => {
+        $("#invoice-id").val(invoiceInfo.id);
+        $("#amount").val(invoiceInfo.amount);
+        $("#purpose").val(invoiceInfo.purpose);
+        $("#description").val(invoiceInfo.description);
+    });
+    ipcRenderer.send(EventGetter.get("request_invoice_info"));
+    
+
+    // Handle Save Button
+    $("#save").click(() => {
+        let invoice = {}
+        invoice.id = $("#invoice-id").val();
+        invoice.amount = $("#amount").val();
+        invoice.purpose = $("#purpose").val();
+        invoice.description = $("#description").val();
+        ipcRenderer.send(EventGetter.get('update_invoice'), invoice);
+    });
+
+
+    ipcRenderer.on(EventGetter.get("update_invoice_success"), () => {
+        ipcRenderer.send(EventGetter.get("request_update_invoice_list"));
+    });
+</script>
+
+
+
+<%- include('../../shared/ejs/footer') %>

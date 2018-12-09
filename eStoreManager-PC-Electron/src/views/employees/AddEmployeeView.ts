@@ -48,7 +48,7 @@ export class AddEmployeeView extends View {
         ipcMain.on(EventGetter.get('add_employee'), (event:any, data:any) => {
             userController.addUser(data, (respond:any) => {
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("add_employee_success"));
-                Dialog.showDialog("info", TextGetter.get("created_user_successfully") + respond.id, null, this.getWindow(), () => {
+                Dialog.showDialog("info", null, TextGetter.get("created_user_successfully") + respond.id, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

@@ -1,0 +1,148 @@
+<%- include('../../shared/ejs/header', {title: gettext.invoice_management}) %>
+<link rel="stylesheet" type="text/css" href="../css/invoices.css">
+<link rel="stylesheet" href="../../../../node_modules/datatables.net-dt/css/jquery.dataTables.min.css">
+
+<%- include('../../shared/ejs/secondary_menu.ejs') %>
+
+<div class="container">
+    <h2 class="text-left" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+        &gt;&gt; <%= gettext.invoice_management %>
+    </h2>
+</div>
+
+<div class="container">
+    <%- include('../../shared/ejs/datepicker_optional.ejs') %>
+    <div class="row">
+        <div class="col-md-12">
+            <div style="margin-bottom: 3rem;padding: 0;">
+                <button class="btn btn-success float-right" id="add-invoice"><%= gettext.add_invoice %></button>
+            </div>
+            <table id="realtime" class="display" width="100%"></table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    const app = {
+        rows: [],
+        selectedUser: null,
+        start() {
+
+            // Load libraries
+            const EventGetter = require("../../../services/EventGetter").EventGetter;
+            const TextGetter = require("../../../services/TextGetter").TextGetter;
+            const {ipcRenderer} = require('electron');
+            var dt = require( 'datatables.net-dt' )( window, $ );
+            require( 'datatables.net-responsive-dt' )( window, $ );
+
+            // Handle add invoice
+            $("#add-invoice").click(() => {
+                ipcRenderer.send(EventGetter.get('request_add_invoice'));
+            });
+
+            const InvoiceController = require("../../../controllers/InvoiceController.js").InvoiceController;
+            const settings = require('electron-settings');
+            let headers = Object({'Content-Type': 'application/json'});
+            headers['Authorization'] = "Bearer " + settings.get('account_info.token');
+            let invoiceController = new InvoiceController();
+          
+            // Create table 
+            dataTable = $('#realtime').DataTable({
+                "serverSide": true,
+                "ajax": {
+                    "url": invoiceController.getAjaxAPIUrl(),
+                    "type": 'POST',
+                    "headers": headers,
+                    "processData": true,
+                    "contentType": 'application/json',
+                    "data": function ( d ) {
+
+                        // Add the Date Filter info
+                        if (isUsingDatePicker()) {
+                            d.search.start = getStartDate();
+                            d.search.end = getEndDate();
+                        }
+
+                        return JSON.stringify(d);
+                    }
+                },
+                columns: [
+                    { data: "id", title: "ID" },
+                    { data: "amount", title: TextGetter.get("amount") },
+                    { data: "purpose", title: TextGetter.get("purpose") },
+                    { data: "description", title: TextGetter.get("description") },
+                    { title: TextGetter.get("manipulation") }
+                ],
+                "columnDefs": [ {
+                    "targets": -1,
+                    "data": null,
+                    "defaultContent": `
+                        <button type="button" class="edit-invoice btn btn-sm btn-success">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </button>&nbsp;
+                        <button type="button" class="delete-invoice btn btn-sm btn-danger">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                    `
+                } ],
+                "responsive": true,
+                "pageLength": 5,
+                "lengthMenu": [[5, 8, 10, -1], [5, 8, 10, "All"]]
+            });
+
+            // ==== Handle events that cause table to update ====
+            ipcRenderer.on(EventGetter.get("add_invoice_success"), (event, invoice) => {
+                dataTable.ajax.reload();
+            });
+            ipcRenderer.on(EventGetter.get("update_invoice_success"), (event, invoice) => {
+                dataTable.ajax.reload();
+            });
+            // Reload when clicking Update in Date Filter
+            $("#btn-date-filter-update").click(() => {
+                dataTable.ajax.reload();
+            });
+            // Reload when changing the usage of date filter
+            $("#use-date-filter").change(() => {
+                dataTable.ajax.reload();
+            });
+            
+
+            // ==== Update data of the table ====
+            
+            // Delete a value by id: Id means the value of the first column
+            ipcRenderer.on(EventGetter.get("delete_row_from_invoice_table"), (event, id) => {
+                dataTable.ajax.reload();
+            });
+            
+
+            // ==== Handle row buttons ====
+            
+            // Delete
+            $('#realtime tbody').on( 'click', 'button.delete-invoice', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                ipcRenderer.send(EventGetter.get("request_delete_invoice"), data);
+            } );
+          
+            // Edit info
+            $('#realtime tbody').on( 'click', 'button.edit-invoice', function () {
+                let data = dataTable.row( $(this).parents('tr') ).data();
+                ipcRenderer.send(EventGetter.get('request_update_invoice_info'), data);
+            } );
+
+        }
+    };
+
+    $(document).ready(() =>  {
+        app.start();
+    });
+</script>
+
+<style>
+    input[type="search"] {
+        border-bottom: 1px solid #999;
+    }
+</style>
+
+<%- include('../../shared/ejs/footer') %>

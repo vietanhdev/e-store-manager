@@ -49,7 +49,7 @@ export class AddSupplierView extends View {
                 let newSupplier = data;
                 newSupplier.id = respond.id;
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("add_supplier_success"), newSupplier);
-                Dialog.showDialog("info", TextGetter.get("created_supplier_successfully") + respond.id, null, this.getWindow(), () => {
+                Dialog.showDialog("info", null, TextGetter.get("created_supplier_successfully") + respond.id, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

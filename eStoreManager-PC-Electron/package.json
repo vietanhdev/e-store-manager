@@ -6,16 +6,23 @@
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
-    "start": "cp -r ./src/views ./dist && cp -r ./src/services ./dist && npm run build && electron ./dist/Launch.js"
+    "start": "cp -r ./src/views ./dist && cp -r ./src/services ./dist && npm run build && electron ./dist/Launch.js",
+    "test": "electron-mocha -r ts-node/register src/**/*.ts"
   },
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.5",
     "bootstrap": "^4.0.0-beta.3",
+    "chai": "^4.2.0",
     "electron": "^2.0.2",
+    "electron-mocha": "^6.0.4",
     "jquery": "^3.3.1",
+    "mocha": "^5.2.0",
     "popper.js": "^1.12.9",
     "tether": "^1.4.0",
+    "ts-node": "^7.0.1",
     "tslint": "^5.10.0",
     "typescript": "^2.8.3"
   },
@@ -29,6 +36,7 @@
     "electron-handlebars": "^2.0.0",
     "electron-prompt": "^1.2.0",
     "electron-reload": "^1.2.5",
+    "electron-serve": "^0.2.0",
     "electron-settings": "^3.2.0",
     "express": "^4.16.4",
     "font-awesome": "^4.7.0",
@@ -36,6 +44,8 @@
     "jszip": "^3.1.5",
     "nedb": "^1.8.0",
     "pdfmake": "^0.1.39",
-    "select2": "^4.0.6-rc.1"
+    "select2": "^4.0.6-rc.1",
+    "shell": "^0.5.0",
+    "static-server": "^2.2.1"
   }
 }

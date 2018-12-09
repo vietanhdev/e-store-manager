@@ -1,13 +1,10 @@
-import { app, BrowserWindow, Menu} from "electron";
-import { ConfigGetter } from "../../services/ConfigGetter";
+import { BrowserWindow} from "electron";
 import { EventGetter } from "../../services/EventGetter";
 import { TextGetter } from "../../services/TextGetter";
 import { Dialog } from "../../services/Dialog";
 import {View} from '../shared/View';
 import {ProductController} from '../../controllers/ProductController';
-import { isNull } from "util";
 const {ipcMain} = require('electron');
-const { dialog } = require('electron');
 
 
 export class AddProductView extends View {
@@ -49,7 +46,7 @@ export class AddProductView extends View {
                 let newProduct = data;
                 newProduct.id = respond.id;
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("add_product_success"), newProduct);
-                Dialog.showDialog("info", TextGetter.get("created_product_successfully") + respond.id, null, this.getWindow(), () => {
+                Dialog.showDialog("info", null, TextGetter.get("created_product_successfully") + respond.id, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

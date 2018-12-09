@@ -1,0 +1,115 @@
+<%- include('../../shared/ejs/header', {title: gettext.reports}) %>
+<%- include('../../shared/ejs/secondary_menu.ejs') %>
+
+<link rel="stylesheet" type="text/css" href="../css/reports.css">
+
+<div id="modal">
+
+    <div class="container">
+        <h2 class="text-left site-title" style="text-transform: uppercase; padding-top: 1rem; padding-bottom: 0.5rem">
+            &gt;&gt;
+            <%= gettext.reports %>
+        </h2>
+    </div>
+
+    <div class="container">
+        <%- include('../../shared/ejs/datepicker.ejs') %>
+        <div class="row" id="concentrate">
+            <div class="col-sm-4">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.total_cost %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-right" id="total_cost">-</h5>
+                        <p class="card-text"><%= gettext.total_cost_description %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.total_revenue %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-right" id="total_revenue">-</h5>
+                        <p class="card-text"><%= gettext.total_revenue_description %></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.profit %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-right" id="profit">-</h5>
+                        <p class="card-text"><%= gettext.profit_description %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="concentrate">
+            <div class="col-sm-3">
+               <img src="../images/best-seller.png" style="width: 11rem">
+            </div>
+            <div class="col-sm-9">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.best_selling %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-left" id="best-selling" style="font-size: 1.2rem;">
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </h5>
+                        <p class="card-text"><%= gettext.best_selling_description %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+
+    //  Request report data
+    function getReportData() {
+        let data = {};
+        data.dateFrom = getDateFormated($("#start-date").val());
+        data.dateTo = getDateFormated($("#end-date").val());
+        ipcRenderer.send(EventGetter.get("request_report_data"), data);
+    }
+    // Handle when report data comes
+    ipcRenderer.on(EventGetter.get("report_data"), (event, data) => {
+        $("#total_cost").html(data.cost);
+        $("#total_revenue").html(data.revenue);
+        $("#profit").html(Number(data.revenue) - Number(data.cost));
+        $("#best-selling ul").html("");
+
+        // Sort the products by sold quantities
+        function compareSoldQuantities(a,b) {
+            if (a.sold_quantities < b.sold_quantities)
+                return 1;
+            if (a.sold_quantities > b.sold_quantities)
+                return -1;
+            return 0;
+        }
+        data.products.sort(compareSoldQuantities);
+
+        // Update best product list
+        for (let i = 0; i < data.products.length; ++i) {
+            $("#best-selling ul").append("<li>" + data.products[i].name + " <span style='font-weight: normal'> (SOLD: "+ data.products[i].sold_quantities+")</span></li>");
+        }
+    });
+
+    $("#btn-update").click(() => {
+        getReportData();
+    });
+
+
+    // Get report of this month by default
+    setDatePickerThisMonth();
+    getReportData();
+
+</script>
+
+<%- include('../../shared/ejs/footer') %>

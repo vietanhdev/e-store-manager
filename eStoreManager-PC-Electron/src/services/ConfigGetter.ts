@@ -1,6 +1,6 @@
 export class ConfigGetter {
     private static instance: ConfigGetter;
-    public config: any;
+    public config: any = null;
     private constructor() {
         
     }

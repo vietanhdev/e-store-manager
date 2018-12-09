@@ -24,7 +24,7 @@ export class Dialog {
         }
 
         let message: string;
-        if (message_content) {
+        if (message_content != null) {
             message = message_content;
         } else {
             message = TextGetter.get(message_code);
@@ -32,6 +32,9 @@ export class Dialog {
                 message = message_code;
             }
         }
+
+        console.log("TEXT GET: " + TextGetter.get("updated_product_successfully"));
+        console.log(message);
 
         dialog.showMessageBox(window, Object({
             type: type,
@@ -51,9 +54,9 @@ export class Dialog {
 
         let message:string = "";
         if (!isUndefined(respond.code)) {
-            message = TextGetter.getWithFailBack(respond.code, respond.message);
+            message = TextGetter.get(respond.code, respond.message);
         } else if (!isUndefined(respond.error)) {
-            message = TextGetter.getWithFailBack(respond.error, respond.message);
+            message = TextGetter.get(respond.error, respond.message);
         } else if (!isUndefined(respond.message)) {
             message = respond.message;
         } else {
