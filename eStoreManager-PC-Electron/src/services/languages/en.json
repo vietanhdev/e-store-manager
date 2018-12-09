@@ -241,6 +241,7 @@
     "this_month": "This Month",
     "update": "Update",
     "best_selling": "Best Selling",
-    "best_selling_description": "Best selling is the list of best seller product by the selling quantity."
+    "best_selling_description": "Best selling is the list of best seller product by the selling quantity.",
 
+    "use_date_filter": "Use Date Filter"
 }
