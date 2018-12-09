@@ -1,7 +1,7 @@
 package com.example.store.payload.invoice_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchInvoicesResponse {
 
@@ -13,7 +13,7 @@ public class SearchInvoicesResponse {
 
     private Long recordsFiltered;
 
-    private Set<Data> data = new HashSet<>();
+    private List<Data> data = new ArrayList<>();
 
     public SearchInvoicesResponse(Long draw, Long recordsTotal, Long recordsFiltered){
         this.draw = draw;
@@ -57,11 +57,11 @@ public class SearchInvoicesResponse {
         data.add(supplier);
     }
 
-    public Set<Data> getData(){
+    public List<Data> getData(){
         return this.data;
     }
 
-    public void setData(Set<Data> data){
+    public void setData(List<Data> data){
         this.data = data;
     }
 }

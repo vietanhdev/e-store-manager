@@ -1,7 +1,7 @@
 package com.example.store.payload.user_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserInfor {
     public Long id;
@@ -11,7 +11,7 @@ public class UserInfor {
     public String email;
     public String address;
     public String mobileNo;
-    public Set<String> roles = new HashSet<>();
+    public List<String> roles = new ArrayList<>();
 
     public UserInfor(Long id, String name, String username, Long salary, String email, String address, String mobileNo){
         this.id = id;
