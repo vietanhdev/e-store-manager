@@ -14,6 +14,7 @@ import {ReportController} from '../../controllers/ReportController';
 export class ReportView extends View {
 
     private reportController:ReportController;
+    private requestedBrowserWindow: BrowserWindow;
 
     private constructor(window: BrowserWindow, parent: BrowserWindow) {
         super("reports", window, parent);
@@ -32,6 +33,22 @@ export class ReportView extends View {
     // Handle all logic of this view
     logicHandle():void {
 
+        ipcMain.on(EventGetter.get("request_report_data"), (event:any, data:any) => {
+            
+            // Save requested window
+            this.requestedBrowserWindow = event.sender.getOwnerBrowserWindow();
+
+            this.reportController.getReport(data.dateFrom, data.dateTo, (respond:any) => { // Success
+                
+                // Send back the result to requested window
+                this.requestedBrowserWindow.webContents.send(EventGetter.get("report_data"), respond);
+
+            }, (respond:any) => { // Fail
+                Dialog.showDialogFromRespond("error", respond, this.getWindow());
+            });
+
+        })
+        
         
     }
 

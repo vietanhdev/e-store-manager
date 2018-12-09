@@ -87,7 +87,10 @@
     "request_discard_sell_bill": "request_discard_sell_bill",
 
     "request_add_sell": "request_add_sell",
-    "request_open_barcode_scanner": "request_open_barcode_scanner"
+    "request_open_barcode_scanner": "request_open_barcode_scanner",
+
+    "request_report_data": "request_report_data",
+    "report_data": "report_data"
     
     
 }

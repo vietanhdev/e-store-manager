@@ -12,15 +12,21 @@ export class ReportController extends Controller {
 
 
     public getReport(dateFrom: Date, dateTo: Date, cbSuccess: (any), cbFail: (any)) {
-        // this.getRestService().request('GET', '/api/v1/sells', {}, (respond:any) => {
-        //     if (respond['success'] == true) {
-        //         cbSuccess (respond.sells);
-        //     } else {
-        //         cbFail(respond);
-        //     }
-        // }, (respond:any) => {
-        //     cbFail (respond);
-        // }, true);
+
+        let data:any = {};
+        data.length = 5;
+        data.start = dateFrom + " 00:00:00";
+        data.end = dateTo + " 23:59:59";
+
+        this.getRestService().request('POST', '/api/v1/reports/1', data, (respond:any) => {
+            if (respond['success'] == true) {
+                cbSuccess (respond);
+            } else {
+                cbFail(respond);
+            }
+        }, (respond:any) => {
+            cbFail (respond);
+        }, true);
     }
 
  

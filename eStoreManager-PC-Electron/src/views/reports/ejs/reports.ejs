@@ -57,12 +57,83 @@
                 </div>
             </div>
         </div>
+        <div class="row" id="concentrate">
+            <div class="col-sm-3">
+               <img src="../images/best-seller.png" style="width: 11rem">
+            </div>
+            <div class="col-sm-9">
+                <div class="card bg-light mb-3" style="max-width: 100%;">
+                    <div class="card-header"><%= gettext.best_selling %></div>
+                    <div class="card-body">
+                        <h5 class="card-title text-left" id="best-selling" style="font-size: 1.2rem;">
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </h5>
+                        <p class="card-text"><%= gettext.best_selling_description %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
 
 
 <script>
+
+    const EventGetter = require("../../../services/EventGetter").EventGetter;
+    const {ipcRenderer} = require('electron');
+
+    function getDateFormated(input) {
+        let date  = new Date(input);
+        let day = ("0" + date.getDate()).slice(-2);
+        let month = ("0" + (date.getMonth() + 1)).slice(-2);
+        return date.getFullYear()+"-"+(month)+"-"+(day) ;
+    } 
+
+    //  Request report data
+    function getReportData() {
+        let data = {};
+        data.dateFrom = getDateFormated($("#start-date").val());
+        data.dateTo = getDateFormated($("#end-date").val());
+        ipcRenderer.send(EventGetter.get("request_report_data"), data);
+    }
+    // Handle when report data comes
+    ipcRenderer.on(EventGetter.get("report_data"), (event, data) => {
+        $("#total_cost").html(data.cost);
+        $("#total_revenue").html(data.revenue);
+        $("#profit").html(Number(data.revenue) - Number(data.cost));
+        $("#best-selling ul").html("");
+
+        for (let i = 0; i < data.products.length; ++i) {
+            $("#best-selling ul").append("<li>" + data.products[i].name + "</li>");
+        }
+    });
+
+    function getReportThisMonth() {
+        // Get this month
+        let today = new Date();
+        let startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        let endMonth = new Date(today.getFullYear(), today.getMonth()+1, 0);
+
+        $("#start-date").val(getDateFormated(startMonth));
+        $("#end-date").val(getDateFormated(endMonth));
+
+        getReportData();
+    }
+
+    $("#btn-this-month").click(() => {
+        getReportThisMonth();
+    });
+
+    $("#btn-update").click(() => {
+        getReportData();
+    });
+
+
+    // Get report of this month by default
+    getReportThisMonth();
 
 </script>
 

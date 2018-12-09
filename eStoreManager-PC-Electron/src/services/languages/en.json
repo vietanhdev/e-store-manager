@@ -242,6 +242,8 @@
     "profit_description": "Profit is the difference of Total Cost and Total Revenue.",
 
     "this_month": "This Month",
-    "update": "Update"
+    "update": "Update",
+    "best_selling": "Best Selling",
+    "best_selling_description": "Best selling is the list of best seller product by the selling quantity."
 
 }

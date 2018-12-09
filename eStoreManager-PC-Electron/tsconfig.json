@@ -7,7 +7,12 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
-    }
+    },
+    "target": "ES6",
+    "lib": [
+        "es6",
+        "dom"
+    ]
   },
   "include": [
     "src/controllers/**/*",
