@@ -48,6 +48,15 @@
         "edit_supplier": {
             "path": "suppliers/ejs/edit_supplier.ejs"
         },
+        "invoices": {
+            "path": "invoices/ejs/invoices.ejs"
+        },
+        "add_invoice": {
+            "path": "invoices/ejs/add_invoice.ejs"
+        },
+        "edit_invoice": {
+            "path": "invoices/ejs/edit_invoice.ejs"
+        },
         "products": {
             "path": "products/ejs/products.ejs"
         },

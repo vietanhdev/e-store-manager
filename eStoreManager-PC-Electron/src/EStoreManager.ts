@@ -29,6 +29,10 @@ const {SupplierView} = require('./views/suppliers/SupplierView');
 const {AddSupplierView} = require('./views/suppliers/AddSupplierView');
 const {EditSupplierView} = require('./views/suppliers/EditSupplierView');
 
+const {InvoiceView} = require('./views/invoices/InvoiceView');
+const {AddInvoiceView} = require('./views/invoices/AddInvoiceView');
+const {EditInvoiceView} = require('./views/invoices/EditInvoiceView');
+
 const {ProductView} = require('./views/products/ProductView');
 const {AddProductView} = require('./views/products/AddProductView');
 const {EditProductView} = require('./views/products/EditProductView');
@@ -85,6 +89,10 @@ export class EStoreManager {
     let supplierView = SupplierView.getInstance(this.mainWindow, null); this.addView(supplierView);
     let addSupplierView = AddSupplierView.getInstance(null, null); this.addView(addSupplierView);
     let editSupplierView = EditSupplierView.getInstance(null, null); this.addView(editSupplierView);
+
+    let invoiceView = InvoiceView.getInstance(this.mainWindow, null); this.addView(invoiceView);
+    let addInvoiceView = AddInvoiceView.getInstance(null, null); this.addView(addInvoiceView);
+    let editInvoiceView = EditInvoiceView.getInstance(null, null); this.addView(editInvoiceView);
 
     let productView = ProductView.getInstance(this.mainWindow, null); this.addView(productView);
     let addProductView = AddProductView.getInstance(null, null); this.addView(addProductView);
