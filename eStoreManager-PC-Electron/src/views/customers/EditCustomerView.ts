@@ -49,7 +49,7 @@ export class EditCustomerView extends View {
         ipcMain.on(EventGetter.get('update_customer'), (event:any, data:any) => {
             customerController.updateCustomerInfo(data, (respond:any) => {
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("update_customer_success"));
-                Dialog.showDialog("info", TextGetter.get("updated_customer_successfully"), null, this.getWindow(), () => {
+                Dialog.showDialog("info", "updated_customer_successfully", null, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

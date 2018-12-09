@@ -49,7 +49,7 @@ export class AddProductView extends View {
                 let newProduct = data;
                 newProduct.id = respond.id;
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("add_product_success"), newProduct);
-                Dialog.showDialog("info", TextGetter.get("created_product_successfully") + respond.id, null, this.getWindow(), () => {
+                Dialog.showDialog("info", null, TextGetter.get("created_product_successfully") + respond.id, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

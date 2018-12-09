@@ -38,7 +38,7 @@ export class EditEmployeeView extends View {
         ipcMain.on(EventGetter.get('update_employee'), (event:any, data:any) => {
             userController.updateUserInfo(data, (respond:any) => {
                 this.getWindow().webContents.send(EventGetter.get("update_employee_success"));
-                Dialog.showDialog("info", TextGetter.get("updated_user_successfully"), null, this.getWindow(), () => {
+                Dialog.showDialog("info", "updated_user_successfully", null, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {

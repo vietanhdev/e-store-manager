@@ -49,7 +49,7 @@ export class AddCustomerView extends View {
                 let newCustomer = data;
                 newCustomer.id = respond.id;
                 this.requestedBrowserWindow.webContents.send(EventGetter.get("add_customer_success"), newCustomer);
-                Dialog.showDialog("info", TextGetter.get("created_customer_successfully") + respond.id, null, this.getWindow(), () => {
+                Dialog.showDialog("info", null, TextGetter.get("created_customer_successfully") + respond.id, this.getWindow(), () => {
                     this.hide();
                 });
             }, (respond:any) => {
