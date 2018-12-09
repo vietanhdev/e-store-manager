@@ -1,7 +1,7 @@
 package com.example.store.payload.sell_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.store.payload.sell_management.request.SellItemInfor;
 
@@ -27,7 +27,7 @@ public class SellInforResponse {
 
     private String createdAt;
 
-    private Set<SellItemInfor> buy_items = new HashSet<>();
+    private List<SellItemInfor> buy_items = new ArrayList<>();
 
     public SellInforResponse(Long id, Long user_id, String user_name, Long customer_id, String customer_name, Float tax, Float total, Boolean active, String createdAt) {
         this.id = id;
@@ -121,11 +121,11 @@ public class SellInforResponse {
         this.tax = tax;
     }
 
-    public Set<SellItemInfor> getSell_items() {
+    public List<SellItemInfor> getSell_items() {
         return buy_items;
     }
 
-    public void setSell_items(Set<SellItemInfor> buy_items) {
+    public void setSell_items(List<SellItemInfor> buy_items) {
         this.buy_items = buy_items;
     }
 

@@ -1,7 +1,7 @@
 package com.example.store.payload.sell_management.request;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -22,7 +22,7 @@ public class UpdateSellRequest {
 
     private Boolean active;
 
-    private Set<SellItemInfor> sell_items = new HashSet<>();
+    private List<SellItemInfor> sell_items = new ArrayList<>();
 
     public Long getUser_id() {
         return user_id;
@@ -44,7 +44,7 @@ public class UpdateSellRequest {
         return active;
     }
 
-    public Set<SellItemInfor> getSell_items() {
+    public List<SellItemInfor> getSell_items() {
         return sell_items;
     }
 }

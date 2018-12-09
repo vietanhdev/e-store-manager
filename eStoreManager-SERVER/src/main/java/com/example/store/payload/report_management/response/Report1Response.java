@@ -1,7 +1,7 @@
 package com.example.store.payload.report_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Report1Response {
 
@@ -11,7 +11,7 @@ public class Report1Response {
 
     private Float revenue;
 
-    private Set<ProductInfor> products = new HashSet<>();
+    private List<ProductInfor> products = new ArrayList<>();
 
     public Report1Response() {
 
@@ -22,7 +22,7 @@ public class Report1Response {
         this.revenue = revenue;
     }
 
-    public Set<ProductInfor> getProducts() {
+    public List<ProductInfor> getProducts() {
         return products;
     }
 
@@ -50,7 +50,7 @@ public class Report1Response {
         this.revenue = revenue;
     }
 
-    public void setProducts(Set<ProductInfor> products) {
+    public void setProducts(List<ProductInfor> products) {
         this.products = products;
     }
 

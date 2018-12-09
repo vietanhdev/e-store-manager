@@ -1,7 +1,7 @@
 package com.example.store.payload.sell_management.request;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public class CreateSellRequest {
     @Min(0)
     private Float total;
 
-    private Set<SellItemInfor> sell_items = new HashSet<>();
+    private List<SellItemInfor> sell_items = new ArrayList<>();
 
     public Float getTax() {
         return tax;
@@ -32,7 +32,7 @@ public class CreateSellRequest {
         return customer_id;
     }
 
-    public Set<SellItemInfor> getSell_items() {
+    public List<SellItemInfor> getSell_items() {
         return sell_items;
     }
 

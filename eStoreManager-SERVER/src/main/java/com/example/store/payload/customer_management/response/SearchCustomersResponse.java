@@ -1,7 +1,7 @@
 package com.example.store.payload.customer_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchCustomersResponse {
 
@@ -13,7 +13,7 @@ public class SearchCustomersResponse {
 
     private Long recordsFiltered;
 
-    private Set<Data> data = new HashSet<>();
+    private List<Data> data = new ArrayList<>();
 
     public SearchCustomersResponse(Long draw, Long recordsTotal, Long recordsFiltered){
         this.draw = draw;
@@ -57,11 +57,11 @@ public class SearchCustomersResponse {
         data.add(customer);
     }
 
-    public Set<Data> getData(){
+    public List<Data> getData(){
         return this.data;
     }
 
-    public void setData(Set<Data> data){
+    public void setData(List<Data> data){
         this.data = data;
     }
 }

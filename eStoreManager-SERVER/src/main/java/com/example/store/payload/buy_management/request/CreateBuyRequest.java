@@ -1,13 +1,13 @@
 package com.example.store.payload.buy_management.request;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateBuyRequest {
 
-    private Set<BuyItemInfor> buy_items = new HashSet<>();
+    private List<BuyItemInfor> buy_items = new ArrayList<>();
 
-    public Set<BuyItemInfor> getBuy_items() {
+    public List<BuyItemInfor> getBuy_items() {
         return buy_items;
     }
 

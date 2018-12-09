@@ -1,7 +1,7 @@
 package com.example.store.payload.buy_management.request;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateBuyRequest {
     
@@ -9,7 +9,7 @@ public class UpdateBuyRequest {
 
     private Boolean active;
 
-    private Set<BuyItemInfor> buy_items = new HashSet<>();
+    private List<BuyItemInfor> buy_items = new ArrayList<>();
 
     public Long getUser_id() {
         return user_id;
@@ -19,7 +19,7 @@ public class UpdateBuyRequest {
         return active;
     }
 
-    public Set<BuyItemInfor> getBuy_items() {
+    public List<BuyItemInfor> getBuy_items() {
         return buy_items;
     }
 

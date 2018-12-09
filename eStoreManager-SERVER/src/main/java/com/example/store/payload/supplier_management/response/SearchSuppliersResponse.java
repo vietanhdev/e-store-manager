@@ -1,7 +1,7 @@
 package com.example.store.payload.supplier_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchSuppliersResponse {
 
@@ -13,7 +13,7 @@ public class SearchSuppliersResponse {
 
     private Long recordsFiltered;
 
-    private Set<Data> data = new HashSet<>();
+    private List<Data> data = new ArrayList<>();
 
     public SearchSuppliersResponse(Long draw, Long recordsTotal, Long recordsFiltered){
         this.draw = draw;
@@ -57,11 +57,11 @@ public class SearchSuppliersResponse {
         data.add(supplier);
     }
 
-    public Set<Data> getData(){
+    public List<Data> getData(){
         return this.data;
     }
 
-    public void setData(Set<Data> data){
+    public void setData(List<Data> data){
         this.data = data;
     }
 }

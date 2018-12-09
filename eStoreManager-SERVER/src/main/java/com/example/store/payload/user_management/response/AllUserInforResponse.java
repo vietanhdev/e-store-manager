@@ -1,11 +1,11 @@
 package com.example.store.payload.user_management.response;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AllUserInforResponse {
     private Boolean success = true;
-    private Set<UserInfor> users = new HashSet<>();
+    private List<UserInfor> users = new ArrayList<>();
 
     public AllUserInforResponse(){
     }
@@ -18,11 +18,11 @@ public class AllUserInforResponse {
         this.success = success;
     }
 
-    public Set<UserInfor> getUsers(){
+    public List<UserInfor> getUsers(){
         return users;
     }
 
-    public void setUsers(Set<UserInfor> users){
+    public void setUsers(List<UserInfor> users){
         this.users = users;
     }
 
