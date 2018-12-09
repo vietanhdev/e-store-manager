@@ -2958,3 +2958,87 @@
     "message": "You don't have permission to access this resource"
 }
 ```
+
+# 8. Report management API
+---
+
+## 7.1. Report 1
+
+### 7.1.1. Request
+
+* Path: /api/v1/reports/1
+* Method: POST
+* Header:
+    
+    * Content-type: application/json
+    * Authorization: Bearer JWT
+
+* Body:(name field is compulsory, other fields can be skipped)
+```
+{	
+	"length": 2,
+	"start": "2018-01-30 06:52:05",
+    "end": "2018-12-30 06:52:05"
+}
+```
+
+### 7.1.2. Response
+
+* On success:
+```
+{
+    "success": true,
+    "cost": 10215.5,
+    "revenue": 3505,
+    "products": [
+        {
+            "success": true,
+            "id": 1,
+            "name": "chocolate",
+            "price": 80000,
+            "unit": "cartoon",
+            "barcode": "dccf2351",
+            "quantities": 291,
+            "sold_quantities": 223
+        },
+        {
+            "success": true,
+            "id": 3,
+            "name": null,
+            "price": null,
+            "unit": null,
+            "barcode": null,
+            "quantities": null,
+            "sold_quantities": 150
+        }
+    ]
+}
+```
+
+* On fail (unauthorized):
+```
+{
+    "success": false,
+    "code": "unauthorized",
+    "message": "You're not authorized to access this resource"
+}
+```
+
+* On fail (one field is not in right format):
+```
+{
+    "success": false,
+    "code": "argument_not_valid",
+    "message": {object_name} + {default_message} + "and" + ...
+}
+```
+
+* On fail (you don't have role admin or manager):
+```
+{
+    "success": false,
+    "code": "access_denied",
+    "message": "You don't have permission to access this resource"
+}
+```
+
