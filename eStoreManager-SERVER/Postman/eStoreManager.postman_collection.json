@@ -984,7 +984,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 100\n\t\t},\n\t\t{\n\t\t\t\"product_id\": 2,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 1,\n\t\t\t\"quantities\": 100\n\t\t}\n\t]\n}"
+									"raw": "{\n\t\"buy_items\": [\n\t\t{\n\t\t\t\"product_id\": 1,\n\t\t\t\"supplier_id\": 1,\n\t\t\t\"price\": 15,\n\t\t\t\"quantities\": 1\n\t\t}\n\t]\n}"
 								},
 								"url": {
 									"raw": "http://localhost:8080/api/v1/buys",
@@ -1503,6 +1503,50 @@
 										"v1",
 										"invoices",
 										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Report Management",
+					"item": [
+						{
+							"name": "Admin, Manager get report 1",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNTQzODMxNjY5LCJleHAiOjE1NDQ0MzY0Njl9.gGNlf0cRUjfggi-BlDZcJLEvyIGlj3J8GEfE-9sfof_pKct3Rxbjp1ALVAuTj8EDFFOW-7s9HOcU9sbJMMsHxQ",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\t\n\t\"length\": 2,\n\t\"start\": \"2018-01-30 06:52:05\",\n    \"end\": \"2018-12-30 06:52:05\"\n}"
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/reports/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"reports",
+										"1"
 									]
 								}
 							},
