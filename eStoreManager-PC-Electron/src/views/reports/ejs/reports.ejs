@@ -13,21 +13,7 @@
     </div>
 
     <div class="container">
-        <div class="row p-3 m-2" style="background: rgba(255,255,255,0.8); border-radius: 2rem;">
-            <div class="col-sm-4 mb-3">
-                <label for="start-date"><%= gettext.start_date %>: </label>
-                <input type="date" class="form-control" id="start-date" placeholder="" required="">
-            </div>
-            <div class="col-sm-4 mb-3">
-                <label for="end-date"><%= gettext.end_date %>: </label>
-                <input type="date" class="form-control" id="end-date" placeholder="" required="">
-            </div>
-            <div class="col-sm-4 mb-3" style="padding-top: 1.8rem;">
-                <label for="btn-this-month"> </label>
-                <button class="btn btn-warning" id="btn-this-month"><%= gettext.this_month %></button>
-                <button class="btn btn-success" id="btn-update"><%= gettext.update %></button>
-            </div>
-        </div>
+        <%- include('../../shared/ejs/datepicker.ejs') %>
         <div class="row" id="concentrate">
             <div class="col-sm-4">
                 <div class="card bg-light mb-3" style="max-width: 100%;">
@@ -85,13 +71,6 @@
     const EventGetter = require("../../../services/EventGetter").EventGetter;
     const {ipcRenderer} = require('electron');
 
-    function getDateFormated(input) {
-        let date  = new Date(input);
-        let day = ("0" + date.getDate()).slice(-2);
-        let month = ("0" + (date.getMonth() + 1)).slice(-2);
-        return date.getFullYear()+"-"+(month)+"-"+(day) ;
-    } 
-
     //  Request report data
     function getReportData() {
         let data = {};
@@ -106,25 +85,20 @@
         $("#profit").html(Number(data.revenue) - Number(data.cost));
         $("#best-selling ul").html("");
 
-        for (let i = 0; i < data.products.length; ++i) {
-            $("#best-selling ul").append("<li>" + data.products[i].name + "</li>");
+        // Sort the products by sold quantities
+        function compareSoldQuantities(a,b) {
+            if (a.sold_quantities < b.sold_quantities)
+                return 1;
+            if (a.sold_quantities > b.sold_quantities)
+                return -1;
+            return 0;
         }
-    });
+        data.products.sort(compareSoldQuantities);
 
-    function getReportThisMonth() {
-        // Get this month
-        let today = new Date();
-        let startMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        let endMonth = new Date(today.getFullYear(), today.getMonth()+1, 0);
-
-        $("#start-date").val(getDateFormated(startMonth));
-        $("#end-date").val(getDateFormated(endMonth));
-
-        getReportData();
-    }
-
-    $("#btn-this-month").click(() => {
-        getReportThisMonth();
+        // Update best product list
+        for (let i = 0; i < data.products.length; ++i) {
+            $("#best-selling ul").append("<li>" + data.products[i].name + " <span style='font-weight: normal'> (SOLD: "+ data.products[i].sold_quantities+")</span></li>");
+        }
     });
 
     $("#btn-update").click(() => {
@@ -133,7 +107,8 @@
 
 
     // Get report of this month by default
-    getReportThisMonth();
+    setDatePickerThisMonth();
+    getReportData();
 
 </script>
 
