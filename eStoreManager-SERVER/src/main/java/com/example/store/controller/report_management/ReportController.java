@@ -48,17 +48,26 @@ public class ReportController {
 
         Double invoice_cost =  invoiceRepository.totalInvoice(report1Request.getStart(), report1Request.getEnd());
 
-        Double cost = buy_cost + invoice_cost;
+        Double cost = 0D;
+
+        if(buy_cost != null && invoice_cost != null){
+            cost = buy_cost + invoice_cost;
+        }
 
         // get total revenue
-        Double revenue = sellItemRepository.totalSell(report1Request.getStart(), report1Request.getEnd());
+        Double sell_revenue = sellItemRepository.totalSell(report1Request.getStart(), report1Request.getEnd());
 
+        Double revenue = 0D;
+
+        if(sell_revenue != null){
+            revenue = sell_revenue;
+        }
+
+        Report1Response report1Response = new Report1Response(cost.floatValue(), revenue.floatValue());
 
         // get the best selling
         List<BestSelling> bestSellings = sellItemRepository.bestSellings(report1Request.getStart(), report1Request.getEnd());
 
-        
-        Report1Response report1Response = new Report1Response(cost.floatValue(), revenue.floatValue());
 
         Long count = 0L;
         for(BestSelling bestSelling: bestSellings) {    
