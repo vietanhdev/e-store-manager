@@ -30,6 +30,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAll();
 
-    @Query("SELECT e FROM User e ORDER BY e.createdAt DESC")
+    @Query("SELECT e FROM User e ORDER BY e.createdAt ASC")
     Page<User> getAllUsersPagable(Pageable pageable);
 } 
