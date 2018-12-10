@@ -20,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
 
     boolean existsById(Long id);
 
-    @Query("SELECT e FROM Product e WHERE e.name LIKE %:name% AND e.unit LIKE %:unit% AND e.barcode LIKE %:barcode% AND ( e.name LIKE %:value% OR e.unit LIKE %:value% OR e.barcode LIKE %:value% ) ORDER BY e.createdAt DESC")
+    @Query("SELECT e FROM Product e WHERE e.name LIKE %:name% AND e.unit LIKE %:unit% AND e.barcode LIKE %:barcode% AND ( e.name LIKE %:value% OR e.unit LIKE %:value% OR e.barcode LIKE %:value% ) ORDER BY e.createdAt ASC")
     Page<Product> searchProducts(@Param("value") String value, @Param("name") String name, @Param("unit") String unit, @Param("barcode") String barcode, Pageable pageable);
 
 }

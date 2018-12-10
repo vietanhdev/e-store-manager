@@ -20,7 +20,7 @@ public interface SupplierRepository extends JpaRepository<Supplier, Long>{
 
     boolean existsById(Long id);
 
-    @Query("SELECT e FROM Supplier e WHERE e.name LIKE %:name% AND e.email LIKE %:email% AND e.address LIKE %:address% AND e.mobileNo LIKE %:mobileNo% AND ( e.name LIKE %:value% OR e.email LIKE %:value% OR e.address LIKE %:value% OR e.mobileNo LIKE %:value% ) ORDER BY e.createdAt DESC")
+    @Query("SELECT e FROM Supplier e WHERE e.name LIKE %:name% AND e.email LIKE %:email% AND e.address LIKE %:address% AND e.mobileNo LIKE %:mobileNo% AND ( e.name LIKE %:value% OR e.email LIKE %:value% OR e.address LIKE %:value% OR e.mobileNo LIKE %:value% ) ORDER BY e.createdAt ASC")
     Page<Supplier> searchSuppliers(@Param("value") String value, @Param("name") String name, @Param("email") String email, @Param("address") String address, @Param("mobileNo") String mobileNo, Pageable pageable);
 
 }
