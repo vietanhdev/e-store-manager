@@ -1,0 +1,16 @@
+{
+  "name": "servertesting",
+  "version": "1.0.0",
+  "description": "Testing for apis - eStoreManager",
+  "main": "test.js",
+  "scripts": {
+    "test": "mocha ./test/**/*.js"
+  },
+  "author": "VietAnhDev",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chakram": "^1.5.0",
+    "mocha": "^5.2.0"
+  }
+}
