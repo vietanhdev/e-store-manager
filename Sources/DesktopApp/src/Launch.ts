@@ -11,7 +11,7 @@ var eStoreManager = new EStoreManager();
 // Default Server Settings
 if (!settings.has("initialized")) {
   settings.set('api_config', {
-    hostname: '13.58.158.138',
+    hostname: 'estoremanger.vietanhdev.com',
     port: 8080,
     protocol: 'http'
   });
