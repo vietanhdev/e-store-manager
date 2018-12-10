@@ -37,7 +37,7 @@ export class LoginView extends View {
             }, (result:any) => {
                 dialog.showMessageBox(this.getWindow(), Object({
                     type: "error",
-                    title: "Login error ("+result.code+")",
+                    title: "Login Error",
                     message: result.message,
                     buttons: ["OK"]
                 }));

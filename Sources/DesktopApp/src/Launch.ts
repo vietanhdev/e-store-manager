@@ -8,16 +8,15 @@ app.disableHardwareAcceleration()
 
 var eStoreManager = new EStoreManager();
 
-// Server settings
-// TODO: Remove this section
-settings.set('api_config', {
-  hostname: 'localhost',
-  port: 8080,
-  protocol: 'http'
-});
-
-// settings.set("lang", "en");
-console.log(settings.get("account_info.token"));
+// Default Server Settings
+if (!settings.has("initialized")) {
+  settings.set('api_config', {
+    hostname: '13.58.158.137',
+    port: 8080,
+    protocol: 'http'
+  });
+  settings.set("lang", "en");
+}
 
 // Set max listener
 require('events').EventEmitter.defaultMaxListeners = 0;  
