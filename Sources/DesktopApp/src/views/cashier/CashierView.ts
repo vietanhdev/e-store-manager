@@ -140,6 +140,7 @@ export class CashierView extends View {
                         // Load order template
                         this.getOrderWindow().loadFile(path.join(__dirname, "./ejs/order_template.ejs"));
                     }
+                    this.getWindow().webContents.reload();
                 });
 
             }, (respond:any) => {

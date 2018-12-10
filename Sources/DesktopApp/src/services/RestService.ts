@@ -43,8 +43,8 @@ export class RestService {
             timeout: 1000
         };
 
-        console.log("REQUESTDATA:::::::::::::");
-        console.log(postData);
+        // console.log("REQUESTDATA:::::::::::::");
+        // console.log(postData);
 
         requestElectron(options, (err: any, data: any) => {
             if (err) {
@@ -53,9 +53,9 @@ export class RestService {
                     message: TextGetter.get("connection_error")
                 });
             } else {
-                console.log("DATA:::::::::::::");
-                console.log(data.body);
-                console.log(err);
+                // console.log("DATA:::::::::::::");
+                // console.log(data.body);
+                // console.log(err);
 
                 let result = {};
                 try {
