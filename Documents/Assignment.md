@@ -1,18 +1,20 @@
-1. Programming:
+* Programming (100%):
 
-* Client-side: Nguyen Viet Anh
-* Server-side: Nguyen Sy An
-* QRCode-Scanner: Theo Mercurio
+    * Client-side (100%): Nguyen Viet Anh
+    * Server-side (100%): Nguyen Sy An
+    * QRCode-Scanner (100%): Theo Mercurio
 
-2. Testing:
+    => Packing product (100%): Nguyen Viet Anh (80%) + Nguyen Sy An (20%)
 
-* Unit test Client-side: Nguyen Viet Anh
-* Unit test Server-side: Nguyen Sy An
-* Test case design for final project (Client-Server): Nguyen Viet Anh
+* Testing (100%):
 
-3. Review:
+    * Unit test Client-side (100%): Nguyen Viet Anh
+    * Unit test Server-side (100%): Nguyen Sy An
+    * Test case design for final project (Client-Server) (100%): Nguyen Viet Anh
 
-* SRS: Nguyen Sy An + Nguyen Viet Anh + Theo Mercurio
-* SDD: Nguyen Sy An + Nguyen Viet Anh + Theo Mercurio
-* Test Report: Nguyen Viet Anh
-* Report of Design Principles and Design Patterns: Nguyen Sy An
+* Report (100%):
+
+    * SRS (100%): Nguyen Sy An (50%) + Nguyen Viet Anh (40%) + Theo Mercurio (10%)
+    * SDD: Nguyen Sy An (50%) + Nguyen Viet Anh (40%) + Theo Mercurio (10%)
+    * Test Report (100%): Nguyen Viet Anh
+    * Report of Design Principles and Design Patterns (100%): Nguyen Sy An
