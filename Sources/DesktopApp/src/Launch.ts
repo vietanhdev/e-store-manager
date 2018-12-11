@@ -1,5 +1,6 @@
 import { app } from "electron";
 import { EStoreManager } from "./EStoreManager";
+import { ConfigGetter } from "./services/ConfigGetter";
 const settings = require('electron-settings');
 
 
@@ -9,13 +10,15 @@ app.disableHardwareAcceleration()
 var eStoreManager = new EStoreManager();
 
 // Default Server Settings
+let config = ConfigGetter.get();
 if (!settings.has("initialized")) {
   settings.set('api_config', {
-    hostname: 'estoremanger.vietanhdev.com',
-    port: 8080,
-    protocol: 'http'
+    hostname: config.default_settings.hostname,
+    port: config.default_settings.server_port,
+    protocol: config.default_settings.server_protocol
   });
-  settings.set("lang", "en");
+  settings.set("lang", config.default_settings.lang);
+  settings.set("initialized", true);
 }
 
 // Set max listener
@@ -46,6 +49,3 @@ app.on("activate", () => {
     eStoreManager.init();
   }
 });
-
-// In this file you can include the rest of your app"s specific main process
-// code. You can also put them in separate files and require them here.

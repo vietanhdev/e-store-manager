@@ -1,4 +1,10 @@
 {
+    "default_settings": {
+        "hostname": "estoremanger.vietanhdev.com",
+        "server_port": 8080,
+        "server_protocol": "http",
+        "lang": "en"
+    },
     "view": {
         "about_us": {
             "path": "about/ejs/about_us.ejs"
