@@ -33,8 +33,8 @@ export class Dialog {
             }
         }
 
-        console.log("TEXT GET: " + TextGetter.get("updated_product_successfully"));
-        console.log(message);
+        // console.log("TEXT GET: " + TextGetter.get("updated_product_successfully"));
+        // console.log(message);
 
         dialog.showMessageBox(window, Object({
             type: type,
