@@ -9,5 +9,6 @@
 ## Server Testing
 
 - For server tesing, we write ServerTesting project to test all the apis of the server to ensure that all of them work correctly.
+- Technique: javascript / mocha + chai + chakram stack.
 - All the test case is designed based on the document ServerTesting/API_Testing_Scenario.md.
 - Result: ServerTesting.
