@@ -4,7 +4,7 @@
   "description": "Testing for apis - eStoreManager",
   "main": "test.js",
   "scripts": {
-    "test": "mocha ./test/**/*.js"
+    "test": "mocha get_auth.js && mocha ./test/**/*.js"
   },
   "author": "VietAnhDev",
   "license": "ISC",
