@@ -1,6 +1,7 @@
 var requestElectron = require('request');
 const settings = require('electron-settings');
 import { TextGetter } from "./TextGetter";
+var crypto = require('crypto');
 
 export class RestService {
 
@@ -24,6 +25,10 @@ export class RestService {
 
         let postData:string;
         try {
+            // if (typeof data.password != "undefined") {
+            //     data.password = crypto.createHash('md5').update(data.password).digest("hex");
+            //     console.log("Hashed Password: " + data.password);
+            // }
             postData = JSON.stringify(data);
         } catch(e) {
             postData = "{}";
@@ -40,7 +45,7 @@ export class RestService {
             method: method,
             headers: headers,
             body: postData,
-            timeout: 1000
+            timeout: 10000
         };
 
         // console.log("REQUESTDATA:::::::::::::");

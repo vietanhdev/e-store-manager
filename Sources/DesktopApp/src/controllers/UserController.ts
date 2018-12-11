@@ -114,8 +114,8 @@ export class UserController extends Controller {
     }
 
     public updateUserInfo(data: any, cbSuccess: (any), cbFail: (any)) {
-        console.log(data);
-        console.log('/api/v1/users/' + data.id);
+        // console.log(data);
+        // console.log('/api/v1/users/' + data.id);
         this.getRestService().request('PUT', '/api/v1/users/' + data.id, data, (respond:any) => {
             if (respond['success'] == true) {
                 cbSuccess (respond);
