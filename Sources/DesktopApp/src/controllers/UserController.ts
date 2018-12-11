@@ -59,6 +59,7 @@ export class UserController extends Controller {
         settings.delete("account_info.userid");
         settings.delete("account_info.username");
         settings.delete("account_info.fullname");
+        settings.set('verified_logged_in', false);
     }
 
 

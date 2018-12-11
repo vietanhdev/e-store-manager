@@ -21,6 +21,9 @@ if (!settings.has("initialized")) {
   settings.set("initialized", true);
 }
 
+// Init the value of verified logged in
+settings.set('verified_logged_in', false);
+
 // Set max listener
 require('events').EventEmitter.defaultMaxListeners = 0;  
 process.setMaxListeners(0);

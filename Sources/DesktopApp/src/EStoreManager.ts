@@ -57,12 +57,13 @@ export class EStoreManager {
   mainWindow: BrowserWindow;
   viewList: Array<any>;
   menu:Menu;
+  userController:UserController;
 
   EStoreManager() {}
 
   public init() {
 
-    let userController = new UserController();
+    this.userController = new UserController();
 
     // Create the main menu of the application
     this.menu = new Menu();
@@ -144,7 +145,7 @@ export class EStoreManager {
     }));
     this.menu.append(new MenuItem({label: TextGetter.get("logout"),
       click: () => {
-        userController.logout();
+        this.userController.logout();
         this.changeView('login');
       }
     }));
@@ -152,10 +153,12 @@ export class EStoreManager {
     this.mainWindow.setMenu(this.menu);
 
     // Check user login and redirect to login page if user have not logged in
-    userController.isLoggedIn(() => {
+    this.userController.isLoggedIn(() => {
       welcomeView.show();
+      settings.set('verified_logged_in', true);
     }, () => {
       loginView.show();
+      settings.set('verified_logged_in', false);
     });
 
   }
@@ -177,7 +180,20 @@ export class EStoreManager {
         for (let i = 0; i < this.viewList.length; i++) {
           // console.log(this.viewList[i].getInstance(this.mainWindow, null).getView());
           if (this.viewList[i].getInstance(this.mainWindow, null).getView() == viewName) {
-            this.viewList[i].getInstance(this.mainWindow, null).show();
+            
+            // Prevent switch to welcome view when not logged in
+            if (viewName != "welcome") {
+              this.viewList[i].getInstance(this.mainWindow, null).show();
+            } else {
+
+              // If user logged in, transfer to welcome screen, otherwise, transfer to login screen
+              if (settings.get('verified_logged_in')) {
+                this.viewList[i].getInstance(this.mainWindow, null).show();
+              } else {
+                this.viewList[i].getEventEmitter().emit("request_change_view", "login");
+              }
+            }
+            
             break;
           }
         }
