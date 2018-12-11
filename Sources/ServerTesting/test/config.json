@@ -1,0 +1,5 @@
+{
+    "server_url": "http://localhost:8080",
+    "default_admin": "admin",
+    "default_admin_password": "admin@gmail.com"
+}
