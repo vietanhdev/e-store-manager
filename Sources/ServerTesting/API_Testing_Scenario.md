@@ -259,7 +259,7 @@
 {
     "name": "ceo la",
     "username": "ceo",
-    "password": "md5@password",
+    "password": "ahsdguyih29387ey3892767565jihi7897897",
     "salary": 1000,
     "email": "ceo@gmail.com",
     "address": "hoa binh",
