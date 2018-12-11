@@ -28,4 +28,5 @@
 	./eStoreManager
 	```
 
-## 3. Video demo: (Youtube link)[https://www.youtube.com/watch?v=uMwq0IdePWQ&feature=youtu.be&fbclid=IwAR3L0LDLYPcaUvPWwcuj7hb-Rdr_epH09AmntxfGbGYgBQ3fzDGWN1gbMTs]
+## 3. Video demo: 
+[Youtube link](https://www.youtube.com/watch?v=uMwq0IdePWQ&feature=youtu.be&fbclid=IwAR3L0LDLYPcaUvPWwcuj7hb-Rdr_epH09AmntxfGbGYgBQ3fzDGWN1gbMTs)
