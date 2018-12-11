@@ -12,3 +12,8 @@
 - Technique: javascript / mocha + chai + chakram stack.
 - All the test case is designed based on the document ServerTesting/API_Testing_Scenario.md.
 - Result: ServerTesting.
+
+
+## System Testing (as the requirement)
+
+- See System-TestCases.xlsx
