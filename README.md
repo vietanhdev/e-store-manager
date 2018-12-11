@@ -29,4 +29,4 @@
 	```
 
 ## 3. Video demo: 
-[Youtube link](https://youtu.be/IzBRSanRksY)
+[Youtube link](https://youtu.be/hzLnz1LNFPo)
