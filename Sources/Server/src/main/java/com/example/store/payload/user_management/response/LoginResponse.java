@@ -111,4 +111,8 @@ public class LoginResponse {
         this.roles.add(role);
     }
 
+    public List<String> getRole() {
+        return this.roles;
+    }
+
 }
