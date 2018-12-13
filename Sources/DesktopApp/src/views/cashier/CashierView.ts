@@ -40,7 +40,7 @@ export class CashierView extends View {
             // Barcode service
             expressApp.get(ConfigGetter.get().barcode_server.receiver_path, (req:any, res:any) => {
                 let product_code = req.query.code;
-                console.log(product_code);
+                // console.log(product_code);
                 if (CashierView.instance.isVisible()) {
                     CashierView.instance.getWindow().webContents.send(EventGetter.get('new_barcode_from_server'), product_code);
                 }
@@ -49,7 +49,7 @@ export class CashierView extends View {
 
             // Launch app to listen to specified port
             expressApp.listen(expressAppPort, function () {
-                console.log("Running barocode receiver on port " + expressAppPort);
+                console.log("Running barcode receiver on port " + expressAppPort);
             });
 
 

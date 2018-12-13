@@ -3,6 +3,8 @@ import * as path from "path";
 import {View} from './views/shared/View';
 import {UserController} from './controllers/UserController';
 import {TextGetter} from './services/TextGetter';
+import { Dialog } from "./services/Dialog";
+const { dialog } = require('electron');
 
 const ejse = require('ejs-electron');
 const settings = require('electron-settings');
@@ -60,6 +62,10 @@ export class EStoreManager {
   userController:UserController;
 
   EStoreManager() {}
+
+  getMainWindow() {
+    return this.mainWindow;
+  }
 
   public init() {
 
@@ -180,18 +186,26 @@ export class EStoreManager {
         for (let i = 0; i < this.viewList.length; i++) {
           // console.log(this.viewList[i].getInstance(this.mainWindow, null).getView());
           if (this.viewList[i].getInstance(this.mainWindow, null).getView() == viewName) {
-            
-            // Prevent switch to welcome view when not logged in
-            if (viewName != "welcome") {
-              this.viewList[i].getInstance(this.mainWindow, null).show();
-            } else {
 
-              // If user logged in, transfer to welcome screen, otherwise, transfer to login screen
-              if (settings.get('verified_logged_in')) {
-                this.viewList[i].getInstance(this.mainWindow, null).show();
-              } else {
-                this.viewList[i].getEventEmitter().emit("request_change_view", "login");
-              }
+            if ( this.viewList[i].roles != undefined) {
+                let havePermission = false;
+                let roles = settings.get("account_info.roles");
+                if ( this.viewList[i].roles.includes(roles)) havePermission = true;
+                if (!havePermission) {
+                    // // Dialog.showDialog("error", null, TextGetter.get("you_dont_have_permission"), this.getMainWindow(), () => {});
+                    // dialog.showMessageBox(this.getMainWindow(), Object({
+                    //   type: "error",
+                    //   title: "Error",
+                    //   message: TextGetter.get("you_dont_have_permission"),
+                    //   buttons: ["OK"]
+                    // }), () => {
+                    //   this.viewList[i].getEventEmitter().emit("request_change_view", "welcome");
+                    // });
+                } else {
+                  this.viewList[i].show();
+                }
+            } else {
+                this.viewList[i].show();
             }
             
             break;

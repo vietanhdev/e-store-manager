@@ -33,6 +33,7 @@ export class LoginView extends View {
                 settings.set("account_info.userid", result.id);
                 settings.set("account_info.fullname", result.name);
                 settings.set("account_info.token", result.accessToken);
+                settings.set("account_info.roles", result.role);
                 settings.set('verified_logged_in', true);
                 this.requestChangeView("welcome");
             }, (result:any) => {

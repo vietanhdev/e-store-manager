@@ -4,8 +4,11 @@ import { app, BrowserWindow, Menu} from "electron";
 import { ConfigGetter } from "../../services/ConfigGetter";
 import {UserController} from '../../controllers/UserController';
 import { isNull } from "util";
+import { Dialog } from "../../services/Dialog";
+import { TextGetter } from "../../services/TextGetter";
 const {ipcMain} = require('electron');
 const { dialog } = require('electron');
+const settings = require('electron-settings');
 
 
 export class View {
@@ -18,6 +21,7 @@ export class View {
     private originWidth: number;
     private originWindow: BrowserWindow;
     private originParent: BrowserWindow;
+    private roles: string;
     private menu:Menu = null;
 
     constructor (viewName: string, window: BrowserWindow, parent: BrowserWindow, width: number = 800, height: number = 600) {
@@ -36,6 +40,7 @@ export class View {
         // Calculate view file path and write to this.viewFile
         if (ConfigGetter.get().view[viewName]) {
             this.viewFile = path.join(__dirname, "../"+ConfigGetter.get().view[viewName].path);
+            this.roles = ConfigGetter.get().view[viewName].roles;
         }
 
         // Handle request_change_view event from browser thread
@@ -121,8 +126,25 @@ export class View {
 
     // Load view file to view window
     public show() {
-        this.getWindow().loadFile(this.viewFile); // Load view file to view window
-        this.getWindow().show();
+
+        // console.log("typeof this.roles" + typeof this.roles);
+        if (this.roles != undefined) {
+
+            let havePermission = false;
+            let roles = settings.get("account_info.roles");
+            if (this.roles.includes(roles)) havePermission = true;
+
+            if (!havePermission) {
+                Dialog.showDialog("error", null, TextGetter.get("you_dont_have_permission"), this.getWindow(), () => {});
+            } else {
+                this.getWindow().loadFile(this.viewFile); // Load view file to view window
+                this.getWindow().show();
+            }
+        } else {
+            this.getWindow().loadFile(this.viewFile); // Load view file to view window
+            this.getWindow().show();
+        }
+        
     }
 
     

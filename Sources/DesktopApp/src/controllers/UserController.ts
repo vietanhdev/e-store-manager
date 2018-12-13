@@ -21,6 +21,7 @@ export class UserController extends Controller {
                 settings.set("account_info.userid", respond['id']);
                 settings.set("account_info.fullname", respond['name']);
                 settings.set("account_info.username", respond['username']);
+                // settings.set("account_info.roles", respond['role']);
                 cbSuccess();
             } else {
                 cbFail(respond.message);
@@ -59,6 +60,7 @@ export class UserController extends Controller {
         settings.delete("account_info.userid");
         settings.delete("account_info.username");
         settings.delete("account_info.fullname");
+        settings.delete("account_info.roles");
         settings.set('verified_logged_in', false);
     }
 

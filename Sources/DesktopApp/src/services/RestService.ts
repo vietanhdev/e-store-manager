@@ -27,7 +27,7 @@ export class RestService {
         try {
             // if (typeof data.password != "undefined") {
             //     data.password = crypto.createHash('md5').update(data.password).digest("hex");
-            //     console.log("Hashed Password: " + data.password);
+            //     // console.log("Hashed Password: " + data.password);
             // }
             postData = JSON.stringify(data);
         } catch(e) {

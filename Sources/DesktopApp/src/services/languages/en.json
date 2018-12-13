@@ -245,5 +245,7 @@
 
     "use_date_filter": "Use Date Filter",
 
-    "connection_error": "Connection Error. Please try again or check the app settings."
+    "connection_error": "Connection Error. Please try again or check the app settings.",
+
+    "you_dont_have_permission": "You don't have permission to access this area."
 }
