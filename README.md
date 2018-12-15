@@ -10,7 +10,7 @@
 
 - Documents: `./Documents/`.
 
-- Desktop Excutable files: [https://drive.google.com/open?id=1DAmEFwoAI-UDpRQQDkWF8GqIEjvGah1B](https://drive.google.com/open?id=1DAmEFwoAI-UDpRQQDkWF8GqIEjvGah1B).
+- Desktop Excutable files: [https://drive.google.com/drive/folders/1IAz_kHipIptSjJMa140D-dE2IDVOILf0?usp=sharing](https://drive.google.com/drive/folders/1IAz_kHipIptSjJMa140D-dE2IDVOILf0?usp=sharing).
 
 ## 2. How to run the project?
 
@@ -18,15 +18,28 @@
 
 - To run the desktop application, 
 
-	1. Download the version for Linux x64 at [https://drive.google.com/open?id=1DAmEFwoAI-UDpRQQDkWF8GqIEjvGah1B](https://drive.google.com/open?id=1DAmEFwoAI-UDpRQQDkWF8GqIEjvGah1B).
+	1. Download the version for Linux x64 at [https://drive.google.com/drive/folders/1IAz_kHipIptSjJMa140D-dE2IDVOILf0?usp=sharing](https://drive.google.com/drive/folders/1IAz_kHipIptSjJMa140D-dE2IDVOILf0?usp=sharing).
+
+	- If you are using Linux x64, Please download eStoreManager-linux-x64.zip.
+	
+	- If you are using Windows x64, Please download eStoreManager-win32-x64.zip.
 
 	2. Extract zip file.
-	3. Run the application by clicking `eStoreManager-linux-x64/eStoreManager` or type following commands to Terminal:
+
+	3. Run it: 
+	
+	- LINUX
+
+	Run the application by clicking `eStoreManager-linux-x64/eStoreManager` or type following commands to Terminal:
 	
 	```
 	cd eStoreManager-linux-x64
 	./eStoreManager
 	```
+
+	- WINDOWS:
+
+	Double click eStoreManager-win32-x64/eStoreManager.exe
 
 ## 3. Video demo: 
 [Youtube link](https://youtu.be/hzLnz1LNFPo)
