@@ -1,8 +1,16 @@
 import { app } from "electron";
 import { EStoreManager } from "./EStoreManager";
 import { ConfigGetter } from "./services/ConfigGetter";
-const settings = require('electron-settings');
+var settings:any;
 
+// Try to import settings
+try {
+  settings = require('electron-settings');
+} catch(e) {
+  // do nothing
+} finally {
+  settings = require('electron-settings');
+}
 
 app.disableHardwareAcceleration()
 

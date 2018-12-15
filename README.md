@@ -14,7 +14,7 @@
 
 ## 2. How to run the project?
 
-- The server code was deployed to `http://estoremanager.vietanhdev.com`.
+- The server code was deployed to `http://estoremanger.vietanhdev.com`.
 
 - To run the desktop application, 
 
