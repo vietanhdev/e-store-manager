@@ -8,6 +8,7 @@ const { dialog } = require('electron');
 
 const ejse = require('ejs-electron');
 const settings = require('electron-settings');
+const {ipcMain} = require('electron');
 
 // Load the language file
 var textGetter = TextGetter.getInstance();
@@ -82,6 +83,11 @@ export class EStoreManager {
 
     // Open the DevTools.
     // this.mainWindow.webContents.openDevTools();
+
+    // Handle request_change_view event from browser thread
+    ipcMain.on('request_change_view', (event:any, data:any) => {
+        this.changeView(data);
+    });
 
     // Init views
     let loginView = LoginView.getInstance(this.mainWindow, null); this.addView(loginView);
@@ -176,6 +182,8 @@ export class EStoreManager {
     })
   }
 
+
+  // Change from one view to another view
   private changeView(viewName:string) {
     switch(viewName) {
       case "preferences": 
@@ -183,24 +191,25 @@ export class EStoreManager {
         preferenceView.show();
         break;
       default:
+
+        // Find the view in the view list
         for (let i = 0; i < this.viewList.length; i++) {
-          // console.log(this.viewList[i].getInstance(this.mainWindow, null).getView());
+          
+          // If found the view
           if (this.viewList[i].getInstance(this.mainWindow, null).getView() == viewName) {
 
+            // If view require permission to access
             if ( this.viewList[i].roles != undefined) {
                 let havePermission = false;
                 let roles = settings.get("account_info.roles");
+
+                // Check the permission of the user
                 if ( this.viewList[i].roles.includes(roles)) havePermission = true;
                 if (!havePermission) {
-                    // // Dialog.showDialog("error", null, TextGetter.get("you_dont_have_permission"), this.getMainWindow(), () => {});
-                    // dialog.showMessageBox(this.getMainWindow(), Object({
-                    //   type: "error",
-                    //   title: "Error",
-                    //   message: TextGetter.get("you_dont_have_permission"),
-                    //   buttons: ["OK"]
-                    // }), () => {
-                    //   this.viewList[i].getEventEmitter().emit("request_change_view", "welcome");
-                    // });
+                  dialog.showMessageBox({
+                      message: TextGetter.get("you_dont_have_permission"),
+                      buttons: ["OK"]
+                  });
                 } else {
                   this.viewList[i].show();
                 }
@@ -208,7 +217,7 @@ export class EStoreManager {
                 this.viewList[i].show();
             }
             
-            break;
+            
           }
         }
     }

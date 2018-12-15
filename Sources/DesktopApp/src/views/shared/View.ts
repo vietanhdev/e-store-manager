@@ -43,11 +43,6 @@ export class View {
             this.roles = ConfigGetter.get().view[viewName].roles;
         }
 
-        // Handle request_change_view event from browser thread
-        ipcMain.on('request_change_view', (event:any, data:any) => {
-            this.requestChangeView(data);
-        });
-
         // Call logic handler
         this.logicHandle();
 
