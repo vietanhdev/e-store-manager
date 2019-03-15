@@ -10,7 +10,6 @@
 
 - Documents: `./Documents/`.
 
-- Desktop Excutable files: [https://drive.google.com/drive/folders/1IAz_kHipIptSjJMa140D-dE2IDVOILf0?usp=sharing](https://drive.google.com/drive/folders/1IAz_kHipIptSjJMa140D-dE2IDVOILf0?usp=sharing).
 
 ## 2. How to run the project?
 
